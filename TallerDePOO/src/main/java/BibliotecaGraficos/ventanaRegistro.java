@@ -12,6 +12,9 @@ import java.awt.SystemColor;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class ventanaRegistro extends JFrame {
 
@@ -20,6 +23,8 @@ public class ventanaRegistro extends JFrame {
 	private JPasswordField passwordField;
 
 	public ventanaRegistro() {
+		setTitle("Registro");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ventanaRegistro.class.getResource("/imagenes/icono.png")));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 360, 450);
 		contentPane = new JPanel();
@@ -34,6 +39,13 @@ public class ventanaRegistro extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ventana frame = new ventana();
+				ventanaRegistro.this.setVisible(false);
+				frame.setVisible(true);
+			}
+		});
 		btnVolver.setBounds(120, 338, 103, 23);
 		contentPane.add(btnVolver);
 		
