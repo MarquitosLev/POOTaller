@@ -1,9 +1,13 @@
 package BibliotecaGraficos;
+import java.util.ArrayList;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Biblioteca.Funcionario; //importa clase funcionario
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
@@ -15,12 +19,15 @@ import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
+import java.awt.Color;
 
 public class ventanaRegistro extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JPasswordField passwordField;
+	private JTextField userReg;
+	private JPasswordField passReg;
+	private Funcionario func;
+	private ArrayList<Funcionario> regFuncionario;
 
 	public ventanaRegistro() {
 		setTitle("Registro");
@@ -50,29 +57,44 @@ public class ventanaRegistro extends JFrame {
 		contentPane.add(btnVolver);
 		
 		JButton btnRegistro = new JButton("Registrarse");
+		btnRegistro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				regFuncionario = new ArrayList<Funcionario>();
+				/*
+				 * Falta comprobar si ya esta registrado
+				 * 
+				 * */
+				String user = userReg.getText();
+				String pass = new String(passReg.getPassword());
+				func = new Funcionario(user, pass);
+				regFuncionario.add(func);
+				System.out.println(user + " - " + pass); //Quitar luego
+			}
+		});
 		btnRegistro.setBounds(120, 260, 103, 23);
 		contentPane.add(btnRegistro);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Nueva Contrase\u00F1a: ");
 		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_1.setForeground(SystemColor.desktop);
+		lblNewLabel_1_1.setForeground(Color.WHITE);
 		lblNewLabel_1_1.setBounds(38, 204, 122, 14);
 		contentPane.add(lblNewLabel_1_1);
 		
 		JLabel lblNewLabel_1 = new JLabel("Nuevo Usuario: ");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1.setForeground(SystemColor.desktop);
+		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setBounds(38, 147, 122, 14);
 		contentPane.add(lblNewLabel_1);
 		
-		textField = new JTextField();
-		textField.setBounds(170, 144, 86, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		userReg = new JTextField();
+		userReg.setBounds(170, 144, 86, 20);
+		contentPane.add(userReg);
+		userReg.setColumns(10);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(170, 201, 86, 20);
-		contentPane.add(passwordField);
+		passReg = new JPasswordField();
+		passReg.setBounds(170, 201, 86, 20);
+		contentPane.add(passReg);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(ventanaRegistro.class.getResource("/imagenes/fondoInicioSesion.jpg")));

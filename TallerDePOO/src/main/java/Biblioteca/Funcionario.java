@@ -12,6 +12,10 @@ public class Funcionario {
 	private ArrayList<Prestamo> prestamosFuncionario;
 	
 	
+	public Funcionario(String usuario, String contrasenia) {
+		this.usuario = usuario;
+		this.contrasenia = contrasenia;
+	}
 	public ArrayList<Ejemplar> getEjemplares() {
 		return ejemplares;
 	}
