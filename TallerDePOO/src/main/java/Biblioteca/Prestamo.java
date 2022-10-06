@@ -2,6 +2,8 @@ package Biblioteca;
 //import java.util.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 public class Prestamo {
 	private LocalDate fechaHoraPrestada;
 	private String funcionarioPrestador;
@@ -13,10 +15,10 @@ public class Prestamo {
 	//Asociacion Multa y Prestamo
 	private ArrayList<Multa> multas;
 	private ArrayList<Funcionario> funcionarios;
-	
+	private Ejemplar ejemplar;
 	
 	public Prestamo(LocalDate fechaHoraPrestada, String funcionarioPrestador, LocalDate fechaHoraADevolver, LocalDate fechaDevuelta,
-			String funcionarioDevuelta, Lector lector, Boolean aDomicilio, ArrayList<Multa> multas, ArrayList<Funcionario> funcionarios) {
+			String funcionarioDevuelta, Lector lector, Boolean aDomicilio, ArrayList<Multa> multas, ArrayList<Funcionario> funcionarios, Ejemplar ejemplar) {
 		this.fechaHoraPrestada = fechaHoraPrestada;
 		this.funcionarioPrestador = funcionarioPrestador;
 		this.fechaHoraADevolver = fechaHoraADevolver;
@@ -26,6 +28,7 @@ public class Prestamo {
 		this.aDomicilio = aDomicilio;
 		this.multas = multas;
 		this.funcionarios = funcionarios;
+		this.ejemplar = ejemplar;
 	}
 
 	public Prestamo(){
@@ -36,7 +39,8 @@ public class Prestamo {
 		this.funcionarioDevuelta = "";
 		this.multas = new ArrayList<Multa>();
 		this.funcionarios = new ArrayList<Funcionario>();
-		
+		this.lector = new Lector();
+		this.ejemplar = new Ejemplar();
 
 	}
 
@@ -113,7 +117,16 @@ public class Prestamo {
 		this.aDomicilio = aDomicilio;
 	}
 	
-	public void compararFecha() {
-		
+	
+	public Ejemplar getEjemplar() {
+		return ejemplar;
+	}
+
+	public void setEjemplar(Ejemplar ejemplar) {
+		this.ejemplar = ejemplar;
+	}
+
+	public Long compararFecha() {
+		return ChronoUnit.DAYS.between(getFechaHoraADevolver(), getFechaDevuelta());
 	}
 }
