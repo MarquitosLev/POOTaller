@@ -19,5 +19,15 @@ public class listaFuncionario {
 		return false;
 	}
 	
+	public boolean comprobarContrasenia(String pass) {
+
+		for(int i = 0; i < datosFunc.size(); i++) {
+			if(this.datosFunc.get(i).getContrasenia().equals(pass)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 }

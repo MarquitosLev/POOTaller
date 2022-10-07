@@ -43,8 +43,8 @@ public class ventanaRegistro extends JFrame{
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ventanaRegistro.this.setVisible(false);		
 				frame.setVisible(true);
+				ventanaRegistro.this.dispose();
 			}
 		});
 		btnVolver.setBounds(120, 338, 103, 23);
@@ -62,9 +62,9 @@ public class ventanaRegistro extends JFrame{
 					 if(listaFunc.existe(user)) {//Comprueba si ya existe
 						 JOptionPane.showMessageDialog(null, "Usuario ya registrado", "Error", JOptionPane.ERROR_MESSAGE);
 					 }else {
-						 listaFunc.agregar(func);
-						 ventanaRegistro.this.setVisible(false);		
+						 listaFunc.agregar(func);	
 						 frame.setVisible(true);
+						 ventanaRegistro.this.dispose();
 					 }
 				}
 				

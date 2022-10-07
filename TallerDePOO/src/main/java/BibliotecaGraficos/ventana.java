@@ -2,29 +2,22 @@ package BibliotecaGraficos;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Biblioteca.Funcionario;
 import Biblioteca.listaFuncionario;
 
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
 import java.awt.Window.Type;
 import java.awt.Toolkit;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
 import java.awt.Color;
-import javax.swing.SwingConstants;
 import java.awt.Panel;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 import javax.script.*;
-import javax.swing.WindowConstants;
 
 public class ventana extends JFrame {
 
@@ -49,15 +42,15 @@ public class ventana extends JFrame {
 
 	//Constructor que crea ventana
 	public ventana() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ventana.class.getResource("/imagenes/icono.png")));
 		listaFunc = new listaFuncionario();
 		ventanaRegistro frameReg = new ventanaRegistro(listaFunc, ventana.this);
-		ventanaInicio(frameReg);
+		ventanaInicio(frameReg, listaFunc);
 	}
 
-	public void ventanaInicio(final ventanaRegistro frameReg) {
+	public void ventanaInicio(final ventanaRegistro frameReg, final listaFuncionario listaFunc) {
 		setTitle("Iniciar Sesi\u00F3n\r\n");
 		setType(Type.POPUP);
-		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 360, 450);
 		contentPane = new JPanel();
@@ -66,6 +59,7 @@ public class ventana extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setIcon(new ImageIcon(ventana.class.getResource("/imagenes/icono.png")));
@@ -117,16 +111,28 @@ public class ventana extends JFrame {
 		btnRegistrarse.setBounds(189, 361, 108, 18);
 		contentPane.add(btnRegistrarse);
 		
-		JButton btnNewButton = new JButton("Iniciar Sesi\u00F3n");
-		btnNewButton.addActionListener(new ActionListener() {
+		
+		
+		JButton btnInicioSesion = new JButton("Iniciar Sesi\u00F3n");
+		btnInicioSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//Inicio de Sesion
 				
+				String user = usuario.getText();
+				String pass = new String(contrasenia.getPassword());
 				
+				if(listaFunc.existe(user) && listaFunc.comprobarContrasenia(pass)) {
+					ventanaPrincipal framePrincipal = new ventanaPrincipal();
+					ventana.this.setVisible(false);
+					framePrincipal.setVisible(true);
+				}else {
+					JOptionPane.showMessageDialog(null, "No está registrado", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 				
 			}
 		});
-		btnNewButton.setBounds(111, 269, 121, 37);
-		contentPane.add(btnNewButton);
+		btnInicioSesion.setBounds(111, 269, 121, 37);
+		contentPane.add(btnInicioSesion);
 		/*Botones*/
 		
 		
