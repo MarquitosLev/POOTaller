@@ -45,6 +45,8 @@ public class ventanaRegistro extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(true);
 				ventanaRegistro.this.dispose();
+				userReg.setText("");
+				passReg.setText("");
 			}
 		});
 		btnVolver.setBounds(120, 338, 103, 23);
@@ -57,12 +59,16 @@ public class ventanaRegistro extends JFrame{
 				String pass = new String(passReg.getPassword());
 				func = new Funcionario(user, pass);
 				if(user.length() == 0 && pass.length() == 0) {//Comprueba si no se ingreso nada
-					JOptionPane.showMessageDialog(null, "No ingresó datos", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "No ingresï¿½ datos", "Error", JOptionPane.ERROR_MESSAGE);
 				}else{
 					 if(listaFunc.existe(user)) {//Comprueba si ya existe
 						 JOptionPane.showMessageDialog(null, "Usuario ya registrado", "Error", JOptionPane.ERROR_MESSAGE);
+						 userReg.setText("");
+						 passReg.setText("");
 					 }else {
-						 listaFunc.agregar(func);	
+						 listaFunc.agregar(func);
+						 userReg.setText("");
+						 passReg.setText("");
 						 frame.setVisible(true);
 						 ventanaRegistro.this.dispose();
 					 }
@@ -91,9 +97,13 @@ public class ventanaRegistro extends JFrame{
 		contentPane.add(userReg);
 		userReg.setColumns(10);
 		
+		//userReg.setText("");
+		
 		passReg = new JPasswordField();
 		passReg.setBounds(170, 201, 86, 20);
 		contentPane.add(passReg);
+		
+		//passReg.setText("");
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(ventanaRegistro.class.getResource("/imagenes/fondoInicioSesion.jpg")));

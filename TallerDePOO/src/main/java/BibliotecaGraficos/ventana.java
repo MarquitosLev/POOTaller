@@ -118,6 +118,7 @@ public class ventana extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//Inicio de Sesion
 				
+				
 				String user = usuario.getText();
 				String pass = new String(contrasenia.getPassword());
 				
@@ -126,7 +127,9 @@ public class ventana extends JFrame {
 					ventana.this.setVisible(false);
 					framePrincipal.setVisible(true);
 				}else {
-					JOptionPane.showMessageDialog(null, "No está registrado", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "No estï¿½ registrado", "Error", JOptionPane.ERROR_MESSAGE);
+					usuario.setText("");
+					contrasenia.setText("");
 				}
 				
 			}
