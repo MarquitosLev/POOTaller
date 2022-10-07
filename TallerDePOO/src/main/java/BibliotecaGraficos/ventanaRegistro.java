@@ -1,35 +1,30 @@
 package BibliotecaGraficos;
-import java.util.ArrayList;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import Biblioteca.Funcionario; //importa clase funcionario
+import Biblioteca.listaFuncionario;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import java.awt.SystemColor;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
-import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import java.awt.Color;
 
-public class ventanaRegistro extends JFrame {
+public class ventanaRegistro extends JFrame{
 
 	private JPanel contentPane;
 	private JTextField userReg;
 	private JPasswordField passReg;
 	private Funcionario func;
-	private ArrayList<Funcionario> regFuncionario;
 
-	public ventanaRegistro() {
+	public ventanaRegistro(final listaFuncionario listaFunc, final ventana frame) {
 		setTitle("Registro");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ventanaRegistro.class.getResource("/imagenes/icono.png")));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -48,9 +43,8 @@ public class ventanaRegistro extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ventana frame = new ventana();
-				ventanaRegistro.this.setVisible(false);
 				frame.setVisible(true);
+				ventanaRegistro.this.dispose();
 			}
 		});
 		btnVolver.setBounds(120, 338, 103, 23);
@@ -59,17 +53,22 @@ public class ventanaRegistro extends JFrame {
 		JButton btnRegistro = new JButton("Registrarse");
 		btnRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				regFuncionario = new ArrayList<Funcionario>();
-				/*
-				 * Falta comprobar si ya esta registrado
-				 * 
-				 * */
 				String user = userReg.getText();
 				String pass = new String(passReg.getPassword());
 				func = new Funcionario(user, pass);
-				regFuncionario.add(func);
-				System.out.println(user + " - " + pass); //Quitar luego
+				if(user.length() == 0 && pass.length() == 0) {//Comprueba si no se ingreso nada
+					JOptionPane.showMessageDialog(null, "No ingresó datos", "Error", JOptionPane.ERROR_MESSAGE);
+				}else{
+					 if(listaFunc.existe(user)) {//Comprueba si ya existe
+						 JOptionPane.showMessageDialog(null, "Usuario ya registrado", "Error", JOptionPane.ERROR_MESSAGE);
+					 }else {
+						 listaFunc.agregar(func);	
+						 frame.setVisible(true);
+						 ventanaRegistro.this.dispose();
+					 }
+				}
+				
+				
 			}
 		});
 		btnRegistro.setBounds(120, 260, 103, 23);
