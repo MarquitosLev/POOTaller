@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Biblioteca.listaFuncionario;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Window.Type;
@@ -28,6 +31,7 @@ public class ventana extends JFrame {
 	private JPanel contentPane;
 	private JTextField usuario;
 	private JPasswordField contrasenia;
+	private listaFuncionario listaFunc;
 	
 	//PRINCIPAL
 	public static void main(String[] args) {
@@ -45,10 +49,12 @@ public class ventana extends JFrame {
 
 	//Constructor que crea ventana
 	public ventana() {
-		ventanaInicio();
+		listaFunc = new listaFuncionario();
+		ventanaRegistro frameReg = new ventanaRegistro(listaFunc, ventana.this);
+		ventanaInicio(frameReg);
 	}
 
-	public void ventanaInicio() {
+	public void ventanaInicio(final ventanaRegistro frameReg) {
 		setTitle("Iniciar Sesi\u00F3n\r\n");
 		setType(Type.POPUP);
 		setResizable(false);
@@ -103,7 +109,6 @@ public class ventana extends JFrame {
 		JButton btnRegistrarse = new JButton("Registrarse");
 		btnRegistrarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ventanaRegistro frameReg = new ventanaRegistro();
 				ventana.this.setVisible(false);//Pone invisible la ventana anterior
 				frameReg.setVisible(true); //Pone visible la ventana de Registro
 			}
@@ -115,6 +120,9 @@ public class ventana extends JFrame {
 		JButton btnNewButton = new JButton("Iniciar Sesi\u00F3n");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				
 			}
 		});
 		btnNewButton.setBounds(111, 269, 121, 37);
