@@ -42,7 +42,7 @@ public class ventana extends JFrame {
 
 	//Constructor que crea ventana
 	public ventana() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(ventana.class.getResource("/imagenes/icono.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ventana.class.getResource("/imagenes/icon.png")));
 		listaFunc = new listaFuncionario();
 		ventanaRegistro frameReg = new ventanaRegistro(listaFunc, ventana.this);
 		ventanaInicio(frameReg, listaFunc);
@@ -83,7 +83,7 @@ public class ventana extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("\u00BFNo tiene una cuenta? \r\n");
 		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setBounds(48, 363, 131, 14);
+		lblNewLabel.setBounds(48, 363, 132, 21);
 		contentPane.add(lblNewLabel);
 		
 		//FUNCIONARIO
@@ -108,7 +108,7 @@ public class ventana extends JFrame {
 			}
 
 		});
-		btnRegistrarse.setBounds(189, 361, 108, 18);
+		btnRegistrarse.setBounds(189, 361, 108, 23);
 		contentPane.add(btnRegistrarse);
 		
 		

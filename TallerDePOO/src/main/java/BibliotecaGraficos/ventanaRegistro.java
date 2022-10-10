@@ -26,7 +26,7 @@ public class ventanaRegistro extends JFrame{
 
 	public ventanaRegistro(final listaFuncionario listaFunc, final ventana frame) {
 		setTitle("Registro");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(ventanaRegistro.class.getResource("/imagenes/icono.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ventanaRegistro.class.getResource("/imagenes/icon.png")));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 360, 450);
 		contentPane = new JPanel();
