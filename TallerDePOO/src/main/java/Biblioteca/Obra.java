@@ -39,8 +39,8 @@ public class Obra {
 		this.ediciones = new ArrayList<Edicion>();
 	}
 	
-	public Obra(int cantEjem, int cantEjemDisponible, String titulo, String subtitulo, String autor1, String autor2,
-			String autor3, String genero, int isbn, int id, Area area, tipoObra tipo, Coleccion perteneceA, ArrayList<Ejemplar> ejemplares, ArrayList<Edicion> ediciones) {
+	//Constructor para la nueva obra
+	public Obra(String titulo, String subtitulo, String autor1, String autor2, String autor3, String genero, int isbn, int id, Area area, tipoObra tipo) {
 		super();
 		this.cantEjem = cantEjem;
 		this.cantEjemDisponible = cantEjemDisponible;

@@ -3,6 +3,9 @@ package BibliotecaGraficos;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Biblioteca.listaObra;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -18,7 +21,9 @@ public class ventanaPrincipal extends JFrame {
 	private JPanel contentPane;
 
 	public ventanaPrincipal() {
-		ventanaNuevaObra regNuevaObra = new ventanaNuevaObra(ventanaPrincipal.this);
+		listaObra listaObras = new listaObra();
+		ventanaNuevaObra regNuevaObra = new ventanaNuevaObra(ventanaPrincipal.this, listaObras);
+		
 		inicioVentanaPrincipal(regNuevaObra);
 	}
 
@@ -43,6 +48,13 @@ public class ventanaPrincipal extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		JButton btnPrestamo = new JButton("Prestamo\r\n");
+		btnPrestamo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+			}
+		});
 		btnPrestamo.setBounds(86, 188, 176, 28);
 		contentPane.add(btnPrestamo);
 		
