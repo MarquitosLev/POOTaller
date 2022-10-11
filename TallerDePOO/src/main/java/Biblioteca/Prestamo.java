@@ -3,14 +3,12 @@ package Biblioteca;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
-import org.joda.time.DateTime;
-
+import java.time.LocalDateTime;
 public class Prestamo {
-	private DateTime fechaHoraPrestada;
+	private LocalDateTime fechaHoraPrestada;
 	private String funcionarioPrestador;
-	private LocalDate fechaHoraADevolver;
-	private LocalDate fechaDevuelta;
+	private LocalDateTime fechaHoraADevolver;
+	private LocalDateTime fechaDevuelta;
 	private String funcionarioDevuelta;
 	private Lector lector;
 	private Boolean aDomicilio;
@@ -19,9 +17,9 @@ public class Prestamo {
 	private ArrayList<Funcionario> funcionarios;
 	private Ejemplar ejemplar;
 	
-	public Prestamo(String funcionarioPrestador, LocalDate fechaHoraADevolver, LocalDate fechaDevuelta,
+	public Prestamo(String funcionarioPrestador, LocalDateTime fechaHoraADevolver, LocalDateTime fechaDevuelta,
 			String funcionarioDevuelta, Lector lector, Boolean aDomicilio, ArrayList<Multa> multas, ArrayList<Funcionario> funcionarios, Ejemplar ejemplar) {
-		this.fechaHoraPrestada = DateTime.now();
+		this.fechaHoraPrestada = LocalDateTime.now();
 		this.funcionarioPrestador = funcionarioPrestador;
 		this.fechaHoraADevolver = fechaHoraADevolver;
 		this.fechaDevuelta = fechaDevuelta;
@@ -34,10 +32,10 @@ public class Prestamo {
 	}
 
 	public Prestamo(){
-		this.fechaHoraPrestada = DateTime.now();
+		this.fechaHoraPrestada = LocalDateTime.now();
 		this.funcionarioPrestador = "";
 		this.fechaHoraADevolver = this.fechaHoraPrestada.plusDays(4);
-		this.fechaDevuelta = LocalDate.of(2000, 1, 1);
+		this.fechaDevuelta = LocalDateTime.of(2000, 1, 1, 1, 1, 1);
 		this.funcionarioDevuelta = "";
 		this.multas = new ArrayList<Multa>();
 		this.funcionarios = new ArrayList<Funcionario>();
@@ -63,7 +61,7 @@ public class Prestamo {
 		this.multas = multas;
 	}
 
-	public LocalDate getFechaHoraPrestada() {
+	public LocalDateTime getFechaHoraPrestada() {
 		return fechaHoraPrestada;
 	}
 
@@ -75,7 +73,7 @@ public class Prestamo {
 		this.funcionarioPrestador = funcionarioPrestador;
 	}
 
-	public LocalDate getFechaHoraADevolver() {
+	public LocalDateTime getFechaHoraADevolver() {
 		return fechaHoraADevolver;
 	}
 
@@ -83,11 +81,11 @@ public class Prestamo {
 		this.fechaHoraADevolver = this.fechaHoraPrestada.plusDays(4);
 	}
 
-	public LocalDate getFechaDevuelta() {
+	public LocalDateTime getFechaDevuelta() {
 		return fechaDevuelta;
 	}
 
-	public void setFechaDevuelta(LocalDate fechaDevuelta) {
+	public void setFechaDevuelta(LocalDateTime fechaDevuelta) {
 		this.fechaDevuelta = fechaDevuelta;
 	}
 
