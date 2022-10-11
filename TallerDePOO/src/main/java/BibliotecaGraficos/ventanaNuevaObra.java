@@ -1,7 +1,6 @@
 package BibliotecaGraficos;
 
 import java.awt.EventQueue;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,19 +12,23 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Color;
-import javax.swing.JSlider;
-import javax.swing.JMenuBar;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
-import javax.swing.ListSelectionModel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import Biblioteca.tipoObra;
-import javax.swing.JTextPane;
-import javax.swing.DropMode;
-import javax.swing.JTabbedPane;
 import Biblioteca.Area;
+import Biblioteca.Obra;
+import Biblioteca.listaObra;
+
 import java.awt.Toolkit;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JTextPane;
+import javax.swing.JLayeredPane;
+import java.awt.ScrollPane;
+import javax.swing.JDesktopPane;
+import javax.swing.DropMode;
+import javax.swing.JTextArea;
+import java.awt.Font;
 
 public class ventanaNuevaObra extends JFrame {
 
@@ -41,7 +44,7 @@ public class ventanaNuevaObra extends JFrame {
 	private JTextField txtID;
 	private JButton btnRegistrarObra;
 
-	public ventanaNuevaObra(final ventanaPrincipal framePrincipal) {
+	public ventanaNuevaObra(final ventanaPrincipal framePrincipal, final listaObra listaObras) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ventanaNuevaObra.class.getResource("/imagenes/icon.png")));
 		setTitle("Nimbook - Reserva");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,16 +64,23 @@ public class ventanaNuevaObra extends JFrame {
 			}
 		});
 		
+		final JTextArea textMuestra = new JTextArea();
+		textMuestra.setEditable(false);
+		textMuestra.setBackground(Color.GRAY);
+		textMuestra.setFont(new Font("Arial", Font.BOLD, 20));
+		textMuestra.setBounds(385, 90, 337, 350);
+		contentPane.add(textMuestra);
+		
 		JLabel lblNewLabel_1_8 = new JLabel("Area:");
 		lblNewLabel_1_8.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_1_8.setForeground(Color.WHITE);
 		lblNewLabel_1_8.setBounds(66, 95, 66, 14);
 		contentPane.add(lblNewLabel_1_8);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(Area.values()));
-		comboBox_1.setBounds(142, 91, 116, 22);
-		contentPane.add(comboBox_1);
+		final JComboBox areaObra = new JComboBox();
+		areaObra.setModel(new DefaultComboBoxModel(Area.values()));
+		areaObra.setBounds(142, 91, 116, 22);
+		contentPane.add(areaObra);
 		
 		JLabel lblNewLabel_1_7_1 = new JLabel("Tipo de Obra:");
 		lblNewLabel_1_7_1.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -78,12 +88,29 @@ public class ventanaNuevaObra extends JFrame {
 		lblNewLabel_1_7_1.setBounds(66, 378, 66, 14);
 		contentPane.add(lblNewLabel_1_7_1);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(tipoObra.values()));
-		comboBox.setBounds(142, 374, 116, 22);
-		contentPane.add(comboBox);
+		final JComboBox tipoObraNueva = new JComboBox();
+		tipoObraNueva.setModel(new DefaultComboBoxModel(tipoObra.values()));
+		tipoObraNueva.setBounds(142, 374, 116, 22);
+		contentPane.add(tipoObraNueva);
 		
 		btnRegistrarObra = new JButton("Registrar Obra");
+		btnRegistrarObra.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Area area = (Area) areaObra.getSelectedItem();
+				String tit = txtTitulo.getText();
+				String subt = txtSubtitulo.getText();
+				String priAut = txtPriAutor.getText();
+				String segAut = txtSegAutor.getText();
+				String terAut = txtTerAutor.getText();
+				String gen = txtGenero.getText();
+				int isbn = Integer.parseInt(txtISBN.getText());
+				int id = Integer.parseInt(txtID.getText());
+				tipoObra tipo =(tipoObra) tipoObraNueva.getSelectedItem();
+				Obra obra = new Obra(tit, subt, priAut, segAut, terAut, gen, isbn, id, area, tipo);
+				listaObras.agregar(obra);
+				textMuestra.append(tit + " - " + priAut + " - " + gen + " - " + isbn + "\n");;
+			}
+		});
 		btnRegistrarObra.setBounds(142, 417, 116, 23);
 		contentPane.add(btnRegistrarObra);
 		
