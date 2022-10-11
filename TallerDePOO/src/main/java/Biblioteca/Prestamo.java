@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
+
 public class Prestamo {
 	private LocalDate fechaHoraPrestada;
 	private String funcionarioPrestador;
@@ -81,8 +82,8 @@ public class Prestamo {
 		return fechaHoraADevolver;
 	}
 
-	public void setFechaHoraADevolver(LocalDate fechaHoraADevolver) {
-		this.fechaHoraADevolver = fechaHoraADevolver;
+	public void setFechaHoraADevolver() {
+		this.fechaHoraADevolver = this.fechaHoraPrestada.plusDays(4);
 	}
 
 	public LocalDate getFechaDevuelta() {
