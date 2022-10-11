@@ -4,9 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
+import org.joda.time.DateTime;
 
 public class Prestamo {
-	private LocalDate fechaHoraPrestada;
+	private DateTime fechaHoraPrestada;
 	private String funcionarioPrestador;
 	private LocalDate fechaHoraADevolver;
 	private LocalDate fechaDevuelta;
@@ -18,9 +19,9 @@ public class Prestamo {
 	private ArrayList<Funcionario> funcionarios;
 	private Ejemplar ejemplar;
 	
-	public Prestamo(LocalDate fechaHoraPrestada, String funcionarioPrestador, LocalDate fechaHoraADevolver, LocalDate fechaDevuelta,
+	public Prestamo(String funcionarioPrestador, LocalDate fechaHoraADevolver, LocalDate fechaDevuelta,
 			String funcionarioDevuelta, Lector lector, Boolean aDomicilio, ArrayList<Multa> multas, ArrayList<Funcionario> funcionarios, Ejemplar ejemplar) {
-		this.fechaHoraPrestada = fechaHoraPrestada;
+		this.fechaHoraPrestada = DateTime.now();
 		this.funcionarioPrestador = funcionarioPrestador;
 		this.fechaHoraADevolver = fechaHoraADevolver;
 		this.fechaDevuelta = fechaDevuelta;
@@ -33,9 +34,9 @@ public class Prestamo {
 	}
 
 	public Prestamo(){
-		this.fechaHoraPrestada = LocalDate.of(2000, 1, 1);
+		this.fechaHoraPrestada = DateTime.now();
 		this.funcionarioPrestador = "";
-		this.fechaHoraADevolver = LocalDate.of(2000, 1, 1);
+		this.fechaHoraADevolver = this.fechaHoraPrestada.plusDays(4);
 		this.fechaDevuelta = LocalDate.of(2000, 1, 1);
 		this.funcionarioDevuelta = "";
 		this.multas = new ArrayList<Multa>();
@@ -64,10 +65,6 @@ public class Prestamo {
 
 	public LocalDate getFechaHoraPrestada() {
 		return fechaHoraPrestada;
-	}
-
-	public void setFechaHoraPrestada(LocalDate fechaHoraPrestada) {
-		this.fechaHoraPrestada = fechaHoraPrestada;
 	}
 
 	public String getFuncionarioPrestador() {
