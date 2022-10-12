@@ -1,14 +1,18 @@
 package Biblioteca;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+
+import BibliotecaGraficos.ventanaRegistro;
 
 public class listaFuncionario {
 	ArrayList<Funcionario> datosFunc = new ArrayList<Funcionario>();
 
 	public void agregar(Funcionario obj) {
+		guardarFuncionario(obj);
 		datosFunc.add(obj);
 	}
 	
@@ -32,13 +36,19 @@ public class listaFuncionario {
 		return false;
 	}
 	
-	public void guardarFuncionario(Funcionario funcionario){
+	public static void guardarFuncionario(Funcionario funcionario){
+		//File archivo = new File("G:\\Mi unidad\\Carrera\\Programación orientada a objetos\\GitHub\\POOTaller\\TallerDePOO\\src\\main\\java\\Registros\\Funcionarios.txt");
+		//File archivo = new File("TallerDePOO\\Registros.Funcionarios.txt" );
 		try {
-			FileWriter crear = new FileWriter("Funcionarios.txt", true); //Crea archivo de texto
+			//if (!archivo.exists()) {
+			//	archivo.createNewFile();
+            //}
+			FileWriter crear = new FileWriter("TallerDePOO\\Registros.Funcionarios.txt", true); //Crea archivo de texto
 			BufferedWriter lector = new BufferedWriter(crear); //Se le pasa el archivo
-			PrintWriter escribir = new PrintWriter(lector); //Imprime en el archivo
-			escribir.print(" - " + funcionario.getUsuario());
-			escribir.print(" - " + funcionario.getContrasenia());
+			//PrintWriter escribir = new PrintWriter(crear); //Imprime en el archivo
+			lector.write(" - " + funcionario.getUsuario());
+			lector.write(" - " + funcionario.getContrasenia());
+			lector.close();
 		} catch (Exception e) {
 		}
 	}

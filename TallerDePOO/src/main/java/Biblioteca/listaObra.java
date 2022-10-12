@@ -6,11 +6,12 @@ public class listaObra {
 	
 	public void guardar(Obra obra){
 		listaObras.add(obra);
+		guardarObras(obra);
 	}
 	
-	public void guardarObras(Obra obra){
+	public static void guardarObras(Obra obra){
 		try {
-			FileWriter crear = new FileWriter("Obras.txt", true); //Crea archivo de texto
+			FileWriter crear = new FileWriter("/Registros/Obras.txt", true); //Crea archivo de texto
 			BufferedWriter lector = new BufferedWriter(crear); //Se le pasa el archivo
 			PrintWriter escribir = new PrintWriter(lector); //Imprime en el archivo
 			escribir.print(" - " + obra.getCantEjem());
