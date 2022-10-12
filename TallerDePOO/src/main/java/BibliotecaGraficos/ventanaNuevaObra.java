@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -43,6 +44,7 @@ public class ventanaNuevaObra extends JFrame {
 	private JTextField txtISBN;
 	private JTextField txtID;
 	private JButton btnRegistrarObra;
+	private JTable tabla;
 
 	//Agregar tabla a dise√±o
 	//TIT AUT GEN ISBN
@@ -58,6 +60,18 @@ public class ventanaNuevaObra extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		//Tabla
+		final DefaultTableModel model = new DefaultTableModel();//Modelo para las columnas
+		model.addColumn("TÌtulo");
+		model.addColumn("Autor");
+		model.addColumn("Genero");
+		model.addColumn("ISBN");
+		
+		tabla = new JTable(model);//se crea la tabla con las columnas de model
+		tabla.setBounds(364, 91, 289, 349);
+		contentPane.add(tabla);
+
+		
 		JButton btnNewButton = new JButton("Volver");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -66,13 +80,6 @@ public class ventanaNuevaObra extends JFrame {
 				
 			}
 		});
-		
-		final JTextArea textMuestra = new JTextArea();
-		textMuestra.setEditable(false);
-		textMuestra.setBackground(Color.GRAY);
-		textMuestra.setFont(new Font("Arial", Font.BOLD, 20));
-		textMuestra.setBounds(385, 90, 337, 350);
-		contentPane.add(textMuestra);
 		
 		JLabel lblNewLabel_1_8 = new JLabel("Area:");
 		lblNewLabel_1_8.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -111,7 +118,11 @@ public class ventanaNuevaObra extends JFrame {
 				tipoObra tipo =(tipoObra) tipoObraNueva.getSelectedItem();
 				Obra obra = new Obra(tit, subt, priAut, segAut, terAut, gen, isbn, id, area, tipo);
 				listaObras.guardar(obra);
-				textMuestra.append(tit + " - " + priAut + " - " + gen + " - " + isbn + "\n");;
+				
+				//Mostrador en la tabla
+				String[] vector = {tit, priAut, gen, (String.valueOf(isbn))};
+				model.addRow(vector);
+				
 			}
 		});
 		btnRegistrarObra.setBounds(142, 417, 116, 23);
@@ -214,7 +225,4 @@ public class ventanaNuevaObra extends JFrame {
 		setLocationRelativeTo(null);
 	}
 
-	public JLabel getLblNewLabel() {
-		return lblNewLabel;
-	}
 }

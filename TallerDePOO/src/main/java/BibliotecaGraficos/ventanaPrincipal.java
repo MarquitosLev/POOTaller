@@ -22,12 +22,13 @@ public class ventanaPrincipal extends JFrame {
 
 	public ventanaPrincipal() {
 		listaObra listaObras = new listaObra();
+		ventanaLectores ventanaLectores = new ventanaLectores(ventanaPrincipal.this);
 		ventanaNuevaObra regNuevaObra = new ventanaNuevaObra(ventanaPrincipal.this, listaObras);
 		
-		inicioVentanaPrincipal(regNuevaObra);
+		inicioVentanaPrincipal(regNuevaObra, ventanaLectores);
 	}
 
-	private void inicioVentanaPrincipal(final ventanaNuevaObra regNuevaObra) {
+	private void inicioVentanaPrincipal(final ventanaNuevaObra regNuevaObra, final ventanaLectores ventanaLectores) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ventanaPrincipal.class.getResource("/imagenes/icon.png")));
 		setType(Type.POPUP);
 		setTitle("Nimbook");
@@ -42,6 +43,19 @@ public class ventanaPrincipal extends JFrame {
 		setResizable(false);
 		contentPane.setLayout(null);
 		
+		//Boton Lectores
+		JButton btnLectores = new JButton("Lectores");
+		btnLectores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ventanaLectores.setVisible(true);
+				ventanaPrincipal.this.setVisible(false);
+				
+			}
+		});
+		btnLectores.setBounds(300, 268, 176, 28);
+		contentPane.add(btnLectores);
+		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/logoTotal.png")));
 		lblNewLabel_1.setBounds(197, 39, 383, 107);
@@ -55,7 +69,7 @@ public class ventanaPrincipal extends JFrame {
 				
 			}
 		});
-		btnPrestamo.setBounds(86, 188, 176, 28);
+		btnPrestamo.setBounds(300, 188, 176, 28);
 		contentPane.add(btnPrestamo);
 		
 		JButton btnNuevaObra = new JButton("Registrar Nueva Obra");
@@ -65,7 +79,7 @@ public class ventanaPrincipal extends JFrame {
 				regNuevaObra.setVisible(true);
 			}
 		});
-		btnNuevaObra.setBounds(86, 228, 176, 28);
+		btnNuevaObra.setBounds(300, 228, 176, 28);
 		contentPane.add(btnNuevaObra);
 
 		JLabel lblNewLabel = new JLabel("");
