@@ -1,5 +1,8 @@
 package Biblioteca;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class listaFuncionario {
@@ -27,6 +30,17 @@ public class listaFuncionario {
 			}
 		}
 		return false;
+	}
+	
+	public void guardarFuncionario(Funcionario funcionario){
+		try {
+			FileWriter crear = new FileWriter("Funcionarios.txt", true); //Crea archivo de texto
+			BufferedWriter lector = new BufferedWriter(crear); //Se le pasa el archivo
+			PrintWriter escribir = new PrintWriter(lector); //Imprime en el archivo
+			escribir.print(" - " + funcionario.getUsuario());
+			escribir.print(" - " + funcionario.getContrasenia());
+		} catch (Exception e) {
+		}
 	}
 	
 	

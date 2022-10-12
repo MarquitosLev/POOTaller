@@ -44,6 +44,9 @@ public class ventanaNuevaObra extends JFrame {
 	private JTextField txtID;
 	private JButton btnRegistrarObra;
 
+	//Agregar tabla a diseño
+	//TIT AUT GEN ISBN
+	
 	public ventanaNuevaObra(final ventanaPrincipal framePrincipal, final listaObra listaObras) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ventanaNuevaObra.class.getResource("/imagenes/icon.png")));
 		setTitle("Nimbook - Reserva");
@@ -107,7 +110,7 @@ public class ventanaNuevaObra extends JFrame {
 				int id = Integer.parseInt(txtID.getText());
 				tipoObra tipo =(tipoObra) tipoObraNueva.getSelectedItem();
 				Obra obra = new Obra(tit, subt, priAut, segAut, terAut, gen, isbn, id, area, tipo);
-				listaObras.agregar(obra);
+				listaObras.guardar(obra);
 				textMuestra.append(tit + " - " + priAut + " - " + gen + " - " + isbn + "\n");;
 			}
 		});
