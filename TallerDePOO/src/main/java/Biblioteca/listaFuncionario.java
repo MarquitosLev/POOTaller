@@ -12,13 +12,15 @@ import BibliotecaGraficos.ventanaRegistro;
 
 public class listaFuncionario {
 	ArrayList<Funcionario> datosFunc = new ArrayList<Funcionario>();
-
+	File functxt= new File ("Funcionarios.txt");
+	
 	public void agregar(Funcionario obj) {
 		guardarFuncionario(obj);
 		datosFunc.add(obj);
 	}
 	
 	public boolean existe(String user) {
+		
 		if(datosFunc.size() == 0) return false;
 		for(int i = 0; i < datosFunc.size(); i++) {
 			if(this.datosFunc.get(i).getUsuario().equals(user)){
@@ -38,30 +40,26 @@ public class listaFuncionario {
 		return false;
 	}
 	
-	public static void guardarFuncionario(Funcionario funcionario){
-		//File archivo = new File("G:\\Mi unidad\\Carrera\\Programación orientada a objetos\\GitHub\\POOTaller\\TallerDePOO\\src\\main\\java\\Registros\\Funcionarios.txt");
-		//File archivo = new File("TallerDePOO\\Registros.Funcionarios.txt" );
+	public void guardarFuncionario(Funcionario funcionario){
 		try {
-			//if (!archivo.exists()) {
-			//	archivo.createNewFile();
-            //}
-			FileWriter crear = new FileWriter("Funcionarios.txt", true); //Crea archivo de texto
-			BufferedWriter lector = new BufferedWriter(crear); //Se le pasa el archivo
-			//PrintWriter escribir = new PrintWriter(crear); //Imprime en el archivo
+			if (!functxt.exists()) {	//Crea el archivo txt en caso de que no exista
+				functxt.createNewFile();
+            }
+			BufferedWriter lector = new BufferedWriter(new PrintWriter(functxt)); //Escribe los datos asignados
 			lector.write(" - " + funcionario.getUsuario());
 			lector.write(" - " + funcionario.getContrasenia());
 			lector.close();
 		} catch (Exception e) {
 		}
-		mostrararchivos();
+		//mostrararchivos();
 	}
-	public static void mostrararchivos() {
+	/*public static void mostrararchivos() {
 		try
         {
             FileReader fr=new FileReader("Funcionarios.txt");
             BufferedReader br=new BufferedReader(fr);
             String cadena;
-            while((cadena=br.readLine())!=null) //cuando el la siguiente linea leida no halla nada significa que termino de ller los datos del archivo
+            while((cadena=br.readLine())!=null) //cuando en la siguiente linea leída no haya nada significa que terminó de leer los datos del archivo
             {
                 System.out.println(""+cadena); 
             }
@@ -71,6 +69,6 @@ public class listaFuncionario {
             System.out.println(ex.getMessage());
         }
 		}
-
+	*/
 	
 }
