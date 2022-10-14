@@ -1,7 +1,9 @@
 package Biblioteca;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -43,7 +45,7 @@ public class listaFuncionario {
 			//if (!archivo.exists()) {
 			//	archivo.createNewFile();
             //}
-			FileWriter crear = new FileWriter("TallerDePOO\\Registros.Funcionarios.txt", true); //Crea archivo de texto
+			FileWriter crear = new FileWriter("Funcionarios.txt", true); //Crea archivo de texto
 			BufferedWriter lector = new BufferedWriter(crear); //Se le pasa el archivo
 			//PrintWriter escribir = new PrintWriter(crear); //Imprime en el archivo
 			lector.write(" - " + funcionario.getUsuario());
@@ -51,7 +53,24 @@ public class listaFuncionario {
 			lector.close();
 		} catch (Exception e) {
 		}
+		mostrararchivos();
 	}
-	
+	public static void mostrararchivos() {
+		try
+        {
+            FileReader fr=new FileReader("Funcionarios.txt");
+            BufferedReader br=new BufferedReader(fr);
+            String cadena;
+            while((cadena=br.readLine())!=null) //cuando el la siguiente linea leida no halla nada significa que termino de ller los datos del archivo
+            {
+                System.out.println(""+cadena); 
+            }
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+		}
+
 	
 }
