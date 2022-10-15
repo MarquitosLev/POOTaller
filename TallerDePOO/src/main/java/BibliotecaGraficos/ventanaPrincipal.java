@@ -79,6 +79,10 @@ public class ventanaPrincipal extends JFrame {
 		panelEjemplar.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Registrar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setBounds(366, 192, 90, 28);
 		panelEjemplar.add(btnNewButton);
 		

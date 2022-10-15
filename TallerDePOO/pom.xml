@@ -2,5 +2,16 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>POOTaller</groupId>
   <artifactId>TallerDePOO</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1-SNAPSHOT</version>  
+  
+  <dependencies>
+  
+  <dependency>
+  	<groupId>net.sourceforge.barbecue</groupId>
+  	<artifactId>barbecue</artifactId>
+  	<version>1.5-beta1</version>
+  </dependency>
+  
+  </dependencies>
+  
 </project>
