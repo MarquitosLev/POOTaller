@@ -13,6 +13,7 @@ public class Ejemplar {
     private String codUbicacion;
     private String codDeBarra;
     private Obra obra;
+    private Lector lector;
     
     
     public Ejemplar(int idEjemplar, String observaciones, boolean disponible, int cantPedidas, LocalDate fechaAdquisicion,
@@ -29,6 +30,7 @@ public class Ejemplar {
 		this.codUbicacion = codUbicacion;
 		this.codDeBarra = codDeBarra;
 		this.obra = obra;
+		this.lector = lector;
 	}
 
 	public Ejemplar() {
@@ -132,4 +134,13 @@ public class Ejemplar {
     public void setObra(Obra obra){
     	this.obra = obra;
     }
+
+	public Lector getLector() {
+		return lector;
+	}
+
+	public void setLector(Lector lector) {
+		this.lector = lector;
+	}
+    
 }
