@@ -121,7 +121,12 @@ public class Prestamo {
 		this.ejemplar = ejemplar;
 	}
 
-	public Long compararFecha() {
-		return ChronoUnit.DAYS.between(getFechaHoraADevolver(), getFechaDevuelta());
+	public boolean compararFecha() {
+		Long x = ChronoUnit.DAYS.between(getFechaHoraADevolver(), getFechaDevuelta());
+		if (x>=0) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 }

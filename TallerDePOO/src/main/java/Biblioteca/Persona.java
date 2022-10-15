@@ -1,4 +1,5 @@
 package Biblioteca;
+import java.time.LocalDate;
 
 abstract class Persona {
 	private String nom;
@@ -7,16 +8,16 @@ abstract class Persona {
 	private int numDoc;
 	private String correo;
 	private int numCel;
-	private String fecNac;
+	private LocalDate fecNac;
 	private String sex;
-	private String nac;
+	private String lugarNac;
 	private String domi;
 	private int codPos;
 	private String dep;
 	private String localidad;
 	
-	public Persona(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, String fecNac,
-			String sex, String nac, String domi, int codPos, String dep, String localidad) {
+	public Persona(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
+			String sex, String lugarNac, String domi, int codPos, String dep, String localidad) {
 		this.nom = nom;
 		this.apellido = apellido;
 		this.tipDoc = tipDoc;
@@ -25,7 +26,7 @@ abstract class Persona {
 		this.numCel = numCel;
 		this.fecNac = fecNac;
 		this.sex = sex;
-		this.nac = nac;
+		this.lugarNac = lugarNac;
 		this.domi = domi;
 		this.codPos = codPos;
 		this.dep = dep;
@@ -38,9 +39,9 @@ abstract class Persona {
 		this.numDoc = 0;
 		this.correo = "";
 		this.numCel = 0;
-		this.fecNac = "";
+		this.fecNac = LocalDate.of(2022, 02, 05);
 		this.sex = "";
-		this.nac = "";
+		this.lugarNac = "";
 		this.domi = "";
 		this.codPos = 0;
 		this.dep = "";
@@ -95,11 +96,11 @@ abstract class Persona {
 		this.numCel = numCel;
 	}
 
-	public String getFecNac() {
+	public LocalDate getFecNac() {
 		return fecNac;
 	}
 
-	public void setFecNac(String fecNac) {
+	public void setFecNac(LocalDate fecNac) {
 		this.fecNac = fecNac;
 	}
 
@@ -111,12 +112,12 @@ abstract class Persona {
 		this.sex = sex;
 	}
 
-	public String getNac() {
-		return nac;
+	public String getLugarNac() {
+		return lugarNac;
 	}
 
-	public void setNac(String nac) {
-		this.nac = nac;
+	public void setLugarNac(String lugarNac) {
+		this.lugarNac = lugarNac;
 	}
 
 	public String getDomi() {

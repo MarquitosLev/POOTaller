@@ -22,6 +22,9 @@ import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
 import Biblioteca.Area;
 import Biblioteca.tipoObra;
+import javax.swing.JCheckBox;
+import Biblioteca.FormaAdquirida;
+import java.awt.Font;
 
 public class ventanaPrincipal extends JFrame {
 
@@ -45,6 +48,22 @@ public class ventanaPrincipal extends JFrame {
 	private JTextField dateDia;
 	private JTextField dateMes;
 	private JTextField dateAnio;
+	private JTextField textIDEjemplar;
+	private JTextField textIDLector;
+	private JTextField otroArea;
+	private JTextField otroTipoObra;
+	private JTextField otroAdquisicion;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textFuncPrestador;
+	private JTextField textFuncRecibidor;
+	private JTextField textIDEjemplarDevuelta;
+	private JTextField textField;
+	private JTextField textNroCelular;
+	private JTextField textCodPos;
+	private JTextField textLugarNac;
 
 	public ventanaPrincipal() {
 		inicioVentanaPrincipal();
@@ -64,239 +83,458 @@ public class ventanaPrincipal extends JFrame {
 		setLocationRelativeTo(null);
 		setResizable(false);
 		contentPane.setLayout(null);
-		
+
 		JLabel logo = new JLabel("");
 		logo.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/nombreIcon22.png")));
 		logo.setBounds(210, 6, 356, 105);
 		contentPane.add(logo);
-		
+
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(6, 98, 765, 474);
 		contentPane.add(tabbedPane);
+
+		JPanel panelPrestamo = new JPanel();
+		tabbedPane.addTab("Prestamo", null, panelPrestamo, null);
+		panelPrestamo.setLayout(null);
+
+		textIDEjemplar = new JTextField();
+		textIDEjemplar.setBounds(27, 93, 102, 28);
+		panelPrestamo.add(textIDEjemplar);
+		textIDEjemplar.setColumns(10);
+
+		textIDLector = new JTextField();
+		textIDLector.setColumns(10);
+		textIDLector.setBounds(159, 93, 102, 28);
+		panelPrestamo.add(textIDLector);
+
+		JLabel lblNewLabel_4 = new JLabel("ID Ejemplar");
+		lblNewLabel_4.setForeground(Color.WHITE);
+		lblNewLabel_4.setBounds(27, 65, 102, 16);
+		panelPrestamo.add(lblNewLabel_4);
+
+		JLabel lblNewLabel_4_1 = new JLabel("ID Lector");
+		lblNewLabel_4_1.setForeground(Color.WHITE);
+		lblNewLabel_4_1.setBounds(159, 65, 102, 16);
+		panelPrestamo.add(lblNewLabel_4_1);
+
+		JCheckBox chckbxNewCheckBox = new JCheckBox("A domicilio");
+		chckbxNewCheckBox.setForeground(Color.WHITE);
+		chckbxNewCheckBox.setBounds(436, 98, 103, 18);
+		panelPrestamo.add(chckbxNewCheckBox);
+
 		
+
+		JLabel lblNewLabel_7 = new JLabel("Pr\u00E9stamo: ");
+		lblNewLabel_7.setForeground(Color.LIGHT_GRAY);
+		lblNewLabel_7.setFont(new Font("SansSerif", Font.BOLD, 15));
+		lblNewLabel_7.setBounds(27, 28, 102, 18);
+		panelPrestamo.add(lblNewLabel_7);
+
+		JLabel lblNewLabel_7_1 = new JLabel("Devoluci\u00F3n: ");
+		lblNewLabel_7_1.setForeground(Color.LIGHT_GRAY);
+		lblNewLabel_7_1.setFont(new Font("SansSerif", Font.BOLD, 15));
+		lblNewLabel_7_1.setBounds(27, 162, 102, 18);
+		panelPrestamo.add(lblNewLabel_7_1);
+
+		JLabel lblNewLabel_2_3_1_1 = new JLabel("Fecha devuelta (d - m - a) :");
+		lblNewLabel_2_3_1_1.setForeground(Color.WHITE);
+		lblNewLabel_2_3_1_1.setBounds(27, 198, 149, 16);
+		panelPrestamo.add(lblNewLabel_2_3_1_1);
+
+		textField_3 = new JTextField();
+		textField_3.setToolTipText("");
+		textField_3.setHorizontalAlignment(SwingConstants.LEFT);
+		textField_3.setColumns(2);
+		textField_3.setBounds(27, 226, 34, 28);
+		panelPrestamo.add(textField_3);
+
+		textField_4 = new JTextField();
+		textField_4.setColumns(2);
+		textField_4.setBounds(73, 226, 34, 28);
+		panelPrestamo.add(textField_4);
+
+		textField_5 = new JTextField();
+		textField_5.setColumns(4);
+		textField_5.setBounds(119, 226, 48, 28);
+		panelPrestamo.add(textField_5);
+
+		textFuncPrestador = new JTextField();
+		textFuncPrestador.setColumns(10);
+		textFuncPrestador.setBounds(286, 93, 102, 28);
+		panelPrestamo.add(textFuncPrestador);
+
+		JLabel lblNewLabel_4_1_1 = new JLabel("Funcionario Prestador:");
+		lblNewLabel_4_1_1.setForeground(Color.WHITE);
+		lblNewLabel_4_1_1.setBounds(286, 65, 149, 16);
+		panelPrestamo.add(lblNewLabel_4_1_1);
+
+		JLabel lblNewLabel_4_1_1_1 = new JLabel("Funcionario Recibidor:");
+		lblNewLabel_4_1_1_1.setForeground(Color.WHITE);
+		lblNewLabel_4_1_1_1.setBounds(208, 198, 149, 16);
+		panelPrestamo.add(lblNewLabel_4_1_1_1);
+
+		textFuncRecibidor = new JTextField();
+		textFuncRecibidor.setColumns(10);
+		textFuncRecibidor.setBounds(208, 226, 102, 28);
+		panelPrestamo.add(textFuncRecibidor);
+
+		JLabel lblNewLabel_4_2 = new JLabel("ID Ejemplar");
+		lblNewLabel_4_2.setForeground(Color.WHITE);
+		lblNewLabel_4_2.setBounds(357, 198, 102, 16);
+		panelPrestamo.add(lblNewLabel_4_2);
+
+		textIDEjemplarDevuelta = new JTextField();
+		textIDEjemplarDevuelta.setColumns(10);
+		textIDEjemplarDevuelta.setBounds(357, 226, 102, 28);
+		panelPrestamo.add(textIDEjemplarDevuelta);
+
+		JButton btnNewButton_1_1 = new JButton("Devuelto");
+		btnNewButton_1_1.setBounds(617, 226, 89, 28);
+		panelPrestamo.add(btnNewButton_1_1);
+
+		JLabel lblNewLabel_4_1_2 = new JLabel("ID Lector");
+		lblNewLabel_4_1_2.setForeground(Color.WHITE);
+		lblNewLabel_4_1_2.setBounds(483, 198, 102, 16);
+		panelPrestamo.add(lblNewLabel_4_1_2);
+
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(483, 226, 102, 28);
+		panelPrestamo.add(textField);
+
+		final JLabel resumenPrestamo = new JLabel("");
+		resumenPrestamo.setForeground(Color.WHITE);
+		resumenPrestamo.setHorizontalAlignment(SwingConstants.LEFT);
+		resumenPrestamo.setFont(new Font("Poor Richard", Font.BOLD, 16));
+		resumenPrestamo.setBounds(43, 283, 679, 123);
+		panelPrestamo.add(resumenPrestamo);
+
 		JPanel panelEjemplar = new JPanel();
 		tabbedPane.addTab("Ejemplar", null, panelEjemplar, null);
 		panelEjemplar.setLayout(null);
-		
+
 		JButton btnNewButton = new JButton("Registrar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				// Registrar la nueva Obra
+
 			}
 		});
-		btnNewButton.setBounds(366, 192, 90, 28);
+		btnNewButton.setBounds(305, 356, 90, 28);
 		panelEjemplar.add(btnNewButton);
+
+		JButton btnNewButton_1 = new JButton("Prestar");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				
+
+			}
+		});
+		btnNewButton_1.setBounds(561, 93, 89, 28);
+		panelPrestamo.add(btnNewButton_1);
 		
+				JLabel lblNewLabel = new JLabel("");
+				lblNewLabel.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
+				lblNewLabel.setBounds(0, 0, 765, 444);
+				panelPrestamo.add(lblNewLabel);
+
 		JComboBox boxArea = new JComboBox();
 		boxArea.setModel(new DefaultComboBoxModel(Area.values()));
-		boxArea.setBounds(93, 69, 124, 26);
+		boxArea.setBounds(93, 195, 124, 26);
 		panelEjemplar.add(boxArea);
-		
+
 		JComboBox boxTipoObra = new JComboBox();
 		boxTipoObra.setModel(new DefaultComboBoxModel(tipoObra.values()));
-		boxTipoObra.setBounds(229, 69, 124, 26);
+		boxTipoObra.setBounds(229, 195, 124, 26);
 		panelEjemplar.add(boxTipoObra);
-		
+
 		textPriAutor = new JTextField();
 		textPriAutor.setBounds(93, 126, 124, 28);
 		panelEjemplar.add(textPriAutor);
 		textPriAutor.setColumns(10);
-		
+
 		textTerAutor = new JTextField();
 		textTerAutor.setColumns(10);
 		textTerAutor.setBounds(366, 126, 124, 28);
 		panelEjemplar.add(textTerAutor);
-		
+
 		textISBN = new JTextField();
 		textISBN.setColumns(10);
-		textISBN.setBounds(95, 192, 124, 28);
+		textISBN.setBounds(366, 67, 124, 28);
 		panelEjemplar.add(textISBN);
-		
+
 		textTitulo = new JTextField();
 		textTitulo.setColumns(10);
-		textTitulo.setBounds(366, 67, 124, 28);
+		textTitulo.setBounds(93, 67, 124, 28);
 		panelEjemplar.add(textTitulo);
-		
+
 		textSubtitulo = new JTextField();
 		textSubtitulo.setColumns(10);
-		textSubtitulo.setBounds(502, 64, 124, 28);
+		textSubtitulo.setBounds(229, 67, 124, 28);
 		panelEjemplar.add(textSubtitulo);
-		
+
 		textSegAutor = new JTextField();
 		textSegAutor.setColumns(10);
 		textSegAutor.setBounds(229, 126, 124, 28);
 		panelEjemplar.add(textSegAutor);
-		
+
 		textGenero = new JTextField();
 		textGenero.setColumns(10);
 		textGenero.setBounds(502, 126, 122, 28);
 		panelEjemplar.add(textGenero);
-		
+
 		textID = new JTextField();
 		textID.setColumns(10);
-		textID.setBounds(231, 192, 122, 28);
+		textID.setBounds(502, 67, 122, 28);
 		panelEjemplar.add(textID);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Area");
 		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setBounds(93, 41, 126, 16);
+		lblNewLabel_1.setBounds(93, 167, 126, 16);
 		panelEjemplar.add(lblNewLabel_1);
-		
+
 		JLabel lblNewLabel_1_1 = new JLabel("Tipo de Obra");
 		lblNewLabel_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_1.setBounds(229, 40, 124, 16);
+		lblNewLabel_1_1.setBounds(229, 166, 124, 16);
 		panelEjemplar.add(lblNewLabel_1_1);
-		
+
 		JLabel lblNewLabel_1_1_1 = new JLabel("Titulo");
 		lblNewLabel_1_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_1_1.setBounds(366, 44, 126, 16);
+		lblNewLabel_1_1_1.setBounds(93, 44, 126, 16);
 		panelEjemplar.add(lblNewLabel_1_1_1);
-		
+
 		JLabel lblNewLabel_1_1_2 = new JLabel("Subtitulo");
 		lblNewLabel_1_1_2.setForeground(Color.WHITE);
-		lblNewLabel_1_1_2.setBounds(502, 41, 124, 16);
+		lblNewLabel_1_1_2.setBounds(229, 44, 124, 16);
 		panelEjemplar.add(lblNewLabel_1_1_2);
-		
+
 		JLabel lblNewLabel_1_1_3 = new JLabel("Primer Autor");
 		lblNewLabel_1_1_3.setForeground(Color.WHITE);
 		lblNewLabel_1_1_3.setBounds(93, 107, 126, 16);
 		panelEjemplar.add(lblNewLabel_1_1_3);
-		
+
 		JLabel lblNewLabel_1_1_4 = new JLabel("Segundo Autor");
 		lblNewLabel_1_1_4.setForeground(Color.WHITE);
 		lblNewLabel_1_1_4.setBounds(229, 108, 124, 16);
 		panelEjemplar.add(lblNewLabel_1_1_4);
-		
+
 		JLabel lblNewLabel_1_1_5 = new JLabel("Tercer Autor");
 		lblNewLabel_1_1_5.setForeground(Color.WHITE);
 		lblNewLabel_1_1_5.setBounds(366, 107, 126, 16);
 		panelEjemplar.add(lblNewLabel_1_1_5);
-		
+
 		JLabel lblNewLabel_1_1_6 = new JLabel("Genero");
 		lblNewLabel_1_1_6.setForeground(Color.WHITE);
 		lblNewLabel_1_1_6.setBounds(502, 107, 124, 16);
 		panelEjemplar.add(lblNewLabel_1_1_6);
-		
+
 		JLabel lblNewLabel_1_1_7 = new JLabel("ISBN");
 		lblNewLabel_1_1_7.setForeground(Color.WHITE);
-		lblNewLabel_1_1_7.setBounds(93, 166, 126, 16);
+		lblNewLabel_1_1_7.setBounds(366, 44, 126, 16);
 		panelEjemplar.add(lblNewLabel_1_1_7);
-		
+
 		JLabel lblNewLabel_1_1_8 = new JLabel("ID");
 		lblNewLabel_1_1_8.setForeground(Color.WHITE);
-		lblNewLabel_1_1_8.setBounds(229, 166, 124, 16);
+		lblNewLabel_1_1_8.setBounds(502, 44, 124, 16);
 		panelEjemplar.add(lblNewLabel_1_1_8);
-		
+
+		JComboBox boxAdquisicion = new JComboBox();
+		boxAdquisicion.setModel(new DefaultComboBoxModel(FormaAdquirida.values()));
+		boxAdquisicion.setBounds(366, 193, 124, 26);
+		panelEjemplar.add(boxAdquisicion);
+
+		JLabel lblNewLabel_1_1_8_1 = new JLabel("Forma de Adquisici\u00F3n");
+		lblNewLabel_1_1_8_1.setForeground(Color.WHITE);
+		lblNewLabel_1_1_8_1.setBounds(366, 166, 124, 16);
+		panelEjemplar.add(lblNewLabel_1_1_8_1);
+
+		otroArea = new JTextField();
+		otroArea.setBounds(93, 233, 124, 28);
+		panelEjemplar.add(otroArea);
+		otroArea.setColumns(10);
+
+		otroTipoObra = new JTextField();
+		otroTipoObra.setColumns(10);
+		otroTipoObra.setBounds(229, 233, 124, 28);
+		panelEjemplar.add(otroTipoObra);
+
+		otroAdquisicion = new JTextField();
+		otroAdquisicion.setColumns(10);
+		otroAdquisicion.setBounds(366, 233, 124, 28);
+		panelEjemplar.add(otroAdquisicion);
+
+		JLabel lblNewLabel_5 = new JLabel("*Otro");
+		lblNewLabel_5.setForeground(Color.WHITE);
+		lblNewLabel_5.setBounds(41, 239, 40, 16);
+		panelEjemplar.add(lblNewLabel_5);
+
+		textField_2 = new JTextField();
+		textField_2.setBounds(93, 299, 531, 45);
+		panelEjemplar.add(textField_2);
+		textField_2.setColumns(10);
+
+		JLabel lblNewLabel_6 = new JLabel("* Observaciones");
+		lblNewLabel_6.setForeground(Color.WHITE);
+		lblNewLabel_6.setBounds(93, 273, 124, 16);
+		panelEjemplar.add(lblNewLabel_6);
+
 		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		lblNewLabel_3.setBounds(0, 0, 765, 444);
 		panelEjemplar.add(lblNewLabel_3);
-		
+
 		JPanel panelLectores = new JPanel();
 		tabbedPane.addTab("Lectores", null, panelLectores, null);
 		panelLectores.setLayout(null);
-		
+
 		textDomicilio = new JTextField();
 		textDomicilio.setColumns(10);
-		textDomicilio.setBounds(115, 277, 122, 28);
+		textDomicilio.setBounds(154, 111, 122, 28);
 		panelLectores.add(textDomicilio);
-		
+
 		textNombre = new JTextField();
-		textNombre.setBounds(115, 37, 122, 28);
+		textNombre.setBounds(20, 43, 122, 28);
 		panelLectores.add(textNombre);
 		textNombre.setColumns(10);
-		
+
 		textTipoDNI = new JTextField();
 		textTipoDNI.setColumns(10);
-		textTipoDNI.setBounds(115, 117, 122, 28);
+		textTipoDNI.setBounds(288, 43, 122, 28);
 		panelLectores.add(textTipoDNI);
-		
+
 		textApellido = new JTextField();
 		textApellido.setColumns(10);
-		textApellido.setBounds(115, 77, 122, 28);
+		textApellido.setBounds(154, 43, 122, 28);
 		panelLectores.add(textApellido);
-		
+
 		textDNI = new JTextField();
 		textDNI.setColumns(10);
-		textDNI.setBounds(115, 157, 122, 28);
+		textDNI.setBounds(422, 43, 122, 28);
 		panelLectores.add(textDNI);
-		
+
 		textLocalidad = new JTextField();
 		textLocalidad.setColumns(10);
-		textLocalidad.setBounds(115, 197, 122, 28);
+		textLocalidad.setBounds(556, 43, 122, 28);
 		panelLectores.add(textLocalidad);
-		
+
 		textDepartamento = new JTextField();
 		textDepartamento.setColumns(10);
-		textDepartamento.setBounds(115, 237, 122, 28);
+		textDepartamento.setBounds(20, 111, 122, 28);
 		panelLectores.add(textDepartamento);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("Nombre");
 		lblNewLabel_2.setForeground(Color.WHITE);
-		lblNewLabel_2.setBounds(6, 43, 97, 16);
+		lblNewLabel_2.setBounds(20, 15, 97, 16);
 		panelLectores.add(lblNewLabel_2);
-		
+
 		JLabel lblNewLabel_2_1 = new JLabel("Apellido");
 		lblNewLabel_2_1.setForeground(Color.WHITE);
-		lblNewLabel_2_1.setBounds(6, 83, 97, 16);
+		lblNewLabel_2_1.setBounds(154, 15, 97, 16);
 		panelLectores.add(lblNewLabel_2_1);
-		
+
 		JLabel lblNewLabel_2_2 = new JLabel("Tipo DNI");
 		lblNewLabel_2_2.setForeground(Color.WHITE);
-		lblNewLabel_2_2.setBounds(6, 123, 97, 16);
+		lblNewLabel_2_2.setBounds(288, 15, 97, 16);
 		panelLectores.add(lblNewLabel_2_2);
-		
+
 		JLabel lblNewLabel_2_3 = new JLabel("Correo");
 		lblNewLabel_2_3.setForeground(Color.WHITE);
-		lblNewLabel_2_3.setBounds(6, 323, 97, 16);
+		lblNewLabel_2_3.setBounds(288, 83, 97, 16);
 		panelLectores.add(lblNewLabel_2_3);
-		
+
 		JLabel lblNewLabel_2_4 = new JLabel("Localidad");
 		lblNewLabel_2_4.setForeground(Color.WHITE);
-		lblNewLabel_2_4.setBounds(6, 203, 97, 16);
+		lblNewLabel_2_4.setBounds(556, 15, 97, 16);
 		panelLectores.add(lblNewLabel_2_4);
-		
+
 		JLabel lblNewLabel_2_5 = new JLabel("Departamento");
 		lblNewLabel_2_5.setForeground(Color.WHITE);
-		lblNewLabel_2_5.setBounds(6, 243, 97, 16);
+		lblNewLabel_2_5.setBounds(20, 83, 97, 16);
 		panelLectores.add(lblNewLabel_2_5);
-		
+
 		JLabel lblNewLabel_2_5_1 = new JLabel("Domicilio");
 		lblNewLabel_2_5_1.setForeground(Color.WHITE);
-		lblNewLabel_2_5_1.setBounds(6, 283, 97, 16);
+		lblNewLabel_2_5_1.setBounds(154, 83, 97, 16);
 		panelLectores.add(lblNewLabel_2_5_1);
-		
+
 		JLabel lblNewLabel_2_5_1_1 = new JLabel("N\u00B0 DNI");
 		lblNewLabel_2_5_1_1.setForeground(Color.WHITE);
-		lblNewLabel_2_5_1_1.setBounds(6, 163, 97, 16);
+		lblNewLabel_2_5_1_1.setBounds(422, 15, 97, 16);
 		panelLectores.add(lblNewLabel_2_5_1_1);
-		
+
 		textCorreo = new JTextField();
 		textCorreo.setColumns(10);
-		textCorreo.setBounds(115, 317, 122, 28);
+		textCorreo.setBounds(288, 111, 122, 28);
 		panelLectores.add(textCorreo);
-		
+
 		dateDia = new JTextField();
 		dateDia.setHorizontalAlignment(SwingConstants.LEFT);
 		dateDia.setToolTipText("");
-		dateDia.setBounds(115, 357, 34, 28);
+		dateDia.setBounds(154, 187, 34, 28);
 		panelLectores.add(dateDia);
 		dateDia.setColumns(2);
-		
+
 		dateMes = new JTextField();
 		dateMes.setColumns(2);
-		dateMes.setBounds(161, 357, 34, 28);
+		dateMes.setBounds(200, 187, 34, 28);
 		panelLectores.add(dateMes);
-		
+
 		dateAnio = new JTextField();
 		dateAnio.setColumns(4);
-		dateAnio.setBounds(207, 357, 48, 28);
+		dateAnio.setBounds(246, 187, 48, 28);
 		panelLectores.add(dateAnio);
-		
+
 		JLabel lblNewLabel_2_3_1 = new JLabel("Nacimiento: d-m-y");
 		lblNewLabel_2_3_1.setForeground(Color.WHITE);
-		lblNewLabel_2_3_1.setBounds(6, 363, 109, 16);
+		lblNewLabel_2_3_1.setBounds(154, 159, 109, 16);
 		panelLectores.add(lblNewLabel_2_3_1);
-		
+
+		textNroCelular = new JTextField();
+		textNroCelular.setColumns(10);
+		textNroCelular.setBounds(422, 111, 122, 28);
+		panelLectores.add(textNroCelular);
+
+		JLabel lblNewLabel_2_3_2 = new JLabel("N\u00B0 Celular");
+		lblNewLabel_2_3_2.setForeground(Color.WHITE);
+		lblNewLabel_2_3_2.setBounds(422, 83, 97, 16);
+		panelLectores.add(lblNewLabel_2_3_2);
+
+		textCodPos = new JTextField();
+		textCodPos.setColumns(10);
+		textCodPos.setBounds(556, 111, 122, 28);
+		panelLectores.add(textCodPos);
+
+		JLabel lblNewLabel_2_3_2_1 = new JLabel("Codigo Postal");
+		lblNewLabel_2_3_2_1.setForeground(Color.WHITE);
+		lblNewLabel_2_3_2_1.setBounds(556, 83, 97, 16);
+		panelLectores.add(lblNewLabel_2_3_2_1);
+
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Masculino", "Femenino", "No Binario" }));
+		comboBox.setBounds(324, 188, 97, 26);
+		panelLectores.add(comboBox);
+
+		JLabel lblNewLabel_8 = new JLabel("Sexo");
+		lblNewLabel_8.setForeground(Color.WHITE);
+		lblNewLabel_8.setBounds(324, 159, 53, 16);
+		panelLectores.add(lblNewLabel_8);
+
+		textLugarNac = new JTextField();
+		textLugarNac.setColumns(10);
+		textLugarNac.setBounds(20, 187, 122, 28);
+		panelLectores.add(textLugarNac);
+
+		JLabel lblNewLabel_2_3_1_2 = new JLabel("Lugar de Nacimiento");
+		lblNewLabel_2_3_1_2.setForeground(Color.WHITE);
+		lblNewLabel_2_3_1_2.setBounds(20, 159, 122, 16);
+		panelLectores.add(lblNewLabel_2_3_1_2);
+
+		JButton btnRegistrarLector = new JButton("Registrar Lector");
+		btnRegistrarLector.setBounds(459, 187, 122, 28);
+		panelLectores.add(btnRegistrarLector);
+
 		JLabel fondoL = new JLabel("");
 		fondoL.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		fondoL.setBounds(0, 0, 765, 444);
@@ -307,6 +545,6 @@ public class ventanaPrincipal extends JFrame {
 		fondo.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		contentPane.add(fondo);
 		setLocationRelativeTo(null);
-		
+
 	}
 }
