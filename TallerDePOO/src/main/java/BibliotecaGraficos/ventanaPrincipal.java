@@ -26,22 +26,25 @@ import Biblioteca.tipoObra;
 public class ventanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
-	private JTextField textField_11;
-	private JTextField textField_12;
-	private JTextField textField_13;
-	private JTextField textField_14;
-	private JTextField textField_16;
+	private JTextField textPriAutor;
+	private JTextField textTerAutor;
+	private JTextField textISBN;
+	private JTextField textTitulo;
+	private JTextField textSubtitulo;
+	private JTextField textSegAutor;
+	private JTextField textGenero;
+	private JTextField textID;
+	private JTextField textNombre;
+	private JTextField textTipoDNI;
+	private JTextField textApellido;
+	private JTextField textDNI;
+	private JTextField textLocalidad;
+	private JTextField textDepartamento;
+	private JTextField textDomicilio;
+	private JTextField textCorreo;
+	private JTextField dateDia;
+	private JTextField dateMes;
+	private JTextField dateAnio;
 
 	public ventanaPrincipal() {
 		inicioVentanaPrincipal();
@@ -62,10 +65,10 @@ public class ventanaPrincipal extends JFrame {
 		setResizable(false);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/nombreIcon22.png")));
-		lblNewLabel_4.setBounds(210, 6, 356, 105);
-		contentPane.add(lblNewLabel_4);
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/nombreIcon22.png")));
+		logo.setBounds(210, 6, 356, 105);
+		contentPane.add(logo);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(6, 98, 765, 474);
@@ -79,55 +82,55 @@ public class ventanaPrincipal extends JFrame {
 		btnNewButton.setBounds(366, 192, 90, 28);
 		panelEjemplar.add(btnNewButton);
 		
-		JComboBox comboBoxArea = new JComboBox();
-		comboBoxArea.setModel(new DefaultComboBoxModel(Area.values()));
-		comboBoxArea.setBounds(93, 69, 124, 26);
-		panelEjemplar.add(comboBoxArea);
+		JComboBox boxArea = new JComboBox();
+		boxArea.setModel(new DefaultComboBoxModel(Area.values()));
+		boxArea.setBounds(93, 69, 124, 26);
+		panelEjemplar.add(boxArea);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(tipoObra.values()));
-		comboBox_1.setBounds(229, 69, 124, 26);
-		panelEjemplar.add(comboBox_1);
+		JComboBox boxTipoObra = new JComboBox();
+		boxTipoObra.setModel(new DefaultComboBoxModel(tipoObra.values()));
+		boxTipoObra.setBounds(229, 69, 124, 26);
+		panelEjemplar.add(boxTipoObra);
 		
-		textField = new JTextField();
-		textField.setBounds(93, 126, 124, 28);
-		panelEjemplar.add(textField);
-		textField.setColumns(10);
+		textPriAutor = new JTextField();
+		textPriAutor.setBounds(93, 126, 124, 28);
+		panelEjemplar.add(textPriAutor);
+		textPriAutor.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(366, 126, 124, 28);
-		panelEjemplar.add(textField_1);
+		textTerAutor = new JTextField();
+		textTerAutor.setColumns(10);
+		textTerAutor.setBounds(366, 126, 124, 28);
+		panelEjemplar.add(textTerAutor);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(95, 192, 124, 28);
-		panelEjemplar.add(textField_2);
+		textISBN = new JTextField();
+		textISBN.setColumns(10);
+		textISBN.setBounds(95, 192, 124, 28);
+		panelEjemplar.add(textISBN);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(366, 67, 124, 28);
-		panelEjemplar.add(textField_3);
+		textTitulo = new JTextField();
+		textTitulo.setColumns(10);
+		textTitulo.setBounds(366, 67, 124, 28);
+		panelEjemplar.add(textTitulo);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(502, 64, 124, 28);
-		panelEjemplar.add(textField_4);
+		textSubtitulo = new JTextField();
+		textSubtitulo.setColumns(10);
+		textSubtitulo.setBounds(502, 64, 124, 28);
+		panelEjemplar.add(textSubtitulo);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(229, 126, 124, 28);
-		panelEjemplar.add(textField_5);
+		textSegAutor = new JTextField();
+		textSegAutor.setColumns(10);
+		textSegAutor.setBounds(229, 126, 124, 28);
+		panelEjemplar.add(textSegAutor);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(502, 126, 122, 28);
-		panelEjemplar.add(textField_6);
+		textGenero = new JTextField();
+		textGenero.setColumns(10);
+		textGenero.setBounds(502, 126, 122, 28);
+		panelEjemplar.add(textGenero);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(231, 192, 122, 28);
-		panelEjemplar.add(textField_7);
+		textID = new JTextField();
+		textID.setColumns(10);
+		textID.setBounds(231, 192, 122, 28);
+		panelEjemplar.add(textID);
 		
 		JLabel lblNewLabel_1 = new JLabel("Area");
 		lblNewLabel_1.setForeground(Color.WHITE);
@@ -188,95 +191,117 @@ public class ventanaPrincipal extends JFrame {
 		tabbedPane.addTab("Lectores", null, panelLectores, null);
 		panelLectores.setLayout(null);
 		
-		textField_14 = new JTextField();
-		textField_14.setColumns(10);
-		textField_14.setBounds(97, 277, 122, 28);
-		panelLectores.add(textField_14);
+		textDomicilio = new JTextField();
+		textDomicilio.setColumns(10);
+		textDomicilio.setBounds(115, 277, 122, 28);
+		panelLectores.add(textDomicilio);
 		
-		textField_8 = new JTextField();
-		textField_8.setBounds(97, 37, 122, 28);
-		panelLectores.add(textField_8);
-		textField_8.setColumns(10);
+		textNombre = new JTextField();
+		textNombre.setBounds(115, 37, 122, 28);
+		panelLectores.add(textNombre);
+		textNombre.setColumns(10);
 		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(97, 117, 122, 28);
-		panelLectores.add(textField_9);
+		textTipoDNI = new JTextField();
+		textTipoDNI.setColumns(10);
+		textTipoDNI.setBounds(115, 117, 122, 28);
+		panelLectores.add(textTipoDNI);
 		
-		textField_10 = new JTextField();
-		textField_10.setColumns(10);
-		textField_10.setBounds(97, 77, 122, 28);
-		panelLectores.add(textField_10);
+		textApellido = new JTextField();
+		textApellido.setColumns(10);
+		textApellido.setBounds(115, 77, 122, 28);
+		panelLectores.add(textApellido);
 		
-		textField_11 = new JTextField();
-		textField_11.setColumns(10);
-		textField_11.setBounds(97, 157, 122, 28);
-		panelLectores.add(textField_11);
+		textDNI = new JTextField();
+		textDNI.setColumns(10);
+		textDNI.setBounds(115, 157, 122, 28);
+		panelLectores.add(textDNI);
 		
-		textField_12 = new JTextField();
-		textField_12.setColumns(10);
-		textField_12.setBounds(97, 197, 122, 28);
-		panelLectores.add(textField_12);
+		textLocalidad = new JTextField();
+		textLocalidad.setColumns(10);
+		textLocalidad.setBounds(115, 197, 122, 28);
+		panelLectores.add(textLocalidad);
 		
-		textField_13 = new JTextField();
-		textField_13.setColumns(10);
-		textField_13.setBounds(97, 237, 122, 28);
-		panelLectores.add(textField_13);
+		textDepartamento = new JTextField();
+		textDepartamento.setColumns(10);
+		textDepartamento.setBounds(115, 237, 122, 28);
+		panelLectores.add(textDepartamento);
 		
 		JLabel lblNewLabel_2 = new JLabel("Nombre");
 		lblNewLabel_2.setForeground(Color.WHITE);
-		lblNewLabel_2.setBounds(6, 43, 79, 16);
+		lblNewLabel_2.setBounds(6, 43, 97, 16);
 		panelLectores.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_2_1 = new JLabel("Apellido");
 		lblNewLabel_2_1.setForeground(Color.WHITE);
-		lblNewLabel_2_1.setBounds(6, 83, 79, 16);
+		lblNewLabel_2_1.setBounds(6, 83, 97, 16);
 		panelLectores.add(lblNewLabel_2_1);
 		
 		JLabel lblNewLabel_2_2 = new JLabel("Tipo DNI");
 		lblNewLabel_2_2.setForeground(Color.WHITE);
-		lblNewLabel_2_2.setBounds(6, 123, 79, 16);
+		lblNewLabel_2_2.setBounds(6, 123, 97, 16);
 		panelLectores.add(lblNewLabel_2_2);
 		
 		JLabel lblNewLabel_2_3 = new JLabel("Correo");
 		lblNewLabel_2_3.setForeground(Color.WHITE);
-		lblNewLabel_2_3.setBounds(6, 323, 79, 16);
+		lblNewLabel_2_3.setBounds(6, 323, 97, 16);
 		panelLectores.add(lblNewLabel_2_3);
 		
 		JLabel lblNewLabel_2_4 = new JLabel("Localidad");
 		lblNewLabel_2_4.setForeground(Color.WHITE);
-		lblNewLabel_2_4.setBounds(6, 203, 79, 16);
+		lblNewLabel_2_4.setBounds(6, 203, 97, 16);
 		panelLectores.add(lblNewLabel_2_4);
 		
 		JLabel lblNewLabel_2_5 = new JLabel("Departamento");
 		lblNewLabel_2_5.setForeground(Color.WHITE);
-		lblNewLabel_2_5.setBounds(6, 243, 79, 16);
+		lblNewLabel_2_5.setBounds(6, 243, 97, 16);
 		panelLectores.add(lblNewLabel_2_5);
 		
 		JLabel lblNewLabel_2_5_1 = new JLabel("Domicilio");
 		lblNewLabel_2_5_1.setForeground(Color.WHITE);
-		lblNewLabel_2_5_1.setBounds(6, 283, 79, 16);
+		lblNewLabel_2_5_1.setBounds(6, 283, 97, 16);
 		panelLectores.add(lblNewLabel_2_5_1);
 		
 		JLabel lblNewLabel_2_5_1_1 = new JLabel("N\u00B0 DNI");
 		lblNewLabel_2_5_1_1.setForeground(Color.WHITE);
-		lblNewLabel_2_5_1_1.setBounds(6, 163, 79, 16);
+		lblNewLabel_2_5_1_1.setBounds(6, 163, 97, 16);
 		panelLectores.add(lblNewLabel_2_5_1_1);
 		
-		textField_16 = new JTextField();
-		textField_16.setColumns(10);
-		textField_16.setBounds(97, 317, 122, 28);
-		panelLectores.add(textField_16);
+		textCorreo = new JTextField();
+		textCorreo.setColumns(10);
+		textCorreo.setBounds(115, 317, 122, 28);
+		panelLectores.add(textCorreo);
 		
-		JLabel lblNewLabel_3_1 = new JLabel("");
-		lblNewLabel_3_1.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
-		lblNewLabel_3_1.setBounds(0, 0, 765, 444);
-		panelLectores.add(lblNewLabel_3_1);
+		dateDia = new JTextField();
+		dateDia.setHorizontalAlignment(SwingConstants.LEFT);
+		dateDia.setToolTipText("");
+		dateDia.setBounds(115, 357, 34, 28);
+		panelLectores.add(dateDia);
+		dateDia.setColumns(2);
+		
+		dateMes = new JTextField();
+		dateMes.setColumns(2);
+		dateMes.setBounds(161, 357, 34, 28);
+		panelLectores.add(dateMes);
+		
+		dateAnio = new JTextField();
+		dateAnio.setColumns(4);
+		dateAnio.setBounds(207, 357, 48, 28);
+		panelLectores.add(dateAnio);
+		
+		JLabel lblNewLabel_2_3_1 = new JLabel("Nacimiento: d-m-y");
+		lblNewLabel_2_3_1.setForeground(Color.WHITE);
+		lblNewLabel_2_3_1.setBounds(6, 363, 109, 16);
+		panelLectores.add(lblNewLabel_2_3_1);
+		
+		JLabel fondoL = new JLabel("");
+		fondoL.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
+		fondoL.setBounds(0, 0, 765, 444);
+		panelLectores.add(fondoL);
 
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(0, 0, 800, 600);
-		lblNewLabel.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
-		contentPane.add(lblNewLabel);
+		JLabel fondo = new JLabel("");
+		fondo.setBounds(0, 0, 777, 578);
+		fondo.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
+		contentPane.add(fondo);
 		setLocationRelativeTo(null);
 		
 	}

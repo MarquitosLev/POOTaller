@@ -42,8 +42,6 @@ public class Obra {
 	//Constructor para la nueva obra
 	public Obra(String titulo, String subtitulo, String autor1, String autor2, String autor3, String genero, int isbn, int id, Area area, tipoObra tipo) {
 		super();
-		this.cantEjem = cantEjem;
-		this.cantEjemDisponible = cantEjemDisponible;
 		this.titulo = titulo;
 		this.subtitulo = subtitulo;
 		this.autor1 = autor1;
@@ -55,8 +53,6 @@ public class Obra {
 		this.area = area;
 		this.tipo = tipo;
 //		this.perteneceA = perteneceA;
-		this.ejemplares = ejemplares;
-		this.ediciones = ediciones;
 	}
 	
 	public Reserva getFuncionario() {
