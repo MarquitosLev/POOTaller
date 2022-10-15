@@ -14,6 +14,7 @@ import BibliotecaGraficos.ventanaRegistro;
 
 public class listaFuncionario {
 	ArrayList<Funcionario> datosFunc;
+	ArrayList<Lector> datosLector;
 	public void agregar(Funcionario obj) {
 		guardarFuncionario(obj);
 	}
@@ -64,4 +65,36 @@ public class listaFuncionario {
 		} catch (Exception e) {
 		}
 	}
+	
+	public void guardarLector(Lector lector){
+		try {
+			File functxt = new File("Lectores.txt");
+			if (!functxt.exists()) {	//Crea el archivo txt en caso de que no exista
+				functxt.createNewFile();
+            }
+			FileWriter fw= new FileWriter ("Lectores.txt", true);
+			BufferedWriter br = new BufferedWriter(fw); //Escribe los datos asignados
+			PrintWriter escribir = new PrintWriter(br);
+			escribir.write(lector.getNom()+"-");
+			escribir.write(lector.getApellido() + "-");
+			escribir.write(lector.getTipDoc() + "-");
+			escribir.write(lector.getNumDoc() + "-");
+			escribir.write(lector.getCorreo() + "-");
+			escribir.write(lector.getNumCel() + "-");
+			escribir.write(lector.getFecNac() + "-");
+			escribir.write(lector.getSex() + "-");
+			escribir.write(lector.getDomi() + "-");
+			escribir.write(lector.getCodPos() + "-");
+			escribir.write(lector.getDep() + "-");
+			escribir.write(lector.getLocalidad() + "-");
+			escribir.write(lector.getCanMulta() + "-");
+			escribir.write(lector.getEstaMultado() + "-");
+			for (int i = 0; i<lector.getEjemplar().size(); i++) {
+				escribir.write(lector.getEjemplar().get(i) + "-");
+			}
+			escribir.close();
+		} catch (Exception e) {
+		}
+	}
+	
 }
