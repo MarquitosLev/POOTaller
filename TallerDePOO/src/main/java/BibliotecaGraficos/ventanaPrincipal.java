@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
@@ -24,7 +25,13 @@ import Biblioteca.Area;
 import Biblioteca.tipoObra;
 import javax.swing.JCheckBox;
 import Biblioteca.FormaAdquirida;
+import Biblioteca.Lector;
+
 import java.awt.Font;
+import javax.swing.JTextPane;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
+import java.awt.Canvas;
 
 public class ventanaPrincipal extends JFrame {
 
@@ -54,13 +61,12 @@ public class ventanaPrincipal extends JFrame {
 	private JTextField otroTipoObra;
 	private JTextField otroAdquisicion;
 	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField textDiaDevuelto;
+	private JTextField textMesDevuelta;
+	private JTextField textAnioDevuelta;
 	private JTextField textFuncPrestador;
 	private JTextField textFuncRecibidor;
 	private JTextField textIDEjemplarDevuelta;
-	private JTextField textField;
 	private JTextField textNroCelular;
 	private JTextField textCodPos;
 	private JTextField textLugarNac;
@@ -122,8 +128,6 @@ public class ventanaPrincipal extends JFrame {
 		chckbxNewCheckBox.setBounds(436, 98, 103, 18);
 		panelPrestamo.add(chckbxNewCheckBox);
 
-		
-
 		JLabel lblNewLabel_7 = new JLabel("Pr\u00E9stamo: ");
 		lblNewLabel_7.setForeground(Color.LIGHT_GRAY);
 		lblNewLabel_7.setFont(new Font("SansSerif", Font.BOLD, 15));
@@ -141,22 +145,22 @@ public class ventanaPrincipal extends JFrame {
 		lblNewLabel_2_3_1_1.setBounds(27, 198, 149, 16);
 		panelPrestamo.add(lblNewLabel_2_3_1_1);
 
-		textField_3 = new JTextField();
-		textField_3.setToolTipText("");
-		textField_3.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_3.setColumns(2);
-		textField_3.setBounds(27, 226, 34, 28);
-		panelPrestamo.add(textField_3);
+		textDiaDevuelto = new JTextField();
+		textDiaDevuelto.setToolTipText("");
+		textDiaDevuelto.setHorizontalAlignment(SwingConstants.LEFT);
+		textDiaDevuelto.setColumns(2);
+		textDiaDevuelto.setBounds(27, 226, 34, 28);
+		panelPrestamo.add(textDiaDevuelto);
 
-		textField_4 = new JTextField();
-		textField_4.setColumns(2);
-		textField_4.setBounds(73, 226, 34, 28);
-		panelPrestamo.add(textField_4);
+		textMesDevuelta = new JTextField();
+		textMesDevuelta.setColumns(2);
+		textMesDevuelta.setBounds(73, 226, 34, 28);
+		panelPrestamo.add(textMesDevuelta);
 
-		textField_5 = new JTextField();
-		textField_5.setColumns(4);
-		textField_5.setBounds(119, 226, 48, 28);
-		panelPrestamo.add(textField_5);
+		textAnioDevuelta = new JTextField();
+		textAnioDevuelta.setColumns(4);
+		textAnioDevuelta.setBounds(119, 226, 48, 28);
+		panelPrestamo.add(textAnioDevuelta);
 
 		textFuncPrestador = new JTextField();
 		textFuncPrestador.setColumns(10);
@@ -189,20 +193,11 @@ public class ventanaPrincipal extends JFrame {
 		panelPrestamo.add(textIDEjemplarDevuelta);
 
 		JButton btnNewButton_1_1 = new JButton("Devuelto");
-		btnNewButton_1_1.setBounds(617, 226, 89, 28);
+		btnNewButton_1_1.setBounds(496, 226, 89, 28);
 		panelPrestamo.add(btnNewButton_1_1);
 
-		JLabel lblNewLabel_4_1_2 = new JLabel("ID Lector");
-		lblNewLabel_4_1_2.setForeground(Color.WHITE);
-		lblNewLabel_4_1_2.setBounds(483, 198, 102, 16);
-		panelPrestamo.add(lblNewLabel_4_1_2);
-
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(483, 226, 102, 28);
-		panelPrestamo.add(textField);
-
 		final JLabel resumenPrestamo = new JLabel("");
+		resumenPrestamo.setVerticalAlignment(SwingConstants.TOP);
 		resumenPrestamo.setForeground(Color.WHITE);
 		resumenPrestamo.setHorizontalAlignment(SwingConstants.LEFT);
 		resumenPrestamo.setFont(new Font("Poor Richard", Font.BOLD, 16));
@@ -228,17 +223,15 @@ public class ventanaPrincipal extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				
-
 			}
 		});
 		btnNewButton_1.setBounds(561, 93, 89, 28);
 		panelPrestamo.add(btnNewButton_1);
-		
-				JLabel lblNewLabel = new JLabel("");
-				lblNewLabel.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
-				lblNewLabel.setBounds(0, 0, 765, 444);
-				panelPrestamo.add(lblNewLabel);
+
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
+		lblNewLabel.setBounds(0, 0, 765, 444);
+		panelPrestamo.add(lblNewLabel);
 
 		JComboBox boxArea = new JComboBox();
 		boxArea.setModel(new DefaultComboBoxModel(Area.values()));
@@ -472,23 +465,23 @@ public class ventanaPrincipal extends JFrame {
 		dateDia = new JTextField();
 		dateDia.setHorizontalAlignment(SwingConstants.LEFT);
 		dateDia.setToolTipText("");
-		dateDia.setBounds(154, 187, 34, 28);
+		dateDia.setBounds(288, 181, 34, 28);
 		panelLectores.add(dateDia);
 		dateDia.setColumns(2);
 
 		dateMes = new JTextField();
 		dateMes.setColumns(2);
-		dateMes.setBounds(200, 187, 34, 28);
+		dateMes.setBounds(334, 181, 34, 28);
 		panelLectores.add(dateMes);
 
 		dateAnio = new JTextField();
 		dateAnio.setColumns(4);
-		dateAnio.setBounds(246, 187, 48, 28);
+		dateAnio.setBounds(380, 181, 48, 28);
 		panelLectores.add(dateAnio);
 
 		JLabel lblNewLabel_2_3_1 = new JLabel("Nacimiento: d-m-y");
 		lblNewLabel_2_3_1.setForeground(Color.WHITE);
-		lblNewLabel_2_3_1.setBounds(154, 159, 109, 16);
+		lblNewLabel_2_3_1.setBounds(288, 153, 109, 16);
 		panelLectores.add(lblNewLabel_2_3_1);
 
 		textNroCelular = new JTextField();
@@ -511,31 +504,73 @@ public class ventanaPrincipal extends JFrame {
 		lblNewLabel_2_3_2_1.setBounds(556, 83, 97, 16);
 		panelLectores.add(lblNewLabel_2_3_2_1);
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Masculino", "Femenino", "No Binario" }));
-		comboBox.setBounds(324, 188, 97, 26);
-		panelLectores.add(comboBox);
+		final JComboBox boxSexo = new JComboBox();
+		boxSexo.setModel(new DefaultComboBoxModel(new String[] { "Masculino", "Femenino", "No Binario" }));
+		boxSexo.setBounds(440, 182, 97, 26);
+		panelLectores.add(boxSexo);
 
 		JLabel lblNewLabel_8 = new JLabel("Sexo");
 		lblNewLabel_8.setForeground(Color.WHITE);
-		lblNewLabel_8.setBounds(324, 159, 53, 16);
+		lblNewLabel_8.setBounds(440, 153, 53, 16);
 		panelLectores.add(lblNewLabel_8);
 
 		textLugarNac = new JTextField();
 		textLugarNac.setColumns(10);
-		textLugarNac.setBounds(20, 187, 122, 28);
+		textLugarNac.setBounds(154, 181, 122, 28);
 		panelLectores.add(textLugarNac);
 
 		JLabel lblNewLabel_2_3_1_2 = new JLabel("Lugar de Nacimiento");
 		lblNewLabel_2_3_1_2.setForeground(Color.WHITE);
-		lblNewLabel_2_3_1_2.setBounds(20, 159, 122, 16);
+		lblNewLabel_2_3_1_2.setBounds(154, 153, 122, 16);
 		panelLectores.add(lblNewLabel_2_3_1_2);
+		
+		final JTextPane muestraLector = new JTextPane();
+		muestraLector.setForeground(new Color(0, 0, 0));
+		muestraLector.setBackground(Color.WHITE);
+		muestraLector.setFont(new Font("Arial", Font.BOLD, 14));
+		muestraLector.setBounds(43, 275, 678, 146);
+		panelLectores.add(muestraLector);
+
 
 		JButton btnRegistrarLector = new JButton("Registrar Lector");
-		btnRegistrarLector.setBounds(459, 187, 122, 28);
+		btnRegistrarLector.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODOS LOS METODOS QUE SE REALIZAN AL REGISTRAR UN NUEVO LECTOR
+
+				// Variables para implementa en el constructor de Lector
+				String nombre = textNombre.getText();
+				String apellido = textApellido.getText();
+				String tipDni = textTipoDNI.getText();
+				int dni = Integer.parseInt(textDNI.getText());
+				String localidad = textLocalidad.getText();
+				String departamento = textDepartamento.getText();
+				String domicilio = textDomicilio.getText();
+				String correo = textCorreo.getText();
+				int numCel = Integer.parseInt(textNroCelular.getText());
+				int codPos = Integer.parseInt(textCodPos.getText());
+				String lugNac = textLugarNac.getText();
+				LocalDate fechaNac = LocalDate.of(Integer.parseInt(dateAnio.getText()),
+						Integer.parseInt(dateMes.getText()), Integer.parseInt(dateDia.getText()));
+				String sexo = (String) boxSexo.getSelectedItem();
+
+				// Crea la nueva instancia de Lector
+				Lector lector = new Lector(nombre, apellido, tipDni, dni, correo, numCel, fechaNac, sexo, lugNac,
+						domicilio, codPos, departamento, localidad);
+
+				// Muestra en pantalla de los datos ingresado
+				muestraLector.setText("* Nombre: " + nombre + "\n* Apellido: " + apellido + "\n* tipo DNI: " + tipDni + ", N° DNI: " + dni
+						+ "\n* Correo: " + correo + " - N° Celular: " + numCel + " - Fecha Nacimiento: " + fechaNac + " - Sexo: " + sexo + "\n* Lugar Nacimiento: "
+						+ lugNac + "\n* Domicilio: " + domicilio + " - Codigo Postal: " + codPos + " - Departamento: " + departamento + "-  Localidad: " + localidad);
+				
+				//Agrega al txt el nuevo lector
+			}
+		});
+		btnRegistrarLector.setBounds(311, 235, 143, 28);
 		panelLectores.add(btnRegistrarLector);
 
+		
 		JLabel fondoL = new JLabel("");
+		fondoL.setBackground(Color.LIGHT_GRAY);
 		fondoL.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		fondoL.setBounds(0, 0, 765, 444);
 		panelLectores.add(fondoL);

@@ -151,4 +151,12 @@ abstract class Persona {
 	public void setLocalidad(String localidad) {
 		this.localidad = localidad;
 	}
+
+	public String toString() {
+		return "* Nombre: " + nom + "\n* Apellido: " + apellido + "\n* tipo DNI: " + tipDoc + ", N° DNI: " + numDoc
+				+ "\n* Correo: " + correo + " - N° Celular: " + numCel + " - Fecha Nacimiento: " + fecNac + " - Sexo: " + sex + "\n* Lugar Nacimiento: "
+				+ lugarNac + "\n* Domicilio: " + domi + " - Codigo Postal: " + codPos + " - Departamento: " + dep + "-  Localidad: " + localidad;
+	}
+	
+	
 }

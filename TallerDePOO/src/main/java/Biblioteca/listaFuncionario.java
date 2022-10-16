@@ -92,6 +92,7 @@ public class listaFuncionario {
 			for (int i = 0; i<lector.getEjemplar().size(); i++) {
 				escribir.write(lector.getEjemplar().get(i) + "-");
 			}
+			System.out.println(escribir);
 			escribir.close();
 		} catch (Exception e) {
 		}

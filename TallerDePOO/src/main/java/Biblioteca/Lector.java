@@ -16,6 +16,13 @@ public class Lector extends Persona{
 		this.ejemplares = ejemplares;
 	}
 	
+	//Constructor para agregar datos del lector
+	public Lector(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
+			String sex, String nac, String domi, int codPos, String dep, String localidad) {
+		super(nom, apellido, tipDoc, numDoc, correo, numCel, fecNac, sex, nac, domi, codPos, dep, localidad);
+
+	}
+	
 	public Lector() {
 		this.canMulta = 0;
 		this.estaMultado = false;
@@ -44,6 +51,10 @@ public class Lector extends Persona{
 
 	public void setEjemplar(ArrayList<Ejemplar> ejemplar) {
 		this.ejemplares = ejemplar;
+	}
+
+	public String toString() {
+		return super.toString();
 	}
 	
 	
