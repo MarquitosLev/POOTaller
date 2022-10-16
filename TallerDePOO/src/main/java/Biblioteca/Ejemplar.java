@@ -1,5 +1,9 @@
 package Biblioteca;
+import java.io.File;
 import java.time.LocalDate;
+import net.sourceforge.barbecue.*;
+import net.sourceforge.barbecue.output.OutputException;
+
 
 public class Ejemplar {
     private int idEjemplar;
@@ -11,14 +15,12 @@ public class Ejemplar {
     private LocalDate fechaDeBaja;
     private String motivoDeBaja;
     private String codUbicacion;
-    private String codDeBarra;
     private Obra obra;
     private Lector lector;
     
     
     public Ejemplar(int idEjemplar, String observaciones, boolean disponible, int cantPedidas, LocalDate fechaAdquisicion,
-			FormaAdquirida formaAdquirida, LocalDate fechaDeBaja, String motivoDeBaja, String codUbicacion,
-			String codDeBarra, Obra obra) {
+			FormaAdquirida formaAdquirida, LocalDate fechaDeBaja, String motivoDeBaja, String codUbicacion, Obra obra, Lector lector) throws BarcodeException, OutputException {
 		this.idEjemplar = idEjemplar;
 		this.observaciones = observaciones;
 		this.disponible = disponible;
@@ -28,9 +30,11 @@ public class Ejemplar {
 		this.fechaDeBaja = fechaDeBaja;
 		this.motivoDeBaja = motivoDeBaja;
 		this.codUbicacion = codUbicacion;
-		this.codDeBarra = codDeBarra;
 		this.obra = obra;
 		this.lector = lector;
+		
+		this.setCodBarr();
+		
 	}
 
 	public Ejemplar() {
@@ -43,7 +47,6 @@ public class Ejemplar {
 		this.fechaDeBaja = LocalDate.of(0000, 0, 0);
 		this.motivoDeBaja = " ";
 		this.codUbicacion = " ";
-		this.codDeBarra = " ";
 		this.obra = new Obra();
 	}
 
@@ -53,6 +56,13 @@ public class Ejemplar {
 
     public void setIdEjemplar(int idEjemplar) {
         this.idEjemplar = idEjemplar;
+    }
+    
+   private void setCodBarr() throws BarcodeException, OutputException{
+    	String aux = Integer.toString(this.idEjemplar);
+    	Barcode CodBarr = BarcodeFactory.createCode128(aux);
+    	File file = new File("src/main/java/codigosBarra" + aux + ".png");
+    	BarcodeImageHandler.savePNG(CodBarr, file);
     }
 
     public String getObservaciones() {
@@ -117,14 +127,6 @@ public class Ejemplar {
 
     public void setCodUbicacion(String codUbicacion) {
         this.codUbicacion = codUbicacion;
-    }
-
-    public String getCodDeBarra() {
-        return codDeBarra;
-    }
-
-    public void setCodDeBarra(String codDeBarra) {
-        this.codDeBarra = codDeBarra;
     }
     
     public Obra getObra() {
