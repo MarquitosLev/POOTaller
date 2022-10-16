@@ -9,6 +9,7 @@ import Biblioteca.listaObra;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
@@ -26,6 +27,7 @@ import Biblioteca.tipoObra;
 import javax.swing.JCheckBox;
 import Biblioteca.FormaAdquirida;
 import Biblioteca.Lector;
+import Biblioteca.listaFuncionario;
 
 import java.awt.Font;
 import javax.swing.JTextPane;
@@ -72,10 +74,11 @@ public class ventanaPrincipal extends JFrame {
 	private JTextField textLugarNac;
 
 	public ventanaPrincipal() {
-		inicioVentanaPrincipal();
+		listaFuncionario listFunc = new listaFuncionario();
+		inicioVentanaPrincipal(listFunc);
 	}
 
-	private void inicioVentanaPrincipal() {
+	private void inicioVentanaPrincipal(final listaFuncionario listFunc) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ventanaPrincipal.class.getResource("/imagenes/icon.png")));
 		setType(Type.POPUP);
 		setTitle("Nimbook");
@@ -525,10 +528,12 @@ public class ventanaPrincipal extends JFrame {
 		panelLectores.add(lblNewLabel_2_3_1_2);
 		
 		final JTextPane muestraLector = new JTextPane();
+		muestraLector.setText("*\r\n*\r\n*\r\n*\r\n*\r\n*\r\n*\r\n*");
+		muestraLector.setEditable(false);
 		muestraLector.setForeground(new Color(0, 0, 0));
 		muestraLector.setBackground(Color.WHITE);
 		muestraLector.setFont(new Font("Arial", Font.BOLD, 14));
-		muestraLector.setBounds(43, 275, 678, 146);
+		muestraLector.setBounds(20, 275, 725, 144);
 		panelLectores.add(muestraLector);
 
 
@@ -546,23 +551,28 @@ public class ventanaPrincipal extends JFrame {
 				String departamento = textDepartamento.getText();
 				String domicilio = textDomicilio.getText();
 				String correo = textCorreo.getText();
-				int numCel = Integer.parseInt(textNroCelular.getText());
+				long numCel = Long.parseLong(textNroCelular.getText());
 				int codPos = Integer.parseInt(textCodPos.getText());
 				String lugNac = textLugarNac.getText();
 				LocalDate fechaNac = LocalDate.of(Integer.parseInt(dateAnio.getText()),
 						Integer.parseInt(dateMes.getText()), Integer.parseInt(dateDia.getText()));
 				String sexo = (String) boxSexo.getSelectedItem();
 
-				// Crea la nueva instancia de Lector
-				Lector lector = new Lector(nombre, apellido, tipDni, dni, correo, numCel, fechaNac, sexo, lugNac,
-						domicilio, codPos, departamento, localidad);
+				if(listFunc.existeLector(dni)) {
+					JOptionPane.showMessageDialog(null, "Ya se encuentra registrado", "Error", JOptionPane.ERROR_MESSAGE);
+				}else {
+					// Crea la nueva instancia de Lector
+					Lector lector = new Lector(nombre, apellido, tipDni, dni, correo, numCel, fechaNac, sexo, lugNac,
+							domicilio, codPos, departamento, localidad);
 
-				// Muestra en pantalla de los datos ingresado
-				muestraLector.setText("* Nombre: " + nombre + "\n* Apellido: " + apellido + "\n* tipo DNI: " + tipDni + ", N° DNI: " + dni
-						+ "\n* Correo: " + correo + " - N° Celular: " + numCel + " - Fecha Nacimiento: " + fechaNac + " - Sexo: " + sexo + "\n* Lugar Nacimiento: "
-						+ lugNac + "\n* Domicilio: " + domicilio + " - Codigo Postal: " + codPos + " - Departamento: " + departamento + "-  Localidad: " + localidad);
-				
-				//Agrega al txt el nuevo lector
+					// Muestra en pantalla de los datos ingresado
+					muestraLector.setText("* Nombre: " + nombre + "\n* Apellido: " + apellido + "\n* tipo DNI: " + tipDni + ", N° DNI: " + dni
+							+ "\n* Correo: " + correo + " - N° Celular: " + numCel + " - Fecha Nacimiento: " + fechaNac + " - Sexo: " + sexo + "\n* Lugar Nacimiento: "
+							+ lugNac + "\n* Domicilio: " + domicilio + " - Codigo Postal: " + codPos + " - Departamento: " + departamento + "-  Localidad: " + localidad);
+					
+					//Agrega al txt el nuevo lector
+					listFunc.guardarLector(lector);
+				}
 			}
 		});
 		btnRegistrarLector.setBounds(311, 235, 143, 28);

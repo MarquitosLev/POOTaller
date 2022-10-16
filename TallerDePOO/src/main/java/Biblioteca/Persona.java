@@ -7,7 +7,7 @@ abstract class Persona {
 	private String tipDoc;
 	private int numDoc;
 	private String correo;
-	private int numCel;
+	private long numCel;
 	private LocalDate fecNac;
 	private String sex;
 	private String lugarNac;
@@ -16,7 +16,7 @@ abstract class Persona {
 	private String dep;
 	private String localidad;
 	
-	public Persona(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
+	public Persona(String nom, String apellido, String tipDoc, int numDoc, String correo, long numCel, LocalDate fecNac,
 			String sex, String lugarNac, String domi, int codPos, String dep, String localidad) {
 		this.nom = nom;
 		this.apellido = apellido;
@@ -38,7 +38,7 @@ abstract class Persona {
 		this.tipDoc = "";
 		this.numDoc = 0;
 		this.correo = "";
-		this.numCel = 0;
+		this.numCel = (long) 0;
 		this.fecNac = LocalDate.of(2022, 02, 05);
 		this.sex = "";
 		this.lugarNac = "";
@@ -88,11 +88,11 @@ abstract class Persona {
 		this.correo = correo;
 	}
 
-	public int getNumCel() {
+	public long getNumCel() {
 		return numCel;
 	}
 
-	public void setNumCel(int numCel) {
+	public void setNumCel(long numCel) {
 		this.numCel = numCel;
 	}
 

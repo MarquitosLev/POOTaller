@@ -127,7 +127,7 @@ public class ventana extends JFrame {
 					ventana.this.setVisible(false);
 					framePrincipal.setVisible(true);
 				}else {
-					JOptionPane.showMessageDialog(null, "No est� registrado", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "No se encuentra registrado", "Error", JOptionPane.ERROR_MESSAGE);
 					usuario.setText("");
 					contrasenia.setText("");
 				}
