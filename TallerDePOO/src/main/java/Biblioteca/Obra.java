@@ -73,6 +73,22 @@ public class Obra {
 //		this.perteneceA = perteneceA;
 	}
 	
+	public Obra(int cantEjem, int cantEjemDisponible, String titulo, String subtitulo, String autor1, String autor2, String autor3, String genero, int isbn, int id, Area area, tipoObra tipo) {
+		super();
+		this.cantEjem = cantEjem;
+		this.cantEjemDisponible = cantEjemDisponible;
+		this.titulo = titulo;
+		this.subtitulo = subtitulo;
+		this.autor1 = autor1;
+		this.autor2 = autor2;
+		this.autor3 = autor3;
+		this.genero = genero;
+		this.isbn = isbn;
+		this.id = id;
+		this.area = area;
+		this.tipo = tipo;
+//		this.perteneceA = perteneceA;
+	}
 	public Reserva getFuncionario() {
 		return funcionario;
 	}

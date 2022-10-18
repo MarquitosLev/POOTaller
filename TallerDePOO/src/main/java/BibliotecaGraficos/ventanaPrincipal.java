@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.util.Random;
 import java.awt.event.ActionEvent;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
@@ -631,7 +632,8 @@ public class ventanaPrincipal extends JFrame {
 				// Si es la primera vez que se ingresa el titulo, se agrega obra y primer
 				// ejemplar
 				if (!listFunc.existeObra(titulo)) {
-					int ran = (int) Math.random() * 1000 +1;
+					Random r = new Random();
+					int ran = r.nextInt();
 					try {
 						Ejemplar ejemplar = new Ejemplar(ran, observaciones, true, formaAdqui,
 								codUbi, obra);
@@ -648,7 +650,8 @@ public class ventanaPrincipal extends JFrame {
 
 				} else {
 					Obra auxObra = obra;
-					int ran = (int) Math.random() * 1000 +1;
+					Random r = new Random();
+					int ran = r.nextInt();
 					try {
 						Ejemplar ejemplar = new Ejemplar(ran, observaciones, true, formaAdqui,codUbi, auxObra);
 						listFunc.guardarEjemplar(ejemplar);

@@ -157,9 +157,9 @@ public class listaFuncionario {
 			FileWriter fw = new FileWriter("Obras.txt", true);
 			BufferedWriter br = new BufferedWriter(fw); // Escribe los datos asignados
 			PrintWriter escribir = new PrintWriter(br);
+			escribir.write(obra.getTitulo() + "/");
 			escribir.write(obra.getCantEjem() + "/");
 			escribir.write(obra.getCantEjemDisponible() + "/");
-			escribir.write(obra.getTitulo() + "/");
 			escribir.write(obra.getSubtitulo() + "/");
 			escribir.write(obra.getAutor1() + "/");
 			escribir.write(obra.getAutor2() + "/");
@@ -200,6 +200,24 @@ public class listaFuncionario {
 	}
 
 	public void guardarEjemplar(Ejemplar ejemplar) {
+		ArrayList<Obra> datosObra = new ArrayList<Obra>();
+		try {
+			BufferedReader br2 = new BufferedReader(new FileReader("Obras.txt"));
+			String obra;
+			while ((obra = br2.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+				StringTokenizer x = new StringTokenizer(obra, "/");
+				datosObra.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), x.nextToken(), x.nextToken(),
+						x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()),
+								Area.valueOf(x.nextToken()), tipoObra.valueOf(x.nextToken())));// agrega al arraylist de String	
+			}
+		} catch (Exception e) {
+		}
+		
+		for (int i = 0; i < datosObra.size(); i++) {
+			if ((datosObra.get(i).equals(ejemplar.getObra()))) {
+				datosObra.get(i).setCantEjem(datosObra.get(i).getCantEjem() + 1);
+			}
+		}
 		try {
 			File functxt = new File("Ejemplares.txt");
 			if (!functxt.exists()) { // Crea el archivo txt en caso de que no exista
@@ -215,8 +233,8 @@ public class listaFuncionario {
 			escribir.write(ejemplar.getCodUbicacion() + "/");
 			escribir.write(ejemplar.getObra() + "/");
 			escribir.write(ejemplar.getCantPedidas() + "/" + "\n");
-
 			escribir.close();
+			
 		} catch (Exception e) {
 		}
 	}
@@ -244,28 +262,6 @@ public class listaFuncionario {
 		}
 		return false;
 		
-	}
-
-	public void guardarEdicion(Edicion edicion) {
-		try {
-			File functxt = new File("Ediciones.txt");
-			if (!functxt.exists()) { // Crea el archivo txt en caso de que no exista
-				functxt.createNewFile();
-			}
-			FileWriter fw = new FileWriter("Ediciones.txt", true);
-			BufferedWriter br = new BufferedWriter(fw); // Escribe los datos asignados
-			PrintWriter escribir = new PrintWriter(br);
-			escribir.write(edicion.getEditorial() + "/");
-			escribir.write(edicion.getAnio() + "/");
-			escribir.write(edicion.getIdioma() + "/");
-			escribir.write(edicion.getNum() + "/");
-			escribir.write(edicion.getVolumen() + "/");
-			escribir.write(edicion.getPais() + "/");
-			escribir.write(edicion.getPaginas() + "/");
-			escribir.write(edicion.getObra() + "/" + "\n");
-			escribir.close();
-		} catch (Exception e) {
-		}
 	}
 }
 
