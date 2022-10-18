@@ -195,10 +195,6 @@ public class ventanaPrincipal extends JFrame {
 		textIDEjemplarDevuelta.setBounds(357, 226, 102, 28);
 		panelPrestamo.add(textIDEjemplarDevuelta);
 
-		JButton btnNewButton_1_1 = new JButton("Devuelto");
-		btnNewButton_1_1.setBounds(496, 226, 89, 28);
-		panelPrestamo.add(btnNewButton_1_1);
-
 		final JLabel resumenPrestamo = new JLabel("");
 		resumenPrestamo.setVerticalAlignment(SwingConstants.TOP);
 		resumenPrestamo.setForeground(Color.WHITE);
@@ -210,31 +206,6 @@ public class ventanaPrincipal extends JFrame {
 		JPanel panelEjemplar = new JPanel();
 		tabbedPane.addTab("Ejemplar", null, panelEjemplar, null);
 		panelEjemplar.setLayout(null);
-
-		JButton btnNewButton = new JButton("Registrar");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				// Registrar la nueva Obra
-
-			}
-		});
-		btnNewButton.setBounds(305, 356, 90, 28);
-		panelEjemplar.add(btnNewButton);
-
-		JButton btnNewButton_1 = new JButton("Prestar");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-		btnNewButton_1.setBounds(561, 93, 89, 28);
-		panelPrestamo.add(btnNewButton_1);
-
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
-		lblNewLabel.setBounds(0, 0, 765, 444);
-		panelPrestamo.add(lblNewLabel);
 
 		JComboBox boxArea = new JComboBox();
 		boxArea.setModel(new DefaultComboBoxModel(Area.values()));
@@ -526,7 +497,7 @@ public class ventanaPrincipal extends JFrame {
 		lblNewLabel_2_3_1_2.setForeground(Color.WHITE);
 		lblNewLabel_2_3_1_2.setBounds(154, 153, 122, 16);
 		panelLectores.add(lblNewLabel_2_3_1_2);
-		
+
 		final JTextPane muestraLector = new JTextPane();
 		muestraLector.setText("*\r\n*\r\n*\r\n*\r\n*\r\n*\r\n*\r\n*");
 		muestraLector.setEditable(false);
@@ -536,6 +507,11 @@ public class ventanaPrincipal extends JFrame {
 		muestraLector.setBounds(20, 275, 725, 144);
 		panelLectores.add(muestraLector);
 
+		JLabel fondo = new JLabel("");
+		fondo.setBounds(0, 0, 777, 578);
+		fondo.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
+		contentPane.add(fondo);
+		setLocationRelativeTo(null);
 
 		JButton btnRegistrarLector = new JButton("Registrar Lector");
 		btnRegistrarLector.addActionListener(new ActionListener() {
@@ -551,45 +527,91 @@ public class ventanaPrincipal extends JFrame {
 				String departamento = textDepartamento.getText();
 				String domicilio = textDomicilio.getText();
 				String correo = textCorreo.getText();
-				long numCel = Long.parseLong(textNroCelular.getText());
+				int numCel = Integer.parseInt(textNroCelular.getText());
 				int codPos = Integer.parseInt(textCodPos.getText());
 				String lugNac = textLugarNac.getText();
 				LocalDate fechaNac = LocalDate.of(Integer.parseInt(dateAnio.getText()),
 						Integer.parseInt(dateMes.getText()), Integer.parseInt(dateDia.getText()));
 				String sexo = (String) boxSexo.getSelectedItem();
 
-				if(listFunc.existeLector(dni)) {
-					JOptionPane.showMessageDialog(null, "Ya se encuentra registrado", "Error", JOptionPane.ERROR_MESSAGE);
-				}else {
+				if (listFunc.existeLector(dni)) {
+					JOptionPane.showMessageDialog(null, "Ya se encuentra registrado", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
 					// Crea la nueva instancia de Lector
 					Lector lector = new Lector(nombre, apellido, tipDni, dni, correo, numCel, fechaNac, sexo, lugNac,
 							domicilio, codPos, departamento, localidad);
 
 					// Muestra en pantalla de los datos ingresado
-					muestraLector.setText("* Nombre: " + nombre + "\n* Apellido: " + apellido + "\n* tipo DNI: " + tipDni + ", N° DNI: " + dni
-							+ "\n* Correo: " + correo + " - N° Celular: " + numCel + " - Fecha Nacimiento: " + fechaNac + " - Sexo: " + sexo + "\n* Lugar Nacimiento: "
-							+ lugNac + "\n* Domicilio: " + domicilio + " - Codigo Postal: " + codPos + " - Departamento: " + departamento + "-  Localidad: " + localidad);
-					
-					//Agrega al txt el nuevo lector
+					muestraLector.setText("* Nombre: " + nombre + "\n* Apellido: " + apellido + "\n* tipo DNI: "
+							+ tipDni + ", N° DNI: " + dni + "\n* Correo: " + correo + " - N° Celular: " + numCel
+							+ " - Fecha Nacimiento: " + fechaNac + " - Sexo: " + sexo + "\n* Lugar Nacimiento: "
+							+ lugNac + "\n* Domicilio: " + domicilio + " - Codigo Postal: " + codPos
+							+ " - Departamento: " + departamento + "-  Localidad: " + localidad);
+
+					// Agrega al txt el nuevo lector
 					listFunc.guardarLector(lector);
+					
+					//Pone en blanco las textFields
+					textNombre.setText("");
+					textApellido.setText("");
+					textTipoDNI.setText("");
+					textDNI.setText("");
+					textLocalidad.setText("");
+					textDepartamento.setText("");
+					textDomicilio.setText("");
+					textCorreo.setText("");
+					textNroCelular.setText("");
+					textCodPos.setText("");
+					textLugarNac.setText("");
+					dateAnio.setText("");
+					dateMes.setText("");
+					dateDia.setText("");
 				}
 			}
 		});
 		btnRegistrarLector.setBounds(311, 235, 143, 28);
 		panelLectores.add(btnRegistrarLector);
 
-		
 		JLabel fondoL = new JLabel("");
 		fondoL.setBackground(Color.LIGHT_GRAY);
 		fondoL.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		fondoL.setBounds(0, 0, 765, 444);
 		panelLectores.add(fondoL);
 
-		JLabel fondo = new JLabel("");
-		fondo.setBounds(0, 0, 777, 578);
-		fondo.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
-		contentPane.add(fondo);
-		setLocationRelativeTo(null);
+		JButton btnNewButton = new JButton("Registrar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				// Registrar la nueva Obra
+
+			}
+		});
+		btnNewButton.setBounds(305, 356, 90, 28);
+		panelEjemplar.add(btnNewButton);
+
+		JButton btnPrestar = new JButton("Prestar");
+		btnPrestar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//Realizado de prestamo
+			}
+		});
+		btnPrestar.setBounds(561, 93, 89, 28);
+		panelPrestamo.add(btnPrestar);
+		
+		JButton btnDevuelto = new JButton("Devuelto");
+		btnDevuelto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnDevuelto.setBounds(496, 226, 89, 28);
+		panelPrestamo.add(btnDevuelto);
+
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
+		lblNewLabel.setBounds(0, 0, 765, 444);
+		panelPrestamo.add(lblNewLabel);
 
 	}
 }

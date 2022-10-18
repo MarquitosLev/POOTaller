@@ -11,11 +11,9 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-import BibliotecaGraficos.ventanaRegistro;
-
 public class listaFuncionario {
 	ArrayList<Funcionario> datosFunc;
-	ArrayList<Lector> datosLector;
+	ArrayList<Integer> datosLector;
 
 	public void agregar(Funcionario obj) {
 		guardarFuncionario(obj);
@@ -91,7 +89,7 @@ public class listaFuncionario {
 			escribir.write(lector.getDep() + "/");
 			escribir.write(lector.getLocalidad() + "/");
 			escribir.write(lector.getCanMulta() + "/");
-			escribir.write(lector.getEstaMultado() + "/\n");
+			escribir.write(lector.getEstaMultado() + "/" + "\n");
 //			for (int i = 0; i<lector.getEjemplar().size(); i++) {
 //				escribir.write(lector.getEjemplar().get(i) + "-");
 //			}
@@ -101,34 +99,31 @@ public class listaFuncionario {
 	}
 
 	public boolean existeLector(int dni) {
-		datosLector = new ArrayList<Lector>();
+		datosLector = new ArrayList<Integer>();
 		try {
-			System.out.println("Entro al try");//quitar
-			FileReader fr = new FileReader("Lectores.txt");
-			BufferedReader br = new BufferedReader(fr);
+			BufferedReader br = new BufferedReader(new FileReader("Lectores.txt"));
 			String lector;
 			while ((lector = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
-				System.out.println("Entro al while");//quitar
-				StringTokenizer X = new StringTokenizer(lector, "/"); // Se crea un String hasta que aparezca el "/"
-				datosLector.add(new Lector(X.nextToken(), X.nextToken(), X.nextToken(),
-						Integer.parseInt(X.nextToken()), X.nextToken(), Long.parseLong(X.nextToken()),
-						LocalDate.parse(X.nextToken()), X.nextToken(), X.nextToken(), X.nextToken(),
-						Integer.parseInt(X.nextToken()), X.nextToken(), X.nextToken()));
+				StringTokenizer x = new StringTokenizer(lector, "/");
 				
-				System.out.println("agrego al arraylist");//quitar
+				// x.nextToken() necesarios para llegar al numero de documento
+				x.nextToken();
+				x.nextToken();
+				x.nextToken();
+				int doc = Integer.parseInt(x.nextToken());//Parsea a entero el numero de dni
+
+				datosLector.add(doc);//agrega al arraylist de enteros
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 		}
-		
-		if(datosLector.size() == 0) {
-			System.out.println("Entro al size == 0");//quitar
+
+		if (datosLector.size() == 0) {
 			return false;
 		}
-		
-		for(int i = 0; i < datosLector.size(); i++) {
-			System.out.println("Entro al for");//quitar
-			if((datosLector.get(i).getNumDoc() == dni)){
-				return true;
+
+		for (int i = 0; i < datosLector.size(); i++) {
+			if ((datosLector.get(i).equals(dni))) {
+				return true;//retorna true si el dni se encuentra en el txt
 			}
 		}
 		return false;
