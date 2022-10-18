@@ -18,6 +18,24 @@ public class Ejemplar {
     private Obra obra;
     private Lector lector;
     
+    //Constructor para registrar nuevo ejemplar
+    public Ejemplar(int idEjemplar, String observaciones, boolean disponible, FormaAdquirida formaAdquirida, String codUbicacion, Obra obra) throws BarcodeException, OutputException {
+		
+    	//pasados por parametro
+    	this.idEjemplar = idEjemplar;
+		this.observaciones = observaciones;
+		this.disponible = disponible;
+		this.formaAdquirida = formaAdquirida;
+		this.codUbicacion = codUbicacion;
+		this.obra = obra;
+		
+		this.fechaDeBaja = LocalDate.of(1800, 01, 01);
+		this.cantPedidas = 0;
+		
+		//Codigo de barra
+		this.setCodBarr();
+		
+	}
     
     public Ejemplar(int idEjemplar, String observaciones, boolean disponible, int cantPedidas, LocalDate fechaAdquisicion,
 			FormaAdquirida formaAdquirida, LocalDate fechaDeBaja, String motivoDeBaja, String codUbicacion, Obra obra, Lector lector) throws BarcodeException, OutputException {
@@ -32,6 +50,8 @@ public class Ejemplar {
 		this.codUbicacion = codUbicacion;
 		this.obra = obra;
 		this.lector = lector;
+		
+		
 		
 		this.setCodBarr();
 		

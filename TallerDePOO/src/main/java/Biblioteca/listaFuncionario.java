@@ -14,7 +14,9 @@ import java.util.Vector;
 public class listaFuncionario {
 	ArrayList<Funcionario> datosFunc;
 	ArrayList<Integer> datosLector;
-
+	ArrayList<String> datoObra;
+	ArrayList<Integer> datoEjemplar;
+	
 	public void agregar(Funcionario obj) {
 		guardarFuncionario(obj);
 	}
@@ -148,10 +150,81 @@ public class listaFuncionario {
 			escribir.write(obra.getId() + "/");
 			escribir.write(obra.getArea() + "/");
 			escribir.write(obra.getTipo() + "/" + "\n");
-			
+
 			escribir.close();
 		} catch (Exception e) {
 		}
 	}
 
+	public boolean existeObra(String titu) {
+		datoObra = new ArrayList<String>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("Obras.txt"));
+			String obra;
+			while ((obra = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+				StringTokenizer x = new StringTokenizer(obra, "/");
+				datoObra.add(x.nextToken());// agrega al arraylist de String
+			}
+		} catch (Exception e) {
+		}
+
+		if (datoObra.size() == 0) {
+			return false;
+		}
+
+		for (int i = 0; i < datoObra.size(); i++) {
+			if ((datoObra.get(i).equals(titu))) {
+				return true;// retorna true si el titulo se encuentra en el txt
+			}
+		}
+		return false;
+	}
+
+	public void guardarEjemplar(Ejemplar ejemplar) {
+		try {
+			File functxt = new File("Ejemplares.txt");
+			if (!functxt.exists()) { // Crea el archivo txt en caso de que no exista
+				functxt.createNewFile();
+			}
+			FileWriter fw = new FileWriter("Ejemplares.txt", true);
+			BufferedWriter br = new BufferedWriter(fw); // Escribe los datos asignados
+			PrintWriter escribir = new PrintWriter(br);
+			escribir.write(ejemplar.getIdEjemplar() + "/");
+			escribir.write(ejemplar.getObservaciones() + "/");
+			escribir.write(ejemplar.getDisponible() + "/");
+			escribir.write(ejemplar.getFechaAdquisicion() + "/");
+			escribir.write(ejemplar.getCodUbicacion() + "/");
+			escribir.write(ejemplar.getObra() + "/");
+			escribir.write(ejemplar.getCantPedidas() + "/" + "\n");
+
+			escribir.close();
+		} catch (Exception e) {
+		}
+	}
+
+	public boolean existeEjemplar(int id) {
+		datoEjemplar = new ArrayList<Integer>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("Ejemplares.txt"));
+			String ejemplar;
+			while ((ejemplar = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+				StringTokenizer x = new StringTokenizer(ejemplar, "/");
+				datoObra.add(x.nextToken());// agrega al arraylist de int
+			}
+		} catch (Exception e) {
+		}
+
+		if (datoEjemplar.size() == 0) {
+			return false;
+		}
+
+		for (int i = 0; i < datoEjemplar.size(); i++) {
+			if ((datoEjemplar.get(i).equals(id))) {
+				return true;// retorna true si el id se encuentra en el txt
+			}
+		}
+		return false;
+		
+	}
 }
+

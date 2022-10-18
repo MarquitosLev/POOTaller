@@ -23,7 +23,11 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
 import Biblioteca.Area;
+import Biblioteca.Ejemplar;
 import Biblioteca.tipoObra;
+import net.sourceforge.barbecue.BarcodeException;
+import net.sourceforge.barbecue.output.OutputException;
+
 import javax.swing.JCheckBox;
 import Biblioteca.FormaAdquirida;
 import Biblioteca.Lector;
@@ -73,6 +77,7 @@ public class ventanaPrincipal extends JFrame {
 	private JTextField textNroCelular;
 	private JTextField textCodPos;
 	private JTextField textLugarNac;
+	private JTextField textCodUbi;
 
 	public ventanaPrincipal(String userWelcome) {
 		listaFuncionario listFunc = new listaFuncionario();
@@ -80,7 +85,8 @@ public class ventanaPrincipal extends JFrame {
 		inicioVentanaPrincipal(listFunc, ventanaEdicion, userWelcome);
 	}
 
-	private void inicioVentanaPrincipal(final listaFuncionario listFunc, final ventanaEditorial ventanaEdicion, String userWelcome) {
+	private void inicioVentanaPrincipal(final listaFuncionario listFunc, final ventanaEditorial ventanaEdicion,
+			String userWelcome) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ventanaPrincipal.class.getResource("/imagenes/icon.png")));
 		setType(Type.POPUP);
 		setTitle("Nimbook");
@@ -503,14 +509,14 @@ public class ventanaPrincipal extends JFrame {
 		muestraLector.setFont(new Font("Arial", Font.BOLD, 14));
 		muestraLector.setBounds(20, 275, 725, 144);
 		panelLectores.add(muestraLector);
-		
+
 		JLabel bienvenido = new JLabel("");
 		bienvenido.setHorizontalAlignment(SwingConstants.CENTER);
 		bienvenido.setForeground(new Color(0, 0, 0));
 		bienvenido.setFont(new Font("Britannic Bold", Font.PLAIN, 28));
 		bienvenido.setBounds(43, 19, 320, 67);
 		contentPane.add(bienvenido);
-		bienvenido.setText("¡Bienvenido, "+ userWelcome + "!");
+		bienvenido.setText("¡Bienvenido, " + userWelcome + "!");
 
 		JLabel fondo = new JLabel("");
 		fondo.setBounds(0, 0, 777, 578);
@@ -518,7 +524,7 @@ public class ventanaPrincipal extends JFrame {
 		contentPane.add(fondo);
 		setLocationRelativeTo(null);
 
-		JButton btnRegistrarLector = new JButton("Registrar Lector");
+		JButton btnRegistrarLector = new JButton("Registrar Lector"); // Registrar Lector
 		btnRegistrarLector.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODOS LOS METODOS QUE SE REALIZAN AL REGISTRAR UN NUEVO LECTOR
@@ -538,7 +544,7 @@ public class ventanaPrincipal extends JFrame {
 				LocalDate fechaNac = LocalDate.of(Integer.parseInt(dateAnio.getText()),
 						Integer.parseInt(dateMes.getText()), Integer.parseInt(dateDia.getText()));
 				String sexo = (String) boxSexo.getSelectedItem();
-				
+
 				if (listFunc.existeLector(dni)) {
 					JOptionPane.showMessageDialog(null, "Ya se encuentra registrado", "Error",
 							JOptionPane.ERROR_MESSAGE);
@@ -577,7 +583,7 @@ public class ventanaPrincipal extends JFrame {
 		btnRegistrarLector.setBounds(311, 235, 143, 28);
 		panelLectores.add(btnRegistrarLector);
 
-		JButton btnRegistrar = new JButton("Registrar");
+		JButton btnRegistrar = new JButton("Registrar");// Registrar obra y ejemplar
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Registrar la nueva Obra
@@ -588,22 +594,24 @@ public class ventanaPrincipal extends JFrame {
 				int id = Integer.parseInt(textID.getText());
 				String priAutor = textPriAutor.getText();
 				String segAutor = textSegAutor.getText();
-				String terAutor = textPriAutor.getText();
+				String terAutor = textTerAutor.getText();
 				String genero = textGenero.getText();
+				String codUbi = textCodUbi.getText();
+				
+				FormaAdquirida formaAdqui = (FormaAdquirida)boxAdquisicion.getSelectedItem();
+				String observaciones = textObservacion.getText();
+				Area area = (Area) boxArea.getSelectedItem();
 
-				Area area;
-				area = (Area) boxArea.getSelectedItem();
+				// NO SE PUEDE CASTEAR DE STRING A UNA ENUMERACION, PREGUNTAR
 
-				// NO SE PUEDE CASTEAR DE STRING A UNA ENUMERACION
-
-//				if(String.valueOf(boxArea.getSelectedItem()) == "otro") {
-//					//area = otroArea.getText();
-//				}else {
-//					area = (Area)boxArea.getSelectedItem();
+//				if (String.valueOf(boxArea.getSelectedItem()) == "otro") {
+//					boxArea.addItem(otroArea.getText());
+//					area = (Area) boxArea.getItemAt(6);
+//				} else {
+//					area = (Area) boxArea.getSelectedItem();
 //				}
 
-				tipoObra tipoObra;
-				tipoObra = (tipoObra) boxTipoObra.getSelectedItem();
+				tipoObra tipoObra = (tipoObra) boxTipoObra.getSelectedItem();
 
 //				if(String.valueOf(boxTipoObra.getSelectedItem()) == "otro") {
 //					//tipoObra = (tipoObra) otroTipoObra.getText();
@@ -617,10 +625,41 @@ public class ventanaPrincipal extends JFrame {
 //				}else {
 //					formaAdquirida = String.valueOf(boxAdquisicion.getSelectedItem());
 //				}
+				
+				Obra obra = new Obra(titulo, subtitulo, priAutor, segAutor, terAutor, genero, isbn, id, area,
+						tipoObra);
+				
+				
+				//Si es la primera vez que se ingresa el titulo, se agrega obra y primer ejemplar
+				if (!listFunc.existeObra(titulo)) {
 
-				Obra obra = new Obra(titulo, subtitulo, priAutor, segAutor, terAutor, genero, isbn, id, area, tipoObra);
+					try {
+						Ejemplar ejemplar = new Ejemplar((int) Math.random() * 200, observaciones, true, formaAdqui, codUbi, obra);
+						// Guarda el primer ejemplar de la obra
+						listFunc.guardarEjemplar(ejemplar);
+					} catch (BarcodeException e1) {
+						e1.printStackTrace();
+					} catch (OutputException e1) {
+						e1.printStackTrace();
+					}
 
-				listFunc.guardarObra(obra);
+					// Guarda la obra
+					listFunc.guardarObra(obra);
+
+				} else {
+					Obra auxObra = obra;
+					try {
+						Ejemplar ejemplar = new Ejemplar((int) Math.random() * 200, observaciones, true, formaAdqui, codUbi, auxObra);
+						listFunc.guardarEjemplar(ejemplar);
+					} catch (BarcodeException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (OutputException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+
 			}
 		});
 		btnRegistrar.setBounds(229, 356, 90, 28);
@@ -658,17 +697,27 @@ public class ventanaPrincipal extends JFrame {
 		});
 		btnNuevaEditorial.setBounds(366, 356, 124, 28);
 		panelEjemplar.add(btnNuevaEditorial);
-
-		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
-		lblNewLabel_3.setBounds(0, 0, 765, 444);
-		panelEjemplar.add(lblNewLabel_3);
+		
+		textCodUbi = new JTextField();
+		textCodUbi.setBounds(502, 233, 122, 28);
+		panelEjemplar.add(textCodUbi);
+		textCodUbi.setColumns(10);
+				
+				JLabel lblNewLabel_10 = new JLabel("Codigo de Ubicacion");
+				lblNewLabel_10.setForeground(Color.WHITE);
+				lblNewLabel_10.setBounds(502, 200, 122, 16);
+				panelEjemplar.add(lblNewLabel_10);
+				
+						JLabel lblNewLabel_3 = new JLabel("");
+						lblNewLabel_3.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
+						lblNewLabel_3.setBounds(0, 0, 765, 444);
+						panelEjemplar.add(lblNewLabel_3);
 
 		JLabel lblNewLabel_9 = new JLabel("A domicilio");
 		lblNewLabel_9.setForeground(Color.WHITE);
 		lblNewLabel_9.setBounds(459, 105, 90, 16);
 		panelPrestamo.add(lblNewLabel_9);
-		
+
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		lblNewLabel.setBounds(0, 0, 765, 444);
