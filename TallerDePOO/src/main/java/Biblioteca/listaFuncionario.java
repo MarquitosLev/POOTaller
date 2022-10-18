@@ -157,6 +157,8 @@ public class listaFuncionario {
 			FileWriter fw = new FileWriter("Obras.txt", true);
 			BufferedWriter br = new BufferedWriter(fw); // Escribe los datos asignados
 			PrintWriter escribir = new PrintWriter(br);
+			escribir.write(obra.getCantEjem() + "/");
+			escribir.write(obra.getCantEjemDisponible() + "/");
 			escribir.write(obra.getTitulo() + "/");
 			escribir.write(obra.getSubtitulo() + "/");
 			escribir.write(obra.getAutor1() + "/");
@@ -242,6 +244,28 @@ public class listaFuncionario {
 		}
 		return false;
 		
+	}
+
+	public void guardarEdicion(Edicion edicion) {
+		try {
+			File functxt = new File("Ediciones.txt");
+			if (!functxt.exists()) { // Crea el archivo txt en caso de que no exista
+				functxt.createNewFile();
+			}
+			FileWriter fw = new FileWriter("Ediciones.txt", true);
+			BufferedWriter br = new BufferedWriter(fw); // Escribe los datos asignados
+			PrintWriter escribir = new PrintWriter(br);
+			escribir.write(edicion.getEditorial() + "/");
+			escribir.write(edicion.getAnio() + "/");
+			escribir.write(edicion.getIdioma() + "/");
+			escribir.write(edicion.getNum() + "/");
+			escribir.write(edicion.getVolumen() + "/");
+			escribir.write(edicion.getPais() + "/");
+			escribir.write(edicion.getPaginas() + "/");
+			escribir.write(edicion.getObra() + "/" + "\n");
+			escribir.close();
+		} catch (Exception e) {
+		}
 	}
 }
 

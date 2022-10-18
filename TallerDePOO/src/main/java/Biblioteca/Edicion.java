@@ -11,6 +11,17 @@ public class Edicion {
 	private formatoObra formato; //Falta Especificacion "Otro" en formato obra
 	private Obra obra;
 	
+	public Edicion(String editorial, String pais, int num, int anio, int volumen, int paginas, String idioma, Obra obra) {
+		super();
+		this.editorial = editorial;
+		this.pais = pais;
+		this.num = num;
+		this.anio = anio;
+		this.volumen = volumen;
+		this.paginas = paginas;
+		this.idioma = idioma;
+		this.obra = obra;
+	}
 	public Obra getObra() {
 		return obra;
 	}

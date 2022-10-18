@@ -516,7 +516,7 @@ public class ventanaPrincipal extends JFrame {
 		bienvenido.setFont(new Font("Britannic Bold", Font.PLAIN, 28));
 		bienvenido.setBounds(43, 19, 320, 67);
 		contentPane.add(bienvenido);
-		bienvenido.setText("¡Bienvenido, " + userWelcome + "!");
+		bienvenido.setText("ï¿½Bienvenido, " + userWelcome + "!");
 
 		JLabel fondo = new JLabel("");
 		fondo.setBounds(0, 0, 777, 578);
@@ -555,7 +555,7 @@ public class ventanaPrincipal extends JFrame {
 
 					// Muestra en pantalla de los datos ingresado
 					muestraLector.setText("* Nombre: " + nombre + "\n* Apellido: " + apellido + "\n* tipo DNI: "
-							+ tipDni + ", N° DNI: " + dni + "\n* Correo: " + correo + " - N° Celular: " + numCel
+							+ tipDni + ", Nï¿½ DNI: " + dni + "\n* Correo: " + correo + " - Nï¿½ Celular: " + numCel
 							+ " - Fecha Nacimiento: " + fechaNac + " - Sexo: " + sexo + "\n* Lugar Nacimiento: "
 							+ lugNac + "\n* Domicilio: " + domicilio + " - Codigo Postal: " + codPos
 							+ " - Departamento: " + departamento + "-  Localidad: " + localidad);
@@ -597,8 +597,8 @@ public class ventanaPrincipal extends JFrame {
 				String terAutor = textTerAutor.getText();
 				String genero = textGenero.getText();
 				String codUbi = textCodUbi.getText();
-				
-				FormaAdquirida formaAdqui = (FormaAdquirida)boxAdquisicion.getSelectedItem();
+
+				FormaAdquirida formaAdqui = (FormaAdquirida) boxAdquisicion.getSelectedItem();
 				String observaciones = textObservacion.getText();
 				Area area = (Area) boxArea.getSelectedItem();
 
@@ -625,16 +625,16 @@ public class ventanaPrincipal extends JFrame {
 //				}else {
 //					formaAdquirida = String.valueOf(boxAdquisicion.getSelectedItem());
 //				}
-				
-				Obra obra = new Obra(titulo, subtitulo, priAutor, segAutor, terAutor, genero, isbn, id, area,
-						tipoObra);
-				
-				
-				//Si es la primera vez que se ingresa el titulo, se agrega obra y primer ejemplar
-				if (!listFunc.existeObra(titulo)) {
 
+				Obra obra = new Obra(titulo, subtitulo, priAutor, segAutor, terAutor, genero, isbn, id, area, tipoObra);
+
+				// Si es la primera vez que se ingresa el titulo, se agrega obra y primer
+				// ejemplar
+				if (!listFunc.existeObra(titulo)) {
+					int ran = (int) Math.random() * 1000 +1;
 					try {
-						Ejemplar ejemplar = new Ejemplar((int) Math.random() * 200, observaciones, true, formaAdqui, codUbi, obra);
+						Ejemplar ejemplar = new Ejemplar(ran, observaciones, true, formaAdqui,
+								codUbi, obra);
 						// Guarda el primer ejemplar de la obra
 						listFunc.guardarEjemplar(ejemplar);
 					} catch (BarcodeException e1) {
@@ -648,8 +648,9 @@ public class ventanaPrincipal extends JFrame {
 
 				} else {
 					Obra auxObra = obra;
+					int ran = (int) Math.random() * 1000 +1;
 					try {
-						Ejemplar ejemplar = new Ejemplar((int) Math.random() * 200, observaciones, true, formaAdqui, codUbi, auxObra);
+						Ejemplar ejemplar = new Ejemplar(ran, observaciones, true, formaAdqui,codUbi, auxObra);
 						listFunc.guardarEjemplar(ejemplar);
 					} catch (BarcodeException e1) {
 						// TODO Auto-generated catch block
@@ -697,21 +698,21 @@ public class ventanaPrincipal extends JFrame {
 		});
 		btnNuevaEditorial.setBounds(366, 356, 124, 28);
 		panelEjemplar.add(btnNuevaEditorial);
-		
+
 		textCodUbi = new JTextField();
 		textCodUbi.setBounds(502, 233, 122, 28);
 		panelEjemplar.add(textCodUbi);
 		textCodUbi.setColumns(10);
-				
-				JLabel lblNewLabel_10 = new JLabel("Codigo de Ubicacion");
-				lblNewLabel_10.setForeground(Color.WHITE);
-				lblNewLabel_10.setBounds(502, 200, 122, 16);
-				panelEjemplar.add(lblNewLabel_10);
-				
-						JLabel lblNewLabel_3 = new JLabel("");
-						lblNewLabel_3.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
-						lblNewLabel_3.setBounds(0, 0, 765, 444);
-						panelEjemplar.add(lblNewLabel_3);
+
+		JLabel lblNewLabel_10 = new JLabel("Codigo de Ubicacion");
+		lblNewLabel_10.setForeground(Color.WHITE);
+		lblNewLabel_10.setBounds(502, 200, 122, 16);
+		panelEjemplar.add(lblNewLabel_10);
+
+		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
+		lblNewLabel_3.setBounds(0, 0, 765, 444);
+		panelEjemplar.add(lblNewLabel_3);
 
 		JLabel lblNewLabel_9 = new JLabel("A domicilio");
 		lblNewLabel_9.setForeground(Color.WHITE);
@@ -733,6 +734,28 @@ public class ventanaPrincipal extends JFrame {
 		fondoL.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		fondoL.setBounds(0, 0, 765, 444);
 		panelLectores.add(fondoL);
+		
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("EstadÃ­sticas", null, panel, null);
+		panel.setLayout(null);
+		
+		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane_1.setBounds(10, 11, 740, 424);
+		panel.add(tabbedPane_1);
+		
+		JPanel panel_1 = new JPanel();
+		tabbedPane_1.addTab("Lista", null, panel_1, null);
+		panel_1.setLayout(null);
+		
+		JLabel lblNewLabel_12 = new JLabel("");
+		lblNewLabel_12.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
+		lblNewLabel_12.setBounds(0, 0, 735, 396);
+		panel_1.add(lblNewLabel_12);
+		
+		JLabel lblNewLabel_11 = new JLabel("");
+		lblNewLabel_11.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
+		lblNewLabel_11.setBounds(0, 0, 760, 446);
+		panel.add(lblNewLabel_11);
 
 	}
 }

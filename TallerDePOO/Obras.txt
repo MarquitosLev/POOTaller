@@ -1,5 +1,6 @@
-1984/---/George Orwell/-/George Orwell/Ciencia Ficcion/866/9/otro/Libro/
-Canto General II/--/Pablo Neruda/-/Pablo Neruda/Poema/1805/97/otro/Libro/Capitanes de la Arena/Capitaes da areia/Jorge Amado/-/Jorge Amado/Narrativa Brasilera/571/97/null/Libro/
-Capitanes de la Arena/Capitaes da areia/Jorge Amado/-/Jorge Amado/Narrativa Brasilera/571/97/null/Libro/
-Harry /Potter/JK Rowling/-/JK Rowling/fantasia/934/1/null/Libro/
-Titulo/Subtitulo/Autor1/--/--/genero/1998/111/Matematica/Libro/
+Hola1/--/Javadoc/--/--/QSY/44/121/Programacion/Libro/
+Hola2/--/Javadoc/--/--/QSY/44/121/Programacion/Libro/
+Hola3/--/Javadoc/--/--/QSY/44/121/Programacion/Libro/
+Python/--/Mr Python/--/--/--/4343/777/Matematica/Libro/
+Entre el bien y el mal/dios ha muerto/Friedrich /--/--/Filosofía/3435/777/Matematica/Libro/
+Mesi/--/Mesi campion/-/-/-/1223/663/Matematica/Libro/

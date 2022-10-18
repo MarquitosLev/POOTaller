@@ -1,0 +1,8 @@
+0/Buen estado/true/null/A567/Biblioteca.Obra@8b2acd8/0/
+0/Buen estado/true/null/A567/Biblioteca.Obra@4c6ee18f/0/
+0/Buen estado/true/null/A567/Biblioteca.Obra@58687274/0/
+0/Buen estado/true/null/A567/Biblioteca.Obra@218ee18e/0/
+0/Buen estado/true/null/A567/Biblioteca.Obra@3a49659/0/
+0/Ta ok/true/null/G878/Biblioteca.Obra@4b40f9d/0/
+5/Hola que hace/true/null/4567/Biblioteca.Obra@44e58c2e/0/
+5/OKOKOK/true/null/K991/Biblioteca.Obra@499b5114/0/
