@@ -1,5 +1,14 @@
 package Biblioteca;
 import java.util.ArrayList;
+
+/**
+ * Clase que representa a las obras que se tienen registradas en la biblioteca
+ * 
+ * @author Leandro González Fister
+ * @author Marcos Leiva
+ * 
+ * */
+
 public class Obra {
 	
 	private int cantEjem;
@@ -39,7 +48,14 @@ public class Obra {
 		this.ediciones = new ArrayList<Edicion>();
 	}
 	
-	//Constructor para la nueva obra
+	/**
+	 * @param titulo  se refiere al título de la obra
+	 * @param subtitulo se refiere al subtítulo de la obra
+	 * @param autor1, autor2, autor3 se refieren al nombre de los distintos autores/as de la obra
+	 * @param genero indica el género literario de la misma
+	 * @param isbn 
+	 * 
+	 * */
 	public Obra(String titulo, String subtitulo, String autor1, String autor2, String autor3, String genero, int isbn, int id, Area area, tipoObra tipo) {
 		super();
 		this.cantEjem = 1;
