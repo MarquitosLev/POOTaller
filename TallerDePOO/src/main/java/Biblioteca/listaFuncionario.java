@@ -90,9 +90,26 @@ public class listaFuncionario {
 			escribir.write(lector.getLocalidad() + "/");
 			escribir.write(lector.getCanMulta() + "/");
 			escribir.write(lector.getEstaMultado() + "/" + "\n");
-//			for (int i = 0; i<lector.getEjemplar().size(); i++) {
-//				escribir.write(lector.getEjemplar().get(i) + "-");
-//			}
+			escribir.close();
+		} catch (Exception e) {
+		}
+	}
+	
+	public void guardarPrestamo(Prestamo prestamo) {
+		try {
+			File functxt = new File("Prestamos.txt");
+			if (!functxt.exists()) { // Crea el archivo txt en caso de que no exista
+				functxt.createNewFile();
+			}
+			FileWriter fw = new FileWriter("Prestamos.txt", true);
+			BufferedWriter br = new BufferedWriter(fw); // Escribe los datos asignados
+			PrintWriter escribir = new PrintWriter(br);
+			escribir.write(prestamo.getFechaHoraPrestada() + "/");
+			escribir.write(prestamo.getFuncionarioPrestador() + "/");
+			escribir.write(prestamo.getFechaHoraADevolver() + "/");
+			escribir.write(prestamo.getLector().getNumDoc() + "/");
+			escribir.write(prestamo.getEjemplar().getIdEjemplar() + "/");
+			escribir.write(prestamo.getFuncionarioPrestador() + "/");
 			escribir.close();
 		} catch (Exception e) {
 		}
@@ -148,7 +165,6 @@ public class listaFuncionario {
 			escribir.write(obra.getId() + "/");
 			escribir.write(obra.getArea() + "/");
 			escribir.write(obra.getTipo() + "/" + "\n");
-			
 			escribir.close();
 		} catch (Exception e) {
 		}
