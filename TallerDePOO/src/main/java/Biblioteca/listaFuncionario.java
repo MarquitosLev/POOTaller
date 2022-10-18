@@ -105,14 +105,14 @@ public class listaFuncionario {
 			String lector;
 			while ((lector = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
 				StringTokenizer x = new StringTokenizer(lector, "/");
-				
+
 				// x.nextToken() necesarios para llegar al numero de documento
 				x.nextToken();
 				x.nextToken();
 				x.nextToken();
-				int doc = Integer.parseInt(x.nextToken());//Parsea a entero el numero de dni
+				int doc = Integer.parseInt(x.nextToken());// Parsea a entero el numero de dni
 
-				datosLector.add(doc);//agrega al arraylist de enteros
+				datosLector.add(doc);// agrega al arraylist de enteros
 			}
 		} catch (Exception e) {
 		}
@@ -123,9 +123,35 @@ public class listaFuncionario {
 
 		for (int i = 0; i < datosLector.size(); i++) {
 			if ((datosLector.get(i).equals(dni))) {
-				return true;//retorna true si el dni se encuentra en el txt
+				return true;// retorna true si el dni se encuentra en el txt
 			}
 		}
 		return false;
 	}
+
+	public void guardarObra(Obra obra) {
+		try {
+			File functxt = new File("Obras.txt");
+			if (!functxt.exists()) { // Crea el archivo txt en caso de que no exista
+				functxt.createNewFile();
+			}
+			FileWriter fw = new FileWriter("Obras.txt", true);
+			BufferedWriter br = new BufferedWriter(fw); // Escribe los datos asignados
+			PrintWriter escribir = new PrintWriter(br);
+			escribir.write(obra.getTitulo() + "/");
+			escribir.write(obra.getSubtitulo() + "/");
+			escribir.write(obra.getAutor1() + "/");
+			escribir.write(obra.getAutor2() + "/");
+			escribir.write(obra.getAutor3() + "/");
+			escribir.write(obra.getGenero() + "/");
+			escribir.write(obra.getIsbn() + "/");
+			escribir.write(obra.getId() + "/");
+			escribir.write(obra.getArea() + "/");
+			escribir.write(obra.getTipo() + "/" + "\n");
+			
+			escribir.close();
+		} catch (Exception e) {
+		}
+	}
+
 }

@@ -42,6 +42,8 @@ public class Obra {
 	//Constructor para la nueva obra
 	public Obra(String titulo, String subtitulo, String autor1, String autor2, String autor3, String genero, int isbn, int id, Area area, tipoObra tipo) {
 		super();
+		this.cantEjem = 1;
+		this.cantEjemDisponible = 1;
 		this.titulo = titulo;
 		this.subtitulo = subtitulo;
 		this.autor1 = autor1;
