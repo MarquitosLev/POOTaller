@@ -562,7 +562,7 @@ public class ventanaPrincipal extends JFrame {
 							+ " - Departamento: " + departamento + "-  Localidad: " + localidad);
 
 					// Agrega al txt el nuevo lector
-					listFunc.guardarLector(lector);
+					MetodosTxt.guardar(lector, "Lectores.txt");
 
 					// Pone en blanco las textFields
 					textNombre.setText("");
@@ -603,29 +603,7 @@ public class ventanaPrincipal extends JFrame {
 				String observaciones = textObservacion.getText();
 				Area area = (Area) boxArea.getSelectedItem();
 
-				// NO SE PUEDE CASTEAR DE STRING A UNA ENUMERACION, PREGUNTAR
-
-//				if (String.valueOf(boxArea.getSelectedItem()) == "otro") {
-//					boxArea.addItem(otroArea.getText());
-//					area = (Area) boxArea.getItemAt(6);
-//				} else {
-//					area = (Area) boxArea.getSelectedItem();
-//				}
-
 				tipoObra tipoObra = (tipoObra) boxTipoObra.getSelectedItem();
-
-//				if(String.valueOf(boxTipoObra.getSelectedItem()) == "otro") {
-//					//tipoObra = (tipoObra) otroTipoObra.getText();
-//				}else {
-//					tipoObra = (tipoObra) boxTipoObra.getSelectedItem();
-//				}
-
-//				String formaAdquirida;
-//				if(String.valueOf(boxAdquisicion.getSelectedItem()) == "otro") {
-//					formaAdquirida = otroAdquisicion.getText();
-//				}else {
-//					formaAdquirida = String.valueOf(boxAdquisicion.getSelectedItem());
-//				}
 
 				Obra obra = new Obra(titulo, subtitulo, priAutor, segAutor, terAutor, genero, isbn, id, area, tipoObra);
 
@@ -638,7 +616,7 @@ public class ventanaPrincipal extends JFrame {
 						Ejemplar ejemplar = new Ejemplar(ran, observaciones, true, formaAdqui,
 								codUbi, obra);
 						// Guarda el primer ejemplar de la obra
-						listFunc.guardarEjemplar(ejemplar);
+						MetodosTxt.guardar(ejemplar, "Ejemplares.txt");
 					} catch (BarcodeException e1) {
 						e1.printStackTrace();
 					} catch (OutputException e1) {
@@ -646,7 +624,7 @@ public class ventanaPrincipal extends JFrame {
 					}
 
 					// Guarda la obra
-					listFunc.guardarObra(obra);
+					MetodosTxt.guardar(obra, "Obras.txt");
 
 				} else {
 					Obra auxObra = obra;
@@ -654,7 +632,7 @@ public class ventanaPrincipal extends JFrame {
 					int ran = r.nextInt(10000);
 					try {
 						Ejemplar ejemplar = new Ejemplar(ran, observaciones, true, formaAdqui,codUbi, auxObra);
-						listFunc.guardarEjemplar(ejemplar);
+						MetodosTxt.guardar(ejemplar, "Ejemplares.txt");
 					} catch (BarcodeException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -674,6 +652,9 @@ public class ventanaPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				// Realizado de prestamo
+				
+				
+				
 			}
 		});
 		btnPrestar.setBounds(561, 93, 89, 28);
