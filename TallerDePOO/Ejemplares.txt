@@ -6,3 +6,7 @@
 0/Ta ok/true/null/G878/Biblioteca.Obra@4b40f9d/0/
 5/Hola que hace/true/null/4567/Biblioteca.Obra@44e58c2e/0/
 5/OKOKOK/true/null/K991/Biblioteca.Obra@499b5114/0/
+-441823840/hola/true/null/GH678/Biblioteca.Obra@2267cc15/0/
+8191/hola/true/null/HG78/Biblioteca.Obra@24c82121/0/
+1840//true/null/020601/Biblioteca.Obra@5292bd61/0/
+2886//true/null/020601/Biblioteca.Obra@3877cf17/0/

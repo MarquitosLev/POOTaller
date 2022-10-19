@@ -82,7 +82,7 @@ public class Ejemplar {
 	private void setCodBarr() throws BarcodeException, OutputException{
 		String aux = this.codUbicacion + " " + String.valueOf(this.idEjemplar);
     	Barcode CodBarr = BarcodeFactory.createCode128(aux);
-    	File file = new File("src/main/java/codigosBarra" + aux + ".png");
+    	File file = new File("src/main/java/codigosBarra/" + aux + ".png");
     	BarcodeImageHandler.savePNG(CodBarr, file);
     }
 

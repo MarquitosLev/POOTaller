@@ -633,7 +633,7 @@ public class ventanaPrincipal extends JFrame {
 				// ejemplar
 				if (!listFunc.existeObra(titulo)) {
 					Random r = new Random();
-					int ran = r.nextInt();
+					int ran = r.nextInt(10000);
 					try {
 						Ejemplar ejemplar = new Ejemplar(ran, observaciones, true, formaAdqui,
 								codUbi, obra);
@@ -651,7 +651,7 @@ public class ventanaPrincipal extends JFrame {
 				} else {
 					Obra auxObra = obra;
 					Random r = new Random();
-					int ran = r.nextInt();
+					int ran = r.nextInt(10000);
 					try {
 						Ejemplar ejemplar = new Ejemplar(ran, observaciones, true, formaAdqui,codUbi, auxObra);
 						listFunc.guardarEjemplar(ejemplar);
