@@ -2,10 +2,40 @@ package Biblioteca;
 import java.util.ArrayList;
 import java.time.LocalDate;
 
+/**
+ * Clase que representa al lector.
+ * 
+ * @author Leandro Gonzalez Fister
+ * @author Sebastian Etchepare
+ * @author Marcos Leiva
+ *
+ */
+
 public class Lector extends Persona implements guardado{
 	private int canMulta;
 	private Boolean estaMultado;
 	private ArrayList<Ejemplar> ejemplares;
+	
+	/**
+	 * Constructor parametrizado de la clase.
+	 * 
+	 * @param nom
+	 * @param apellido
+	 * @param tipDoc
+	 * @param numDoc
+	 * @param correo
+	 * @param numCel
+	 * @param fecNac
+	 * @param sex
+	 * @param nac
+	 * @param domi
+	 * @param codPos
+	 * @param dep
+	 * @param localidad
+	 * @param canMulta
+	 * @param estaMultado
+	 * @param ejemplares
+	 */
 	
 	public Lector(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
 			String sex, String nac, String domi, int codPos, String dep, String localidad, int canMulta,
@@ -16,6 +46,24 @@ public class Lector extends Persona implements guardado{
 		this.ejemplares = ejemplares;
 	}
 	
+	
+	/**
+	 * Constructor que agrega datos del Lector.
+	 * 
+	 * @param nom
+	 * @param apellido
+	 * @param tipDoc
+	 * @param numDoc
+	 * @param correo
+	 * @param numCel
+	 * @param fecNac
+	 * @param sex
+	 * @param nac
+	 * @param domi
+	 * @param codPos
+	 * @param dep
+	 * @param localidad
+	 */
 	//Constructor para agregar datos del lector
 	public Lector(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
 			String sex, String nac, String domi, int codPos, String dep, String localidad) {
@@ -24,6 +72,10 @@ public class Lector extends Persona implements guardado{
 		this.canMulta = 0;
 		this.estaMultado = false;
 	}
+	
+	/**
+	 * Constructor del lector que asigna datos por defecto a los atributos relacionados a sus multas y los ejemplares que posee. 
+	 */
 	
 	public Lector() {
 		this.canMulta = 0;
@@ -59,6 +111,10 @@ public class Lector extends Persona implements guardado{
 		return super.toString();
 	}
 	
+	/**
+	 * Metodo que se encarga de crear un ArrayList del tipo 'Object' y agrega a los atributos de la clase dentro.
+	 */
+	
 	public ArrayList<Object> obtenerLista() {
 		ArrayList<Object>  lista = new ArrayList<Object> ();
 		lista.add(getNom());
@@ -78,8 +134,4 @@ public class Lector extends Persona implements guardado{
 		lista.add(getEstaMultado());
 		return lista;
 	}
-	
-	
-	
-	
 }

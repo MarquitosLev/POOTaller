@@ -1,7 +1,5 @@
 package Biblioteca;
 
-
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,10 +12,10 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 
 /**
- * La clase se encarga de almacenar un conjunto de métodos que sirven para guardar elementos y acciones como 
- * préstamos, obra, Ejemplar, funcionario, dentro de ArrayLists, a la vez que verifican su existencia o no.
+ * La clase se encarga de almacenar un conjunto de metodos que sirven para guardar elementos y acciones como 
+ * prestamos, obra, Ejemplar, funcionario, dentro de ArrayLists, a la vez que verifican su existencia o no.
  * 
- * @author Sebastián Etchepare
+ * @author Sebastian Etchepare
  *
  */
 
@@ -28,13 +26,12 @@ public class MetodosTxt  {
 	ArrayList<Integer> datoEjemplar;
 	
 	/**
+	 * Guarda cualquier objeto que se pase por parámetro dentro de alguna de los 4 ArrayLists creados en la clase. Seria como una funcion de guardado general.
 	 * 
-	 * @param obj Un objeto del tipo funcionario que es pasado por parámetro, para luego ser almacenado en un ArrayList
-	 * 			  a través de otro método llamada "guardarFuncionario"
+	 * @param nuevo Corresponde al objeto que va a ser agregado al ArrayList. Como se indica, debe ser o implementar la interfaz 'guardado'
+	 * 
+	 * @param ruta Se pasa la ruta donde los datos serán guardado.  
 	 */
-	public void agregar(Funcionario obj) {
-		guardarFuncionario(obj);
-	}
 	
 	public static void guardar(guardado nuevo, String ruta) {
 		try {
@@ -48,7 +45,7 @@ public class MetodosTxt  {
 			try {
 				ArrayList<Object> x = nuevo.obtenerLista();
 				System.out.println(x);
-				System.out.println("Entr� al guardado");
+				System.out.println("Entr� al guardado");
 				for (int i = 0; i < x.size(); i++) {
 					escribir.write(x.get(i) + "/");
 				}
@@ -62,9 +59,11 @@ public class MetodosTxt  {
 	}
 	
 	/**
+	 * Función que controla si un usuario ya se encuentra registrado dentro de la aplicacion. 
 	 * 
 	 * @param user Se le pasa el parámetro 'user', atributo perteneciente a 'Funcionario', para comprobar si el mismo ya 
 	 * existe dentro del ArrayList de funcionario. 
+	 * 
 	 * @return retorna 'verdadero' o 'Falso' para indicar si el funcionario se encuentra o no guardado en el ArrayList. 
 	 */
 	public boolean existe(String user) {
@@ -89,9 +88,11 @@ public class MetodosTxt  {
 		return false;
 	}
 /**
- * Método encargado de controlar si la contraseña se encuentra o no dentro del ArrayList
- * @param pass Se pasa el parámetro para controlar si se encuentra como contraseña dentro del ArrayList de funcionarios
- * @return Si la contraseña pasada por parámetro coincide con alguna de las que se encuentra dentro del ArrayList, entonces retorna 'Verdadero'
+ * Metodo encargado de controlar si la contraseña se encuentra o no dentro del ArrayList. 
+ * 
+ * @param pass Se pasa el parametro para controlar si se encuentra como contraseña dentro del ArrayList de funcionarios.
+ * 
+ * @return Si la contraseña pasada por parametro coincide con alguna de las que se encuentra dentro del ArrayList, entonces retorna 'Verdadero'
  * sino, 'Falso'
  */
 	public boolean comprobarContrasenia(String pass) {
@@ -103,33 +104,9 @@ public class MetodosTxt  {
 		}
 		return false;
 	}
-/**
- * Método que se encarga de escribir/almacenar los datos de un funcionario dentro del archivo 'Funcionarios.txt'
- * @param funcionario Se le pasa un funcionario, cuyos datos serán guardados dentro del archivo '.txt'
- */
-	public void guardarFuncionario(Funcionario funcionario) {
-		guardar(funcionario, "Funcionarios.txt");
-	}
-	/**
-	 * Método encargado de escribir/almacenar los datos del objeto 'Lector' dentro del archivo 'Lectores.txt'
-	 * @param lector Se le pasa un objeto del tipo 'Lector'  para que sus datos sean tomados y escritos en el '.txt'
-	 */
-	public void guardarLector(Lector lector) {
-		guardar(lector, "Lectores.txt");
-	}
-	
-	/**
-	 * Método encargado de escribir/almacenar los datos del objeto 'Préstamo' dentro del archivo 'Prestamos.txt'
-	 * @param prestamo Se le pasa un objeto del tipo 'Prestamo' para tomar sus datos y guardarlos en el .txt
-	 */
-	
-	public void guardarPrestamo(Prestamo prestamo) {
-		guardar(prestamo, "Prestamos.txt");
-
-	}
 
 	/**
-	 * Método encargado de comprobar que el lector ya se encuentra almacenado dentro del ArrayList de Lectores.
+	 * Metodo encargado de comprobar que el lector ya se encuentra almacenado dentro del ArrayList de Lectores.
 	 * 
 	 * @param dni Se utilizar el DNI del mismo con clave para saber si se encuentra o no. 
 	 * 
@@ -168,10 +145,13 @@ public class MetodosTxt  {
 		return false;
 	}
 
-	public void guardarObra(Obra obra) {
-		guardar(obra, "Obras.txt");
-	}
-
+	/**
+	 * Función que busca en los archivos .txt si existe una determinada obra. 
+	 * 
+	 * @param titu Se le pasa el tilulo de la obra para buscar si se encuentra o no almacenada. 
+	 * 
+	 * @return retorna 'Verdadero' en caso de encontrar alguna coicidencia y 'Falso' encaso contrario. 
+	 */
 	public boolean existeObra(String titu) {
 		datoObra = new ArrayList<String>();
 		try {
@@ -195,6 +175,12 @@ public class MetodosTxt  {
 		}
 		return false;
 	}
+	
+	/**
+	 * Metodo que se encarga de guardar un ejemplar dentro de un archivo .txt
+	 * 
+	 * @param ejemplar Se le pasa como parámetro el ejemplar que quiere ser añadido al ArrayList y posteriormente al .txt
+	 */
 
 	public void guardarEjemplar(Ejemplar ejemplar) {
 		ArrayList<Obra> datosObra = new ArrayList<Obra>();

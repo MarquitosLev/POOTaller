@@ -1,6 +1,15 @@
 package Biblioteca;
 import java.util.ArrayList;
 
+/**
+ * Clase que representa al funcionario de la biblioteca.
+ * 
+ * @author Leandro Gonzalez Fister
+ * @author Sebastian Etchepare
+ * @author Marcos Leiva
+ *
+ */
+
 public class Funcionario implements guardado{
 	private String usuario;
 	private String contrasenia;
@@ -11,7 +20,12 @@ public class Funcionario implements guardado{
 	//Creacion de la asociacion entre el funcionario y la clase Prestamo;
 	private ArrayList<Prestamo> prestamosFuncionario;
 	
-	
+	/**
+	 * Constructor de la clase.
+	 * 
+	 * @param usuario Representa el nombre de usuario que el funcionario usa en el sistema
+	 * @param contrasenia Representa la contraseña que el funcionario usara para acceder al sistema. 
+	 */
 	public Funcionario(String usuario, String contrasenia) {
 		this.usuario = usuario;
 		this.contrasenia = contrasenia;
@@ -60,6 +74,10 @@ public class Funcionario implements guardado{
 	public void realizarPrestamo() {
 		//falta completar
 	}
+	
+	/**
+	 * Metodo que se encarga de crear un ArrayList del tipo 'Object' e ir agregando los atributos de la clase dentro. 
+	 */
 	
 	public ArrayList<Object> obtenerLista() {
 		ArrayList<Object> lista = new ArrayList<Object> ();

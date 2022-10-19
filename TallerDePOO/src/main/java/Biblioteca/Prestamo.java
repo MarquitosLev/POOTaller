@@ -1,8 +1,18 @@
 package Biblioteca;
 //import java.util.Date;
+
 import java.util.ArrayList;
 import java.time.temporal.ChronoUnit;
 import java.time.LocalDateTime;
+
+/**
+ * Clase que representa el proceso de prestamo y devolucion de un ejemplar en la biblioteca.
+ * 
+ * @author Leandro Gonzalez Fister
+ * @author Marcos Leiva
+ * @author Sebastian Etchepare
+ *
+ */
 public class Prestamo implements guardado {
 	private LocalDateTime fechaHoraPrestada;
 	private String funcionarioPrestador;
@@ -15,6 +25,20 @@ public class Prestamo implements guardado {
 	private ArrayList<Multa> multas;
 	private ArrayList<Funcionario> funcionarios;
 	private Ejemplar ejemplar;
+	
+	/**
+	 * Constructor de la clase Prestamo
+	 * 
+	 * @param funcionarioPrestador
+	 * @param fechaHoraADevolver
+	 * @param fechaDevuelta
+	 * @param funcionarioDevuelta
+	 * @param lector
+	 * @param aDomicilio
+	 * @param multas
+	 * @param funcionarios
+	 * @param ejemplar
+	 */
 	
 	public Prestamo(String funcionarioPrestador, LocalDateTime fechaHoraADevolver, LocalDateTime fechaDevuelta,
 			String funcionarioDevuelta, Lector lector, Boolean aDomicilio, ArrayList<Multa> multas, ArrayList<Funcionario> funcionarios, Ejemplar ejemplar) {
@@ -29,7 +53,11 @@ public class Prestamo implements guardado {
 		this.funcionarios = funcionarios;
 		this.ejemplar = ejemplar;
 	}
-
+	
+	/**
+	 * Constructor por defecto de la clase.
+	 */
+	
 	public Prestamo(){
 		this.fechaHoraPrestada = LocalDateTime.now();
 		this.funcionarioPrestador = "";
@@ -129,6 +157,10 @@ public class Prestamo implements guardado {
 			return false;
 		}
 	}
+	
+	/**
+	 * Metodo que crea un ArrayList del tipo 'Object' y agrega los atributos de la clase dentro. 
+	 */
 	
 	public ArrayList<Object> obtenerLista() {
 		ArrayList<Object>  lista = new ArrayList<Object> ();

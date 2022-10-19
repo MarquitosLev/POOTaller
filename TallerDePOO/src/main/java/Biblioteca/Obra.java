@@ -50,6 +50,7 @@ public class Obra implements guardado{
 	}
 	
 	/**
+	 * Constructor de la clase Obra. 
 	 * 
 	 * @param titulo
 	 * @param subtitulo
@@ -80,6 +81,7 @@ public class Obra implements guardado{
 	}
 	
 	/**
+	 * Constructor de la clase Obra. 
 	 * 
 	 * @param cantEjem
 	 * @param cantEjemDisponible
@@ -113,22 +115,25 @@ public class Obra implements guardado{
 	}
 	
 	/**
+	 * Función que retorna el funcionario del tipo 'Reserva'
 	 * 
-	 * @return 
+	 * @return retorna el funcionario que se encuentre almacenado.
 	 */
 	public Reserva getFuncionario() {
 		return funcionario;
 	}
 	
 	/**
+	 * Metodo que settea el atributo 'funcionario' de la clase.
 	 * 
-	 * @param funcionario
+	 * @param funcionario Se pasa el funcionario que se quiera agregar como atributo
 	 */
 	public void setFuncionario(Reserva funcionario) {
 		this.funcionario = funcionario;
 	}
 	
 	/**
+	 * Función que retorna ediciones.
 	 * 
 	 * @return las ediciones que se encuentran dentro del ArrayList del tipo Edición.
 	 */
@@ -137,10 +142,20 @@ public class Obra implements guardado{
 		return ediciones;
 	}
 
+	/**
+	 * Metodo que se encarga de setear lo que se encuentre dentro del atributo 'ediciones'
+	 * 
+	 * @param ediciones Se pasa como parámetro, un ArrayList que reemplaza el valor guardado en el correspondiente atributo.
+	 */
 	public void setEdiciones(ArrayList<Edicion> ediciones) {
 		this.ediciones = ediciones;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	
 	public ArrayList<Ejemplar> getEjemplares() {
 		return ejemplares;
 	}
@@ -215,6 +230,10 @@ public class Obra implements guardado{
 	public void setTipo(tipoObra tipo) {
 		this.tipo = tipo;
 	}
+	
+	/**
+	 * Metodo que se encarga de crear un array list del tipo objeto e ir agregando los atributos de la clase dentro. 
+	 */
 	
 	public ArrayList<Object> obtenerLista() {
 		ArrayList<Object>  lista = new ArrayList<Object> ();

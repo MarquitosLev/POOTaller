@@ -1,5 +1,12 @@
 package Biblioteca;
 
+/**
+ * Clase que representa la edicion de cada obra.
+ * 
+ * @author Leandro Gonzalez Fister
+ *
+ */
+
 public class Edicion {
 	private String editorial;
 	private String pais;
@@ -10,6 +17,19 @@ public class Edicion {
 	private String idioma;
 	private formatoObra formato; //Falta Especificacion "Otro" en formato obra
 	private Obra obra;
+	
+	/**
+	 * Constructor de la clase.
+	 * 
+	 * @param editorial
+	 * @param pais
+	 * @param num
+	 * @param anio
+	 * @param volumen
+	 * @param paginas
+	 * @param idioma
+	 * @param obra
+	 */
 	
 	public Edicion(String editorial, String pais, int num, int anio, int volumen, int paginas, String idioma, Obra obra) {
 		super();
