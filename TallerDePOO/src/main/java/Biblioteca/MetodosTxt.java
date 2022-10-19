@@ -1,5 +1,7 @@
 package Biblioteca;
 
+
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,12 +13,25 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
+/**
+ * La clase se encarga de almacenar un conjunto de métodos que sirven para guardar elementos y acciones como 
+ * préstamos, obra, Ejemplar, funcionario, dentro de ArrayLists, a la vez que verifican su existencia o no.
+ * 
+ * @author Sebastián Etchepare
+ *
+ */
+
 public class MetodosTxt {
 	ArrayList<Funcionario> datosFunc;
 	ArrayList<Integer> datosLector;
 	ArrayList<String> datoObra;
 	ArrayList<Integer> datoEjemplar;
 	
+	/**
+	 * 
+	 * @param obj Un objeto del tipo funcionario que es pasado por parámetro, para luego ser almacenado en un ArrayList
+	 * 			  a través de otro método llamada "guardarFuncionario"
+	 */
 	public void agregar(Funcionario obj) {
 		guardarFuncionario(obj);
 	}
@@ -36,6 +51,13 @@ public class MetodosTxt {
 		}
 	}
 	*/
+	
+	/**
+	 * 
+	 * @param user Se le pasa el parámetro 'user', atributo perteneciente a 'Funcionario', para comprobar si el mismo ya 
+	 * existe dentro del ArrayList de funcionario. 
+	 * @return retorna 'verdadero' o 'Falso' para indicar si el funcionario se encuentra o no guardado en el ArrayList. 
+	 */
 	public boolean existe(String user) {
 		datosFunc = new ArrayList<Funcionario>();
 		try {
@@ -57,7 +79,12 @@ public class MetodosTxt {
 		}
 		return false;
 	}
-
+/**
+ * Método encargado de controlar si la contraseña se encuentra o no dentro del ArrayList
+ * @param pass Se pasa el parámetro para controlar si se encuentra como contraseña dentro del ArrayList de funcionarios
+ * @return Si la contraseña pasada por parámetro coincide con alguna de las que se encuentra dentro del ArrayList, entonces retorna 'Verdadero'
+ * sino, 'Falso'
+ */
 	public boolean comprobarContrasenia(String pass) {
 
 		for (int i = 0; i < datosFunc.size(); i++) {
@@ -67,7 +94,10 @@ public class MetodosTxt {
 		}
 		return false;
 	}
-
+/**
+ * Método que se encarga de escribir/almacenar los datos de un funcionario dentro del archivo 'Funcionarios.txt'
+ * @param funcionario Se le pasa un funcionario, cuyos datos serán guardados dentro del archivo '.txt'
+ */
 	public void guardarFuncionario(Funcionario funcionario) {
 		try {
 			File functxt = new File("Funcionarios.txt");
@@ -84,6 +114,10 @@ public class MetodosTxt {
 		}
 	}
 
+	/**
+	 * Método encargado de escribir/almacenar los datos del objeto 'Lector' dentro del archivo 'Lectores.txt'
+	 * @param lector Se le pasa un objeto del tipo 'Lector'  para que sus datos sean tomados y escritos en el '.txt'
+	 */
 	public void guardarLector(Lector lector) {
 		try {
 			File functxt = new File("Lectores.txt");
@@ -112,6 +146,11 @@ public class MetodosTxt {
 		}
 	}
 	
+	/**
+	 * Método encargado de escribir/almacenar los datos del objeto 'Préstamo' dentro del archivo 'Prestamos.txt'
+	 * @param prestamo Se le pasa un objeto del tipo 'Prestamo' para tomar sus datos y guardarlos en el .txt
+	 */
+	
 	public void guardarPrestamo(Prestamo prestamo) {
 		try {
 			File functxt = new File("Prestamos.txt");
@@ -132,6 +171,15 @@ public class MetodosTxt {
 		}
 	}
 
+	/**
+	 * Método encargado de comprobar que el lector ya se encuentra almacenado dentro del ArrayList de Lectores.
+	 * 
+	 * @param dni Se utilizar el DNI del mismo con clave para saber si se encuentra o no. 
+	 * 
+	 * @return En el caso de que el DNI se encuentre, retorna verdadero, por ende, el lector existe. En caso
+	 * contrario, retorna falso
+	 */
+	
 	public boolean existeLector(int dni) {
 		datosLector = new ArrayList<Integer>();
 		try {

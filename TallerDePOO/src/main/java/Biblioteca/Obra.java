@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * 
  * @author Leandro González Fister
  * @author Marcos Leiva
+ * @author Sebastián Etchepare
  * 
  * */
 
@@ -49,13 +50,18 @@ public class Obra {
 	}
 	
 	/**
-	 * @param titulo  se refiere al título de la obra
-	 * @param subtitulo se refiere al subtítulo de la obra
-	 * @param autor1, autor2, autor3 se refieren al nombre de los distintos autores/as de la obra
-	 * @param genero indica el género literario de la misma
-	 * @param isbn 
 	 * 
-	 * */
+	 * @param titulo
+	 * @param subtitulo
+	 * @param autor1
+	 * @param autor2
+	 * @param autor3
+	 * @param genero
+	 * @param isbn
+	 * @param id
+	 * @param area
+	 * @param tipo
+	 */
 	public Obra(String titulo, String subtitulo, String autor1, String autor2, String autor3, String genero, int isbn, int id, Area area, tipoObra tipo) {
 		super();
 		this.cantEjem = 1;
@@ -73,6 +79,22 @@ public class Obra {
 //		this.perteneceA = perteneceA;
 	}
 	
+	/**
+	 * 
+	 * @param cantEjem
+	 * @param cantEjemDisponible
+	 * @param titulo
+	 * @param subtitulo
+	 * @param autor1
+	 * @param autor2
+	 * @param autor3
+	 * @param genero
+	 * @param isbn
+	 * @param id
+	 * @param area
+	 * @param tipo
+	 */
+	
 	public Obra(int cantEjem, int cantEjemDisponible, String titulo, String subtitulo, String autor1, String autor2, String autor3, String genero, int isbn, int id, Area area, tipoObra tipo) {
 		super();
 		this.cantEjem = cantEjem;
@@ -89,13 +111,27 @@ public class Obra {
 		this.tipo = tipo;
 //		this.perteneceA = perteneceA;
 	}
+	
+	/**
+	 * 
+	 * @return 
+	 */
 	public Reserva getFuncionario() {
 		return funcionario;
 	}
-
+	
+	/**
+	 * 
+	 * @param funcionario
+	 */
 	public void setFuncionario(Reserva funcionario) {
 		this.funcionario = funcionario;
 	}
+	
+	/**
+	 * 
+	 * @return las ediciones que se encuentran dentro del ArrayList del tipo Edición.
+	 */
 	
 	public ArrayList<Edicion> getEdiciones() {
 		return ediciones;
