@@ -21,6 +21,7 @@ public class Ejemplar implements guardado{
 	private Lector lector;
 
 	// Constructor para registrar nuevo ejemplar
+	
 	public Ejemplar(int idEjemplar, String observaciones, boolean disponible, FormaAdquirida formaAdquirida,
 			String codUbicacion, Obra obra) throws BarcodeException, OutputException {
 

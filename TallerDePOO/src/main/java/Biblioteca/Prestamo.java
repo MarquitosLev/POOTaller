@@ -3,6 +3,7 @@ package Biblioteca;
 
 import java.util.ArrayList;
 import java.time.temporal.ChronoUnit;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -17,7 +18,7 @@ public class Prestamo implements guardado {
 	private LocalDateTime fechaHoraPrestada;
 	private String funcionarioPrestador;
 	private LocalDateTime fechaHoraADevolver;
-	private LocalDateTime fechaDevuelta;
+	private LocalDate fechaDevuelta;
 	private String funcionarioDevuelta;
 	private Lector lector;
 	private Boolean aDomicilio;
@@ -40,17 +41,15 @@ public class Prestamo implements guardado {
 	 * @param ejemplar
 	 */
 	
-	public Prestamo(String funcionarioPrestador, LocalDateTime fechaHoraADevolver, LocalDateTime fechaDevuelta,
-			String funcionarioDevuelta, Lector lector, Boolean aDomicilio, ArrayList<Multa> multas, ArrayList<Funcionario> funcionarios, Ejemplar ejemplar) {
+	public Prestamo(String funcionarioPrestador, LocalDate fechaDevuelta,
+			String funcionarioDevuelta, Lector lector, Boolean aDomicilio, Ejemplar ejemplar) {
 		this.fechaHoraPrestada = LocalDateTime.now();
 		this.funcionarioPrestador = funcionarioPrestador;
-		this.fechaHoraADevolver = fechaHoraADevolver;
+		this.fechaHoraADevolver = this.fechaHoraPrestada.plusDays(4);
 		this.fechaDevuelta = fechaDevuelta;
 		this.funcionarioDevuelta = funcionarioDevuelta;
 		this.lector = lector;
 		this.aDomicilio = aDomicilio;
-		this.multas = multas;
-		this.funcionarios = funcionarios;
 		this.ejemplar = ejemplar;
 	}
 	
@@ -62,7 +61,7 @@ public class Prestamo implements guardado {
 		this.fechaHoraPrestada = LocalDateTime.now();
 		this.funcionarioPrestador = "";
 		this.fechaHoraADevolver = this.fechaHoraPrestada.plusDays(4);
-		this.fechaDevuelta = LocalDateTime.of(2000, 1, 1, 1, 1, 1);
+		this.fechaDevuelta = LocalDate.of(2000, 1, 1);
 		this.funcionarioDevuelta = "";
 		this.multas = new ArrayList<Multa>();
 		this.funcionarios = new ArrayList<Funcionario>();
@@ -108,11 +107,11 @@ public class Prestamo implements guardado {
 		this.fechaHoraADevolver = this.fechaHoraPrestada.plusDays(4);
 	}
 
-	public LocalDateTime getFechaDevuelta() {
+	public LocalDate getFechaDevuelta() {
 		return fechaDevuelta;
 	}
 
-	public void setFechaDevuelta(LocalDateTime fechaDevuelta) {
+	public void setFechaDevuelta(LocalDate fechaDevuelta) {
 		this.fechaDevuelta = fechaDevuelta;
 	}
 
