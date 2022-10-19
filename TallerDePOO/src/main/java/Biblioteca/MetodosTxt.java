@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-public class listaFuncionario {
+public class MetodosTxt {
 	ArrayList<Funcionario> datosFunc;
 	ArrayList<Integer> datosLector;
 	ArrayList<String> datoObra;
@@ -20,7 +20,22 @@ public class listaFuncionario {
 	public void agregar(Funcionario obj) {
 		guardarFuncionario(obj);
 	}
-
+	
+	/*public static void guardar(Class nuevo, String ruta) {
+		try {
+			File txt = new File(ruta);
+			if (!txt.exists()) { // Crea el archivo txt en caso de que no exista
+				txt.createNewFile();
+			}
+			FileWriter fw = new FileWriter(ruta, true);
+			BufferedWriter br = new BufferedWriter(fw); // Escribe los datos asignados
+			PrintWriter escribir = new PrintWriter(br);
+			n
+		} catch(Exception e) {
+			
+		}
+	}
+	*/
 	public boolean existe(String user) {
 		datosFunc = new ArrayList<Funcionario>();
 		try {
@@ -216,7 +231,35 @@ public class listaFuncionario {
 		for (int i = 0; i < datosObra.size(); i++) {
 			if ((datosObra.get(i).equals(ejemplar.getObra()))) {
 				datosObra.get(i).setCantEjem(datosObra.get(i).getCantEjem() + 1);
+				datosObra.get(i).setCantEjemDisponible(datosObra.get(i).getCantEjemDisponible() + 1);
 			}
+		}
+		
+		
+		try {
+			File functxt = new File("Obras.txt");
+			functxt.delete();
+			functxt.createNewFile();
+			for (int i = 0; i> datosObra.size(); i++) {
+			FileWriter fw = new FileWriter("Obras.txt", true);
+			BufferedWriter br = new BufferedWriter(fw); // Escribe los datos asignados
+			PrintWriter escribir = new PrintWriter(br);
+			escribir.write(datosObra.get(i).getTitulo() + "/");
+			escribir.write(datosObra.get(i).getCantEjem() + "/");
+			escribir.write(datosObra.get(i).getCantEjemDisponible() + "/");
+			escribir.write(datosObra.get(i).getSubtitulo() + "/");
+			escribir.write(datosObra.get(i).getAutor1() + "/");
+			escribir.write(datosObra.get(i).getAutor2() + "/");
+			escribir.write(datosObra.get(i).getAutor3() + "/");
+			escribir.write(datosObra.get(i).getGenero() + "/");
+			escribir.write(datosObra.get(i).getIsbn() + "/");
+			escribir.write(datosObra.get(i).getId() + "/");
+			escribir.write(datosObra.get(i).getArea() + "/");
+			escribir.write(datosObra.get(i).getTipo() + "/" + "\n");
+
+			escribir.close();
+			}
+		} catch (Exception e) {
 		}
 		try {
 			File functxt = new File("Ejemplares.txt");
@@ -264,4 +307,3 @@ public class listaFuncionario {
 		
 	}
 }
-

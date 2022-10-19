@@ -33,7 +33,7 @@ import javax.swing.JCheckBox;
 import Biblioteca.FormaAdquirida;
 import Biblioteca.Lector;
 import Biblioteca.Obra;
-import Biblioteca.listaFuncionario;
+import Biblioteca.MetodosTxt;
 
 import java.awt.Font;
 import javax.swing.JTextPane;
@@ -81,12 +81,12 @@ public class ventanaPrincipal extends JFrame {
 	private JTextField textCodUbi;
 
 	public ventanaPrincipal(String userWelcome) {
-		listaFuncionario listFunc = new listaFuncionario();
+		MetodosTxt listFunc = new MetodosTxt();
 		ventanaEditorial ventanaEdicion = new ventanaEditorial(ventanaPrincipal.this);
 		inicioVentanaPrincipal(listFunc, ventanaEdicion, userWelcome);
 	}
 
-	private void inicioVentanaPrincipal(final listaFuncionario listFunc, final ventanaEditorial ventanaEdicion,
+	private void inicioVentanaPrincipal(final MetodosTxt listFunc, final ventanaEditorial ventanaEdicion,
 			String userWelcome) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ventanaPrincipal.class.getResource("/imagenes/icon.png")));
 		setType(Type.POPUP);

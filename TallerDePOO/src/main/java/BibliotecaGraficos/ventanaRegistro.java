@@ -3,7 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import Biblioteca.Funcionario; //importa clase funcionario
-import Biblioteca.listaFuncionario;
+import Biblioteca.MetodosTxt;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -24,7 +24,7 @@ public class ventanaRegistro extends JFrame{
 	private JPasswordField passReg;
 	private Funcionario func;
 
-	public ventanaRegistro(final listaFuncionario listaFunc, final ventana frame) {
+	public ventanaRegistro(final MetodosTxt listaFunc, final ventana frame) {
 		setTitle("Registro");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ventanaRegistro.class.getResource("/imagenes/icon.png")));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -5,7 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.border.EmptyBorder;
 
 import Biblioteca.Funcionario;
-import Biblioteca.listaFuncionario;
+import Biblioteca.MetodosTxt;
 
 import java.awt.Window.Type;
 import java.awt.Toolkit;
@@ -24,7 +24,7 @@ public class ventana extends JFrame {
 	private JPanel contentPane;
 	private JTextField usuario;
 	private JPasswordField contrasenia;
-	private listaFuncionario listaFunc;
+	private MetodosTxt listaFunc;
 	
 	//PRINCIPAL
 	public static void main(String[] args) {
@@ -43,12 +43,12 @@ public class ventana extends JFrame {
 	//Constructor que crea ventana
 	public ventana() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ventana.class.getResource("/imagenes/icon.png")));
-		listaFunc = new listaFuncionario();
+		listaFunc = new MetodosTxt();
 		ventanaRegistro frameReg = new ventanaRegistro(listaFunc, ventana.this);
 		ventanaInicio(frameReg, listaFunc);
 	}
 
-	public void ventanaInicio(final ventanaRegistro frameReg, final listaFuncionario listaFunc) {
+	public void ventanaInicio(final ventanaRegistro frameReg, final MetodosTxt listaFunc) {
 		setTitle("Iniciar Sesi\u00F3n\r\n");
 		setType(Type.POPUP);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
