@@ -13,7 +13,7 @@ import java.util.Vector;
 
 /**
  * La clase se encarga de almacenar un conjunto de metodos que sirven para guardar elementos y acciones como 
- * prestamos, obra, Ejemplar, funcionario, dentro de ArrayLists, a la vez que verifican su existencia o no.
+ * prestamos, obra, Ejemplar, funcionario, dentro de ArrayLists, los recorridos de dichas clases y a la vez que verifican su existencia o no.
  * 
  * @author Sebastian Etchepare
  *
@@ -44,8 +44,6 @@ public class MetodosTxt  {
 			PrintWriter escribir = new PrintWriter(br);
 			try {
 				ArrayList<Object> x = nuevo.obtenerLista();
-				System.out.println(x);
-				System.out.println("Entr� al guardado");
 				for (int i = 0; i < x.size(); i++) {
 					escribir.write(x.get(i) + "/");
 				}
@@ -177,8 +175,8 @@ public class MetodosTxt  {
 	}
 	
 	/**
-	 * Metodo que se encarga de guardar un ejemplar dentro de un archivo .txt
-	 * 
+	 * Metodo que se encarga de guardar un ejemplar dentro de un archivo .txt y se le suma 1 a la cantiad de ejemplares de
+	 * y cantidad de ejemplares disponibles a la obra
 	 * @param ejemplar Se le pasa como parámetro el ejemplar que quiere ser añadido al ArrayList y posteriormente al .txt
 	 */
 
@@ -239,4 +237,66 @@ public class MetodosTxt  {
 		return false;
 		
 	}
+	
+	public void ejemplarPedido(Ejemplar ejemplar) {
+		ArrayList<Obra> datosObra = new ArrayList<Obra>();
+		try {
+			BufferedReader br2 = new BufferedReader(new FileReader("Obras.txt"));
+			String obra;
+			while ((obra = br2.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+				StringTokenizer x = new StringTokenizer(obra, "/");
+				datosObra.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), x.nextToken(), x.nextToken(),
+						x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()),
+								Area.valueOf(x.nextToken()), tipoObra.valueOf(x.nextToken())));// agrega al arraylist de String	
+			}
+		} catch (Exception e) {
+		}
+		
+		for (int i = 0; i < datosObra.size(); i++) {	//Recorre el nuevo ArrayList quitando 1 ejemplar disponible a la obra
+			if ((datosObra.get(i).equals(ejemplar.getObra()))) {
+				datosObra.get(i).setCantEjemDisponible(datosObra.get(i).getCantEjemDisponible() - 1);
+				break;
+			}
+		}
+		
+		try {
+			File functxt = new File("Obras.txt");
+			functxt.delete();
+			functxt.createNewFile();
+			for (int i = 0; i < datosObra.size(); i++) {
+			guardar(datosObra.get(i), "Obras.txt");
+			}
+		} catch (Exception e) {
+		}
+		
+		ArrayList<Ejemplar> datosEjemplar = new ArrayList<Ejemplar>();
+		try {
+			BufferedReader br3 = new BufferedReader(new FileReader("Ejemplares.txt"));
+			String ejemplarNoDisponible;
+			while ((ejemplarNoDisponible = br3.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+				StringTokenizer x = new StringTokenizer(ejemplarNoDisponible, "/");
+				datosEjemplar.add(new Ejemplar(Integer.parseInt(x.nextToken()), x.nextToken(), Boolean.parseBoolean(x.nextToken()), 
+						FormaAdquirida.valueOf(x.nextToken()), x.nextToken(), (bra) x.nextToken()));// agrega al arraylist de String	
+			}
+		} catch (Exception e) {
+		}
+		
+		for (int i = 0; i < datosEjemplar.size(); i++) {	//Recorre el nuevo ArrayList quitando 1 ejemplar disponible a la obra
+			if ((datosObra.get(i).equals(ejemplar.getObra()))) {
+				datosObra.get(i).setCantEjemDisponible(datosObra.get(i).getCantEjemDisponible() - 1);
+				break;
+			}
+		}
+		try {
+			File functxt = new File("Ejemplares.txt");
+			functxt.delete();
+			functxt.createNewFile();
+			for (int i = 0; i < datosObra.size(); i++) {
+			guardar(datosObra.get(i), "Ejemplares.txt");
+			}
+		} catch (Exception e) {
+		}
+	}
 }
+
+
