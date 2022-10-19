@@ -1,7 +1,7 @@
 package Biblioteca;
 import java.util.ArrayList;
 
-public class Funcionario {
+public class Funcionario implements guardado{
 	private String usuario;
 	private String contrasenia;
 	//Creacion de la asociacion entre el funcionario y la clase Ejemplar;
@@ -59,5 +59,12 @@ public class Funcionario {
 	
 	public void realizarPrestamo() {
 		//falta completar
+	}
+	
+	public ArrayList<Object> obtenerLista() {
+		ArrayList<Object> lista = new ArrayList<Object> ();
+		lista.add(getUsuario());
+		lista.add(getContrasenia());
+		return lista;
 	}
 }

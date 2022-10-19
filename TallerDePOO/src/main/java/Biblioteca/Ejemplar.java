@@ -2,10 +2,12 @@ package Biblioteca;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.ArrayList;
+
 import net.sourceforge.barbecue.*;
 import net.sourceforge.barbecue.output.OutputException;
 
-public class Ejemplar {
+public class Ejemplar implements guardado{
 	private int idEjemplar;
 	private String observaciones;
 	private boolean disponible;
@@ -164,6 +166,18 @@ public class Ejemplar {
 
 	public void setLector(Lector lector) {
 		this.lector = lector;
+	}
+	
+	public ArrayList<Object> obtenerLista() {
+		ArrayList<Object>  lista = new ArrayList<Object> ();
+		lista.add(getIdEjemplar());
+		lista.add(getObservaciones());
+		lista.add(getDisponible());
+		lista.add(getFechaAdquisicion());
+		lista.add(getCodUbicacion());
+		lista.add(getObra());
+		lista.add(getCantPedidas());
+		return lista;
 	}
 
 }

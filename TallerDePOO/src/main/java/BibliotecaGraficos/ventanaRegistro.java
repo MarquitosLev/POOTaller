@@ -66,7 +66,7 @@ public class ventanaRegistro extends JFrame{
 						 userReg.setText("");
 						 passReg.setText("");
 					 }else {
-						 listaFunc.agregar(func);
+						 listaFunc.guardar(func, "Funcionarios.txt");
 						 userReg.setText("");
 						 passReg.setText("");
 						 frame.setVisible(true);

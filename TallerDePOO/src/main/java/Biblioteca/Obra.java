@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * 
  * */
 
-public class Obra {
+public class Obra implements guardado{
 	
 	private int cantEjem;
 	private int cantEjemDisponible;
@@ -215,5 +215,21 @@ public class Obra {
 	public void setTipo(tipoObra tipo) {
 		this.tipo = tipo;
 	}
-
+	
+	public ArrayList<Object> obtenerLista() {
+		ArrayList<Object>  lista = new ArrayList<Object> ();
+		lista.add(getCantEjem());
+		lista.add(getCantEjemDisponible());
+		lista.add(getTitulo());
+		lista.add(getSubtitulo());
+		lista.add(getAutor1());
+		lista.add(getAutor2());
+		lista.add(getAutor3());
+		lista.add(getGenero());
+		lista.add(getIsbn());
+		lista.add(getId());
+		lista.add(getArea());
+		lista.add(getTipo());
+		return lista;
+	}
 }

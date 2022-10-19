@@ -21,7 +21,7 @@ import java.util.Vector;
  *
  */
 
-public class MetodosTxt {
+public class MetodosTxt  {
 	ArrayList<Funcionario> datosFunc;
 	ArrayList<Integer> datosLector;
 	ArrayList<String> datoObra;
@@ -36,7 +36,7 @@ public class MetodosTxt {
 		guardarFuncionario(obj);
 	}
 	
-	/*public static void guardar(Class nuevo, String ruta) {
+	public static void guardar(guardado nuevo, String ruta) {
 		try {
 			File txt = new File(ruta);
 			if (!txt.exists()) { // Crea el archivo txt en caso de que no exista
@@ -45,12 +45,21 @@ public class MetodosTxt {
 			FileWriter fw = new FileWriter(ruta, true);
 			BufferedWriter br = new BufferedWriter(fw); // Escribe los datos asignados
 			PrintWriter escribir = new PrintWriter(br);
-			n
+			try {
+				ArrayList<Object> x = nuevo.obtenerLista();
+				System.out.println(x);
+				System.out.println("Entr� al guardado");
+				for (int i = 0; i < x.size(); i++) {
+					escribir.write(x.get(i) + "/");
+				}
+			} catch (Exception e) {
+			}
+			escribir.write("\n");
+			escribir.close();
 		} catch(Exception e) {
 			
 		}
 	}
-	*/
 	
 	/**
 	 * 
@@ -65,7 +74,7 @@ public class MetodosTxt {
 			BufferedReader br = new BufferedReader(fr);
 			String lector;
 			while ((lector = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
-				StringTokenizer X = new StringTokenizer(lector, "-"); // Se crea un String hasta que aparezca el "-"
+				StringTokenizer X = new StringTokenizer(lector, "/"); // Se crea un String hasta que aparezca el "-"
 				datosFunc.add(new Funcionario(X.nextToken(), X.nextToken()));
 			}
 		} catch (Exception e) {
@@ -99,51 +108,14 @@ public class MetodosTxt {
  * @param funcionario Se le pasa un funcionario, cuyos datos serán guardados dentro del archivo '.txt'
  */
 	public void guardarFuncionario(Funcionario funcionario) {
-		try {
-			File functxt = new File("Funcionarios.txt");
-			if (!functxt.exists()) { // Crea el archivo txt en caso de que no exista
-				functxt.createNewFile();
-			}
-			FileWriter fw = new FileWriter("Funcionarios.txt", true);
-			BufferedWriter br = new BufferedWriter(fw); // Escribe los datos asignados
-			PrintWriter escribir = new PrintWriter(br);
-			escribir.write(funcionario.getUsuario() + "-");
-			escribir.write(funcionario.getContrasenia() + "-" + "\n");
-			escribir.close();
-		} catch (Exception e) {
-		}
+		guardar(funcionario, "Funcionarios.txt");
 	}
-
 	/**
 	 * Método encargado de escribir/almacenar los datos del objeto 'Lector' dentro del archivo 'Lectores.txt'
 	 * @param lector Se le pasa un objeto del tipo 'Lector'  para que sus datos sean tomados y escritos en el '.txt'
 	 */
 	public void guardarLector(Lector lector) {
-		try {
-			File functxt = new File("Lectores.txt");
-			if (!functxt.exists()) { // Crea el archivo txt en caso de que no exista
-				functxt.createNewFile();
-			}
-			FileWriter fw = new FileWriter("Lectores.txt", true);
-			BufferedWriter br = new BufferedWriter(fw); // Escribe los datos asignados
-			PrintWriter escribir = new PrintWriter(br);
-			escribir.write(lector.getNom() + "/");
-			escribir.write(lector.getApellido() + "/");
-			escribir.write(lector.getTipDoc() + "/");
-			escribir.write(lector.getNumDoc() + "/");
-			escribir.write(lector.getCorreo() + "/");
-			escribir.write(lector.getNumCel() + "/");
-			escribir.write(lector.getFecNac() + "/");
-			escribir.write(lector.getSex() + "/");
-			escribir.write(lector.getDomi() + "/");
-			escribir.write(lector.getCodPos() + "/");
-			escribir.write(lector.getDep() + "/");
-			escribir.write(lector.getLocalidad() + "/");
-			escribir.write(lector.getCanMulta() + "/");
-			escribir.write(lector.getEstaMultado() + "/" + "\n");
-			escribir.close();
-		} catch (Exception e) {
-		}
+		guardar(lector, "Lectores.txt");
 	}
 	
 	/**
@@ -152,23 +124,8 @@ public class MetodosTxt {
 	 */
 	
 	public void guardarPrestamo(Prestamo prestamo) {
-		try {
-			File functxt = new File("Prestamos.txt");
-			if (!functxt.exists()) { // Crea el archivo txt en caso de que no exista
-				functxt.createNewFile();
-			}
-			FileWriter fw = new FileWriter("Prestamos.txt", true);
-			BufferedWriter br = new BufferedWriter(fw); // Escribe los datos asignados
-			PrintWriter escribir = new PrintWriter(br);
-			escribir.write(prestamo.getFechaHoraPrestada() + "/");
-			escribir.write(prestamo.getFuncionarioPrestador() + "/");
-			escribir.write(prestamo.getFechaHoraADevolver() + "/");
-			escribir.write(prestamo.getLector().getNumDoc() + "/");
-			escribir.write(prestamo.getEjemplar().getIdEjemplar() + "/");
-			escribir.write(prestamo.getFuncionarioPrestador() + "/");
-			escribir.close();
-		} catch (Exception e) {
-		}
+		guardar(prestamo, "Prestamos.txt");
+
 	}
 
 	/**
@@ -212,30 +169,7 @@ public class MetodosTxt {
 	}
 
 	public void guardarObra(Obra obra) {
-		try {
-			File functxt = new File("Obras.txt");
-			if (!functxt.exists()) { // Crea el archivo txt en caso de que no exista
-				functxt.createNewFile();
-			}
-			FileWriter fw = new FileWriter("Obras.txt", true);
-			BufferedWriter br = new BufferedWriter(fw); // Escribe los datos asignados
-			PrintWriter escribir = new PrintWriter(br);
-			escribir.write(obra.getTitulo() + "/");
-			escribir.write(obra.getCantEjem() + "/");
-			escribir.write(obra.getCantEjemDisponible() + "/");
-			escribir.write(obra.getSubtitulo() + "/");
-			escribir.write(obra.getAutor1() + "/");
-			escribir.write(obra.getAutor2() + "/");
-			escribir.write(obra.getAutor3() + "/");
-			escribir.write(obra.getGenero() + "/");
-			escribir.write(obra.getIsbn() + "/");
-			escribir.write(obra.getId() + "/");
-			escribir.write(obra.getArea() + "/");
-			escribir.write(obra.getTipo() + "/" + "\n");
-
-			escribir.close();
-		} catch (Exception e) {
-		}
+		guardar(obra, "Obras.txt");
 	}
 
 	public boolean existeObra(String titu) {
@@ -276,60 +210,25 @@ public class MetodosTxt {
 		} catch (Exception e) {
 		}
 		
-		for (int i = 0; i < datosObra.size(); i++) {
+		for (int i = 0; i < datosObra.size(); i++) {	//Recorre el nuevo ArrayList agregando 1 ejemplar a la obra ingresada
 			if ((datosObra.get(i).equals(ejemplar.getObra()))) {
 				datosObra.get(i).setCantEjem(datosObra.get(i).getCantEjem() + 1);
 				datosObra.get(i).setCantEjemDisponible(datosObra.get(i).getCantEjemDisponible() + 1);
+				break;
 			}
 		}
-		
 		
 		try {
 			File functxt = new File("Obras.txt");
 			functxt.delete();
 			functxt.createNewFile();
-			for (int i = 0; i> datosObra.size(); i++) {
-			FileWriter fw = new FileWriter("Obras.txt", true);
-			BufferedWriter br = new BufferedWriter(fw); // Escribe los datos asignados
-			PrintWriter escribir = new PrintWriter(br);
-			escribir.write(datosObra.get(i).getTitulo() + "/");
-			escribir.write(datosObra.get(i).getCantEjem() + "/");
-			escribir.write(datosObra.get(i).getCantEjemDisponible() + "/");
-			escribir.write(datosObra.get(i).getSubtitulo() + "/");
-			escribir.write(datosObra.get(i).getAutor1() + "/");
-			escribir.write(datosObra.get(i).getAutor2() + "/");
-			escribir.write(datosObra.get(i).getAutor3() + "/");
-			escribir.write(datosObra.get(i).getGenero() + "/");
-			escribir.write(datosObra.get(i).getIsbn() + "/");
-			escribir.write(datosObra.get(i).getId() + "/");
-			escribir.write(datosObra.get(i).getArea() + "/");
-			escribir.write(datosObra.get(i).getTipo() + "/" + "\n");
-
-			escribir.close();
+			for (int i = 0; i < datosObra.size(); i++) {
+			guardar(datosObra.get(i), "Obras.txt");
 			}
 		} catch (Exception e) {
 		}
-		try {
-			File functxt = new File("Ejemplares.txt");
-			if (!functxt.exists()) { // Crea el archivo txt en caso de que no exista
-				functxt.createNewFile();
-			}
-			FileWriter fw = new FileWriter("Ejemplares.txt", true);
-			BufferedWriter br = new BufferedWriter(fw); // Escribe los datos asignados
-			PrintWriter escribir = new PrintWriter(br);
-			escribir.write(ejemplar.getIdEjemplar() + "/");
-			escribir.write(ejemplar.getObservaciones() + "/");
-			escribir.write(ejemplar.getDisponible() + "/");
-			escribir.write(ejemplar.getFechaAdquisicion() + "/");
-			escribir.write(ejemplar.getCodUbicacion() + "/");
-			escribir.write(ejemplar.getObra() + "/");
-			escribir.write(ejemplar.getCantPedidas() + "/" + "\n");
-			escribir.close();
-			
-		} catch (Exception e) {
-		}
+		guardar(ejemplar, "Ejemplares.txt");
 	}
-
 	public boolean existeEjemplar(int id) {
 		datoEjemplar = new ArrayList<Integer>();
 		try {

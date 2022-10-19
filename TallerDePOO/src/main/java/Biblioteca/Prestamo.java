@@ -3,7 +3,7 @@ package Biblioteca;
 import java.util.ArrayList;
 import java.time.temporal.ChronoUnit;
 import java.time.LocalDateTime;
-public class Prestamo {
+public class Prestamo implements guardado {
 	private LocalDateTime fechaHoraPrestada;
 	private String funcionarioPrestador;
 	private LocalDateTime fechaHoraADevolver;
@@ -128,5 +128,16 @@ public class Prestamo {
 		}else {
 			return false;
 		}
+	}
+	
+	public ArrayList<Object> obtenerLista() {
+		ArrayList<Object>  lista = new ArrayList<Object> ();
+		lista.add(getFechaHoraPrestada());
+		lista.add(getFuncionarioPrestador());
+		lista.add(getFechaHoraADevolver());
+		lista.add(getLector().getNumDoc());
+		lista.add(getEjemplar().getIdEjemplar());
+		lista.add(getFuncionarioPrestador());
+		return lista;
 	}
 }

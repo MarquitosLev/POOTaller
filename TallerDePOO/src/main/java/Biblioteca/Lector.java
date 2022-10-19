@@ -2,7 +2,7 @@ package Biblioteca;
 import java.util.ArrayList;
 import java.time.LocalDate;
 
-public class Lector extends Persona{
+public class Lector extends Persona implements guardado{
 	private int canMulta;
 	private Boolean estaMultado;
 	private ArrayList<Ejemplar> ejemplares;
@@ -59,6 +59,25 @@ public class Lector extends Persona{
 		return super.toString();
 	}
 	
+	public ArrayList<Object> obtenerLista() {
+		ArrayList<Object>  lista = new ArrayList<Object> ();
+		lista.add(getNom());
+		lista.add(getApellido());
+		lista.add(getTipDoc());
+		lista.add(getNumDoc());
+		lista.add(getCorreo());
+		lista.add(getNumCel());
+		lista.add(getFecNac());
+		lista.add(getSex());
+		lista.add(getLugarNac());
+		lista.add(getDomi());
+		lista.add(getCodPos());
+		lista.add(getDep());
+		lista.add(getLocalidad());
+		lista.add(getCanMulta());
+		lista.add(getEstaMultado());
+		return lista;
+	}
 	
 	
 	
