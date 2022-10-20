@@ -311,11 +311,12 @@ public class MetodosTxt {
 			}
 		}
 		try {
-			File functxt = new File("Ejemplares.txt"); // Elimina el viejo Ejemplares.txt para crear uno nuevo ya actualizado
-			functxt.delete();
+			BufferedWriter bw = new BufferedWriter(new FileWriter("Ejemplares.txt"));// Vacia el txt
+			bw.write("");
+			bw.close();
 			for (int i = 0; i < datosEjemplar.size(); i++) {
-				guardar(datosEjemplar.get(i), "Ejemplares.txt");
-			}
+				guardar(datosEjemplar.get(i), "Ejemplares.txt");	//Guarda todos los ejemplares ya actualizados
+			} 
 		} catch (Exception e) {
 		}
 		
@@ -342,9 +343,9 @@ public class MetodosTxt {
 		}
 
 		try {
-			File functxt = new File("Obras.txt");
-			functxt.delete();
-			functxt.createNewFile();
+			BufferedWriter bw = new BufferedWriter(new FileWriter("Obras.txt"));// Vacia el txt
+			bw.write("");
+			bw.close();
 			for (int i = 0; i < datosObra.size(); i++) {
 				guardar(datosObra.get(i), "Obras.txt");
 			}
@@ -382,8 +383,9 @@ public class MetodosTxt {
 						Prestamo prestamoDevuelto = new Prestamo(aux.getFechaHoraPrestada(),
 								aux.getFuncionarioPrestador(), aux.getFechaHoraADevolver(), fechaDevuelta,
 								funcionario, aux.getaDomicilio(), aux.getLector(), aux.getEjemplar());
-						try {	
-							
+								datosPrestamo.remove(i); //Despues de crear el prestamoDevuelto borra el prestamo del array
+	
+						try {							
 							File txt = new File("PrestamosTerminados.txt"); 
 							if (!txt.exists()) { // Crea el archivo txt en caso de que no exista
 								txt.createNewFile();
@@ -448,9 +450,9 @@ public class MetodosTxt {
 						
 						//ERRORES AL REESCRIBIR EL EJEMPLARES.TXT
 						try {
-							File functxt = new File("Ejemplares.txt"); // Elimina el viejo Ejemplares.txt para crear uno nuevo ya actualizado
-							functxt.delete(); //Borra la clonacion, no el txt existente
-							functxt.createNewFile();
+							BufferedWriter bw = new BufferedWriter(new FileWriter("Ejemplares.txt"));// Vacia el txt
+							bw.write("");
+							bw.close();
 							for (int y = 0; y < datosEjemplar.size(); y++) {
 								guardar(datosEjemplar.get(y), "Ejemplares.txt");
 							}
@@ -466,16 +468,21 @@ public class MetodosTxt {
 						
 						//ERRORES AL REESCRIBIR EL OBRAS.TXT
 						try {
-							File functxt = new File("Obras.txt");	// Elimina el viejo Obras.txt para crear uno nuevo ya actualizado
-							functxt.delete(); //Borra la clonacion, no el txt existente
-							functxt.createNewFile();
+							BufferedWriter bw = new BufferedWriter(new FileWriter("Obras.txt"));// Vacia el txt
+							bw.write("");
+							bw.close();
 							for (int q = 0; q < datosObra.size(); q++) {
 								guardar(datosObra.get(q), "Obras.txt");
 							}
+							BufferedWriter bw2 = new BufferedWriter(new FileWriter("Prestamos.txt"));// Vacia el txt
+							bw2.write("");
+							bw2.close();
+							for (int l = 0; l < datosPrestamo.size(); l++) {
+								guardar(datosPrestamo.get(l), "Prestamos.txt");
+							}
 						} catch (Exception e) {
-						}
-						
-						
+						} 
+						break;
 					}
 				}
 			}
