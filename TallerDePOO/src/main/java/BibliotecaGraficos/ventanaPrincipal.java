@@ -676,8 +676,13 @@ public class ventanaPrincipal extends JFrame {
 				} else {
 					JOptionPane.showMessageDialog(null, "El Ejemplar no existe", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-
 				
+				if(listFunc.existeLector(dniLector)) {
+				}	else {
+					JOptionPane.showMessageDialog(null, "El lector no existe", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				
+				//guardar(new Prestamo(), "Prestamos.txt");  //Guardar prestamo
 			}
 		});
 		btnPrestar.setBounds(561, 93, 89, 28);

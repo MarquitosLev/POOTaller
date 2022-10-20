@@ -61,7 +61,7 @@ public class ventanaRegistro extends JFrame{
 				if(user.length() == 0 && pass.length() == 0) {//Comprueba si no se ingreso nada
 					JOptionPane.showMessageDialog(null, "No ingres� datos", "Error", JOptionPane.ERROR_MESSAGE);
 				}else{
-					 if(listaFunc.existe(user)) {//Comprueba si ya existe
+					 if(listaFunc.existeFuncionario(user)) {//Comprueba si ya existeFuncionario
 						 JOptionPane.showMessageDialog(null, "Usuario ya registrado", "Error", JOptionPane.ERROR_MESSAGE);
 						 userReg.setText("");
 						 passReg.setText("");

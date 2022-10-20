@@ -1,9 +1,4 @@
-Hola1/--/Javadoc/--/--/QSY/44/121/Programacion/Libro/
-Hola2/--/Javadoc/--/--/QSY/44/121/Programacion/Libro/
-Hola3/--/Javadoc/--/--/QSY/44/121/Programacion/Libro/
-Python/--/Mr Python/--/--/--/4343/777/Matematica/Libro/
-Entre el bien y el mal/dios ha muerto/Friedrich /--/--/Filosofía/3435/777/Matematica/Libro/
-Mesi/--/Mesi campion/-/-/-/1223/663/Matematica/Libro/
---/1/1/--/--/--/--/--/5678/3456/Matematica/Libro/
-1984/1/1/eso/George Orwell/ese/ese2/no binarie/1234/205/Matematica/Libro/
-1/1/Harry Popoter/Hemione/yo/ella/Richard/no binario/412412/421421/Contabilidad/Manual/
+1/1/Axion/Energy4/Yo/Marquitos/Santi/Terror/412421/523513/SisOperativo/Tesis/
+1/1/Axion/Energy4/Yo/Marquitos/Santi/Terror/412421/523513/SisOperativo/Tesis/
+1/1/Axion/Energy4/Yo/Marquitos/Santi/Terror/412421/523513/SisOperativo/Tesis/
+1/1/Axion/Energy4/Yo/Marquitos/Santi/Terror/412421/523511/SisOperativo/Tesis/
