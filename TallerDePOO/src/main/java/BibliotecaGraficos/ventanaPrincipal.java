@@ -751,8 +751,9 @@ public class ventanaPrincipal extends JFrame {
 				
 				//try comprueba si existe el prestamo, sino sale error
 				try { 
-					metodo.guardarPrestamoTerminado(fechaDevuelta,funcionario,idEjemplar);		
-					modelo2.addRow(new Object[] {"dni", idEjemplar, "Fecha prestada", "Funcionario prestado", funcionario});
+					Prestamo prestamo = metodo.guardarPrestamoTerminado(fechaDevuelta,funcionario,idEjemplar);		
+					modelo2.addRow(new Object[] {prestamo.getLector().getNumDoc(), idEjemplar, 
+							prestamo.getFechaHoraPrestada(), prestamo.getFuncionarioDevuelta(), funcionario});
 				} catch (Exception t){
 					JOptionPane.showMessageDialog(null, "No existe el Prestamo", "Error", JOptionPane.ERROR_MESSAGE);
 				}
