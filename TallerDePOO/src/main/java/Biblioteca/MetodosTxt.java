@@ -70,7 +70,7 @@ public class MetodosTxt {
 	 * @return retorna 'verdadero' o 'Falso' para indicar si el funcionario se
 	 *         encuentra o no guardado en el ArrayList.
 	 */
-	public boolean existe(String user) {
+	public boolean existeFuncionario(String user) {
 		datosFunc = new ArrayList<Funcionario>();
 		try {
 			FileReader fr = new FileReader("Funcionarios.txt");
@@ -240,7 +240,7 @@ public class MetodosTxt {
 			String ejemplar;
 			while ((ejemplar = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
 				StringTokenizer x = new StringTokenizer(ejemplar, "/");
-				datoObra.add(x.nextToken());// agrega al arraylist de int
+				datoEjemplar.add(Integer.parseInt(x.nextToken()));// agrega al arraylist de int
 			}
 		} catch (Exception e) {
 		}
@@ -261,9 +261,9 @@ public class MetodosTxt {
 	public void ejemplarPedido(Ejemplar ejemplar) {
 		ArrayList<Obra> datosObra = new ArrayList<Obra>();
 		try {
-			BufferedReader br2 = new BufferedReader(new FileReader("Obras.txt"));
+			BufferedReader br = new BufferedReader(new FileReader("Obras.txt"));
 			String obra;
-			while ((obra = br2.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+			while ((obra = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
 				StringTokenizer x = new StringTokenizer(obra, "/");
 				datosObra.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), x.nextToken(),
 						x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(),
@@ -273,8 +273,7 @@ public class MetodosTxt {
 		} catch (Exception e) {
 		}
 
-		for (int i = 0; i < datosObra.size(); i++) { // Recorre el nuevo ArrayList quitando 1 ejemplar disponible a la
-														// obra
+		for (int i = 0; i < datosObra.size(); i++) { // Recorre el nuevo ArrayList quitando 1 ejemplar disponible a la obra
 			if ((datosObra.get(i).equals(ejemplar.getObra()))) {
 				datosObra.get(i).setCantEjemDisponible(datosObra.get(i).getCantEjemDisponible() - 1);
 				break;
@@ -300,15 +299,15 @@ public class MetodosTxt {
 				StringTokenizer x = new StringTokenizer(ejemplarNoDisponible, "/");
 				datosEjemplar.add(new Ejemplar(Integer.parseInt(x.nextToken()), x.nextToken(),
 						Boolean.parseBoolean(x.nextToken()), FormaAdquirida.valueOf(x.nextToken()), x.nextToken(),
-						new Obra()));// agrega al arraylist de String
+						new Obra(x.nextToken())));// agrega al arraylist de String
 			}
 		} catch (Exception e) {
 		}
 
 		for (int i = 0; i < datosEjemplar.size(); i++) { // Recorre el nuevo ArrayList quitando 1 ejemplar disponible a
 															// la obra
-			if ((datosObra.get(i).equals(ejemplar.getObra()))) {
-				datosObra.get(i).setCantEjemDisponible(datosObra.get(i).getCantEjemDisponible() - 1);
+			if ((datosEjemplar.get(i).equals(ejemplar))) {
+				datosEjemplar.get(i).setDisponible(false);
 				break;
 			}
 		}
@@ -316,8 +315,8 @@ public class MetodosTxt {
 			File functxt = new File("Ejemplares.txt");
 			functxt.delete();
 			functxt.createNewFile();
-			for (int i = 0; i < datosObra.size(); i++) {
-				guardar(datosObra.get(i), "Ejemplares.txt");
+			for (int i = 0; i < datosEjemplar.size(); i++) {
+				guardar(datosEjemplar.get(i), "Ejemplares.txt");
 			}
 		} catch (Exception e) {
 		}
