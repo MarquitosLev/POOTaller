@@ -174,6 +174,7 @@ public class Ejemplar implements guardado{
 		lista.add(getIdEjemplar());
 		lista.add(getObservaciones());
 		lista.add(getDisponible());
+		lista.add(getFormaAdquirida());
 		lista.add(getFechaAdquisicion());
 		lista.add(getCodUbicacion());
 		lista.add(getObra());

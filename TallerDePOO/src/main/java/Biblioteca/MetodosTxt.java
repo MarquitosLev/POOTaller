@@ -9,30 +9,33 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-import java.util.Vector;
 
 /**
- * La clase se encarga de almacenar un conjunto de metodos que sirven para guardar elementos y acciones como 
- * prestamos, obra, Ejemplar, funcionario, dentro de ArrayLists, los recorridos de dichas clases y a la vez que verifican su existencia o no.
+ * La clase se encarga de almacenar un conjunto de metodos que sirven para
+ * guardar elementos y acciones como prestamos, obra, Ejemplar, funcionario,
+ * dentro de ArrayLists, los recorridos de dichas clases y a la vez que
+ * verifican su existencia o no.
  * 
  * @author Sebastian Etchepare
  *
  */
 
-public class MetodosTxt  {
+public class MetodosTxt {
 	ArrayList<Funcionario> datosFunc;
 	ArrayList<Integer> datosLector;
 	ArrayList<String> datoObra;
 	ArrayList<Integer> datoEjemplar;
-	
+
 	/**
-	 * Guarda cualquier objeto que se pase por parámetro dentro de alguna de los 4 ArrayLists creados en la clase. Seria como una funcion de guardado general.
+	 * Guarda cualquier objeto que se pase por parámetro dentro de alguna de los 4
+	 * ArrayLists creados en la clase. Seria como una funcion de guardado general.
 	 * 
-	 * @param nuevo Corresponde al objeto que va a ser agregado al ArrayList. Como se indica, debe ser o implementar la interfaz 'guardado'
+	 * @param nuevo Corresponde al objeto que va a ser agregado al ArrayList. Como
+	 *              se indica, debe ser o implementar la interfaz 'guardado'
 	 * 
-	 * @param ruta Se pasa la ruta donde los datos serán guardado.  
+	 * @param ruta  Se pasa la ruta donde los datos serán guardado.
 	 */
-	
+
 	public static void guardar(guardado nuevo, String ruta) {
 		try {
 			File txt = new File(ruta);
@@ -51,18 +54,21 @@ public class MetodosTxt  {
 			}
 			escribir.write("\n");
 			escribir.close();
-		} catch(Exception e) {
-			
+		} catch (Exception e) {
+
 		}
 	}
-	
+
 	/**
-	 * Función que controla si un usuario ya se encuentra registrado dentro de la aplicacion. 
+	 * Función que controla si un usuario ya se encuentra registrado dentro de la
+	 * aplicacion.
 	 * 
-	 * @param user Se le pasa el parámetro 'user', atributo perteneciente a 'Funcionario', para comprobar si el mismo ya 
-	 * existe dentro del ArrayList de funcionario. 
+	 * @param user Se le pasa el parámetro 'user', atributo perteneciente a
+	 *             'Funcionario', para comprobar si el mismo ya existe dentro del
+	 *             ArrayList de funcionario.
 	 * 
-	 * @return retorna 'verdadero' o 'Falso' para indicar si el funcionario se encuentra o no guardado en el ArrayList. 
+	 * @return retorna 'verdadero' o 'Falso' para indicar si el funcionario se
+	 *         encuentra o no guardado en el ArrayList.
 	 */
 	public boolean existe(String user) {
 		datosFunc = new ArrayList<Funcionario>();
@@ -85,14 +91,18 @@ public class MetodosTxt  {
 		}
 		return false;
 	}
-/**
- * Metodo encargado de controlar si la contraseña se encuentra o no dentro del ArrayList. 
- * 
- * @param pass Se pasa el parametro para controlar si se encuentra como contraseña dentro del ArrayList de funcionarios.
- * 
- * @return Si la contraseña pasada por parametro coincide con alguna de las que se encuentra dentro del ArrayList, entonces retorna 'Verdadero'
- * sino, 'Falso'
- */
+
+	/**
+	 * Metodo encargado de controlar si la contraseña se encuentra o no dentro del
+	 * ArrayList.
+	 * 
+	 * @param pass Se pasa el parametro para controlar si se encuentra como
+	 *             contraseña dentro del ArrayList de funcionarios.
+	 * 
+	 * @return Si la contraseña pasada por parametro coincide con alguna de las que
+	 *         se encuentra dentro del ArrayList, entonces retorna 'Verdadero' sino,
+	 *         'Falso'
+	 */
 	public boolean comprobarContrasenia(String pass) {
 
 		for (int i = 0; i < datosFunc.size(); i++) {
@@ -104,14 +114,16 @@ public class MetodosTxt  {
 	}
 
 	/**
-	 * Metodo encargado de comprobar que el lector ya se encuentra almacenado dentro del ArrayList de Lectores.
+	 * Metodo encargado de comprobar que el lector ya se encuentra almacenado dentro
+	 * del ArrayList de Lectores.
 	 * 
-	 * @param dni Se utilizar el DNI del mismo con clave para saber si se encuentra o no. 
+	 * @param dni Se utilizar el DNI del mismo con clave para saber si se encuentra
+	 *            o no.
 	 * 
-	 * @return En el caso de que el DNI se encuentre, retorna verdadero, por ende, el lector existe. En caso
-	 * contrario, retorna falso
+	 * @return En el caso de que el DNI se encuentre, retorna verdadero, por ende,
+	 *         el lector existe. En caso contrario, retorna falso
 	 */
-	
+
 	public boolean existeLector(int dni) {
 		datosLector = new ArrayList<Integer>();
 		try {
@@ -144,11 +156,13 @@ public class MetodosTxt  {
 	}
 
 	/**
-	 * Función que busca en los archivos .txt si existe una determinada obra. 
+	 * Función que busca en los archivos .txt si existe una determinada obra.
 	 * 
-	 * @param titu Se le pasa el tilulo de la obra para buscar si se encuentra o no almacenada. 
+	 * @param titu Se le pasa el tilulo de la obra para buscar si se encuentra o no
+	 *             almacenada.
 	 * 
-	 * @return retorna 'Verdadero' en caso de encontrar alguna coicidencia y 'Falso' encaso contrario. 
+	 * @return retorna 'Verdadero' en caso de encontrar alguna coicidencia y 'Falso'
+	 *         encaso contrario.
 	 */
 	public boolean existeObra(String titu) {
 		datoObra = new ArrayList<String>();
@@ -173,11 +187,14 @@ public class MetodosTxt  {
 		}
 		return false;
 	}
-	
+
 	/**
-	 * Metodo que se encarga de guardar un ejemplar dentro de un archivo .txt y se le suma 1 a la cantiad de ejemplares de
-	 * y cantidad de ejemplares disponibles a la obra
-	 * @param ejemplar Se le pasa como parámetro el ejemplar que quiere ser añadido al ArrayList y posteriormente al .txt
+	 * Metodo que se encarga de guardar un ejemplar dentro de un archivo .txt y se
+	 * le suma 1 a la cantiad de ejemplares de y cantidad de ejemplares disponibles
+	 * a la obra
+	 * 
+	 * @param ejemplar Se le pasa como parámetro el ejemplar que quiere ser
+	 *                 añadido al ArrayList y posteriormente al .txt
 	 */
 
 	public void guardarEjemplar(Ejemplar ejemplar) {
@@ -187,32 +204,35 @@ public class MetodosTxt  {
 			String obra;
 			while ((obra = br2.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
 				StringTokenizer x = new StringTokenizer(obra, "/");
-				datosObra.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), x.nextToken(), x.nextToken(),
-						x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()),
-								Area.valueOf(x.nextToken()), tipoObra.valueOf(x.nextToken())));// agrega al arraylist de String	
+				datosObra.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), x.nextToken(),
+						x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(),
+						Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), Area.valueOf(x.nextToken()),
+						tipoObra.valueOf(x.nextToken())));// agrega al arraylist de String
 			}
 		} catch (Exception e) {
 		}
-		
-		for (int i = 0; i < datosObra.size(); i++) {	//Recorre el nuevo ArrayList agregando 1 ejemplar a la obra ingresada
+
+		for (int i = 0; i < datosObra.size(); i++) { // Recorre el nuevo ArrayList agregando 1 ejemplar a la obra
+														// ingresada
 			if ((datosObra.get(i).equals(ejemplar.getObra()))) {
 				datosObra.get(i).setCantEjem(datosObra.get(i).getCantEjem() + 1);
 				datosObra.get(i).setCantEjemDisponible(datosObra.get(i).getCantEjemDisponible() + 1);
 				break;
 			}
 		}
-		
+
 		try {
 			File functxt = new File("Obras.txt");
 			functxt.delete();
 			functxt.createNewFile();
 			for (int i = 0; i < datosObra.size(); i++) {
-			guardar(datosObra.get(i), "Obras.txt");
+				guardar(datosObra.get(i), "Obras.txt");
 			}
 		} catch (Exception e) {
 		}
 		guardar(ejemplar, "Ejemplares.txt");
 	}
+
 	public boolean existeEjemplar(int id) {
 		datoEjemplar = new ArrayList<Integer>();
 		try {
@@ -235,9 +255,9 @@ public class MetodosTxt  {
 			}
 		}
 		return false;
-		
+
 	}
-	
+
 	public void ejemplarPedido(Ejemplar ejemplar) {
 		ArrayList<Obra> datosObra = new ArrayList<Obra>();
 		try {
@@ -245,43 +265,48 @@ public class MetodosTxt  {
 			String obra;
 			while ((obra = br2.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
 				StringTokenizer x = new StringTokenizer(obra, "/");
-				datosObra.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), x.nextToken(), x.nextToken(),
-						x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()),
-								Area.valueOf(x.nextToken()), tipoObra.valueOf(x.nextToken())));// agrega al arraylist de String	
+				datosObra.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), x.nextToken(),
+						x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(),
+						Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), Area.valueOf(x.nextToken()),
+						tipoObra.valueOf(x.nextToken())));// agrega al arraylist de String
 			}
 		} catch (Exception e) {
 		}
-		
-		for (int i = 0; i < datosObra.size(); i++) {	//Recorre el nuevo ArrayList quitando 1 ejemplar disponible a la obra
+
+		for (int i = 0; i < datosObra.size(); i++) { // Recorre el nuevo ArrayList quitando 1 ejemplar disponible a la
+														// obra
 			if ((datosObra.get(i).equals(ejemplar.getObra()))) {
 				datosObra.get(i).setCantEjemDisponible(datosObra.get(i).getCantEjemDisponible() - 1);
 				break;
 			}
 		}
-		
+
 		try {
 			File functxt = new File("Obras.txt");
 			functxt.delete();
 			functxt.createNewFile();
 			for (int i = 0; i < datosObra.size(); i++) {
-			guardar(datosObra.get(i), "Obras.txt");
+				guardar(datosObra.get(i), "Obras.txt");
 			}
 		} catch (Exception e) {
 		}
-		
+
 		ArrayList<Ejemplar> datosEjemplar = new ArrayList<Ejemplar>();
 		try {
 			BufferedReader br3 = new BufferedReader(new FileReader("Ejemplares.txt"));
 			String ejemplarNoDisponible;
-			while ((ejemplarNoDisponible = br3.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+			while ((ejemplarNoDisponible = br3.readLine()) != null) { // Lee el archivo hasta el siguiente salto de
+																		// linea
 				StringTokenizer x = new StringTokenizer(ejemplarNoDisponible, "/");
-				datosEjemplar.add(new Ejemplar(Integer.parseInt(x.nextToken()), x.nextToken(), Boolean.parseBoolean(x.nextToken()), 
-						FormaAdquirida.valueOf(x.nextToken()), x.nextToken(), (bra) x.nextToken()));// agrega al arraylist de String	
+				datosEjemplar.add(new Ejemplar(Integer.parseInt(x.nextToken()), x.nextToken(),
+						Boolean.parseBoolean(x.nextToken()), FormaAdquirida.valueOf(x.nextToken()), x.nextToken(),
+						new Obra()));// agrega al arraylist de String
 			}
 		} catch (Exception e) {
 		}
-		
-		for (int i = 0; i < datosEjemplar.size(); i++) {	//Recorre el nuevo ArrayList quitando 1 ejemplar disponible a la obra
+
+		for (int i = 0; i < datosEjemplar.size(); i++) { // Recorre el nuevo ArrayList quitando 1 ejemplar disponible a
+															// la obra
 			if ((datosObra.get(i).equals(ejemplar.getObra()))) {
 				datosObra.get(i).setCantEjemDisponible(datosObra.get(i).getCantEjemDisponible() - 1);
 				break;
@@ -292,11 +317,58 @@ public class MetodosTxt  {
 			functxt.delete();
 			functxt.createNewFile();
 			for (int i = 0; i < datosObra.size(); i++) {
-			guardar(datosObra.get(i), "Ejemplares.txt");
+				guardar(datosObra.get(i), "Ejemplares.txt");
 			}
 		} catch (Exception e) {
 		}
 	}
+
+	public static Ejemplar buscarEjemplar(int id) {
+		ArrayList<Ejemplar> datosEjemplar = new ArrayList<Ejemplar>();
+		try {
+			BufferedReader br3 = new BufferedReader(new FileReader("Ejemplares.txt"));
+			String ejemplar;
+			while ((ejemplar = br3.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+				StringTokenizer x = new StringTokenizer(ejemplar, "/");
+				datosEjemplar.add(new Ejemplar(Integer.parseInt(x.nextToken()), x.nextToken(),
+						Boolean.parseBoolean(x.nextToken()), FormaAdquirida.valueOf(x.nextToken()), x.nextToken(),
+						new Obra()));// agrega al arraylist de String. VA A CREAR UNA OBRA VACIA EN CONSTRUCTOR
+			}
+		} catch (Exception e) {
+		}
+
+		for (int b = 0; b < datosEjemplar.size(); b++) {
+			if (datosEjemplar.get(b).getIdEjemplar() == id) {
+				// Busca el id, si es igual, retorna el ejemplar, sino returna null.
+				System.out.println("Entro for ej");
+				return datosEjemplar.get(b);
+			}
+		}
+		return null;
+
+	}
+
+	public static Lector buscarLector(int dni) {
+		ArrayList<Lector> datosLector = new ArrayList<Lector>();
+		try {
+			BufferedReader br3 = new BufferedReader(new FileReader("Lectores.txt"));
+			String lector;
+			while ((lector = br3.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+				StringTokenizer x = new StringTokenizer(lector, "/");
+				datosLector.add(new Lector(x.nextToken(), x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()),
+						x.nextToken(), Integer.parseInt(x.nextToken()), LocalDate.now(), x.nextToken(), x.nextToken(),
+						x.nextToken(), Integer.parseInt(x.nextToken()), x.nextToken(), x.nextToken()));
+				// agrega al arraylist de String
+			}
+		} catch (Exception e) {
+		}
+
+		for (int b = 0; b < datosLector.size(); b++) {
+			if (datosLector.get(b).getNumDoc() == dni) {
+				// Busca el dni, si es igual, retorna el Lector, sino returna null.
+				return datosLector.get(b);
+			}
+		}
+		return null;
+	}
 }
-
-
