@@ -1,2 +1,9 @@
+<<<<<<< HEAD
 1715/Ok/true/Compra/null/H123/Biblioteca.Obra@16afbc0a/0/
 1689/AAA/true/Donacion/null/U777/Biblioteca.Obra@552bac71/0/
+=======
+2618/Esta bueno/true/null/T6427/Axion/0/
+3036/Esta bueno/true/null/T6427/Axion/0/
+7500/Esta bueno/true/null/T6427/Axion/0/
+8437/Esta bueno/true/null/T6427/Axion/0/
+>>>>>>> 1914f0d5eb580dbea03ca848fbe52d62cb495019

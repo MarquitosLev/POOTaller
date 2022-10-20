@@ -15,7 +15,8 @@ public class Ejemplar implements guardado{
 	private LocalDate fechaAdquisicion;
 	private FormaAdquirida formaAdquirida;
 	private LocalDate fechaDeBaja;
-	private String motivoDeBaja;
+	private String motivoDeBaja; 
+	
 	private String codUbicacion;
 	private Obra obra;
 	private Lector lector;
@@ -177,7 +178,7 @@ public class Ejemplar implements guardado{
 		lista.add(getFormaAdquirida());
 		lista.add(getFechaAdquisicion());
 		lista.add(getCodUbicacion());
-		lista.add(getObra());
+		lista.add(getObra().getTitulo());
 		lista.add(getCantPedidas());
 		return lista;
 	}

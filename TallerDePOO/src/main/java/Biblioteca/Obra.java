@@ -114,6 +114,10 @@ public class Obra implements guardado{
 //		this.perteneceA = perteneceA;
 	}
 	
+	public Obra(String titulo) {
+		this.titulo = titulo;
+	}
+
 	/**
 	 * Función que retorna el funcionario del tipo 'Reserva'
 	 * 
