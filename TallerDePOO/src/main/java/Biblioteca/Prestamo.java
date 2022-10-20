@@ -23,8 +23,29 @@ public class Prestamo implements guardado {
 	private Lector lector;
 	private Boolean aDomicilio;
 	//Asociacion Multa y Prestamo
+	
+	/**
+	 * Constructor de la clase Prestamo
+	 * @param fechaHoraPrestada
+	 * @param funcionarioPrestador
+	 * @param fechaHoraADevolver	 
+	 * @param lector
+	 * @param aDomicilio
+	 * @param funcionarios
+	 * @param ejemplar
+	 */
+	
 	private ArrayList<Multa> multas;
-	private ArrayList<Funcionario> funcionarios;
+	
+	public Prestamo(String funcionarioPrestador, Lector lector, Boolean aDomicilio, Ejemplar ejemplar) {
+		this.fechaHoraPrestada = LocalDateTime.now();
+		this.funcionarioPrestador = funcionarioPrestador;
+		this.fechaHoraADevolver = this.fechaHoraPrestada.plusDays(4);
+		this.lector = lector;
+		this.aDomicilio = aDomicilio;
+		this.ejemplar = ejemplar;
+	}
+
 	private Ejemplar ejemplar;
 	
 	/**
@@ -40,6 +61,7 @@ public class Prestamo implements guardado {
 	 * @param funcionarios
 	 * @param ejemplar
 	 */
+	
 	
 	public Prestamo(String funcionarioPrestador, LocalDate fechaDevuelta,
 			String funcionarioDevuelta, Lector lector, Boolean aDomicilio, Ejemplar ejemplar) {
@@ -64,20 +86,11 @@ public class Prestamo implements guardado {
 		this.fechaDevuelta = LocalDate.of(2000, 1, 1);
 		this.funcionarioDevuelta = "";
 		this.multas = new ArrayList<Multa>();
-		this.funcionarios = new ArrayList<Funcionario>();
 		this.lector = new Lector();
 		this.ejemplar = new Ejemplar();
 
 	}
 
-
-	public ArrayList<Funcionario> getFuncionarios() {
-		return funcionarios;
-	}
-
-	public void setFuncionarios(ArrayList<Funcionario> funcionarios) {
-		this.funcionarios = funcionarios;
-	}
 
 	public ArrayList<Multa> getMultas() {
 		return multas;
@@ -168,7 +181,6 @@ public class Prestamo implements guardado {
 		lista.add(getFechaHoraADevolver());
 		lista.add(getLector().getNumDoc());
 		lista.add(getEjemplar().getIdEjemplar());
-		lista.add(getFuncionarioPrestador());
 		return lista;
 	}
 }

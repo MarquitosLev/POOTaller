@@ -24,7 +24,7 @@ public class ventanaRegistro extends JFrame{
 	private JPasswordField passReg;
 	private Funcionario func;
 
-	public ventanaRegistro(final MetodosTxt listaFunc, final ventana frame) {
+	public ventanaRegistro(final MetodosTxt metodo, final ventana frame) {
 		setTitle("Registro");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ventanaRegistro.class.getResource("/imagenes/icon.png")));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -61,12 +61,12 @@ public class ventanaRegistro extends JFrame{
 				if(user.length() == 0 && pass.length() == 0) {//Comprueba si no se ingreso nada
 					JOptionPane.showMessageDialog(null, "No ingres� datos", "Error", JOptionPane.ERROR_MESSAGE);
 				}else{
-					 if(listaFunc.existeFuncionario(user)) {//Comprueba si ya existeFuncionario
+					 if(metodo.comprobarFuncionario(user)) {//Comprueba si ya existeFuncionario
 						 JOptionPane.showMessageDialog(null, "Usuario ya registrado", "Error", JOptionPane.ERROR_MESSAGE);
 						 userReg.setText("");
 						 passReg.setText("");
 					 }else {
-						 MetodosTxt.guardar(func, "Funcionarios.txt");
+						 metodo.guardar(func, "Funcionarios.txt");
 						 userReg.setText("");
 						 passReg.setText("");
 						 frame.setVisible(true);

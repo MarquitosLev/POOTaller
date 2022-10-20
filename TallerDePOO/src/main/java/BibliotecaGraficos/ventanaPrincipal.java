@@ -87,7 +87,7 @@ public class ventanaPrincipal extends JFrame {
 		inicioVentanaPrincipal(listFunc, ventanaEdicion, userWelcome);
 	}
 
-	private void inicioVentanaPrincipal(final MetodosTxt listFunc, final ventanaEditorial ventanaEdicion,
+	private void inicioVentanaPrincipal(final MetodosTxt metodo, final ventanaEditorial ventanaEdicion,
 			String userWelcome) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ventanaPrincipal.class.getResource("/imagenes/icon.png")));
 		setType(Type.POPUP);
@@ -571,7 +571,7 @@ public class ventanaPrincipal extends JFrame {
 						Integer.parseInt(dateMes.getText()), Integer.parseInt(dateDia.getText()));
 				String sexo = (String) boxSexo.getSelectedItem();
 
-				if (listFunc.existeLector(dni)) {
+				if (metodo.existeLector(dni)) {
 					JOptionPane.showMessageDialog(null, "Ya se encuentra registrado", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
@@ -587,7 +587,7 @@ public class ventanaPrincipal extends JFrame {
 							+ " - Departamento: " + departamento + "-  Localidad: " + localidad);
 
 					// Agrega al txt el nuevo lector
-					MetodosTxt.guardar(lector, "Lectores.txt");
+					metodo.guardar(lector, "Lectores.txt");
 
 					// Pone en blanco las textFields
 					textNombre.setText("");
@@ -635,13 +635,13 @@ public class ventanaPrincipal extends JFrame {
 
 				// Si es la primera vez que se ingresa el titulo, se agrega obra y primer
 				// ejemplar
-				if (!listFunc.existeObra(titulo)) {
+				if (!metodo.existeObra(titulo)) {
 					Random r = new Random();
 					int ran = r.nextInt(10000);
 					try {
 						Ejemplar ejemplar = new Ejemplar(ran, observaciones, true, formaAdqui, codUbi, obra);
 						// Guarda el primer ejemplar de la obra
-						MetodosTxt.guardar(ejemplar, "Ejemplares.txt");
+						metodo.guardar(ejemplar, "Ejemplares.txt");
 					} catch (BarcodeException e1) {
 						e1.printStackTrace();
 					} catch (OutputException e1) {
@@ -649,7 +649,7 @@ public class ventanaPrincipal extends JFrame {
 					}
 
 					// Guarda la obra
-					MetodosTxt.guardar(obra, "Obras.txt");
+					metodo.guardar(obra, "Obras.txt");
 
 				} else {
 					Obra auxObra = obra;
@@ -657,7 +657,7 @@ public class ventanaPrincipal extends JFrame {
 					int ran = r.nextInt(10000);
 					try {
 						Ejemplar ejemplar = new Ejemplar(ran, observaciones, true, formaAdqui, codUbi, auxObra);
-						MetodosTxt.guardar(ejemplar, "Ejemplares.txt");
+						metodo.guardar(ejemplar, "Ejemplares.txt");
 					} catch (BarcodeException e1) {
 						e1.printStackTrace();
 					} catch (OutputException e1) {
@@ -677,37 +677,38 @@ public class ventanaPrincipal extends JFrame {
 
 				// Realizado de prestamo
 
-				// Buscar ejemplar
-				int idEjemplar = Integer.parseInt(textIDEjemplar.getText());
-				Ejemplar ejemplar = MetodosTxt.buscarEjemplar(idEjemplar); // EL METODO DEBE RETORNAR EL OBJETO EJEMPLAR
+				int id = Integer.parseInt(textIDEjemplar.getText()); //Convierte a entero el id del ejemplar pasado
+				int dni = Integer.parseInt(textDniLector.getText()); //Convierte a entero el DNI del lector pasado
+				// Buscar existencia del Ejemplar
+				if(metodo.existeEjemplar(id)) {
+					// Buscar existencia del Lector
+					if(metodo.existeLector(dni)) {
+						// Buscar existencia del Funcionario
+						if(metodo.existeFuncionario(textFuncPrestador.getText())) {
+							Prestamo prestamo = new Prestamo(textFuncPrestador.getText(), new Lector(dni), checkDomicilio.isSelected(),
+									new Ejemplar(id));
+							metodo.guardar(prestamo, "Prestamos.txt");
+						} else {
+							JOptionPane.showMessageDialog(null, "El funcionario no existe", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}	else {
+						JOptionPane.showMessageDialog(null, "El lector no existe", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+					
+				}	else {
+					JOptionPane.showMessageDialog(null, "El ejemplar no existe", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 
 				// Buscar Lector
-				int dniLector = Integer.parseInt(textDniLector.getText());
-				Lector lector =  MetodosTxt.buscarLector(dniLector); // EL METODO DEBE RETORNAR EL OBJETO LECTOR
 
 				// Se crea el prestamo con las medidas necesarias
-				Prestamo prestamo = new Prestamo(textFuncPrestador.getText(),
-						/* LocalDate cuando se devuelva */LocalDate.of(1900, 01, 01), "", lector,
-						checkDomicilio.isSelected(), ejemplar);
 
 				
 				/*
 				 * Falta comprobar si el lector existe y otra cosa mas
 				 * 
 				 * */
-				if (!listFunc.existeEjemplar(idEjemplar)) {// Comprueba si existe el Ejemplar
-					MetodosTxt.guardar(prestamo, "Prestamos.txt");
-					modelo.addRow(new Object[] {lector.getApellido(), ejemplar.getIdEjemplar(), prestamo.getFechaHoraPrestada()});
-					JOptionPane.showMessageDialog(null, "Prestamo Realizado", "Exito", JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(null, "El Ejemplar no existe", "Error", JOptionPane.ERROR_MESSAGE);
-				}
 
-				
-				if(listFunc.existeLector(dniLector)) {
-				}	else {
-					JOptionPane.showMessageDialog(null, "El lector no existe", "Error", JOptionPane.ERROR_MESSAGE);
-				}
 				
 				//guardar(new Prestamo(), "Prestamos.txt");  //Guardar prestamo
 			}

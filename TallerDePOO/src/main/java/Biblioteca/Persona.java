@@ -47,7 +47,12 @@ abstract class Persona {
 		this.dep = "";
 		this.localidad = "";
 	}
-
+	
+	
+	//Constructor que acepta solo el dni
+	public Persona(int numDoc) {
+		this.numDoc = numDoc;
+	}
 	public String getNom() {
 		return nom;
 	}

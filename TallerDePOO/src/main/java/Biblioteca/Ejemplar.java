@@ -16,12 +16,13 @@ public class Ejemplar implements guardado{
 	private FormaAdquirida formaAdquirida;
 	private LocalDate fechaDeBaja;
 	private String motivoDeBaja; 
-	
 	private String codUbicacion;
 	private Obra obra;
 	private Lector lector;
 
 	// Constructor para registrar nuevo ejemplar
+	
+	
 	
 	public Ejemplar(int idEjemplar, String observaciones, boolean disponible, FormaAdquirida formaAdquirida,
 			String codUbicacion, Obra obra) throws BarcodeException, OutputException {
@@ -40,6 +41,10 @@ public class Ejemplar implements guardado{
 		// Codigo de barra
 		this.setCodBarr();
 
+	}
+
+	public Ejemplar(int idEjemplar) {
+		this.idEjemplar = idEjemplar;
 	}
 
 	public Ejemplar(int idEjemplar, String observaciones, boolean disponible, int cantPedidas,

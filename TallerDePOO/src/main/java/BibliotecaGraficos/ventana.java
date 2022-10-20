@@ -122,7 +122,7 @@ public class ventana extends JFrame {
 				String user = usuario.getText();
 				String pass = new String(contrasenia.getPassword());
 				
-				if(listaFunc.existeFuncionario(user) && listaFunc.comprobarContrasenia(pass)) {
+				if(listaFunc.comprobarFuncionario(user) && listaFunc.comprobarContrasenia(pass)) {
 					ventanaPrincipal framePrincipal = new ventanaPrincipal(user);
 					ventana.this.setVisible(false);
 					framePrincipal.setVisible(true);

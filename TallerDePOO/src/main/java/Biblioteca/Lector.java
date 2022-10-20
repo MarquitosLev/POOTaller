@@ -77,6 +77,12 @@ public class Lector extends Persona implements guardado{
 	 * Constructor del lector que asigna datos por defecto a los atributos relacionados a sus multas y los ejemplares que posee. 
 	 */
 	
+	public Lector(int numDoc) {
+		super(numDoc);
+	}
+	
+	
+	
 	public Lector() {
 		this.canMulta = 0;
 		this.estaMultado = false;

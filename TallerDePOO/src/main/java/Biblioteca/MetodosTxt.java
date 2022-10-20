@@ -36,7 +36,7 @@ public class MetodosTxt {
 	 * @param ruta  Se pasa la ruta donde los datos serán guardado.
 	 */
 
-	public static void guardar(guardado nuevo, String ruta) {
+	public void guardar(guardado nuevo, String ruta) {
 		try {
 			File txt = new File(ruta);
 			if (!txt.exists()) { // Crea el archivo txt en caso de que no exista
@@ -70,7 +70,7 @@ public class MetodosTxt {
 	 * @return retorna 'verdadero' o 'Falso' para indicar si el funcionario se
 	 *         encuentra o no guardado en el ArrayList.
 	 */
-	public boolean existeFuncionario(String user) {
+	public boolean comprobarFuncionario(String user) {
 		datosFunc = new ArrayList<Funcionario>();
 		try {
 			FileReader fr = new FileReader("Funcionarios.txt");
@@ -91,6 +91,8 @@ public class MetodosTxt {
 		}
 		return false;
 	}
+	
+	
 
 	/**
 	 * Metodo encargado de controlar si la contraseña se encuentra o no dentro del
@@ -112,7 +114,30 @@ public class MetodosTxt {
 		}
 		return false;
 	}
+	//Comprueba que exista el funcionario pasandole el nombre del mismo
+	public boolean existeFuncionario(String nombre) {
+		ArrayList<String> datosFuncionarios = new ArrayList<String>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("Funcionarios.txt"));
+			String lector;
+			while ((lector = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+				StringTokenizer x = new StringTokenizer(lector, "/");
+				datosFuncionarios.add(x.nextToken());// agrega al arraylist de String
+			}
+		} catch (Exception e) {
+		}
 
+		if (datosFuncionarios.size() == 0) {
+			return false;
+		}
+
+		for (int i = 0; i < datosLector.size(); i++) {
+			if ((datosFuncionarios.get(i).equals(nombre))) {
+				return true;// retorna true si el dni se encuentra en el txt
+			}
+		}
+		return false;
+	}
 	/**
 	 * Metodo encargado de comprobar que el lector ya se encuentra almacenado dentro
 	 * del ArrayList de Lectores.
@@ -304,15 +329,14 @@ public class MetodosTxt {
 		} catch (Exception e) {
 		}
 
-		for (int i = 0; i < datosEjemplar.size(); i++) { // Recorre el nuevo ArrayList quitando 1 ejemplar disponible a
-															// la obra
-			if ((datosEjemplar.get(i).equals(ejemplar))) {
+		for (int i = 0; i < datosEjemplar.size(); i++) { // Recorre el ArrayList de Ejemplares buscando el ejemplar prestado para
+			if ((datosEjemplar.get(i).equals(ejemplar))) { // colocandole la disponibilidad en false
 				datosEjemplar.get(i).setDisponible(false);
 				break;
 			}
 		}
 		try {
-			File functxt = new File("Ejemplares.txt");
+			File functxt = new File("Ejemplares.txt");  //Elimina el viejo Ejemplares.txt para crear uno nuevo ya actualizado
 			functxt.delete();
 			functxt.createNewFile();
 			for (int i = 0; i < datosEjemplar.size(); i++) {
@@ -320,54 +344,5 @@ public class MetodosTxt {
 			}
 		} catch (Exception e) {
 		}
-	}
-
-	public static Ejemplar buscarEjemplar(int id) {
-		ArrayList<Ejemplar> datosEjemplar = new ArrayList<Ejemplar>();
-		try {
-			BufferedReader br3 = new BufferedReader(new FileReader("Ejemplares.txt"));
-			String ejemplar;
-			while ((ejemplar = br3.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
-				StringTokenizer x = new StringTokenizer(ejemplar, "/");
-				datosEjemplar.add(new Ejemplar(Integer.parseInt(x.nextToken()), x.nextToken(),
-						Boolean.parseBoolean(x.nextToken()), FormaAdquirida.valueOf(x.nextToken()), x.nextToken(),
-						new Obra()));// agrega al arraylist de String. VA A CREAR UNA OBRA VACIA EN CONSTRUCTOR
-
-			}
-		} catch (Exception e) {
-		}
-
-		for (int b = 0; b < datosEjemplar.size(); b++) {
-			if (datosEjemplar.get(b).getIdEjemplar() == id) {
-				// Busca el id, si es igual, retorna el ejemplar, sino returna null.
-				return datosEjemplar.get(b);
-			}
-		}
-		return null;
-
-	}
-
-	public static Lector buscarLector(int dni) {
-		ArrayList<Lector> datosLector = new ArrayList<Lector>();
-		try {
-			BufferedReader br3 = new BufferedReader(new FileReader("Lectores.txt"));
-			String lector;
-			while ((lector = br3.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
-				StringTokenizer x = new StringTokenizer(lector, "/");
-				datosLector.add(new Lector(x.nextToken(), x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()),
-						x.nextToken(), Integer.parseInt(x.nextToken()), LocalDate.now(), x.nextToken(), x.nextToken(),
-						x.nextToken(), Integer.parseInt(x.nextToken()), x.nextToken(), x.nextToken()));
-				// agrega al arraylist de String
-			}
-		} catch (Exception e) {
-		}
-
-		for (int b = 0; b < datosLector.size(); b++) {
-			if (datosLector.get(b).getNumDoc() == dni) {
-				// Busca el dni, si es igual, retorna el Lector, sino returna null.
-				return datosLector.get(b);
-			}
-		}
-		return null;
 	}
 }
