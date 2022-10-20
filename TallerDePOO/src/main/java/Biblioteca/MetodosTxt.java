@@ -247,9 +247,9 @@ public class MetodosTxt {
 		}
 
 		try {
-			File functxt = new File("Obras.txt");
-			functxt.delete();
-			functxt.createNewFile();
+			BufferedWriter bw = new BufferedWriter(new FileWriter("Obras.txt"));
+			bw.write("");
+			bw.close();
 			for (int i = 0; i < datosObra.size(); i++) {
 				guardar(datosObra.get(i), "Obras.txt");
 			}
@@ -488,4 +488,6 @@ public class MetodosTxt {
 			}
 		}
 	}
+
+	
 }

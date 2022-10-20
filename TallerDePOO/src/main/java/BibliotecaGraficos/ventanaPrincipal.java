@@ -22,7 +22,10 @@ import javax.swing.table.TableModel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
+
+import Biblioteca.Alumno;
 import Biblioteca.Area;
+import Biblioteca.Docente;
 import Biblioteca.Ejemplar;
 import Biblioteca.tipoObra;
 import net.sourceforge.barbecue.BarcodeException;
@@ -81,6 +84,7 @@ public class ventanaPrincipal extends JFrame {
 	private JTextField textCodUbi;
 	private JTable tablaPrestamosActivos;
 	private JTable tablaPrestamosTerminados;
+	private JTextField textCarreras;
 
 	public ventanaPrincipal(String userWelcome) {
 		MetodosTxt listFunc = new MetodosTxt();
@@ -354,6 +358,11 @@ public class ventanaPrincipal extends JFrame {
 		tabbedPane.addTab("Lectores", null, panelLectores, null);
 		panelLectores.setLayout(null);
 
+		final JComboBox boxTipoLector = new JComboBox();
+		boxTipoLector.setModel(new DefaultComboBoxModel(new String[] {"Lector", "Alumno", "Docente"}));
+		boxTipoLector.setBounds(422, 181, 122, 22);
+		panelLectores.add(boxTipoLector);
+
 		textDomicilio = new JTextField();
 		textDomicilio.setColumns(10);
 		textDomicilio.setBounds(154, 111, 122, 28);
@@ -437,23 +446,23 @@ public class ventanaPrincipal extends JFrame {
 		dateDia = new JTextField();
 		dateDia.setHorizontalAlignment(SwingConstants.LEFT);
 		dateDia.setToolTipText("");
-		dateDia.setBounds(288, 181, 34, 28);
+		dateDia.setBounds(154, 178, 34, 28);
 		panelLectores.add(dateDia);
 		dateDia.setColumns(2);
 
 		dateMes = new JTextField();
 		dateMes.setColumns(2);
-		dateMes.setBounds(334, 181, 34, 28);
+		dateMes.setBounds(200, 178, 34, 28);
 		panelLectores.add(dateMes);
 
 		dateAnio = new JTextField();
 		dateAnio.setColumns(4);
-		dateAnio.setBounds(380, 181, 48, 28);
+		dateAnio.setBounds(246, 178, 48, 28);
 		panelLectores.add(dateAnio);
 
 		JLabel lblNewLabel_2_3_1 = new JLabel("Nacimiento: d-m-y");
 		lblNewLabel_2_3_1.setForeground(Color.WHITE);
-		lblNewLabel_2_3_1.setBounds(288, 153, 109, 16);
+		lblNewLabel_2_3_1.setBounds(154, 150, 109, 16);
 		panelLectores.add(lblNewLabel_2_3_1);
 
 		textNroCelular = new JTextField();
@@ -478,22 +487,22 @@ public class ventanaPrincipal extends JFrame {
 
 		final JComboBox boxSexo = new JComboBox();
 		boxSexo.setModel(new DefaultComboBoxModel(new String[] { "Masculino", "Femenino", "No Binario" }));
-		boxSexo.setBounds(440, 182, 97, 26);
+		boxSexo.setBounds(306, 179, 97, 26);
 		panelLectores.add(boxSexo);
 
 		JLabel lblNewLabel_8 = new JLabel("Sexo");
 		lblNewLabel_8.setForeground(Color.WHITE);
-		lblNewLabel_8.setBounds(440, 153, 53, 16);
+		lblNewLabel_8.setBounds(306, 150, 53, 16);
 		panelLectores.add(lblNewLabel_8);
 
 		textLugarNac = new JTextField();
 		textLugarNac.setColumns(10);
-		textLugarNac.setBounds(154, 181, 122, 28);
+		textLugarNac.setBounds(20, 178, 122, 28);
 		panelLectores.add(textLugarNac);
 
 		JLabel lblNewLabel_2_3_1_2 = new JLabel("Lugar de Nacimiento");
 		lblNewLabel_2_3_1_2.setForeground(Color.WHITE);
-		lblNewLabel_2_3_1_2.setBounds(154, 153, 122, 16);
+		lblNewLabel_2_3_1_2.setBounds(20, 150, 122, 16);
 		panelLectores.add(lblNewLabel_2_3_1_2);
 
 		final JTextPane muestraLector = new JTextPane();
@@ -516,35 +525,35 @@ public class ventanaPrincipal extends JFrame {
 		JPanel panelEstadisticas = new JPanel();
 		tabbedPane.addTab("Estadisticas", null, panelEstadisticas, null);
 		panelEstadisticas.setLayout(null);
-		
+
 		JTabbedPane tabbedEstadisticas = new JTabbedPane(JTabbedPane.TOP);
 		tabbedEstadisticas.setBounds(10, 11, 740, 424);
 		panelEstadisticas.add(tabbedEstadisticas);
-		
+
 		JPanel ListaPrestamosActivos = new JPanel();
 		tabbedEstadisticas.addTab("Prestamos Activos", null, ListaPrestamosActivos, null);
 		ListaPrestamosActivos.setLayout(null);
-		
-		//TABLA QUE MUESTRA LOS PRESTAMOS ACTIVOS
+
+		// TABLA QUE MUESTRA LOS PRESTAMOS ACTIVOS
 		final DefaultTableModel modelo = new DefaultTableModel();
 		modelo.addColumn("Lector");
 		modelo.addColumn("ID Ejemplar");
 		modelo.addColumn("Fecha pedido");
 		modelo.addColumn("Funcionario Prestador");
-		
+
 		tablaPrestamosActivos = new JTable(modelo);
 		tablaPrestamosActivos.setBounds(43, 53, 649, 302);
 		ListaPrestamosActivos.add(tablaPrestamosActivos);
-		
-		//TABLA QUE MUESTRA PRESTAMOS TERMINADOS
+
+		// TABLA QUE MUESTRA PRESTAMOS TERMINADOS
 		JPanel listaPrestamosTerminados = new JPanel();
 		tabbedEstadisticas.addTab("Prestamo Terminado", null, listaPrestamosTerminados, null);
 		listaPrestamosTerminados.setLayout(null);
-		
+
 		tablaPrestamosTerminados = new JTable((TableModel) null);
 		tablaPrestamosTerminados.setBounds(43, 47, 649, 302);
 		listaPrestamosTerminados.add(tablaPrestamosTerminados);
-		
+
 		final DefaultTableModel modelo2 = new DefaultTableModel();
 		modelo2.addColumn("DNI Lector");
 		modelo2.addColumn("ID Ejemplar");
@@ -552,7 +561,7 @@ public class ventanaPrincipal extends JFrame {
 		modelo2.addColumn("Fecha Devuelta");
 		modelo2.addColumn("Funcionario Prestador");
 		modelo2.addColumn("Funcionario Devuelto");
-		
+
 		JLabel fondo = new JLabel("");
 		fondo.setBounds(0, 0, 777, 578);
 		fondo.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
@@ -581,24 +590,50 @@ public class ventanaPrincipal extends JFrame {
 				LocalDate fechaNac = LocalDate.of(Integer.parseInt(dateAnio.getText()),
 						Integer.parseInt(dateMes.getText()), Integer.parseInt(dateDia.getText()));
 				String sexo = (String) boxSexo.getSelectedItem();
-
+				String tipoLector = String.valueOf(boxTipoLector.getSelectedItem());
+				String carreraDocente = String.valueOf(textCarreras.getText());
+				
+				
 				if (metodo.existeLector(dni)) {
 					JOptionPane.showMessageDialog(null, "Ya se encuentra registrado", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
 					// Crea la nueva instancia de Lector
-					Lector lector = new Lector(nombre, apellido, tipDni, dni, correo, numCel, fechaNac, sexo, lugNac,
-							domicilio, codPos, departamento, localidad);
-
+					
 					// Muestra en pantalla de los datos ingresado
-					muestraLector.setText("* Nombre: " + nombre + "\n* Apellido: " + apellido + "\n* tipo DNI: "
-							+ tipDni + ", N� DNI: " + dni + "\n* Correo: " + correo + " - N� Celular: " + numCel
+					muestraLector.setText("* Tipo: " + tipoLector + "\n* Nombre: " + nombre + "\n* Apellido: " + apellido + "\n* tipo DNI: "
+							+ tipDni + ", Num DNI: " + dni + "\n* Correo: " + correo + " - Num Celular: " + numCel
 							+ " - Fecha Nacimiento: " + fechaNac + " - Sexo: " + sexo + "\n* Lugar Nacimiento: "
 							+ lugNac + "\n* Domicilio: " + domicilio + " - Codigo Postal: " + codPos
-							+ " - Departamento: " + departamento + "-  Localidad: " + localidad);
+							+ " - Departamento: " + departamento + "-  Localidad: " + localidad + "\n* Carreras del docente: " + carreraDocente);
 
-					// Agrega al txt el nuevo lector
-					metodo.guardar(lector, "Lectores.txt");
+					/*
+					 *	Falta el como guardar el tipo de lector en Lectores.txt
+					 * 
+					 * */
+										
+					if (tipoLector == "Alumno") {
+						//Crea el Alumno
+						Lector alumno = new Alumno(nombre, apellido, tipDni, dni, correo, numCel, fechaNac, sexo, lugNac,
+								domicilio, codPos, departamento, localidad);
+						// Agrega al txt el nuevo Alumno
+						metodo.guardar(alumno, "Lectores.txt");
+					}else if(tipoLector == "Docente") {
+						//Crea el docente
+						Lector docente = new Docente(nombre, apellido, tipDni, dni, correo, numCel, fechaNac, sexo, lugNac,
+								domicilio, codPos, departamento, localidad, carreraDocente);
+						
+						//Setea carrera de docente
+						((Docente) docente).setCarrera(carreraDocente);
+						
+						//Guarda en txt al docente
+						metodo.guardar(docente, "Lectores.txt");
+					}else {
+						// Agrega al txt el nuevo lector
+						Lector lector = new Lector(nombre, apellido, tipDni, dni, correo, numCel, fechaNac, sexo, lugNac,
+								domicilio, codPos, departamento, localidad);
+						metodo.guardar(lector, "Lectores.txt");
+					}
 
 					// Pone en blanco las textFields
 					textNombre.setText("");
@@ -619,8 +654,8 @@ public class ventanaPrincipal extends JFrame {
 		});
 		btnRegistrarLector.setBounds(311, 235, 143, 28);
 		panelLectores.add(btnRegistrarLector);
-		
-		//REGISTRO OBRA/EJEMPLAR
+
+		// REGISTRO OBRA/EJEMPLAR
 		JButton btnRegistrar = new JButton("Registrar");// Registrar obra y ejemplar
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -681,39 +716,36 @@ public class ventanaPrincipal extends JFrame {
 		btnRegistrar.setBounds(229, 356, 90, 28);
 		panelEjemplar.add(btnRegistrar);
 
-		//REALIZADO DEL PRESTAMO
+		// REALIZADO DEL PRESTAMO
 		JButton btnPrestar = new JButton("Prestar");
 		btnPrestar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				// Realizado de prestamo
 
-				int id = Integer.parseInt(textIDEjemplar.getText()); //Convierte a entero el id del ejemplar pasado
-				int dni = Integer.parseInt(textDniLector.getText()); //Convierte a entero el DNI del lector pasado
+				int id = Integer.parseInt(textIDEjemplar.getText()); // Convierte a entero el id del ejemplar pasado
+				int dni = Integer.parseInt(textDniLector.getText()); // Convierte a entero el DNI del lector pasado
 				// Buscar existencia del Ejemplar
-				if(metodo.existeEjemplar(id)) {
+				if (metodo.existeEjemplar(id)) {
 					// Buscar existencia del Lector
-					if(metodo.existeLector(dni)) {
+					if (metodo.existeLector(dni)) {
 						// Buscar existencia del Funcionario
-						if(metodo.existeFuncionario(textFuncPrestador.getText())) {
-							Prestamo prestamo = new Prestamo(textFuncPrestador.getText(), new Lector(dni), checkDomicilio.isSelected(),
-									new Ejemplar(id));
-							
+						if (metodo.existeFuncionario(textFuncPrestador.getText())) {
+							Prestamo prestamo = new Prestamo(textFuncPrestador.getText(), new Lector(dni),
+									checkDomicilio.isSelected(), new Ejemplar(id));
+
 							metodo.ejemplarPedido(new Ejemplar(id));
 							metodo.guardar(prestamo, "Prestamos.txt");
-							
-							//Agrega en tabla el dni Lector, IdEjemplar, fecha Prestada y el funcionario prestador. PASARLO AL BOTON ACTUALIZAR
-							modelo.addRow(new Object[] {dni, id, prestamo.getFechaHoraPrestada(), textFuncPrestador.getText() });
-							
-							
+
 						} else {
-							JOptionPane.showMessageDialog(null, "El funcionario no existe", "Error", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "El funcionario no existe", "Error",
+									JOptionPane.ERROR_MESSAGE);
 						}
-					}	else {
+					} else {
 						JOptionPane.showMessageDialog(null, "El lector no existe", "Error", JOptionPane.ERROR_MESSAGE);
 					}
-					
-				}	else {
+
+				} else {
 					JOptionPane.showMessageDialog(null, "El ejemplar no existe", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 
@@ -721,14 +753,12 @@ public class ventanaPrincipal extends JFrame {
 
 				// Se crea el prestamo con las medidas necesarias
 
-				
 				/*
 				 * Falta comprobar si el lector existe y otra cosa mas
 				 * 
-				 * */
+				 */
 
-				
-				//guardar(new Prestamo(), "Prestamos.txt");  //Guardar prestamo
+				// guardar(new Prestamo(), "Prestamos.txt"); //Guardar prestamo
 			}
 		});
 		btnPrestar.setBounds(561, 93, 89, 28);
@@ -738,26 +768,23 @@ public class ventanaPrincipal extends JFrame {
 		btnDevuelto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Metodos de ejemplares devueltos
-				
+
 				int dia = Integer.parseInt(textDiaDevuelto.getText());
 				int mes = Integer.parseInt(textMesDevuelto.getText());
 				int anio = Integer.parseInt(textAnioDevuelto.getText());
-				
+
 				LocalDate fechaDevuelta = LocalDate.of(anio, mes, dia);
-				
+
 				String funcionario = textFuncRecibidor.getText();
-				
+
 				int idEjemplar = Integer.parseInt(textIDEjemplar.getText());
-				
-				//try comprueba si existe el prestamo, sino sale error
-				try { 
-					metodo.guardarPrestamoTerminado(fechaDevuelta,funcionario,idEjemplar);		
-					modelo2.addRow(new Object[] {"dni", idEjemplar, "Fecha prestada", "Funcionario prestado", funcionario});
-				} catch (Exception t){
+
+				// try comprueba si existe el prestamo, sino sale error
+				try {
+					metodo.guardarPrestamoTerminado(fechaDevuelta, funcionario, idEjemplar);
+				} catch (Exception t) {
 					JOptionPane.showMessageDialog(null, "No existe el Prestamo", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				
-				
 
 			}
 		});
@@ -807,39 +834,50 @@ public class ventanaPrincipal extends JFrame {
 		lblNewLabel_2_3_2_2.setBounds(422, 117, 48, 16);
 		panelLectores.add(lblNewLabel_2_3_2_2);
 
+		JLabel lblNewLabel_8_1 = new JLabel("Tipo Lector");
+		lblNewLabel_8_1.setForeground(Color.WHITE);
+		lblNewLabel_8_1.setBounds(422, 151, 122, 16);
+		panelLectores.add(lblNewLabel_8_1);
+		
+		textCarreras = new JTextField();
+		textCarreras.setBounds(554, 182, 124, 20);
+		panelLectores.add(textCarreras);
+		textCarreras.setColumns(10);
+		
+		JLabel lblNewLabel_8_1_1 = new JLabel("* Carrera Docente");
+		lblNewLabel_8_1_1.setForeground(Color.WHITE);
+		lblNewLabel_8_1_1.setBounds(556, 151, 122, 16);
+		panelLectores.add(lblNewLabel_8_1_1);
+
 		JLabel fondoL = new JLabel("");
 		fondoL.setBackground(Color.LIGHT_GRAY);
 		fondoL.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		fondoL.setBounds(0, 0, 765, 444);
 		panelLectores.add(fondoL);
-		
+
 		JButton actualizoPrestamosActivos = new JButton("Actualizar");
 		actualizoPrestamosActivos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
+
 			}
 		});
 		actualizoPrestamosActivos.setBounds(43, 362, 89, 23);
 		ListaPrestamosActivos.add(actualizoPrestamosActivos);
 
-
 		JLabel lblNewLabel_12 = new JLabel("");
 		lblNewLabel_12.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		lblNewLabel_12.setBounds(0, 0, 735, 396);
 		ListaPrestamosActivos.add(lblNewLabel_12);
-		
+
 		JButton actualizoPrestamosTerminados = new JButton("Actualizar");
 		actualizoPrestamosTerminados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
+
 			}
 		});
 		actualizoPrestamosTerminados.setBounds(43, 360, 89, 23);
 		listaPrestamosTerminados.add(actualizoPrestamosTerminados);
-		
-		
+
 		JLabel lblNewLabel_13 = new JLabel("");
 		lblNewLabel_13.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		lblNewLabel_13.setBounds(0, 0, 735, 396);

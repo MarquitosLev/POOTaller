@@ -161,7 +161,7 @@ public class ventanaEditorial extends JFrame {
 		textObra.setBounds(336, 201, 86, 20);
 		contentPane.add(textObra);
 
-		JLabel text = new JLabel("Título de Obra");
+		JLabel text = new JLabel("Titulo de Obra");
 		text.setHorizontalAlignment(SwingConstants.CENTER);
 		text.setForeground(Color.WHITE);
 		text.setBounds(336, 176, 86, 14);

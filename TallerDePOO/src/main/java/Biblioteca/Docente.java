@@ -37,14 +37,20 @@ public class Docente extends Lector {
 	 * @param carrera
 	 * @param funcionario
 	 */
+	
+
+	public Docente(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
+			String sex, String nac, String domi, int codPos, String dep, String localidad, String carrera) {
+		super(nom, apellido, tipDoc, numDoc, correo, numCel, fecNac, sex, nac, domi, codPos, dep, localidad);
+		this.carrera = carrera;
+	}
 
 	public Docente(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
 			String sex, String nac, String domi, int codPos, String dep, String localidad, int canMulta,
-			Boolean estaMultado, ArrayList<Ejemplar> ejemplares, String carrera, Funcionario funcionario) {
+			Boolean estaMultado, ArrayList<Ejemplar> ejemplares, String carrera) {
 		super(nom, apellido, tipDoc, numDoc, correo, numCel, fecNac, sex, nac, domi, codPos, dep, localidad, canMulta,
 				estaMultado, ejemplares);
 		this.carrera = carrera;
-		this.funcionario = funcionario;
 	}
 
 	public Funcionario getFuncionario() {
@@ -65,6 +71,28 @@ public class Docente extends Lector {
 	
 	public void Consultar() {
 		
+	}
+	
+	public ArrayList<Object> obtenerLista() {
+		ArrayList<Object>  lista = new ArrayList<Object> ();
+		lista.add(getNom());
+		lista.add(getApellido());
+		lista.add(getTipDoc());
+		lista.add(getNumDoc());
+		lista.add(getCorreo());
+		lista.add(getNumCel());
+		lista.add(getFecNac());
+		lista.add(getSex());
+		lista.add(getLugarNac());
+		lista.add(getDomi());
+		lista.add(getCodPos());
+		lista.add(getDep());
+		lista.add(getLocalidad());
+		lista.add(getCanMulta());
+		lista.add(getEstaMultado());
+		lista.add(this.getClass().getSimpleName());
+		lista.add(getCarrera());
+		return lista;
 	}
 	
 }

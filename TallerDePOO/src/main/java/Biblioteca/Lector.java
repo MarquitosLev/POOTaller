@@ -138,6 +138,8 @@ public class Lector extends Persona implements guardado{
 		lista.add(getLocalidad());
 		lista.add(getCanMulta());
 		lista.add(getEstaMultado());
+		lista.add(this.getClass().getSimpleName());
+		lista.add("");
 		return lista;
 	}
 }
