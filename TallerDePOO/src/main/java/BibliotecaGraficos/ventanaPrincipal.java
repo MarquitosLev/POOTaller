@@ -70,8 +70,8 @@ public class ventanaPrincipal extends JFrame {
 	private JTextField otroAdquisicion;
 	private JTextField textObservacion;
 	private JTextField textDiaDevuelto;
-	private JTextField textMesDevuelta;
-	private JTextField textAnioDevuelta;
+	private JTextField textMesDevuelto;
+	private JTextField textAnioDevuelto;
 	private JTextField textFuncPrestador;
 	private JTextField textFuncRecibidor;
 	private JTextField textIDEjemplarDevuelta;
@@ -79,7 +79,8 @@ public class ventanaPrincipal extends JFrame {
 	private JTextField textCodPos;
 	private JTextField textLugarNac;
 	private JTextField textCodUbi;
-	private JTable tablaPrestamos;
+	private JTable tablaPrestamosActivos;
+	private JTable tablaPrestamosTerminados;
 
 	public ventanaPrincipal(String userWelcome) {
 		MetodosTxt listFunc = new MetodosTxt();
@@ -165,15 +166,15 @@ public class ventanaPrincipal extends JFrame {
 		checkDomicilio.setBounds(427, 105, 18, 16);
 		panelPrestamo.add(checkDomicilio);
 
-		textMesDevuelta = new JTextField();
-		textMesDevuelta.setColumns(2);
-		textMesDevuelta.setBounds(70, 291, 34, 28);
-		panelPrestamo.add(textMesDevuelta);
+		textMesDevuelto = new JTextField();
+		textMesDevuelto.setColumns(2);
+		textMesDevuelto.setBounds(70, 291, 34, 28);
+		panelPrestamo.add(textMesDevuelto);
 
-		textAnioDevuelta = new JTextField();
-		textAnioDevuelta.setColumns(4);
-		textAnioDevuelta.setBounds(116, 291, 48, 28);
-		panelPrestamo.add(textAnioDevuelta);
+		textAnioDevuelto = new JTextField();
+		textAnioDevuelto.setColumns(4);
+		textAnioDevuelto.setBounds(116, 291, 48, 28);
+		panelPrestamo.add(textAnioDevuelto);
 
 		textFuncPrestador = new JTextField();
 		textFuncPrestador.setColumns(10);
@@ -204,14 +205,6 @@ public class ventanaPrincipal extends JFrame {
 		textIDEjemplarDevuelta.setColumns(10);
 		textIDEjemplarDevuelta.setBounds(354, 291, 102, 28);
 		panelPrestamo.add(textIDEjemplarDevuelta);
-
-		final JLabel resumenPrestamo = new JLabel("");
-		resumenPrestamo.setVerticalAlignment(SwingConstants.TOP);
-		resumenPrestamo.setForeground(Color.WHITE);
-		resumenPrestamo.setHorizontalAlignment(SwingConstants.LEFT);
-		resumenPrestamo.setFont(new Font("Poor Richard", Font.BOLD, 16));
-		resumenPrestamo.setBounds(43, 283, 679, 123);
-		panelPrestamo.add(resumenPrestamo);
 
 		JPanel panelEjemplar = new JPanel();
 		tabbedPane.addTab("Ejemplar", null, panelEjemplar, null);
@@ -528,20 +521,38 @@ public class ventanaPrincipal extends JFrame {
 		tabbedEstadisticas.setBounds(10, 11, 740, 424);
 		panelEstadisticas.add(tabbedEstadisticas);
 		
-		JPanel ListaPrestamos = new JPanel();
-		tabbedEstadisticas.addTab("Lista", null, ListaPrestamos, null);
-		ListaPrestamos.setLayout(null);
+		JPanel ListaPrestamosActivos = new JPanel();
+		tabbedEstadisticas.addTab("Prestamos Activos", null, ListaPrestamosActivos, null);
+		ListaPrestamosActivos.setLayout(null);
 		
-		//TABLA QUE MUESTRA LOS PRESTAMOS
+		//TABLA QUE MUESTRA LOS PRESTAMOS ACTIVOS
 		final DefaultTableModel modelo = new DefaultTableModel();
 		modelo.addColumn("Lector");
 		modelo.addColumn("ID Ejemplar");
 		modelo.addColumn("Fecha pedido");
+		modelo.addColumn("Funcionario Prestador");
 		
-		tablaPrestamos = new JTable(modelo);
-		tablaPrestamos.setBounds(43, 53, 649, 302);
-		ListaPrestamos.add(tablaPrestamos);
-
+		tablaPrestamosActivos = new JTable(modelo);
+		tablaPrestamosActivos.setBounds(43, 53, 649, 302);
+		ListaPrestamosActivos.add(tablaPrestamosActivos);
+		
+		//TABLA QUE MUESTRA PRESTAMOS TERMINADOS
+		JPanel listaPrestamosTerminados = new JPanel();
+		tabbedEstadisticas.addTab("Prestamo Terminado", null, listaPrestamosTerminados, null);
+		listaPrestamosTerminados.setLayout(null);
+		
+		tablaPrestamosTerminados = new JTable((TableModel) null);
+		tablaPrestamosTerminados.setBounds(43, 47, 649, 302);
+		listaPrestamosTerminados.add(tablaPrestamosTerminados);
+		
+		final DefaultTableModel modelo2 = new DefaultTableModel();
+		modelo2.addColumn("DNI Lector");
+		modelo2.addColumn("ID Ejemplar");
+		modelo2.addColumn("Fecha pedido");
+		modelo2.addColumn("Fecha Devuelta");
+		modelo2.addColumn("Funcionario Prestador");
+		modelo2.addColumn("Funcionario Devuelto");
+		
 		JLabel fondo = new JLabel("");
 		fondo.setBounds(0, 0, 777, 578);
 		fondo.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
@@ -687,8 +698,14 @@ public class ventanaPrincipal extends JFrame {
 						if(metodo.existeFuncionario(textFuncPrestador.getText())) {
 							Prestamo prestamo = new Prestamo(textFuncPrestador.getText(), new Lector(dni), checkDomicilio.isSelected(),
 									new Ejemplar(id));
+							
+							//Guarda en txt el prestamo
 							metodo.guardar(prestamo, "Prestamos.txt");
-							modelo.addRow(new Object[] {dni, id, prestamo.getFechaHoraPrestada()});
+							
+							//Agrega en tabla el dni Lector, IdEjemplar, fecha Prestada y el funcionario prestador. PASARLO AL BOTON ACTUALIZAR
+							modelo.addRow(new Object[] {dni, id, prestamo.getFechaHoraPrestada(), textFuncPrestador.getText() });
+							
+							
 						} else {
 							JOptionPane.showMessageDialog(null, "El funcionario no existe", "Error", JOptionPane.ERROR_MESSAGE);
 						}
@@ -721,6 +738,26 @@ public class ventanaPrincipal extends JFrame {
 		btnDevuelto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Metodos de ejemplares devueltos
+				
+				int dia = Integer.parseInt(textDiaDevuelto.getText());
+				int mes = Integer.parseInt(textMesDevuelto.getText());
+				int anio = Integer.parseInt(textAnioDevuelto.getText());
+				
+				LocalDate fechaDevuelta = LocalDate.of(anio, mes, dia);
+				
+				String funcionario = textFuncRecibidor.getText();
+				
+				int idEjemplar = Integer.parseInt(textIDEjemplar.getText());
+				
+				//try comprueba si existe el prestamo, sino sale error
+				try { 
+					metodo.guardarPrestamoTerminado(fechaDevuelta,funcionario,idEjemplar);		
+					modelo2.addRow(new Object[] {"dni", idEjemplar, "Fecha prestada", "Funcionario prestado", funcionario});
+				} catch (Exception t){
+					JOptionPane.showMessageDialog(null, "No existe el Prestamo", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				
+				
 
 			}
 		});
@@ -775,12 +812,38 @@ public class ventanaPrincipal extends JFrame {
 		fondoL.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		fondoL.setBounds(0, 0, 765, 444);
 		panelLectores.add(fondoL);
+		
+		JButton actualizoPrestamosActivos = new JButton("Actualizar");
+		actualizoPrestamosActivos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+		actualizoPrestamosActivos.setBounds(43, 362, 89, 23);
+		ListaPrestamosActivos.add(actualizoPrestamosActivos);
 
 
 		JLabel lblNewLabel_12 = new JLabel("");
 		lblNewLabel_12.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		lblNewLabel_12.setBounds(0, 0, 735, 396);
-		ListaPrestamos.add(lblNewLabel_12);
+		ListaPrestamosActivos.add(lblNewLabel_12);
+		
+		JButton actualizoPrestamosTerminados = new JButton("Actualizar");
+		actualizoPrestamosTerminados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+		actualizoPrestamosTerminados.setBounds(43, 360, 89, 23);
+		listaPrestamosTerminados.add(actualizoPrestamosTerminados);
+		
+		
+		JLabel lblNewLabel_13 = new JLabel("");
+		lblNewLabel_13.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
+		lblNewLabel_13.setBounds(0, 0, 735, 396);
+		listaPrestamosTerminados.add(lblNewLabel_13);
 
 		JLabel lblNewLabel_11 = new JLabel("");
 		lblNewLabel_11.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));

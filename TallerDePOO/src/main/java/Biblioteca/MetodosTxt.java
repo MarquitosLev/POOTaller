@@ -354,14 +354,18 @@ public class MetodosTxt {
 	}
 
 	public void guardarPrestamoTerminado(LocalDate fechaDevuelta, String funcionario, int ejemplar) {
+
 		if (existeFuncionario(funcionario)) {  //Comprueba que el funcionario exista
+
 			if (existeEjemplar(ejemplar)) {	//Comprueba que el ejemplar exista
+
 				ArrayList<Prestamo> datosPrestamo = new ArrayList<Prestamo>();
 				try {  //Genera un ArrayList con todos los prestamos guardados
-					BufferedReader br = new BufferedReader(new FileReader("Obras.txt"));
+					BufferedReader br = new BufferedReader(new FileReader("Prestamos.txt"));
 					String prestamo;
 					while ((prestamo = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
 						StringTokenizer x = new StringTokenizer(prestamo, "/");
+
 						datosPrestamo.add(new Prestamo(LocalDate.parse(x.nextToken()), x.nextToken(),
 								LocalDate.parse(x.nextToken()), Boolean.parseBoolean(x.nextToken()),
 								new Lector(Integer.parseInt(x.nextToken())),
@@ -372,12 +376,13 @@ public class MetodosTxt {
 
 				for (int i = 0; i < datosPrestamo.size(); i++) { // Recorre el ArrayList de Prestamos buscando el que
 					Ejemplar EjemplarAux = new Ejemplar(ejemplar);								// coincide con el ejemplar ingresado
-					if (datosPrestamo.get(i).getEjemplar().equals(EjemplarAux)) {
+					if (datosPrestamo.get(i).getEjemplar().getIdEjemplar() == EjemplarAux.getIdEjemplar()) {
 						Prestamo aux = datosPrestamo.get(i);
 						Prestamo prestamoDevuelto = new Prestamo(aux.getFechaHoraPrestada(),
-								aux.getFuncionarioPrestador(), aux.getFechaHoraADevolver(), aux.getFechaDevuelta(),
-								aux.getFuncionarioDevuelta(), aux.getaDomicilio(), aux.getLector(), aux.getEjemplar());
-						try {
+								aux.getFuncionarioPrestador(), aux.getFechaHoraADevolver(), fechaDevuelta,
+								funcionario, aux.getaDomicilio(), aux.getLector(), aux.getEjemplar());
+						try {	
+							
 							File txt = new File("PrestamosTerminados.txt"); 
 							if (!txt.exists()) { // Crea el archivo txt en caso de que no exista
 								txt.createNewFile();
@@ -440,9 +445,10 @@ public class MetodosTxt {
 							}
 						}
 						
+						//ERRORES AL REESCRIBIR EL EJEMPLARES.TXT
 						try {
 							File functxt = new File("Ejemplares.txt"); // Elimina el viejo Ejemplares.txt para crear uno nuevo ya actualizado
-							functxt.delete();
+							functxt.delete(); //Borra la clonacion, no el txt existente
 							functxt.createNewFile();
 							for (int y = 0; y < datosEjemplar.size(); y++) {
 								guardar(datosEjemplar.get(y), "Ejemplares.txt");
@@ -457,9 +463,10 @@ public class MetodosTxt {
 							}
 						}
 						
+						//ERRORES AL REESCRIBIR EL OBRAS.TXT
 						try {
 							File functxt = new File("Obras.txt");	// Elimina el viejo Obras.txt para crear uno nuevo ya actualizado
-							functxt.delete();
+							functxt.delete(); //Borra la clonacion, no el txt existente
 							functxt.createNewFile();
 							for (int q = 0; q < datosObra.size(); q++) {
 								guardar(datosObra.get(q), "Obras.txt");
