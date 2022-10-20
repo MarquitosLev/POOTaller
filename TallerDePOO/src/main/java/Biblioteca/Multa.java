@@ -25,6 +25,10 @@ public class Multa {
 		this.prestamo = prestamo;
 	}
 
+	public Multa(int diasMulta) {
+		this.diasMulta = diasMulta;
+	}
+
 	public Prestamo getPrestamo() {
 		return prestamo;
 	}

@@ -688,6 +688,7 @@ public class ventanaPrincipal extends JFrame {
 							Prestamo prestamo = new Prestamo(textFuncPrestador.getText(), new Lector(dni), checkDomicilio.isSelected(),
 									new Ejemplar(id));
 							metodo.guardar(prestamo, "Prestamos.txt");
+							modelo.addRow(new Object[] {dni, id, prestamo.getFechaHoraPrestada()});
 						} else {
 							JOptionPane.showMessageDialog(null, "El funcionario no existe", "Error", JOptionPane.ERROR_MESSAGE);
 						}

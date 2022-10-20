@@ -4,7 +4,7 @@ package Biblioteca;
 import java.util.ArrayList;
 import java.time.temporal.ChronoUnit;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * Clase que representa el proceso de prestamo y devolucion de un ejemplar en la biblioteca.
@@ -15,15 +15,16 @@ import java.time.LocalDateTime;
  *
  */
 public class Prestamo implements guardado {
-	private LocalDateTime fechaHoraPrestada;
+	private LocalDate fechaHoraPrestada;
 	private String funcionarioPrestador;
-	private LocalDateTime fechaHoraADevolver;
+	private LocalDate fechaHoraADevolver;
 	private LocalDate fechaDevuelta;
 	private String funcionarioDevuelta;
-	private Lector lector;
 	private Boolean aDomicilio;
+	private Lector lector;
 	//Asociacion Multa y Prestamo
-	
+	private ArrayList<Multa> multas;
+	private Ejemplar ejemplar;
 	/**
 	 * Constructor de la clase Prestamo
 	 * @param fechaHoraPrestada
@@ -34,11 +35,8 @@ public class Prestamo implements guardado {
 	 * @param funcionarios
 	 * @param ejemplar
 	 */
-	
-	private ArrayList<Multa> multas;
-	
 	public Prestamo(String funcionarioPrestador, Lector lector, Boolean aDomicilio, Ejemplar ejemplar) {
-		this.fechaHoraPrestada = LocalDateTime.now();
+		this.fechaHoraPrestada = LocalDate.now();
 		this.funcionarioPrestador = funcionarioPrestador;
 		this.fechaHoraADevolver = this.fechaHoraPrestada.plusDays(4);
 		this.lector = lector;
@@ -46,7 +44,15 @@ public class Prestamo implements guardado {
 		this.ejemplar = ejemplar;
 	}
 
-	private Ejemplar ejemplar;
+	
+	public Prestamo(LocalDate fechaHoraPrestada, String funcionarioPrestador, LocalDate fechaHoraADevolver, Boolean aDomicilio, Lector lector, Ejemplar ejemplar) {
+		this.fechaHoraPrestada = fechaHoraPrestada;
+		this.funcionarioPrestador = funcionarioPrestador;
+		this.fechaHoraADevolver = fechaHoraADevolver;
+		this.aDomicilio = aDomicilio;
+		this.lector = lector;
+		this.ejemplar = ejemplar;
+	}
 	
 	/**
 	 * Constructor de la clase Prestamo
@@ -65,7 +71,7 @@ public class Prestamo implements guardado {
 	
 	public Prestamo(String funcionarioPrestador, LocalDate fechaDevuelta,
 			String funcionarioDevuelta, Lector lector, Boolean aDomicilio, Ejemplar ejemplar) {
-		this.fechaHoraPrestada = LocalDateTime.now();
+		this.fechaHoraPrestada = LocalDate.now();
 		this.funcionarioPrestador = funcionarioPrestador;
 		this.fechaHoraADevolver = this.fechaHoraPrestada.plusDays(4);
 		this.fechaDevuelta = fechaDevuelta;
@@ -80,7 +86,7 @@ public class Prestamo implements guardado {
 	 */
 	
 	public Prestamo(){
-		this.fechaHoraPrestada = LocalDateTime.now();
+		this.fechaHoraPrestada = LocalDate.now();
 		this.funcionarioPrestador = "";
 		this.fechaHoraADevolver = this.fechaHoraPrestada.plusDays(4);
 		this.fechaDevuelta = LocalDate.of(2000, 1, 1);
@@ -89,6 +95,20 @@ public class Prestamo implements guardado {
 		this.lector = new Lector();
 		this.ejemplar = new Ejemplar();
 
+	}
+
+	
+	
+	public Prestamo(LocalDate fechaHoraPrestada, String funcionarioPrestador, LocalDate fechaHoraADevolver,
+			LocalDate fechaDevuelta, String funcionarioDevuelta, Boolean aDomicilio, Lector lector, Ejemplar ejemplar) {
+		this.fechaHoraPrestada = fechaHoraPrestada;
+		this.funcionarioPrestador = funcionarioPrestador;
+		this.fechaHoraADevolver = fechaHoraADevolver;
+		this.fechaDevuelta = fechaDevuelta;
+		this.funcionarioDevuelta = funcionarioDevuelta;
+		this.lector = lector;
+		this.aDomicilio = aDomicilio;
+		this.ejemplar = ejemplar;
 	}
 
 
@@ -100,7 +120,7 @@ public class Prestamo implements guardado {
 		this.multas = multas;
 	}
 
-	public LocalDateTime getFechaHoraPrestada() {
+	public LocalDate getFechaHoraPrestada() {
 		return fechaHoraPrestada;
 	}
 
@@ -112,7 +132,7 @@ public class Prestamo implements guardado {
 		this.funcionarioPrestador = funcionarioPrestador;
 	}
 
-	public LocalDateTime getFechaHoraADevolver() {
+	public LocalDate getFechaHoraADevolver() {
 		return fechaHoraADevolver;
 	}
 
@@ -179,6 +199,7 @@ public class Prestamo implements guardado {
 		lista.add(getFechaHoraPrestada());
 		lista.add(getFuncionarioPrestador());
 		lista.add(getFechaHoraADevolver());
+		lista.add(getaDomicilio());
 		lista.add(getLector().getNumDoc());
 		lista.add(getEjemplar().getIdEjemplar());
 		return lista;

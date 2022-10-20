@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -91,8 +92,6 @@ public class MetodosTxt {
 		}
 		return false;
 	}
-	
-	
 
 	/**
 	 * Metodo encargado de controlar si la contraseña se encuentra o no dentro del
@@ -114,7 +113,8 @@ public class MetodosTxt {
 		}
 		return false;
 	}
-	//Comprueba que exista el funcionario pasandole el nombre del mismo
+
+	// Comprueba que exista el funcionario pasandole el nombre del mismo
 	public boolean existeFuncionario(String nombre) {
 		ArrayList<String> datosFuncionarios = new ArrayList<String>();
 		try {
@@ -138,6 +138,7 @@ public class MetodosTxt {
 		}
 		return false;
 	}
+
 	/**
 	 * Metodo encargado de comprobar que el lector ya se encuentra almacenado dentro
 	 * del ArrayList de Lectores.
@@ -283,6 +284,7 @@ public class MetodosTxt {
 
 	}
 
+	// Metodo llamado cuando se solicita el ejemplar
 	public void ejemplarPedido(Ejemplar ejemplar) {
 		ArrayList<Obra> datosObra = new ArrayList<Obra>();
 		try {
@@ -298,7 +300,8 @@ public class MetodosTxt {
 		} catch (Exception e) {
 		}
 
-		for (int i = 0; i < datosObra.size(); i++) { // Recorre el nuevo ArrayList quitando 1 ejemplar disponible a la obra
+		for (int i = 0; i < datosObra.size(); i++) { // Recorre el nuevo ArrayList quitando 1 ejemplar disponible a la
+														// obra
 			if ((datosObra.get(i).equals(ejemplar.getObra()))) {
 				datosObra.get(i).setCantEjemDisponible(datosObra.get(i).getCantEjemDisponible() - 1);
 				break;
@@ -329,20 +332,145 @@ public class MetodosTxt {
 		} catch (Exception e) {
 		}
 
-		for (int i = 0; i < datosEjemplar.size(); i++) { // Recorre el ArrayList de Ejemplares buscando el ejemplar prestado para
+		for (int i = 0; i < datosEjemplar.size(); i++) { // Recorre el ArrayList de Ejemplares buscando el ejemplar
+															// prestado para
 			if ((datosEjemplar.get(i).equals(ejemplar))) { // colocandole la disponibilidad en false
 				datosEjemplar.get(i).setDisponible(false);
 				break;
 			}
 		}
 		try {
-			File functxt = new File("Ejemplares.txt");  //Elimina el viejo Ejemplares.txt para crear uno nuevo ya actualizado
+			File functxt = new File("Ejemplares.txt"); // Elimina el viejo Ejemplares.txt para crear uno nuevo ya
+														// actualizado
 			functxt.delete();
 			functxt.createNewFile();
 			for (int i = 0; i < datosEjemplar.size(); i++) {
 				guardar(datosEjemplar.get(i), "Ejemplares.txt");
 			}
 		} catch (Exception e) {
+		}
+		
+		
+	}
+
+	public void guardarPrestamoTerminado(LocalDate fechaDevuelta, String funcionario, int ejemplar) {
+		if (existeFuncionario(funcionario)) {  //Comprueba que el funcionario exista
+			if (existeEjemplar(ejemplar)) {	//Comprueba que el ejemplar exista
+				ArrayList<Prestamo> datosPrestamo = new ArrayList<Prestamo>();
+				try {  //Genera un ArrayList con todos los prestamos guardados
+					BufferedReader br = new BufferedReader(new FileReader("Obras.txt"));
+					String prestamo;
+					while ((prestamo = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+						StringTokenizer x = new StringTokenizer(prestamo, "/");
+						datosPrestamo.add(new Prestamo(LocalDate.parse(x.nextToken()), x.nextToken(),
+								LocalDate.parse(x.nextToken()), Boolean.parseBoolean(x.nextToken()),
+								new Lector(Integer.parseInt(x.nextToken())),
+								new Ejemplar(Integer.parseInt(x.nextToken()))));// agrega al arraylist de String
+					}
+				} catch (Exception e) {
+				}
+
+				for (int i = 0; i < datosPrestamo.size(); i++) { // Recorre el ArrayList de Prestamos buscando el que
+					Ejemplar EjemplarAux = new Ejemplar(ejemplar);								// coincide con el ejemplar ingresado
+					if (datosPrestamo.get(i).getEjemplar().equals(EjemplarAux)) {
+						Prestamo aux = datosPrestamo.get(i);
+						Prestamo prestamoDevuelto = new Prestamo(aux.getFechaHoraPrestada(),
+								aux.getFuncionarioPrestador(), aux.getFechaHoraADevolver(), aux.getFechaDevuelta(),
+								aux.getFuncionarioDevuelta(), aux.getaDomicilio(), aux.getLector(), aux.getEjemplar());
+						try {
+							File txt = new File("PrestamosTerminados.txt"); 
+							if (!txt.exists()) { // Crea el archivo txt en caso de que no exista
+								txt.createNewFile();
+							}
+							FileWriter fw = new FileWriter("PrestamosTerminados.txt", true);
+							BufferedWriter br = new BufferedWriter(fw); // Escribe los datos asignados
+							PrintWriter escribir = new PrintWriter(br);
+							try {  // Escribe todos los atributos del prestamo teminado en el txt
+									escribir.write(prestamoDevuelto.getFechaHoraPrestada() + "/");
+									escribir.write(prestamoDevuelto.getFuncionarioPrestador() + "/");
+									escribir.write(prestamoDevuelto.getFechaHoraADevolver() + "/");
+									escribir.write(prestamoDevuelto.getFechaDevuelta() + "/");
+									escribir.write(prestamoDevuelto.getFuncionarioDevuelta() + "/");
+									escribir.write(prestamoDevuelto.getaDomicilio() + "/");
+									escribir.write(prestamoDevuelto.getLector().getNumDoc() + "/");
+									escribir.write(prestamoDevuelto.getEjemplar().getIdEjemplar() + "/");
+								} catch (Exception e) {
+							}
+							escribir.write("\n");
+							escribir.close();
+						} catch (Exception e) {
+
+						}
+						//Obtengo las obras del Obras.txt
+						ArrayList<Obra> datosObra = new ArrayList<Obra>();
+						try {
+							BufferedReader br2 = new BufferedReader(new FileReader("Obras.txt"));
+							String obra;
+							while ((obra = br2.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+								StringTokenizer x = new StringTokenizer(obra, "/");
+								datosObra.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), x.nextToken(),
+										x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(),
+										Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), Area.valueOf(x.nextToken()),
+										tipoObra.valueOf(x.nextToken())));// agrega al arraylist de String
+							}
+						} catch (Exception e) {
+						}
+						//Obtengo los ejemplares del Ejemplares.txt
+						ArrayList<Ejemplar> datosEjemplar = new ArrayList<Ejemplar>();
+						try {
+							BufferedReader br3 = new BufferedReader(new FileReader("Ejemplares.txt"));
+							String ejemplar1;
+							while ((ejemplar1 = br3.readLine()) != null) { // Lee el archivo hasta el siguiente salto de
+																						// linea
+								StringTokenizer x = new StringTokenizer(ejemplar1, "/");
+								datosEjemplar.add(new Ejemplar(Integer.parseInt(x.nextToken()), x.nextToken(),
+										Boolean.parseBoolean(x.nextToken()), FormaAdquirida.valueOf(x.nextToken()), x.nextToken(),
+										new Obra(x.nextToken())));// agrega al arraylist de String
+							}
+						} catch (Exception e) {
+						}
+						
+						// busco el ejemplar con el id ingresado
+						String nuevo = "";
+						for (int t = 0; t < datosEjemplar.size(); t++) {
+							if ((datosEjemplar.get(t).getIdEjemplar() == ejemplar)) {
+								nuevo = datosEjemplar.get(t).getObra().getTitulo();
+								datosEjemplar.get(t).setDisponible(true);
+								break;
+							}
+						}
+						
+						try {
+							File functxt = new File("Ejemplares.txt"); // Elimina el viejo Ejemplares.txt para crear uno nuevo ya actualizado
+							functxt.delete();
+							functxt.createNewFile();
+							for (int y = 0; y < datosEjemplar.size(); y++) {
+								guardar(datosEjemplar.get(y), "Ejemplares.txt");
+							}
+						} catch (Exception e) {
+						}
+						
+						for (int j = 0; j < datosObra.size(); j++) { // Recorre el nuevo ArrayList agregando 1 ejemplar a la obra										// ingresada
+							if ((datosObra.get(j).getTitulo().equals(nuevo))) {
+								datosObra.get(j).setCantEjemDisponible(datosObra.get(j).getCantEjemDisponible() + 1);
+								break;
+							}
+						}
+						
+						try {
+							File functxt = new File("Obras.txt");	// Elimina el viejo Obras.txt para crear uno nuevo ya actualizado
+							functxt.delete();
+							functxt.createNewFile();
+							for (int q = 0; q < datosObra.size(); q++) {
+								guardar(datosObra.get(q), "Obras.txt");
+							}
+						} catch (Exception e) {
+						}
+						
+						
+					}
+				}
+			}
 		}
 	}
 }
