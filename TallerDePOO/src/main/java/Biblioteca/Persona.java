@@ -1,6 +1,11 @@
 package Biblioteca;
 import java.time.LocalDate;
 
+/**
+ * Clase que contiene todos los datos de las personas que concurren a la biblioteca
+ * @author Santiago Fernandez Gomez
+ * 
+ */
 abstract class Persona {
 	private String nom;
 	private String apellido;
@@ -16,6 +21,23 @@ abstract class Persona {
 	private String dep;
 	private String localidad;
 	
+	/**
+	 * Constructor parametrizado de la clase Persona
+	 * 
+	 * @param nom
+	 * @param apellido
+	 * @param tipDoc
+	 * @param numDoc
+	 * @param correo
+	 * @param numCel
+	 * @param fecNac
+	 * @param sex
+	 * @param lugarNac
+	 * @param domi
+	 * @param codPos
+	 * @param dep
+	 * @param localidad
+	 */
 	public Persona(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
 			String sex, String lugarNac, String domi, int codPos, String dep, String localidad) {
 		this.nom = nom;
@@ -32,6 +54,8 @@ abstract class Persona {
 		this.dep = dep;
 		this.localidad = localidad;	
 	}
+	
+	//Constructor por defecto de la clase Persona
 	public Persona() {
 		this.nom = "";
 		this.apellido = "";
@@ -53,26 +77,57 @@ abstract class Persona {
 	public Persona(int numDoc) {
 		this.numDoc = numDoc;
 	}
+	
+	/**
+	 * Funcion que retorna el nombre de la persona que es de tipo 'String'
+	 * 
+	 * @return un String con el nombre del individuo
+	 */
 	public String getNom() {
 		return nom;
 	}
 
+	/**
+	 * Metodo que settea el atributo "nom" de la clase
+	 * 
+	 * @param nom Se pasa el nombre que se quiera agregar al atributo de la clase 
+	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
+	/**
+	 * Funcion que se encarga de retornar el apellido de la persona
+	 * 
+	 * @return un String con el apellido del sujeto
+	 */
 	public String getApellido() {
 		return apellido;
 	}
 
+	/**
+	 * Metodo encargado de settear el atributo "apellido" de la clase 
+	 * 
+	 * @param apellido Se pasa por parametro el apellido a agregar al atributo de la clase
+	 */
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
 
+	/**
+	 * Funcion que se ocupa de retornar el tipo de documento que tiene la persona
+	 * 
+	 * @return un String en el que se indica que tipo de documento posee
+	 */
 	public String getTipDoc() {
 		return tipDoc;
 	}
 
+	/**
+	 * Metodo que tiene como objetivo settear el atributo "tipDoc" de la clase
+	 * 
+	 * @param tipDoc Se pasa como parametro el tipo de documento que se quiere aÃ±adir al atributo de la clase
+	 */
 	public void setTipDoc(String tipDoc) {
 		this.tipDoc = tipDoc;
 	}
@@ -158,8 +213,8 @@ abstract class Persona {
 	}
 
 	public String toString() {
-		return "* Nombre: " + nom + "\n* Apellido: " + apellido + "\n* tipo DNI: " + tipDoc + ", N° DNI: " + numDoc
-				+ "\n* Correo: " + correo + " - N° Celular: " + numCel + " - Fecha Nacimiento: " + fecNac + " - Sexo: " + sex + "\n* Lugar Nacimiento: "
+		return "* Nombre: " + nom + "\n* Apellido: " + apellido + "\n* tipo DNI: " + tipDoc + ", Nï¿½ DNI: " + numDoc
+				+ "\n* Correo: " + correo + " - Nï¿½ Celular: " + numCel + " - Fecha Nacimiento: " + fecNac + " - Sexo: " + sex + "\n* Lugar Nacimiento: "
 				+ lugarNac + "\n* Domicilio: " + domi + " - Codigo Postal: " + codPos + " - Departamento: " + dep + "-  Localidad: " + localidad;
 	}
 	
