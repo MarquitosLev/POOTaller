@@ -1,9 +1,1 @@
-<<<<<<< HEAD
-1/1/Java/--/--/--/-/-/55/22/Matematica/Libro/
-1/1/Pool/--/-/./-/-/44/66/Matematica/Libro/
-=======
-1/1/Axion/Energy4/Yo/Marquitos/Santi/Terror/412421/523513/SisOperativo/Tesis/
-1/1/Axion/Energy4/Yo/Marquitos/Santi/Terror/412421/523513/SisOperativo/Tesis/
-1/1/Axion/Energy4/Yo/Marquitos/Santi/Terror/412421/523513/SisOperativo/Tesis/
-1/1/Axion/Energy4/Yo/Marquitos/Santi/Terror/412421/523511/SisOperativo/Tesis/
->>>>>>> 1914f0d5eb580dbea03ca848fbe52d62cb495019
+1/1/EducacionF/--/-/-/-/-/788/643/Matematica/Libro/

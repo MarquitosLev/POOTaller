@@ -698,14 +698,11 @@ public class ventanaPrincipal extends JFrame {
 				if (!listFunc.existeEjemplar(idEjemplar)) {// Comprueba si existe el Ejemplar
 					MetodosTxt.guardar(prestamo, "Prestamos.txt");
 					modelo.addRow(new Object[] {lector.getApellido(), ejemplar.getIdEjemplar(), prestamo.getFechaHoraPrestada()});
+					JOptionPane.showMessageDialog(null, "Prestamo Realizado", "Exito", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "El Ejemplar no existe", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-<<<<<<< HEAD
-				
-				
-=======
->>>>>>> 1914f0d5eb580dbea03ca848fbe52d62cb495019
+
 				
 				if(listFunc.existeLector(dniLector)) {
 				}	else {

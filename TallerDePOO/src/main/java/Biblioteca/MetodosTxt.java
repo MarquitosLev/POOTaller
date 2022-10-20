@@ -58,12 +58,7 @@ public class MetodosTxt {
 
 		}
 	}
-<<<<<<< HEAD
 
-=======
-	
-	
->>>>>>> 1914f0d5eb580dbea03ca848fbe52d62cb495019
 	/**
 	 * Función que controla si un usuario ya se encuentra registrado dentro de la
 	 * aplicacion.
@@ -75,7 +70,7 @@ public class MetodosTxt {
 	 * @return retorna 'verdadero' o 'Falso' para indicar si el funcionario se
 	 *         encuentra o no guardado en el ArrayList.
 	 */
-	public boolean existeFuncionario(String user) {
+	public boolean existe(String user) {
 		datosFunc = new ArrayList<Funcionario>();
 		try {
 			FileReader fr = new FileReader("Funcionarios.txt");
@@ -237,11 +232,7 @@ public class MetodosTxt {
 		}
 		guardar(ejemplar, "Ejemplares.txt");
 	}
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> 1914f0d5eb580dbea03ca848fbe52d62cb495019
 	public boolean existeEjemplar(int id) {
 		datoEjemplar = new ArrayList<Integer>();
 		try {
@@ -249,7 +240,7 @@ public class MetodosTxt {
 			String ejemplar;
 			while ((ejemplar = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
 				StringTokenizer x = new StringTokenizer(ejemplar, "/");
-				datoEjemplar.add(Integer.parseInt(x.nextToken()));// agrega al arraylist de int
+				datoObra.add(x.nextToken());// agrega al arraylist de int
 			}
 		} catch (Exception e) {
 		}
@@ -270,9 +261,9 @@ public class MetodosTxt {
 	public void ejemplarPedido(Ejemplar ejemplar) {
 		ArrayList<Obra> datosObra = new ArrayList<Obra>();
 		try {
-			BufferedReader br = new BufferedReader(new FileReader("Obras.txt"));
+			BufferedReader br2 = new BufferedReader(new FileReader("Obras.txt"));
 			String obra;
-			while ((obra = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+			while ((obra = br2.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
 				StringTokenizer x = new StringTokenizer(obra, "/");
 				datosObra.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), x.nextToken(),
 						x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(),
@@ -281,16 +272,10 @@ public class MetodosTxt {
 			}
 		} catch (Exception e) {
 		}
-<<<<<<< HEAD
 
 		for (int i = 0; i < datosObra.size(); i++) { // Recorre el nuevo ArrayList quitando 1 ejemplar disponible a la
 														// obra
 			if ((datosObra.get(i).equals(ejemplar.getObra()))) {
-=======
-		
-		for (int i = 0; i < datosObra.size(); i++) {	//Recorre el nuevo ArrayList quitando 1 ejemplar disponible a la obra
-			if ((datosObra.get(i).getTitulo().equals(ejemplar.getObra().getTitulo()))) {
->>>>>>> 1914f0d5eb580dbea03ca848fbe52d62cb495019
 				datosObra.get(i).setCantEjemDisponible(datosObra.get(i).getCantEjemDisponible() - 1);
 				break;
 			}
@@ -308,9 +293,8 @@ public class MetodosTxt {
 
 		ArrayList<Ejemplar> datosEjemplar = new ArrayList<Ejemplar>();
 		try {
-			BufferedReader br = new BufferedReader(new FileReader("Ejemplares.txt"));
+			BufferedReader br3 = new BufferedReader(new FileReader("Ejemplares.txt"));
 			String ejemplarNoDisponible;
-<<<<<<< HEAD
 			while ((ejemplarNoDisponible = br3.readLine()) != null) { // Lee el archivo hasta el siguiente salto de
 																		// linea
 				StringTokenizer x = new StringTokenizer(ejemplarNoDisponible, "/");
@@ -325,19 +309,6 @@ public class MetodosTxt {
 															// la obra
 			if ((datosObra.get(i).equals(ejemplar.getObra()))) {
 				datosObra.get(i).setCantEjemDisponible(datosObra.get(i).getCantEjemDisponible() - 1);
-=======
-			while ((ejemplarNoDisponible = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
-				StringTokenizer x = new StringTokenizer(ejemplarNoDisponible, "/");
-				datosEjemplar.add(new Ejemplar(Integer.parseInt(x.nextToken()), x.nextToken(), Boolean.parseBoolean(x.nextToken()), 
-						FormaAdquirida.valueOf(x.nextToken()), x.nextToken(), new Obra(x.nextToken())));// agrega al arraylist de String	
-			}
-		} catch (Exception e) {
-		}
-		
-		for (int i = 0; i < datosEjemplar.size(); i++) {
-			if ((datosEjemplar.get(i).equals(ejemplar))) {
-				datosEjemplar.get(i).setDisponible(false);
->>>>>>> 1914f0d5eb580dbea03ca848fbe52d62cb495019
 				break;
 			}
 		}
@@ -345,18 +316,12 @@ public class MetodosTxt {
 			File functxt = new File("Ejemplares.txt");
 			functxt.delete();
 			functxt.createNewFile();
-<<<<<<< HEAD
 			for (int i = 0; i < datosObra.size(); i++) {
 				guardar(datosObra.get(i), "Ejemplares.txt");
-=======
-			for (int i = 0; i < datosEjemplar.size(); i++) {
-			guardar(datosEjemplar.get(i), "Ejemplares.txt");
->>>>>>> 1914f0d5eb580dbea03ca848fbe52d62cb495019
 			}
 		} catch (Exception e) {
 		}
 	}
-<<<<<<< HEAD
 
 	public static Ejemplar buscarEjemplar(int id) {
 		ArrayList<Ejemplar> datosEjemplar = new ArrayList<Ejemplar>();
@@ -368,6 +333,7 @@ public class MetodosTxt {
 				datosEjemplar.add(new Ejemplar(Integer.parseInt(x.nextToken()), x.nextToken(),
 						Boolean.parseBoolean(x.nextToken()), FormaAdquirida.valueOf(x.nextToken()), x.nextToken(),
 						new Obra()));// agrega al arraylist de String. VA A CREAR UNA OBRA VACIA EN CONSTRUCTOR
+
 			}
 		} catch (Exception e) {
 		}
@@ -375,7 +341,6 @@ public class MetodosTxt {
 		for (int b = 0; b < datosEjemplar.size(); b++) {
 			if (datosEjemplar.get(b).getIdEjemplar() == id) {
 				// Busca el id, si es igual, retorna el ejemplar, sino returna null.
-				System.out.println("Entro for ej");
 				return datosEjemplar.get(b);
 			}
 		}
@@ -406,8 +371,4 @@ public class MetodosTxt {
 		}
 		return null;
 	}
-=======
-	
-	
->>>>>>> 1914f0d5eb580dbea03ca848fbe52d62cb495019
 }
