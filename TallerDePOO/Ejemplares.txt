@@ -1,0 +1,6 @@
+6053/gergre/true/Compra/2022-10-20/Y4124/Harry/0/
+3300/hfghg/true/Donacion/2022-10-20/O942/Hola/0/
+4647/hgfjghhfghg/true/Compra/2022-10-20/Q412/Chau/0/
+6053/gergre/true/Compra/2022-10-20/Y4124/Harry/0/
+3300/hfghg/false/Donacion/2022-10-20/O942/Hola/1/
+4647/hgfjghhfghg/true/Compra/2022-10-20/Q412/Chau/0/

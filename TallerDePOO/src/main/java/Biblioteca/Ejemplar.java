@@ -34,8 +34,7 @@ public class Ejemplar implements guardado{
 		this.formaAdquirida = formaAdquirida;
 		this.codUbicacion = codUbicacion;
 		this.obra = obra;
-
-		this.fechaDeBaja = LocalDate.of(1800, 01, 01);
+		this.fechaAdquisicion = LocalDate.now();
 		this.cantPedidas = 0;
 
 		// Codigo de barra
@@ -45,6 +44,22 @@ public class Ejemplar implements guardado{
 
 	public Ejemplar(int idEjemplar) {
 		this.idEjemplar = idEjemplar;
+	}
+	
+	
+	
+	
+	public Ejemplar(int idEjemplar, String observaciones, boolean disponible, FormaAdquirida formaAdquirida,
+			LocalDate fechaAdquisicion, String codUbicacion, Obra obra, int cantPedidas) {
+		
+		this.idEjemplar = idEjemplar;
+		this.observaciones = observaciones;
+		this.disponible = disponible;
+		this.formaAdquirida = formaAdquirida;
+		this.codUbicacion = codUbicacion;
+		this.obra = obra;
+		this.fechaAdquisicion = fechaAdquisicion;
+		this.cantPedidas = cantPedidas;
 	}
 
 	public Ejemplar(int idEjemplar, String observaciones, boolean disponible, int cantPedidas,
@@ -56,13 +71,11 @@ public class Ejemplar implements guardado{
 		this.cantPedidas = cantPedidas;
 		this.fechaAdquisicion = fechaAdquisicion;
 		this.formaAdquirida = formaAdquirida;
-		this.fechaDeBaja = fechaDeBaja;
+		this.fechaDeBaja = LocalDate.now();
 		this.motivoDeBaja = motivoDeBaja;
 		this.codUbicacion = codUbicacion;
 		this.obra = obra;
 		this.lector = lector;
-
-		this.setCodBarr();
 
 	}
 

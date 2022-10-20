@@ -284,7 +284,41 @@ public class MetodosTxt {
 	}
 
 	// Metodo llamado cuando se solicita el ejemplar
-	public void ejemplarPedido(Ejemplar ejemplar) {
+	public void ejemplarPedido(Ejemplar ejemplar) { //Pide un Ejemplar solo con el atributo ID
+		
+		ArrayList<Ejemplar> datosEjemplar = new ArrayList<Ejemplar>();
+		try {
+			BufferedReader br3 = new BufferedReader(new FileReader("Ejemplares.txt"));
+			String ejemplarNoDisponible;
+			while ((ejemplarNoDisponible = br3.readLine()) != null) { // Lee el archivo hasta el siguiente salto de
+																		// linea
+				StringTokenizer x = new StringTokenizer(ejemplarNoDisponible, "/");
+				datosEjemplar.add(new Ejemplar(Integer.parseInt(x.nextToken()), x.nextToken(),
+						Boolean.parseBoolean(x.nextToken()), FormaAdquirida.valueOf(x.nextToken()), LocalDate.parse(x.nextToken()),
+						x.nextToken(), new Obra(x.nextToken()), Integer.parseInt(x.nextToken())));// agrega al arraylist de String
+			}
+		} catch (Exception e) {
+		}
+		Ejemplar ejem = new Ejemplar(); //Auxiliar para guardar el ejemplar que se actualizo
+		for (int j = 0; j < datosEjemplar.size(); j++) { // Recorre el ArrayList de Ejemplares buscando el ejemplar prestado para
+			if ((datosEjemplar.get(j).getIdEjemplar() == (ejemplar.getIdEjemplar()))) { // colocandole la disponibilidad en false
+				datosEjemplar.get(j).setDisponible(false); // Setea en falso la disponibilidad
+				datosEjemplar.get(j).setCantPedidas(datosEjemplar.get(j).getCantPedidas()+1); //Incrementa en 1 la cantidad de veces pedidas del ejemplar
+				ejem = datosEjemplar.get(j);
+				break;
+				
+				
+			}
+		}
+		try {
+			File functxt = new File("Ejemplares.txt"); // Elimina el viejo Ejemplares.txt para crear uno nuevo ya actualizado
+			functxt.delete();
+			for (int i = 0; i < datosEjemplar.size(); i++) {
+				guardar(datosEjemplar.get(i), "Ejemplares.txt");
+			}
+		} catch (Exception e) {
+		}
+		
 		ArrayList<Obra> datosObra = new ArrayList<Obra>();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("Obras.txt"));
@@ -301,7 +335,7 @@ public class MetodosTxt {
 
 		for (int i = 0; i < datosObra.size(); i++) { // Recorre el nuevo ArrayList quitando 1 ejemplar disponible a la
 														// obra
-			if ((datosObra.get(i).equals(ejemplar.getObra()))) {
+			if ((datosObra.get(i).getTitulo().equals(ejem.getObra().getTitulo()))) {
 				datosObra.get(i).setCantEjemDisponible(datosObra.get(i).getCantEjemDisponible() - 1);
 				break;
 			}
@@ -313,38 +347,6 @@ public class MetodosTxt {
 			functxt.createNewFile();
 			for (int i = 0; i < datosObra.size(); i++) {
 				guardar(datosObra.get(i), "Obras.txt");
-			}
-		} catch (Exception e) {
-		}
-
-		ArrayList<Ejemplar> datosEjemplar = new ArrayList<Ejemplar>();
-		try {
-			BufferedReader br3 = new BufferedReader(new FileReader("Ejemplares.txt"));
-			String ejemplarNoDisponible;
-			while ((ejemplarNoDisponible = br3.readLine()) != null) { // Lee el archivo hasta el siguiente salto de
-																		// linea
-				StringTokenizer x = new StringTokenizer(ejemplarNoDisponible, "/");
-				datosEjemplar.add(new Ejemplar(Integer.parseInt(x.nextToken()), x.nextToken(),
-						Boolean.parseBoolean(x.nextToken()), FormaAdquirida.valueOf(x.nextToken()), x.nextToken(),
-						new Obra(x.nextToken())));// agrega al arraylist de String
-			}
-		} catch (Exception e) {
-		}
-
-		for (int i = 0; i < datosEjemplar.size(); i++) { // Recorre el ArrayList de Ejemplares buscando el ejemplar
-															// prestado para
-			if ((datosEjemplar.get(i).equals(ejemplar))) { // colocandole la disponibilidad en false
-				datosEjemplar.get(i).setDisponible(false);
-				break;
-			}
-		}
-		try {
-			File functxt = new File("Ejemplares.txt"); // Elimina el viejo Ejemplares.txt para crear uno nuevo ya
-														// actualizado
-			functxt.delete();
-			functxt.createNewFile();
-			for (int i = 0; i < datosEjemplar.size(); i++) {
-				guardar(datosEjemplar.get(i), "Ejemplares.txt");
 			}
 		} catch (Exception e) {
 		}

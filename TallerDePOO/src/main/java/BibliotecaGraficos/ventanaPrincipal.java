@@ -646,7 +646,7 @@ public class ventanaPrincipal extends JFrame {
 
 				// Si es la primera vez que se ingresa el titulo, se agrega obra y primer
 				// ejemplar
-				if (!metodo.existeObra(titulo)) {
+				if (metodo.existeObra(titulo)) {
 					Random r = new Random();
 					int ran = r.nextInt(10000);
 					try {
@@ -660,7 +660,6 @@ public class ventanaPrincipal extends JFrame {
 					}
 
 					// Guarda la obra
-					metodo.guardar(obra, "Obras.txt");
 
 				} else {
 					Obra auxObra = obra;
@@ -674,6 +673,7 @@ public class ventanaPrincipal extends JFrame {
 					} catch (OutputException e1) {
 						e1.printStackTrace();
 					}
+					metodo.guardar(obra, "Obras.txt");
 				}
 
 			}
@@ -699,7 +699,7 @@ public class ventanaPrincipal extends JFrame {
 							Prestamo prestamo = new Prestamo(textFuncPrestador.getText(), new Lector(dni), checkDomicilio.isSelected(),
 									new Ejemplar(id));
 							
-							//Guarda en txt el prestamo
+							metodo.ejemplarPedido(new Ejemplar(id));
 							metodo.guardar(prestamo, "Prestamos.txt");
 							
 							//Agrega en tabla el dni Lector, IdEjemplar, fecha Prestada y el funcionario prestador. PASARLO AL BOTON ACTUALIZAR
