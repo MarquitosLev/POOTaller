@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -133,7 +132,7 @@ public class MetodosTxt {
 
 		for (int i = 0; i < datosLector.size(); i++) {
 			if ((datosFuncionarios.get(i).equals(nombre))) {
-				return true;// retorna true si el dni se encuentra en el txt
+				return true;// retorna true si el nombre se encuentra en el txt
 			}
 		}
 		return false;
@@ -184,11 +183,11 @@ public class MetodosTxt {
 	/**
 	 * Función que busca en los archivos .txt si existe una determinada obra.
 	 * 
-	 * @param titu Se le pasa el tilulo de la obra para buscar si se encuentra o no
+	 * @param titu Se le pasa el titulo de la obra para buscar si se encuentra o no
 	 *             almacenada.
 	 * 
 	 * @return retorna 'Verdadero' en caso de encontrar alguna coicidencia y 'Falso'
-	 *         encaso contrario.
+	 *         en caso contrario.
 	 */
 	public boolean existeObra(String titu) {
 		datoObra = new ArrayList<String>();
@@ -216,7 +215,7 @@ public class MetodosTxt {
 
 	/**
 	 * Metodo que se encarga de guardar un ejemplar dentro de un archivo .txt y se
-	 * le suma 1 a la cantiad de ejemplares de y cantidad de ejemplares disponibles
+	 * le suma 1 a la cantidad de ejemplares y cantidad de ejemplares disponibles
 	 * a la obra
 	 * 
 	 * @param ejemplar Se le pasa como parámetro el ejemplar que quiere ser
@@ -241,7 +240,7 @@ public class MetodosTxt {
 		for (int i = 0; i < datosObra.size(); i++) { // Recorre el nuevo ArrayList agregando 1 ejemplar a la obra
 														// ingresada
 			if ((datosObra.get(i).equals(ejemplar.getObra()))) {
-				datosObra.get(i).setCantEjem(datosObra.get(i).getCantEjem() + 1);
+				datosObra.get(i).setCantEjem(datosObra.get(i).getCantEjem());
 				datosObra.get(i).setCantEjemDisponible(datosObra.get(i).getCantEjemDisponible() + 1);
 				break;
 			}
