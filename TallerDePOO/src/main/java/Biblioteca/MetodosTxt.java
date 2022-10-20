@@ -247,9 +247,9 @@ public class MetodosTxt {
 		}
 
 		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter("Obras.txt"));// Vacia el txt
-			bw.write("");
-			bw.close();
+			File functxt = new File("Obras.txt");
+			functxt.delete();
+			functxt.createNewFile();
 			for (int i = 0; i < datosObra.size(); i++) {
 				guardar(datosObra.get(i), "Obras.txt");
 			}
@@ -356,6 +356,7 @@ public class MetodosTxt {
 	}
 
 	public void guardarPrestamoTerminado(LocalDate fechaDevuelta, String funcionario, int ejemplar) {
+
 		if (existeFuncionario(funcionario)) {  //Comprueba que el funcionario exista
 
 			if (existeEjemplar(ejemplar)) {	//Comprueba que el ejemplar exista
@@ -480,11 +481,11 @@ public class MetodosTxt {
 								guardar(datosPrestamo.get(l), "Prestamos.txt");
 							}
 						} catch (Exception e) {
-						}
+						} 
+						break;
 					}
 				}
 			}
 		}
 	}
-	
 }
