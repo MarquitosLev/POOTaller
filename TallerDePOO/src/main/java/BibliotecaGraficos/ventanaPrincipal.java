@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -78,6 +79,7 @@ public class ventanaPrincipal extends JFrame {
 	private JTextField textCodPos;
 	private JTextField textLugarNac;
 	private JTextField textCodUbi;
+	private JTable tablaPrestamos;
 
 	public ventanaPrincipal(String userWelcome) {
 		MetodosTxt listFunc = new MetodosTxt();
@@ -516,7 +518,29 @@ public class ventanaPrincipal extends JFrame {
 		bienvenido.setFont(new Font("Britannic Bold", Font.PLAIN, 28));
 		bienvenido.setBounds(43, 19, 320, 67);
 		contentPane.add(bienvenido);
-		bienvenido.setText("�Bienvenido, " + userWelcome + "!");
+		bienvenido.setText("Bienvenido, " + userWelcome + "!");
+
+		JPanel panelEstadisticas = new JPanel();
+		tabbedPane.addTab("Estadisticas", null, panelEstadisticas, null);
+		panelEstadisticas.setLayout(null);
+		
+		JTabbedPane tabbedEstadisticas = new JTabbedPane(JTabbedPane.TOP);
+		tabbedEstadisticas.setBounds(10, 11, 740, 424);
+		panelEstadisticas.add(tabbedEstadisticas);
+		
+		JPanel ListaPrestamos = new JPanel();
+		tabbedEstadisticas.addTab("Lista", null, ListaPrestamos, null);
+		ListaPrestamos.setLayout(null);
+		
+		//TABLA QUE MUESTRA LOS PRESTAMOS
+		final DefaultTableModel modelo = new DefaultTableModel();
+		modelo.addColumn("Lector");
+		modelo.addColumn("ID Ejemplar");
+		modelo.addColumn("Fecha pedido");
+		
+		tablaPrestamos = new JTable(modelo);
+		tablaPrestamos.setBounds(43, 53, 649, 302);
+		ListaPrestamos.add(tablaPrestamos);
 
 		JLabel fondo = new JLabel("");
 		fondo.setBounds(0, 0, 777, 578);
@@ -584,7 +608,8 @@ public class ventanaPrincipal extends JFrame {
 		});
 		btnRegistrarLector.setBounds(311, 235, 143, 28);
 		panelLectores.add(btnRegistrarLector);
-
+		
+		//REGISTRO OBRA/EJEMPLAR
 		JButton btnRegistrar = new JButton("Registrar");// Registrar obra y ejemplar
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -600,7 +625,7 @@ public class ventanaPrincipal extends JFrame {
 				String genero = textGenero.getText();
 				String codUbi = textCodUbi.getText();
 
-				FormaAdquirida formaAdqui = (FormaAdquirida) boxAdquisicion.getSelectedItem();
+				FormaAdquirida formaAdqui = FormaAdquirida.valueOf(boxAdquisicion.getSelectedItem().toString());
 				String observaciones = textObservacion.getText();
 				Area area = (Area) boxArea.getSelectedItem();
 
@@ -634,10 +659,8 @@ public class ventanaPrincipal extends JFrame {
 						Ejemplar ejemplar = new Ejemplar(ran, observaciones, true, formaAdqui, codUbi, auxObra);
 						MetodosTxt.guardar(ejemplar, "Ejemplares.txt");
 					} catch (BarcodeException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (OutputException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -647,6 +670,7 @@ public class ventanaPrincipal extends JFrame {
 		btnRegistrar.setBounds(229, 356, 90, 28);
 		panelEjemplar.add(btnRegistrar);
 
+		//REALIZADO DEL PRESTAMO
 		JButton btnPrestar = new JButton("Prestar");
 		btnPrestar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -655,27 +679,33 @@ public class ventanaPrincipal extends JFrame {
 
 				// Buscar ejemplar
 				int idEjemplar = Integer.parseInt(textIDEjemplar.getText());
-				// Ejemplar ejemplar = MetodosTxt.buscarEjemplar(); //EL METODO DEBE RETORNAR EL OBJETO EJEMPLAR
-				
+				Ejemplar ejemplar = MetodosTxt.buscarEjemplar(idEjemplar); // EL METODO DEBE RETORNAR EL OBJETO EJEMPLAR
+
 				// Buscar Lector
 				int dniLector = Integer.parseInt(textDniLector.getText());
-				// Lector lector = MetodosTxt.buscarLector(); //EL METODO DEBE RETORNAR EL OBJETO LECTOR
+				Lector lector =  MetodosTxt.buscarLector(dniLector); // EL METODO DEBE RETORNAR EL OBJETO LECTOR
 
 				// Se crea el prestamo con las medidas necesarias
-				// Prestamo prestamo = new Prestamo(textFuncPrestador.getText(),
-				// LocalDate.of(1900, 01, 01), "", lector, checkDomicilio.isSelected(),
-				// ejemplar);
+				Prestamo prestamo = new Prestamo(textFuncPrestador.getText(),
+						/* LocalDate cuando se devuelva */LocalDate.of(1900, 01, 01), "", lector,
+						checkDomicilio.isSelected(), ejemplar);
 
-//				Prestamo(String funcionarioPrestador, LocalDate fechaDevuelta,
-//						String funcionarioDevuelta, Lector lector, Boolean aDomicilio, Ejemplar ejemplar)
-
-				// Prestamo prestamo = new Prestamo();
-
-				if (listFunc.existeEjemplar(idEjemplar)) {// Comprueba si existe el Ejemplar
-
+				
+				/*
+				 * Falta comprobar si el lector existe y otra cosa mas
+				 * 
+				 * */
+				if (!listFunc.existeEjemplar(idEjemplar)) {// Comprueba si existe el Ejemplar
+					MetodosTxt.guardar(prestamo, "Prestamos.txt");
+					modelo.addRow(new Object[] {lector.getApellido(), ejemplar.getIdEjemplar(), prestamo.getFechaHoraPrestada()});
 				} else {
 					JOptionPane.showMessageDialog(null, "El Ejemplar no existe", "Error", JOptionPane.ERROR_MESSAGE);
 				}
+<<<<<<< HEAD
+				
+				
+=======
+>>>>>>> 1914f0d5eb580dbea03ca848fbe52d62cb495019
 				
 				if(listFunc.existeLector(dniLector)) {
 				}	else {
@@ -747,27 +777,16 @@ public class ventanaPrincipal extends JFrame {
 		fondoL.setBounds(0, 0, 765, 444);
 		panelLectores.add(fondoL);
 
-		JPanel panel = new JPanel();
-		tabbedPane.addTab("Estadísticas", null, panel, null);
-		panel.setLayout(null);
-
-		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane_1.setBounds(10, 11, 740, 424);
-		panel.add(tabbedPane_1);
-
-		JPanel panel_1 = new JPanel();
-		tabbedPane_1.addTab("Lista", null, panel_1, null);
-		panel_1.setLayout(null);
 
 		JLabel lblNewLabel_12 = new JLabel("");
 		lblNewLabel_12.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		lblNewLabel_12.setBounds(0, 0, 735, 396);
-		panel_1.add(lblNewLabel_12);
+		ListaPrestamos.add(lblNewLabel_12);
 
 		JLabel lblNewLabel_11 = new JLabel("");
 		lblNewLabel_11.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		lblNewLabel_11.setBounds(0, 0, 760, 446);
-		panel.add(lblNewLabel_11);
+		panelEstadisticas.add(lblNewLabel_11);
 
 	}
 }
