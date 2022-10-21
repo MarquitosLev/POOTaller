@@ -28,19 +28,31 @@ public abstract class Persona {
 	/**
 	 * Constructor parametrizado de la clase Persona
 	 * 
-	 * @param nom Texto en el que se coloca el nombre del sujeto
-	 * @param apellido Texto en el que se encuentra el apellido del individuo
-	 * @param tipDoc Texto en el que esta el tipo de documento de la persona
-	 * @param numDoc Entero donde se establece el numero de documento del individuo
-	 * @param correo Texto donde se ingresa el correo correspondiente a la persona
-	 * @param numCel Entero que contiene el numero del celular de cada persona
-	 * @param fecNac Aqui esta la fecha de nacimiento del sujeto, que es de tipo "LocalDate"
-	 * @param sex Texto en el que se incluye el sexo con el que se siente identificado la persona
-	 * @param lugarNac Texto en el que se coloca el lugar donde nacio el individuo
-	 * @param domi Texto en el que se encuentra el domicilio donde reside el sujeto
-	 * @param codPos Aqui se encuentra el codigo postal, que es de tipo Entero
-	 * @param dep Texto en el que esta el departamento donde se encuentra ubicado la persona
-	 * @param localidad Texto donde se establece la localidad donde vive actualmente el sujeto
+	 * @param nom Se pasa un texto que contiene el/los nuevo/s nombre/s del sujeto y lo que hace es reemplazar el antiguo valor del atributo "nom" de la clase por el nuevo valor ingresado por parametro.
+	 * 
+	 * @param apellido Se pasa un texto con el/los nuevo/s apellido/s del individuo. Se reemplaza el antiguo valor por el nuevo, en el atributo "apellido" de la clase.
+	 * 
+	 * @param tipDoc Se pasa un texto con el nuevo tipo de documento que se desea colocar, y se reemplaza el valor antiguo de su atributo correspondiente de la clase con este nuevo valor.
+	 * 
+	 * @param numDoc Se pasa un entero con el nuevo numero de documento a colocar. Y al valor antiguo del atributo "numDoc" de la clase se lo reemplaza por este nuevo valor.
+	 * 
+	 * @param correo Se pasa un texto con el nuevo correo perteneciente a la persona. Se sustituye el antiguo correo por el nuevo, en su atributo correspondiente de la clase.
+	 * 
+	 * @param numCel Se pasa un entero con el nuevo numero de celular de la persona. Se reemplaza el antiguo numero de celular por el nuevo, en el atributo "numCel" de la clase.
+	 * 
+	 * @param fecNac Se pasa la fecha de nacimiento que se quiere agregar, que es de tipo "LocalDate". Se sustituye la fecha de nacimiento antigua por la nueva, en el atributo "fecNac" de la clase.
+	 * 
+	 * @param sex Se pasa un texto que contiene el sexo con el que se siente identificado la persona. Se reemplaza el antiguo valor del atributo "sex" de la clase, por el nuevo valor.
+	 * 
+	 * @param lugarNac Se pasa un texto con el lugar donde nacio el individuo. Se sustituye el antiguo valor del atributo "lugarNac" de la clase, por este nuevo valor ingresado.
+	 * 
+	 * @param domi Se pasa un texto con el domicilio donde reside el sujeto. Se reemplaza, en el atributo "domi" de la clase, el viejo domicilio por el nuevo.
+	 * 
+	 * @param codPos Aqui se encuentra el codigo postal, que es un entero. Lo que hace es sustituir, en su atributo correspondiente de la clase, el viejo codigo postal por el nuevo.
+	 * 
+	 * @param dep Se pasa un texto con el departamento donde se encuentra ubicado la persona. Con este parametro, lo que se hace es reemplazar el antiguo nombre del departamento por el nuevo, en el atributo "dep" de la clase.
+	 * 
+	 * @param localidad Se pasa un texto en el que esta la localidad donde vive actualmente el sujeto. Se sustituye el viejo nombre de la localidad por el nuevo, en el atributo "localidad" de la clase.
 	 */
 	public Persona(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
 			String sex, String lugarNac, String domi, int codPos, String dep, String localidad) {
@@ -59,7 +71,9 @@ public abstract class Persona {
 		this.localidad = localidad;	
 	}
 	
-	//Constructor por defecto de la clase Persona
+	/**
+	 * Constructor por defecto de la clase Persona
+	 */
 	public Persona() {
 		this.nom = "";
 		this.apellido = "";
@@ -77,7 +91,11 @@ public abstract class Persona {
 	}
 	
 	
-	//Constructor que acepta solo el dni
+	/**
+	 * Constructor que acepta solo el dni
+	 * 
+	 * @param numDoc Se pasa un entero con el numero de documento de la persona. Se lo sustituye a ese nuevo valor por el viejo, en su atributo correspondiente de la clase.
+	 */
 	public Persona(int numDoc) {
 		this.numDoc = numDoc;
 	}
@@ -85,7 +103,7 @@ public abstract class Persona {
 	/**
 	 * Funcion que retorna el nombre de la persona que es de tipo 'String'
 	 * 
-	 * @return Un String con el nombre del individuo
+	 * @return Devuelve un String con el nombre del individuo
 	 */
 	public String getNom() {
 		return nom;
@@ -94,7 +112,7 @@ public abstract class Persona {
 	/**
 	 * Metodo que settea el atributo "nom" de la clase
 	 * 
-	 * @param nom Se pasa el nombre que se quiera agregar al atributo de la clase 
+	 * @param nom Se pasa un texto con el nuevo nombre que se quiera agregar al atributo de la clase 
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
@@ -103,7 +121,7 @@ public abstract class Persona {
 	/**
 	 * Funcion que se encarga de retornar el apellido de la persona
 	 * 
-	 * @return Un String con el apellido del sujeto
+	 * @return Retorna un String con el apellido del sujeto
 	 */
 	public String getApellido() {
 		return apellido;
@@ -112,7 +130,7 @@ public abstract class Persona {
 	/**
 	 * Metodo encargado de settear el atributo "apellido" de la clase 
 	 * 
-	 * @param apellido Se pasa por parametro el apellido a agregar al atributo de la clase
+	 * @param apellido Se pasa por parametro un texto con el nuevo apellido a agregar al atributo de la clase
 	 */
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
@@ -121,7 +139,7 @@ public abstract class Persona {
 	/**
 	 * Funcion que se ocupa de retornar el tipo de documento que tiene la persona
 	 * 
-	 * @return Un String en el que se indica que tipo de documento posee
+	 * @return Devuelve un String en el que se indica que tipo de documento posee
 	 */
 	public String getTipDoc() {
 		return tipDoc;
@@ -139,7 +157,7 @@ public abstract class Persona {
 	/**
 	 * Funcion que se encarga de retornar el numero de documento perteneciente a la persona
 	 * 
-	 * @return El numero de documento de la persona, en forma de entero
+	 * @return Retorna el numero de documento de la persona, en forma de entero
 	 */
 	public int getNumDoc() {
 		return numDoc;
@@ -154,6 +172,7 @@ public abstract class Persona {
 		this.numDoc = numDoc;
 	}
 
+	
 	public String getCorreo() {
 		return correo;
 	}
@@ -226,6 +245,9 @@ public abstract class Persona {
 		this.localidad = localidad;
 	}
 
+	/**
+	 * 
+	 */
 	public String toString() {
 		return "* Nombre: " + nom + "\n* Apellido: " + apellido + "\n* tipo DNI: " + tipDoc + ", N� DNI: " + numDoc
 				+ "\n* Correo: " + correo + " - N� Celular: " + numCel + " - Fecha Nacimiento: " + fecNac + " - Sexo: " + sex + "\n* Lugar Nacimiento: "
