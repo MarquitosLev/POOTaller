@@ -260,8 +260,8 @@ public class Obra implements guardado{
 		return lista;
 	}
 	
-	public ArrayList<Object> leerTexto(){
-		ArrayList<Object> lista = new ArrayList<Object>();
+	public static ArrayList<Obra> leerTexto(){
+		ArrayList<Obra> lista = new ArrayList<Obra>();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("Obras.txt"));
 			String lector;

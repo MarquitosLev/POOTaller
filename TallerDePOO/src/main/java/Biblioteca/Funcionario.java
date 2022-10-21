@@ -89,8 +89,8 @@ public class Funcionario implements guardado{
 		return lista;
 	}
 	
-	public ArrayList<Object> leerTexto(){
-		ArrayList<Object> lista = new ArrayList<Object>();
+	public static ArrayList<Funcionario> leerTexto(){
+		ArrayList<Funcionario> lista = new ArrayList<Funcionario>();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("Funcionarios.txt"));
 			String lector;

@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 import net.sourceforge.barbecue.*;
 import net.sourceforge.barbecue.output.OutputException;
 
-public class Ejemplar implements guardado, leerArchivo{
+public class Ejemplar implements guardado{
 	private int idEjemplar;
 	private String observaciones;
 	private boolean disponible;
@@ -203,8 +203,8 @@ public class Ejemplar implements guardado, leerArchivo{
 		return lista;
 	}
 	
-	public ArrayList<Object> leerTexto(){
-		ArrayList<Object> lista = new ArrayList<Object>();
+	public static ArrayList<Ejemplar> leerTexto(){
+		ArrayList<Ejemplar> lista = new ArrayList<Ejemplar>();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("Ejemplares.txt"));
 			String lector;

@@ -623,8 +623,8 @@ public class ventanaPrincipal extends JFrame {
 				 * 
 				 */
 
-				ArrayList<Prestamo> prestamos = metodo.devuelvoPrestamo();
-				ArrayList<Lector> lectores = metodo.devuelveLector();
+				ArrayList<Prestamo> prestamos = Prestamo.leerTexto(1);
+				ArrayList<Lector> lectores = Lector.leerTexto();
 				// Vacia la tabla entera
 				for (int x = modelo.getRowCount() - 1; x >= 0; x--) {
 					modelo.removeRow(x);

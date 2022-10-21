@@ -208,8 +208,8 @@ public class Prestamo implements guardado {
 	}
 	//Se le pasa un 1 si se requiere un Array con los prestamos pendientes
 	//Se le pasa un 2 si se requiere un Array con los prestamos ya terminados
-	public ArrayList<Object> leerTexto(int num){
-		ArrayList<Object> lista = new ArrayList<Object>();
+	public static ArrayList<Prestamo> leerTexto(int num){
+		ArrayList<Prestamo> lista = new ArrayList<Prestamo>();
 		if (num == 1) {
 			try {
 				BufferedReader br = new BufferedReader(new FileReader("Prestamos.txt"));

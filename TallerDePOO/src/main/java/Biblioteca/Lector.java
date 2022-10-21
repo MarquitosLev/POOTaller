@@ -14,7 +14,7 @@ import java.time.LocalDate;
  *
  */
 
-public class Lector extends Persona implements guardado, leerArchivo{
+public class Lector extends Persona implements guardado{
 	private int canMulta;
 	private Boolean estaMultado;
 	private ArrayList<Ejemplar> ejemplares;
@@ -145,8 +145,8 @@ public class Lector extends Persona implements guardado, leerArchivo{
 		return lista;
 	}
 	
-	public ArrayList<Object> leerTexto(){
-		ArrayList<Object> lista = new ArrayList<Object>();
+	public static ArrayList<Lector> leerTexto(){
+		ArrayList<Lector> lista = new ArrayList<Lector>();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("Lectores.txt"));
 			String lector;

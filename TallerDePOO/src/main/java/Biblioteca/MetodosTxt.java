@@ -347,7 +347,7 @@ public class MetodosTxt {
 
 			if (existeEjemplar(ejemplar)) { // Comprueba que el ejemplar exista
 				
-				ArrayList<Prestamo> datosPrestamo = devuelvoPrestamo();
+				ArrayList<Prestamo> datosPrestamo = Prestamo.leerTexto(1);
 				
 				
 				// Recorre el ArrayList de Prestamos buscando el que
@@ -386,10 +386,10 @@ public class MetodosTxt {
 
 						}
 						// Obtengo las obras del Obras.txt
-						ArrayList<Obra> datosObra = devuelvoObra();
+						ArrayList<Obra> datosObra = Obra.leerTexto();
 
 						// Obtengo los ejemplares del Ejemplares.txt
-						ArrayList<Ejemplar> datosEjemplar = devuelvoEjemplar();
+						ArrayList<Ejemplar> datosEjemplar = Ejemplar.leerTexto();
 
 						// busco el ejemplar con el id ingresado
 						String nuevo = "";
@@ -450,87 +450,6 @@ public class MetodosTxt {
 			JOptionPane.showMessageDialog(null, "No existe el Funcionario", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-
-	public ArrayList<Obra> devuelvoObra() {
-		// RETORNA LISTA CON TODOS LAS OBRAS DEL TXT
-		listaObra = new ArrayList<Obra>();
-		try {
-			BufferedReader br = new BufferedReader(new FileReader("Obras.txt"));
-			String obra;
-			while ((obra = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
-				StringTokenizer x = new StringTokenizer(obra, "/");
-				listaObra.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), x.nextToken(),
-						x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(),
-						Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), Area.valueOf(x.nextToken()),
-						tipoObra.valueOf(x.nextToken())));
-			}
-		} catch (Exception e) {
-		}
-		return listaObra;
-	}
-
-	public ArrayList<Ejemplar> devuelvoEjemplar() {
-
-		listaEjemplar = new ArrayList<Ejemplar>();
-
-		try {
-			BufferedReader br = new BufferedReader(new FileReader("Ejemplares.txt"));
-			String ejemplar;
-			while ((ejemplar = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
-				StringTokenizer x = new StringTokenizer(ejemplar, "/");
-				listaEjemplar.add(new Ejemplar(Integer.parseInt(x.nextToken()), x.nextToken(),
-						Boolean.parseBoolean(x.nextToken()), FormaAdquirida.valueOf(x.nextToken()),
-						LocalDate.parse(x.nextToken()), x.nextToken(), new Obra(x.nextToken()),
-						Integer.parseInt(x.nextToken())));
-
-			}
-		} catch (Exception e) {
-		}
-		return listaEjemplar;
-	}
-
-	public ArrayList<Prestamo> devuelvoPrestamo() {
-		// Retorna un ArrayList con todos los prestamos
-
-		listaPrestamo = new ArrayList<Prestamo>();
-
-		try {
-			BufferedReader br = new BufferedReader(new FileReader("Prestamos.txt"));
-			String prestamo;
-			while ((prestamo = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
-				StringTokenizer x = new StringTokenizer(prestamo, "/");
-				listaPrestamo.add(new Prestamo(LocalDate.parse(x.nextToken()), x.nextToken(),
-						LocalDate.parse(x.nextToken()), Boolean.parseBoolean(x.nextToken()),
-						new Lector(Integer.parseInt(x.nextToken())), new Ejemplar(Integer.parseInt(x.nextToken()))));
-			}
-		} catch (Exception e) {
-		}
-
-		return listaPrestamo;
-	}
-
-	public ArrayList<Lector> devuelveLector() {
-		// Retorna un ArrayList con todos los Lectores
-
-		listaLector = new ArrayList<Lector>();
-
-		try {
-			BufferedReader br = new BufferedReader(new FileReader("Lectores.txt"));
-			String lec;
-			while ((lec = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
-				StringTokenizer x = new StringTokenizer(lec, "/");
-				listaLector.add(new Lector(x.nextToken(), x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()),
-						x.nextToken(), Integer.parseInt(x.nextToken()), LocalDate.parse(x.nextToken()), x.nextToken(),
-						x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()), x.nextToken(), x.nextToken(), 
-						Integer.parseInt(x.nextToken()), Boolean.parseBoolean(x.nextToken())));
-				
-			}
-		} catch (Exception e) {
-		}
-
-		return listaLector;
-	}
-
 	
 	public boolean fechaPasada(Prestamo pres) {
 		Long x = ChronoUnit.DAYS.between(pres.getFechaHoraADevolver(), LocalDate.now()); // 20-10 < 21-10
@@ -543,8 +462,8 @@ public class MetodosTxt {
 
 	public boolean hayDisponibles(int id) {
 		
-		ArrayList<Ejemplar> ejemplares = devuelvoEjemplar();
-		ArrayList<Obra> obras = devuelvoObra();
+		ArrayList<Ejemplar> ejemplares = Ejemplar.leerTexto();
+		ArrayList<Obra> obras = Obra.leerTexto();
 		
 		for(int i = 0; i < ejemplares.size(); i++) {
 			
