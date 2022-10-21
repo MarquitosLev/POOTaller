@@ -96,7 +96,10 @@ public class Ejemplar implements guardado{
 	public void setIdEjemplar(int idEjemplar) {
 		this.idEjemplar = idEjemplar;
 	}
-
+	
+	/*
+	 * CODIGO DE BARRA
+	 */
 	private void setCodBarr() throws BarcodeException, OutputException{
 		String aux = this.codUbicacion + " " + String.valueOf(this.idEjemplar);
     	Barcode CodBarr = BarcodeFactory.createCode128(aux);

@@ -622,27 +622,33 @@ public class ventanaPrincipal extends JFrame {
 		actualizoMorosos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				// ACTUALIZAR LA TABLA CON LOS MOROSOS (LECTORES QUE NO DEVOLVIERON DESPUES DE
-				// FECHA A DEVOLVER
+				/*
+				 * ACTUALIZAR LA TABLA CON LOS MOROSOS (LECTORES QUE NO DEVOLVIERON DESPUES DE
+				 * FECHA A DEVOLVER
+				 * 
+				 */
 
 				ArrayList<Prestamo> prestamos = metodo.devuelvoPrestamo();
 				ArrayList<Lector> lectores = metodo.devuelveLector();
+				//Vacia la tabla entera
+				for(int x = modelo.getRowCount() - 1; x >= 0; x-- ) {
+					modelo.removeRow(x);
+				}
 				
 				//Busca los prestamos
 				for (int i = 0; i < prestamos.size(); i++) {
 					//Busca los lectores, para obtener sus atributos
-					for (int j = 0; i < lectores.size(); j++) {
+					for (int j = 0; j < lectores.size(); j++) {
 						//Verifica si es a domicilio, si se paso de la fecha y si el dni del lector 
 						// de prestamo es igual al dni de lista lector
 						if (prestamos.get(i).getaDomicilio() && metodo.fechaPasada(prestamos.get(i))
 								&& prestamos.get(i).getLector().getNumDoc() == lectores.get(j).getNumDoc()) {
 							Object[] vec = new Object[6];
-
-							vec[0] = lectores.get(i).getNom();
-							vec[1] = lectores.get(i).getApellido();
-							vec[2] = lectores.get(i).getTipDoc();
-							vec[3] = lectores.get(i).getNumDoc();
-							vec[4] = lectores.get(i).getNumCel();
+							vec[0] = lectores.get(j).getNom();
+							vec[1] = lectores.get(j).getApellido();
+							vec[2] = lectores.get(j).getTipDoc();
+							vec[3] = lectores.get(j).getNumDoc();
+							vec[4] = lectores.get(j).getNumCel();
 							vec[5] = prestamos.get(i).getEjemplar().getIdEjemplar();
 							
 							//Agrega la tabla

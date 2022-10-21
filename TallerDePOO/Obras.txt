@@ -1,2 +1,3 @@
-1/-1/Hola1/sub/priA/segA/terA/gen/1234/12/Matematica/Libro/
+1/0/Hola1/sub/priA/segA/terA/gen/1234/12/Matematica/Libro/
 1/0/Java22/-/-/-/-/-/125462/7755/Matematica/Libro/
+1/1/Domino/-/-/-/-/-/7755/901/Contabilidad/Investigacion/

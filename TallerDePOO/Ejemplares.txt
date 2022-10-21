@@ -1,2 +1,3 @@
-7727/Obs/false/Compra/2022-10-20/codUbi/Hola1/2/
-6511/Esta okei/false/Compra/2022-10-20/O777/Java22/2/
+7727/Obs/false/Compra/2022-10-20/codUbi/Hola1/4/
+6511/Esta okei/false/Compra/2022-10-20/O777/Java22/4/
+1196/___/true/Donacion/2022-10-21/H123/Domino/1/

@@ -547,7 +547,7 @@ public class MetodosTxt {
 		listaLector = new ArrayList<Lector>();
 
 		try {
-			BufferedReader br = new BufferedReader(new FileReader("Lector.txt"));
+			BufferedReader br = new BufferedReader(new FileReader("Lectores.txt"));
 			String lec;
 			while ((lec = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
 				StringTokenizer x = new StringTokenizer(lec, "/");
@@ -555,9 +555,6 @@ public class MetodosTxt {
 						x.nextToken(), Integer.parseInt(x.nextToken()), LocalDate.parse(x.nextToken()), x.nextToken(),
 						x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()), x.nextToken(), x.nextToken(), 
 						Integer.parseInt(x.nextToken()), Boolean.parseBoolean(x.nextToken())));
-				
-				x.nextToken(); //Tipolector
-				x.nextToken(); //Carrera, en caso de que sea Docente
 				
 			}
 		} catch (Exception e) {
@@ -570,9 +567,9 @@ public class MetodosTxt {
 	public boolean fechaPasada(Prestamo pres) {
 		Long x = ChronoUnit.DAYS.between(pres.getFechaHoraADevolver(), LocalDate.now()); // 20-10 < 21-10
 		if(x < 0) {
-			return true;
-		}else {
 			return false;
+		}else {
+			return true;
 		}
 	}
 
