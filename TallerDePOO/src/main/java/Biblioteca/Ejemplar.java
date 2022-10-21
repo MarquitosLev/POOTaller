@@ -1,13 +1,16 @@
 package Biblioteca;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import net.sourceforge.barbecue.*;
 import net.sourceforge.barbecue.output.OutputException;
 
-public class Ejemplar implements guardado{
+public class Ejemplar implements guardado, leerArchivo{
 	private int idEjemplar;
 	private String observaciones;
 	private boolean disponible;
@@ -199,5 +202,21 @@ public class Ejemplar implements guardado{
 		lista.add(getCantPedidas());
 		return lista;
 	}
+	
+	public ArrayList<Object> leerTexto(){
+		ArrayList<Object> lista = new ArrayList<Object>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("Ejemplares.txt"));
+			String lector;
+			while ((lector = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+				StringTokenizer x = new StringTokenizer(lector, "/");
+				lista.add(new Ejemplar(Integer.parseInt(x.nextToken()), x.nextToken(), Boolean.parseBoolean(x.nextToken()),
+						FormaAdquirida.valueOf(x.nextToken()), LocalDate.parse(x.nextToken()), x.nextToken(), new Obra(x.nextToken()),
+						Integer.parseInt(x.nextToken())));
 
+			}
+		} catch (Exception e) {
+		}
+		return lista;
+	}
 }

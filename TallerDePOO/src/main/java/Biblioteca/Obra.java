@@ -1,5 +1,9 @@
 package Biblioteca;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * Clase que representa a las obras que se tienen registradas en la biblioteca
@@ -253,6 +257,23 @@ public class Obra implements guardado{
 		lista.add(getId());
 		lista.add(getArea());
 		lista.add(getTipo());
+		return lista;
+	}
+	
+	public ArrayList<Object> leerTexto(){
+		ArrayList<Object> lista = new ArrayList<Object>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("Obras.txt"));
+			String lector;
+			while ((lector = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+				StringTokenizer x = new StringTokenizer(lector, "/");
+				lista.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()),
+						x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(),
+						Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), Area.valueOf(x.nextToken()),
+						tipoObra.valueOf(x.nextToken())));
+			}
+		} catch (Exception e) {
+		}
 		return lista;
 	}
 }

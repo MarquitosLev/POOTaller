@@ -1,5 +1,8 @@
 package Biblioteca;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.time.LocalDate;
 
 /**
@@ -11,7 +14,7 @@ import java.time.LocalDate;
  *
  */
 
-public class Lector extends Persona implements guardado{
+public class Lector extends Persona implements guardado, leerArchivo{
 	private int canMulta;
 	private Boolean estaMultado;
 	private ArrayList<Ejemplar> ejemplares;
@@ -139,6 +142,24 @@ public class Lector extends Persona implements guardado{
 		lista.add(getEstaMultado());
 		lista.add(this.getClass().getSimpleName());
 		lista.add("");
+		return lista;
+	}
+	
+	public ArrayList<Object> leerTexto(){
+		ArrayList<Object> lista = new ArrayList<Object>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("Lectores.txt"));
+			String lector;
+			while ((lector = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+				StringTokenizer x = new StringTokenizer(lector, "/");
+				lista.add(new Lector(x.nextToken(), x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()),
+						x.nextToken(), Integer.parseInt(x.nextToken()), LocalDate.parse(x.nextToken()), x.nextToken(),
+						x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()), x.nextToken(), x.nextToken(),
+						Integer.parseInt(x.nextToken()), Boolean.parseBoolean(lector)));
+
+			}
+		} catch (Exception e) {
+		}
 		return lista;
 	}
 }

@@ -1,5 +1,8 @@
 package Biblioteca;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * Clase que representa al funcionario de la biblioteca.
@@ -83,6 +86,20 @@ public class Funcionario implements guardado{
 		ArrayList<Object> lista = new ArrayList<Object> ();
 		lista.add(getUsuario());
 		lista.add(getContrasenia());
+		return lista;
+	}
+	
+	public ArrayList<Object> leerTexto(){
+		ArrayList<Object> lista = new ArrayList<Object>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("Funcionarios.txt"));
+			String lector;
+			while ((lector = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+				StringTokenizer x = new StringTokenizer(lector, "/");
+				lista.add(new Funcionario(x.nextToken(), x.nextToken()));
+			}
+		} catch (Exception e) {
+		}
 		return lista;
 	}
 }

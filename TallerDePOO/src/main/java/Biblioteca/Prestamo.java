@@ -2,7 +2,10 @@ package Biblioteca;
 //import java.util.Date;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 import java.time.temporal.ChronoUnit;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.LocalDate;
 
@@ -203,4 +206,39 @@ public class Prestamo implements guardado {
 		lista.add(getEjemplar().getIdEjemplar());
 		return lista;
 	}
+	//Se le pasa un 1 si se requiere un Array con los prestamos pendientes
+	//Se le pasa un 2 si se requiere un Array con los prestamos ya terminados
+	public ArrayList<Object> leerTexto(int num){
+		ArrayList<Object> lista = new ArrayList<Object>();
+		if (num == 1) {
+			try {
+				BufferedReader br = new BufferedReader(new FileReader("Prestamos.txt"));
+				String lector;
+				while ((lector = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+					StringTokenizer x = new StringTokenizer(lector, "/");
+					lista.add(new Prestamo(LocalDate.parse(x.nextToken()), x.nextToken(), LocalDate.parse(x.nextToken()),
+							Boolean.parseBoolean(x.nextToken()), new Lector(Integer.parseInt(x.nextToken())),
+									new Ejemplar(Integer.parseInt(x.nextToken()))));
+	
+				}
+			} catch (Exception e) {
+			}
+			return lista;
+		} else {
+			try {
+				BufferedReader br = new BufferedReader(new FileReader("PrestamosTerminados.txt"));
+				String lector;
+				while ((lector = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+					StringTokenizer x = new StringTokenizer(lector, "/");
+					lista.add(new Prestamo(LocalDate.parse(x.nextToken()), x.nextToken(), LocalDate.parse(x.nextToken()),
+							LocalDate.parse(x.nextToken()), x.nextToken(),
+							Boolean.parseBoolean(x.nextToken()), new Lector(Integer.parseInt(x.nextToken())),
+									new Ejemplar(Integer.parseInt(x.nextToken()))));
+	
+				}
+			} catch (Exception e) {
+			}
+			return lista;
+	}
+}
 }
