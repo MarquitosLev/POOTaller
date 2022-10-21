@@ -11,6 +11,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import javax.swing.JOptionPane;
+
 /**
  * La clase se encarga de almacenar un conjunto de metodos que sirven para
  * guardar elementos y acciones como prestamos, obra, Ejemplar, funcionario,
@@ -344,24 +346,14 @@ public class MetodosTxt {
 		if (comprobarFuncionario(funcionario)) { // Comprueba que el funcionario exista
 
 			if (existeEjemplar(ejemplar)) { // Comprueba que el ejemplar exista
-
-				ArrayList<Prestamo> datosPrestamo = new ArrayList<Prestamo>();
-				try { // Genera un ArrayList con todos los prestamos guardados
-					BufferedReader br = new BufferedReader(new FileReader("Prestamos.txt"));
-					String prestamo;
-					while ((prestamo = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
-						StringTokenizer x = new StringTokenizer(prestamo, "/");
-
-						datosPrestamo.add(new Prestamo(LocalDate.parse(x.nextToken()), x.nextToken(),
-								LocalDate.parse(x.nextToken()), Boolean.parseBoolean(x.nextToken()),
-								new Lector(Integer.parseInt(x.nextToken())),
-								new Ejemplar(Integer.parseInt(x.nextToken()))));// agrega al arraylist de String
-					}
-				} catch (Exception e) {
-				}
-
-				for (int i = 0; i < datosPrestamo.size(); i++) { // Recorre el ArrayList de Prestamos buscando el que
-					Ejemplar EjemplarAux = new Ejemplar(ejemplar); // coincide con el ejemplar ingresado
+				
+				ArrayList<Prestamo> datosPrestamo = devuelvoPrestamo();
+				
+				
+				// Recorre el ArrayList de Prestamos buscando el que
+				// coincide con el ejemplar ingresado
+				for (int i = 0; i < datosPrestamo.size(); i++) { 
+					Ejemplar EjemplarAux = new Ejemplar(ejemplar); 
 					if (datosPrestamo.get(i).getEjemplar().getIdEjemplar() == EjemplarAux.getIdEjemplar()) {
 						Prestamo aux = datosPrestamo.get(i);
 						Prestamo prestamoDevuelto = new Prestamo(aux.getFechaHoraPrestada(),
@@ -394,38 +386,10 @@ public class MetodosTxt {
 
 						}
 						// Obtengo las obras del Obras.txt
-						ArrayList<Obra> datosObra = new ArrayList<Obra>();
-						try {
-							BufferedReader br2 = new BufferedReader(new FileReader("Obras.txt"));
-							String obra;
-							while ((obra = br2.readLine()) != null) { // Lee el archivo hasta el siguiente salto de
-																		// linea
-								StringTokenizer x = new StringTokenizer(obra, "/");
-								datosObra.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()),
-										x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(),
-										x.nextToken(), Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()),
-										Area.valueOf(x.nextToken()), tipoObra.valueOf(x.nextToken())));// agrega al
-																										// arraylist de
-																										// String
-							}
-						} catch (Exception e) {
-						}
-						// Obtengo los ejemplares del Ejemplares.txt
-						ArrayList<Ejemplar> datosEjemplar = new ArrayList<Ejemplar>();
-						try {
-							BufferedReader br3 = new BufferedReader(new FileReader("Ejemplares.txt"));
-							String ejemplar1;
-							while ((ejemplar1 = br3.readLine()) != null) { // Lee el archivo hasta el siguiente salto de
-																			// linea
-								StringTokenizer x = new StringTokenizer(ejemplar1, "/");
-								datosEjemplar.add(new Ejemplar(Integer.parseInt(x.nextToken()), x.nextToken(),
-										Boolean.parseBoolean(x.nextToken()), FormaAdquirida.valueOf(x.nextToken()),
-										LocalDate.parse(x.nextToken()), x.nextToken(), new Obra(x.nextToken()),
-										Integer.parseInt(x.nextToken())));// agrega al arraylist de String
+						ArrayList<Obra> datosObra = devuelvoObra();
 
-							}
-						} catch (Exception e) {
-						}
+						// Obtengo los ejemplares del Ejemplares.txt
+						ArrayList<Ejemplar> datosEjemplar = devuelvoEjemplar();
 
 						// busco el ejemplar con el id ingresado
 						String nuevo = "";
@@ -479,7 +443,11 @@ public class MetodosTxt {
 						break;
 					}
 				}
+			}else {
+				JOptionPane.showMessageDialog(null, "No existe el Ejemplar", "Error", JOptionPane.ERROR_MESSAGE);
 			}
+		}else {
+			JOptionPane.showMessageDialog(null, "No existe el Funcionario", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -573,5 +541,24 @@ public class MetodosTxt {
 		}
 	}
 
-	
+	public boolean hayDisponibles(int id) {
+		
+		ArrayList<Ejemplar> ejemplares = devuelvoEjemplar();
+		ArrayList<Obra> obras = devuelvoObra();
+		
+		for(int i = 0; i < ejemplares.size(); i++) {
+			
+			for(int t = 0; t < obras.size(); t++) {
+				//Si el id del ejemplar y el titulo de obra y ejemplar son iguales, es verdadero
+				if(ejemplares.get(i).getIdEjemplar() == id && 
+						ejemplares.get(i).getObra().getTitulo().equals(obras.get(t).getTitulo())) {
+					
+					if(obras.get(t).getCantEjemDisponible() > 0) {
+						return true;
+					}
+				}
+			}	
+		}
+		return false;
+	}
 }

@@ -538,12 +538,7 @@ public class ventanaPrincipal extends JFrame {
 		// TABLA QUE MUESTRA LOS PRESTAMOS ACTIVOS
 		final DefaultTableModel modelo = new DefaultTableModel();
 		/*
-		 * nombre
-		 * apellido
-		 * tipo dni
-		 * num dni
-		 * celular
-		 * ejemplares
+		 * nombre apellido tipo dni num dni celular ejemplares
 		 */
 		modelo.addColumn("Nombre Lector");
 		modelo.addColumn("Apellido Lector");
@@ -566,7 +561,7 @@ public class ventanaPrincipal extends JFrame {
 		listaPrestamosTerminados.add(tablaPrestamosTerminados);
 		try {
 			final DefaultTableModel modelo2 = new DefaultTableModel();
-			
+
 			modelo2.addColumn("DNI Lector");
 			modelo2.addColumn("ID Ejemplar");
 			modelo2.addColumn("Fecha pedido");
@@ -630,16 +625,16 @@ public class ventanaPrincipal extends JFrame {
 
 				ArrayList<Prestamo> prestamos = metodo.devuelvoPrestamo();
 				ArrayList<Lector> lectores = metodo.devuelveLector();
-				//Vacia la tabla entera
-				for(int x = modelo.getRowCount() - 1; x >= 0; x-- ) {
+				// Vacia la tabla entera
+				for (int x = modelo.getRowCount() - 1; x >= 0; x--) {
 					modelo.removeRow(x);
 				}
-				
-				//Busca los prestamos
+
+				// Busca los prestamos
 				for (int i = 0; i < prestamos.size(); i++) {
-					//Busca los lectores, para obtener sus atributos
+					// Busca los lectores, para obtener sus atributos
 					for (int j = 0; j < lectores.size(); j++) {
-						//Verifica si es a domicilio, si se paso de la fecha y si el dni del lector 
+						// Verifica si es a domicilio, si se paso de la fecha y si el dni del lector
 						// de prestamo es igual al dni de lista lector
 						if (prestamos.get(i).getaDomicilio() && metodo.fechaPasada(prestamos.get(i))
 								&& prestamos.get(i).getLector().getNumDoc() == lectores.get(j).getNumDoc()) {
@@ -650,8 +645,8 @@ public class ventanaPrincipal extends JFrame {
 							vec[3] = lectores.get(j).getNumDoc();
 							vec[4] = lectores.get(j).getNumCel();
 							vec[5] = prestamos.get(i).getEjemplar().getIdEjemplar();
-							
-							//Agrega la tabla
+
+							// Agrega la tabla
 							modelo.addRow(vec);
 						}
 
@@ -824,42 +819,34 @@ public class ventanaPrincipal extends JFrame {
 
 				// Realizado de prestamo
 
+				// FALTA EL COMPROBAR SI HAY EJEMPLARES DISPONIBLES DE LA OBRA (METODO)
+				// USAR EL METODO DE hayDisponibles(id);
+
 				int id = Integer.parseInt(textIDEjemplar.getText()); // Convierte a entero el id del ejemplar pasado
 				int dni = Integer.parseInt(textDniLector.getText()); // Convierte a entero el DNI del lector pasado
-				// Buscar existencia del Ejemplar
-				if (metodo.existeEjemplar(id)) {
-					// Buscar existencia del Lector
-					if (metodo.existeLector(dni)) {
-						// Buscar existencia del Funcionario
-						if (metodo.comprobarFuncionario(textFuncPrestador.getText())) {
-							Prestamo prestamo = new Prestamo(textFuncPrestador.getText(), new Lector(dni),
-									checkDomicilio.isSelected(), new Ejemplar(id));
+				// Buscar existencia del Ejemplar, del lector y del funcionario
+				if (metodo.existeEjemplar(id) && metodo.existeLector(dni)
+						&& metodo.comprobarFuncionario(textFuncPrestador.getText())) {
+					
+					//Comprueba si hay ejemplares disponibles
+					if (metodo.hayDisponibles(id)) {
+						Prestamo prestamo = new Prestamo(textFuncPrestador.getText(), new Lector(dni),
+								checkDomicilio.isSelected(), new Ejemplar(id));
 
-							metodo.ejemplarPedido(new Ejemplar(id));
-							metodo.guardar(prestamo, "Prestamos.txt");
-
-						} else {
-							JOptionPane.showMessageDialog(null, "El funcionario no existe", "Error",
-									JOptionPane.ERROR_MESSAGE);
-						}
-					} else {
-						JOptionPane.showMessageDialog(null, "El lector no existe", "Error", JOptionPane.ERROR_MESSAGE);
+						// Realiza los cambios de obra y ejemplar, si esta disponible y cantidad.
+						metodo.ejemplarPedido(new Ejemplar(id));
+						// Guarda el nuevo prestamo
+						metodo.guardar(prestamo, "Prestamos.txt");
+					}else {
+						JOptionPane.showMessageDialog(null, "Ejemplar " + id + " ya esta prestado." , "Error", JOptionPane.ERROR_MESSAGE);
 					}
 
 				} else {
-					JOptionPane.showMessageDialog(null, "El ejemplar no existe", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Hay datos erroneos", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-
-				// Buscar Lector
-
-				// Se crea el prestamo con las medidas necesarias
-
-				/*
-				 * Falta comprobar si el lector existe y otra cosa mas
-				 * 
-				 */
-
-				// guardar(new Prestamo(), "Prestamos.txt"); //Guardar prestamo
+				textIDEjemplar.setText("");
+				textDniLector.setText("");
+				textFuncPrestador.setText("");
 			}
 		});
 		btnPrestar.setBounds(561, 93, 89, 28);
@@ -874,11 +861,14 @@ public class ventanaPrincipal extends JFrame {
 				int mes = Integer.parseInt(textMesDevuelto.getText());
 				int anio = Integer.parseInt(textAnioDevuelto.getText());
 
+				/**
+				 * COMPROBAR SI LA FECHA SE INGRESO MAL, NO CON TRY
+				 */
 				LocalDate fechaDevuelta = LocalDate.of(anio, mes, dia);
 
 				String funcionario = textFuncRecibidor.getText();
 
-				int idEjemplar = Integer.parseInt(textIDEjemplar.getText());
+				int idEjemplar = Integer.parseInt(textIDEjemplarDevuelta.getText());
 
 				// try comprueba si existe el prestamo, sino sale error
 				try {
@@ -886,7 +876,11 @@ public class ventanaPrincipal extends JFrame {
 				} catch (Exception t) {
 					JOptionPane.showMessageDialog(null, "No existe el Prestamo", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-
+				textIDEjemplarDevuelta.setText("");
+				textFuncRecibidor.setText("");
+				textDiaDevuelto.setText("");
+				textMesDevuelto.setText("");
+				textAnioDevuelto.setText("");
 			}
 		});
 		btnDevuelto.setBounds(493, 291, 89, 28);
