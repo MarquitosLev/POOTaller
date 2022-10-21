@@ -3,10 +3,14 @@ import java.time.LocalDate;
 
 /**
  * Clase que contiene todos los datos de las personas que concurren a la biblioteca
+ * 
  * @author Santiago Fernandez Gomez
+ * @author Marcos Leiva
+ * @author Leandro Gonzalez Fister
+ * @author Sebastian Etchepare
  * 
  */
-abstract class Persona {
+public abstract class Persona {
 	private String nom;
 	private String apellido;
 	private String tipDoc;
@@ -24,19 +28,19 @@ abstract class Persona {
 	/**
 	 * Constructor parametrizado de la clase Persona
 	 * 
-	 * @param nom
-	 * @param apellido
-	 * @param tipDoc
-	 * @param numDoc
-	 * @param correo
-	 * @param numCel
-	 * @param fecNac
-	 * @param sex
-	 * @param lugarNac
-	 * @param domi
-	 * @param codPos
-	 * @param dep
-	 * @param localidad
+	 * @param nom Texto en el que se coloca el nombre del sujeto
+	 * @param apellido Texto en el que se encuentra el apellido del individuo
+	 * @param tipDoc Texto en el que esta el tipo de documento de la persona
+	 * @param numDoc Entero donde se establece el numero de documento del individuo
+	 * @param correo Texto donde se ingresa el correo correspondiente a la persona
+	 * @param numCel Entero que contiene el numero del celular de cada persona
+	 * @param fecNac Aqui esta la fecha de nacimiento del sujeto, que es de tipo "LocalDate"
+	 * @param sex Texto en el que se incluye el sexo con el que se siente identificado la persona
+	 * @param lugarNac Texto en el que se coloca el lugar donde nacio el individuo
+	 * @param domi Texto en el que se encuentra el domicilio donde reside el sujeto
+	 * @param codPos Aqui se encuentra el codigo postal, que es de tipo Entero
+	 * @param dep Texto en el que esta el departamento donde se encuentra ubicado la persona
+	 * @param localidad Texto donde se establece la localidad donde vive actualmente el sujeto
 	 */
 	public Persona(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
 			String sex, String lugarNac, String domi, int codPos, String dep, String localidad) {
@@ -81,7 +85,7 @@ abstract class Persona {
 	/**
 	 * Funcion que retorna el nombre de la persona que es de tipo 'String'
 	 * 
-	 * @return un String con el nombre del individuo
+	 * @return Un String con el nombre del individuo
 	 */
 	public String getNom() {
 		return nom;
@@ -99,7 +103,7 @@ abstract class Persona {
 	/**
 	 * Funcion que se encarga de retornar el apellido de la persona
 	 * 
-	 * @return un String con el apellido del sujeto
+	 * @return Un String con el apellido del sujeto
 	 */
 	public String getApellido() {
 		return apellido;
@@ -117,7 +121,7 @@ abstract class Persona {
 	/**
 	 * Funcion que se ocupa de retornar el tipo de documento que tiene la persona
 	 * 
-	 * @return un String en el que se indica que tipo de documento posee
+	 * @return Un String en el que se indica que tipo de documento posee
 	 */
 	public String getTipDoc() {
 		return tipDoc;
@@ -132,10 +136,20 @@ abstract class Persona {
 		this.tipDoc = tipDoc;
 	}
 
+	/**
+	 * Funcion que se encarga de retornar el numero de documento perteneciente a la persona
+	 * 
+	 * @return El numero de documento de la persona, en forma de entero
+	 */
 	public int getNumDoc() {
 		return numDoc;
 	}
 
+	/**
+	 * Metodo en el cual se settea el atributo "numDoc" de la clase
+	 * 
+	 * @param numDoc Se pasa el numero de documento que se quiere agregar al atributo de la clase
+	 */
 	public void setNumDoc(int numDoc) {
 		this.numDoc = numDoc;
 	}
