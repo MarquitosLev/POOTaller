@@ -12,6 +12,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Random;
 import java.awt.event.ActionEvent;
 import javax.swing.JTabbedPane;
@@ -82,7 +83,7 @@ public class ventanaPrincipal extends JFrame {
 	private JTextField textCodPos;
 	private JTextField textLugarNac;
 	private JTextField textCodUbi;
-	private JTable tablaPrestamosActivos;
+	private JTable tableMorosos;
 	private JTable tablaPrestamosTerminados;
 	private JTextField textCarreras;
 
@@ -359,7 +360,7 @@ public class ventanaPrincipal extends JFrame {
 		panelLectores.setLayout(null);
 
 		final JComboBox boxTipoLector = new JComboBox();
-		boxTipoLector.setModel(new DefaultComboBoxModel(new String[] {"Lector", "Alumno", "Docente"}));
+		boxTipoLector.setModel(new DefaultComboBoxModel(new String[] { "Lector", "Alumno", "Docente" }));
 		boxTipoLector.setBounds(422, 181, 122, 22);
 		panelLectores.add(boxTipoLector);
 
@@ -531,42 +532,130 @@ public class ventanaPrincipal extends JFrame {
 		panelEstadisticas.add(tabbedEstadisticas);
 
 		JPanel ListaPrestamosActivos = new JPanel();
-		tabbedEstadisticas.addTab("Prestamos Activos", null, ListaPrestamosActivos, null);
+		tabbedEstadisticas.addTab("Morosos", null, ListaPrestamosActivos, null);
 		ListaPrestamosActivos.setLayout(null);
 
 		// TABLA QUE MUESTRA LOS PRESTAMOS ACTIVOS
 		final DefaultTableModel modelo = new DefaultTableModel();
-		modelo.addColumn("Lector");
-		modelo.addColumn("ID Ejemplar");
-		modelo.addColumn("Fecha pedido");
-		modelo.addColumn("Funcionario Prestador");
+		/*
+		 * nombre
+		 * apellido
+		 * tipo dni
+		 * num dni
+		 * celular
+		 * ejemplares
+		 */
+		modelo.addColumn("Nombre Lector");
+		modelo.addColumn("Apellido Lector");
+		modelo.addColumn("Tipo Dni");
+		modelo.addColumn("Nro Dni");
+		modelo.addColumn("Nro Celular");
+		modelo.addColumn("Ejemplares");
 
-		tablaPrestamosActivos = new JTable(modelo);
-		tablaPrestamosActivos.setBounds(43, 53, 649, 302);
-		ListaPrestamosActivos.add(tablaPrestamosActivos);
+		tableMorosos = new JTable(modelo);
+		tableMorosos.setBounds(43, 53, 649, 302);
+		ListaPrestamosActivos.add(tableMorosos);
 
 		// TABLA QUE MUESTRA PRESTAMOS TERMINADOS
 		JPanel listaPrestamosTerminados = new JPanel();
-		tabbedEstadisticas.addTab("Prestamo Terminado", null, listaPrestamosTerminados, null);
+		tabbedEstadisticas.addTab("", null, listaPrestamosTerminados, null);
 		listaPrestamosTerminados.setLayout(null);
 
 		tablaPrestamosTerminados = new JTable((TableModel) null);
 		tablaPrestamosTerminados.setBounds(43, 47, 649, 302);
 		listaPrestamosTerminados.add(tablaPrestamosTerminados);
+		try {
+			final DefaultTableModel modelo2 = new DefaultTableModel();
+			
+			modelo2.addColumn("DNI Lector");
+			modelo2.addColumn("ID Ejemplar");
+			modelo2.addColumn("Fecha pedido");
+			modelo2.addColumn("Fecha Devuelta");
+			modelo2.addColumn("Funcionario Prestador");
+			modelo2.addColumn("Funcionario Devuelto");
 
-		final DefaultTableModel modelo2 = new DefaultTableModel();
-		modelo2.addColumn("DNI Lector");
-		modelo2.addColumn("ID Ejemplar");
-		modelo2.addColumn("Fecha pedido");
-		modelo2.addColumn("Fecha Devuelta");
-		modelo2.addColumn("Funcionario Prestador");
-		modelo2.addColumn("Funcionario Devuelto");
+		} catch (Exception e) {
+		}
 
 		JLabel fondo = new JLabel("");
 		fondo.setBounds(0, 0, 777, 578);
 		fondo.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		contentPane.add(fondo);
 		setLocationRelativeTo(null);
+
+		textCodUbi = new JTextField();
+		textCodUbi.setBounds(502, 233, 122, 28);
+		panelEjemplar.add(textCodUbi);
+		textCodUbi.setColumns(10);
+
+		JLabel lblNewLabel_10 = new JLabel("Codigo de Ubicacion");
+		lblNewLabel_10.setForeground(Color.WHITE);
+		lblNewLabel_10.setBounds(502, 200, 122, 16);
+		panelEjemplar.add(lblNewLabel_10);
+
+		JLabel lblNewLabel_9 = new JLabel("A domicilio");
+		lblNewLabel_9.setForeground(Color.WHITE);
+		lblNewLabel_9.setBounds(459, 105, 90, 16);
+		panelPrestamo.add(lblNewLabel_9);
+
+		JLabel lblNewLabel_2_3_2_2 = new JLabel("0345");
+		lblNewLabel_2_3_2_2.setForeground(Color.WHITE);
+		lblNewLabel_2_3_2_2.setBounds(422, 117, 48, 16);
+		panelLectores.add(lblNewLabel_2_3_2_2);
+
+		JLabel lblNewLabel_8_1 = new JLabel("Tipo Lector");
+		lblNewLabel_8_1.setForeground(Color.WHITE);
+		lblNewLabel_8_1.setBounds(422, 151, 122, 16);
+		panelLectores.add(lblNewLabel_8_1);
+
+		textCarreras = new JTextField();
+		textCarreras.setBounds(554, 182, 124, 20);
+		panelLectores.add(textCarreras);
+		textCarreras.setColumns(10);
+
+		JLabel lblNewLabel_8_1_1 = new JLabel("* Carrera Docente");
+		lblNewLabel_8_1_1.setForeground(Color.WHITE);
+		lblNewLabel_8_1_1.setBounds(556, 151, 122, 16);
+		panelLectores.add(lblNewLabel_8_1_1);
+
+		JButton actualizoMorosos = new JButton("Actualizar");
+		actualizoMorosos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				// ACTUALIZAR LA TABLA CON LOS MOROSOS (LECTORES QUE NO DEVOLVIERON DESPUES DE
+				// FECHA A DEVOLVER
+
+				ArrayList<Prestamo> prestamos = metodo.devuelvoPrestamo();
+				ArrayList<Lector> lectores = metodo.devuelveLector();
+				
+				//Busca los prestamos
+				for (int i = 0; i < prestamos.size(); i++) {
+					//Busca los lectores, para obtener sus atributos
+					for (int j = 0; i < lectores.size(); j++) {
+						//Verifica si es a domicilio, si se paso de la fecha y si el dni del lector 
+						// de prestamo es igual al dni de lista lector
+						if (prestamos.get(i).getaDomicilio() && metodo.fechaPasada(prestamos.get(i))
+								&& prestamos.get(i).getLector().getNumDoc() == lectores.get(j).getNumDoc()) {
+							Object[] vec = new Object[6];
+
+							vec[0] = lectores.get(i).getNom();
+							vec[1] = lectores.get(i).getApellido();
+							vec[2] = lectores.get(i).getTipDoc();
+							vec[3] = lectores.get(i).getNumDoc();
+							vec[4] = lectores.get(i).getNumCel();
+							vec[5] = prestamos.get(i).getEjemplar().getIdEjemplar();
+							
+							//Agrega la tabla
+							modelo.addRow(vec);
+						}
+
+					}
+				}
+
+			}
+		});
+		actualizoMorosos.setBounds(43, 362, 109, 23);
+		ListaPrestamosActivos.add(actualizoMorosos);
 
 		JButton btnRegistrarLector = new JButton("Registrar Lector");
 		// Registrar Lector
@@ -592,46 +681,46 @@ public class ventanaPrincipal extends JFrame {
 				String sexo = (String) boxSexo.getSelectedItem();
 				String tipoLector = String.valueOf(boxTipoLector.getSelectedItem());
 				String carreraDocente = String.valueOf(textCarreras.getText());
-				
-				
+
 				if (metodo.existeLector(dni)) {
 					JOptionPane.showMessageDialog(null, "Ya se encuentra registrado", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
 					// Crea la nueva instancia de Lector
-					
+
 					// Muestra en pantalla de los datos ingresado
-					muestraLector.setText("* Tipo: " + tipoLector + "\n* Nombre: " + nombre + "\n* Apellido: " + apellido + "\n* tipo DNI: "
-							+ tipDni + ", Num DNI: " + dni + "\n* Correo: " + correo + " - Num Celular: " + numCel
-							+ " - Fecha Nacimiento: " + fechaNac + " - Sexo: " + sexo + "\n* Lugar Nacimiento: "
-							+ lugNac + "\n* Domicilio: " + domicilio + " - Codigo Postal: " + codPos
-							+ " - Departamento: " + departamento + "-  Localidad: " + localidad + "\n* Carreras del docente: " + carreraDocente);
+					muestraLector.setText("* Tipo: " + tipoLector + "\n* Nombre: " + nombre + "\n* Apellido: "
+							+ apellido + "\n* tipo DNI: " + tipDni + ", Num DNI: " + dni + "\n* Correo: " + correo
+							+ " - Num Celular: " + numCel + " - Fecha Nacimiento: " + fechaNac + " - Sexo: " + sexo
+							+ "\n* Lugar Nacimiento: " + lugNac + "\n* Domicilio: " + domicilio + " - Codigo Postal: "
+							+ codPos + " - Departamento: " + departamento + "-  Localidad: " + localidad
+							+ "\n* Carreras del docente: " + carreraDocente);
 
 					/*
-					 *	Falta el como guardar el tipo de lector en Lectores.txt
+					 * Falta el como guardar el tipo de lector en Lectores.txt
 					 * 
-					 * */
-										
+					 */
+
 					if (tipoLector == "Alumno") {
-						//Crea el Alumno
-						Lector alumno = new Alumno(nombre, apellido, tipDni, dni, correo, numCel, fechaNac, sexo, lugNac,
-								domicilio, codPos, departamento, localidad);
+						// Crea el Alumno
+						Lector alumno = new Alumno(nombre, apellido, tipDni, dni, correo, numCel, fechaNac, sexo,
+								lugNac, domicilio, codPos, departamento, localidad);
 						// Agrega al txt el nuevo Alumno
 						metodo.guardar(alumno, "Lectores.txt");
-					}else if(tipoLector == "Docente") {
-						//Crea el docente
-						Lector docente = new Docente(nombre, apellido, tipDni, dni, correo, numCel, fechaNac, sexo, lugNac,
-								domicilio, codPos, departamento, localidad, carreraDocente);
-						
-						//Setea carrera de docente
+					} else if (tipoLector == "Docente") {
+						// Crea el docente
+						Lector docente = new Docente(nombre, apellido, tipDni, dni, correo, numCel, fechaNac, sexo,
+								lugNac, domicilio, codPos, departamento, localidad, carreraDocente);
+
+						// Setea carrera de docente
 						((Docente) docente).setCarrera(carreraDocente);
-						
-						//Guarda en txt al docente
+
+						// Guarda en txt al docente
 						metodo.guardar(docente, "Lectores.txt");
-					}else {
+					} else {
 						// Agrega al txt el nuevo lector
-						Lector lector = new Lector(nombre, apellido, tipDni, dni, correo, numCel, fechaNac, sexo, lugNac,
-								domicilio, codPos, departamento, localidad);
+						Lector lector = new Lector(nombre, apellido, tipDni, dni, correo, numCel, fechaNac, sexo,
+								lugNac, domicilio, codPos, departamento, localidad);
 						metodo.guardar(lector, "Lectores.txt");
 					}
 
@@ -654,6 +743,12 @@ public class ventanaPrincipal extends JFrame {
 		});
 		btnRegistrarLector.setBounds(311, 235, 143, 28);
 		panelLectores.add(btnRegistrarLector);
+
+		JLabel fondoL = new JLabel("");
+		fondoL.setBackground(Color.LIGHT_GRAY);
+		fondoL.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
+		fondoL.setBounds(0, 0, 765, 444);
+		panelLectores.add(fondoL);
 
 		// REGISTRO OBRA/EJEMPLAR
 		JButton btnRegistrar = new JButton("Registrar");// Registrar obra y ejemplar
@@ -730,7 +825,7 @@ public class ventanaPrincipal extends JFrame {
 					// Buscar existencia del Lector
 					if (metodo.existeLector(dni)) {
 						// Buscar existencia del Funcionario
-						if (metodo.existeFuncionario(textFuncPrestador.getText())) {
+						if (metodo.comprobarFuncionario(textFuncPrestador.getText())) {
 							Prestamo prestamo = new Prestamo(textFuncPrestador.getText(), new Lector(dni),
 									checkDomicilio.isSelected(), new Ejemplar(id));
 
@@ -791,6 +886,11 @@ public class ventanaPrincipal extends JFrame {
 		btnDevuelto.setBounds(493, 291, 89, 28);
 		panelPrestamo.add(btnDevuelto);
 
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
+		lblNewLabel.setBounds(0, 0, 765, 444);
+		panelPrestamo.add(lblNewLabel);
+
 		JButton btnNuevaEditorial = new JButton("Nueva Editorial");
 		btnNuevaEditorial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -804,65 +904,10 @@ public class ventanaPrincipal extends JFrame {
 		btnNuevaEditorial.setBounds(366, 356, 124, 28);
 		panelEjemplar.add(btnNuevaEditorial);
 
-		textCodUbi = new JTextField();
-		textCodUbi.setBounds(502, 233, 122, 28);
-		panelEjemplar.add(textCodUbi);
-		textCodUbi.setColumns(10);
-
-		JLabel lblNewLabel_10 = new JLabel("Codigo de Ubicacion");
-		lblNewLabel_10.setForeground(Color.WHITE);
-		lblNewLabel_10.setBounds(502, 200, 122, 16);
-		panelEjemplar.add(lblNewLabel_10);
-
 		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		lblNewLabel_3.setBounds(0, 0, 765, 444);
 		panelEjemplar.add(lblNewLabel_3);
-
-		JLabel lblNewLabel_9 = new JLabel("A domicilio");
-		lblNewLabel_9.setForeground(Color.WHITE);
-		lblNewLabel_9.setBounds(459, 105, 90, 16);
-		panelPrestamo.add(lblNewLabel_9);
-
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
-		lblNewLabel.setBounds(0, 0, 765, 444);
-		panelPrestamo.add(lblNewLabel);
-
-		JLabel lblNewLabel_2_3_2_2 = new JLabel("0345");
-		lblNewLabel_2_3_2_2.setForeground(Color.WHITE);
-		lblNewLabel_2_3_2_2.setBounds(422, 117, 48, 16);
-		panelLectores.add(lblNewLabel_2_3_2_2);
-
-		JLabel lblNewLabel_8_1 = new JLabel("Tipo Lector");
-		lblNewLabel_8_1.setForeground(Color.WHITE);
-		lblNewLabel_8_1.setBounds(422, 151, 122, 16);
-		panelLectores.add(lblNewLabel_8_1);
-		
-		textCarreras = new JTextField();
-		textCarreras.setBounds(554, 182, 124, 20);
-		panelLectores.add(textCarreras);
-		textCarreras.setColumns(10);
-		
-		JLabel lblNewLabel_8_1_1 = new JLabel("* Carrera Docente");
-		lblNewLabel_8_1_1.setForeground(Color.WHITE);
-		lblNewLabel_8_1_1.setBounds(556, 151, 122, 16);
-		panelLectores.add(lblNewLabel_8_1_1);
-
-		JLabel fondoL = new JLabel("");
-		fondoL.setBackground(Color.LIGHT_GRAY);
-		fondoL.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
-		fondoL.setBounds(0, 0, 765, 444);
-		panelLectores.add(fondoL);
-
-		JButton actualizoPrestamosActivos = new JButton("Actualizar");
-		actualizoPrestamosActivos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-		actualizoPrestamosActivos.setBounds(43, 362, 89, 23);
-		ListaPrestamosActivos.add(actualizoPrestamosActivos);
 
 		JLabel lblNewLabel_12 = new JLabel("");
 		lblNewLabel_12.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
@@ -875,7 +920,7 @@ public class ventanaPrincipal extends JFrame {
 
 			}
 		});
-		actualizoPrestamosTerminados.setBounds(43, 360, 89, 23);
+		actualizoPrestamosTerminados.setBounds(43, 360, 110, 23);
 		listaPrestamosTerminados.add(actualizoPrestamosTerminados);
 
 		JLabel lblNewLabel_13 = new JLabel("");

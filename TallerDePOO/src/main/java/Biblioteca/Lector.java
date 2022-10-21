@@ -39,11 +39,10 @@ public class Lector extends Persona implements guardado{
 	
 	public Lector(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
 			String sex, String nac, String domi, int codPos, String dep, String localidad, int canMulta,
-			Boolean estaMultado, ArrayList<Ejemplar> ejemplares) {
+			Boolean estaMultado) {
 		super(nom, apellido, tipDoc, numDoc, correo, numCel, fecNac, sex, nac, domi, codPos, dep, localidad);
 		this.canMulta = canMulta;
 		this.estaMultado = estaMultado;
-		this.ejemplares = ejemplares;
 	}
 	
 	

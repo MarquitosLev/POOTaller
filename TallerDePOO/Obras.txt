@@ -1,5 +1,2 @@
-1/1/Harry/fsdfdfd/fdsfdsfds/fdsfsdfds/Santi/Terror/4124/111/SisOperativo/Ensayo/
-1/-1/Hola/fsdfdfd/hgd/asd/Chili/Horror/4124/762/Programacion/Boletin/
-1/1/Chau/jhgjhg/hg/asdhjg/Chilia/Horrors/512/512/SisOperativo/Ensayo/
-1/1/Santi/fsdfdfd/fdfds/gfdgfd/weqwqe/fdsgre/4214/421/SisOperativo/Ensayo/
-1/1/Santi/fsdfdfd/fdfds/gfdgfd/weqwqe/fdsgre/4214/421/SisOperativo/Ensayo/
+1/-1/Hola1/sub/priA/segA/terA/gen/1234/12/Matematica/Libro/
+1/0/Java22/-/-/-/-/-/125462/7755/Matematica/Libro/
