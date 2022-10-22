@@ -9,8 +9,9 @@ import java.time.LocalDate;
  * Clase que representa al lector.
  * 
  * @author Leandro Gonzalez Fister
- * @author Sebastian Etchepare
  * @author Marcos Leiva
+ * @author Sebastian Etchepare
+ * @author Santiago Fernandez Gomez
  *
  */
 
@@ -65,8 +66,8 @@ public class Lector extends Persona implements guardado{
 	 * @param codPos
 	 * @param dep
 	 * @param localidad
+	 * 
 	 */
-	//Constructor para agregar datos del lector
 	public Lector(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
 			String sex, String nac, String domi, int codPos, String dep, String localidad) {
 		

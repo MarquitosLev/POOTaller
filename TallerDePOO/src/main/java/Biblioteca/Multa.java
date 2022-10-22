@@ -1,24 +1,26 @@
 package Biblioteca;
 
 /**
- * Clase que representa la multa que se le coloca a un lector por inflingir con los tiempos de devolucion de un ejemplar.
+ * Clase que representa la multa que se le coloca a un lector por infringir con
+ * los tiempos de devolucion de un ejemplar.
  * 
  * @author Leandro Gonzalez Fister
- *
+ * @author Marcos Leiva
+ * @author Sebastian Etchepare
+ * @author Santiago Fernandez Gomez
+ * 
  */
 
 public class Multa {
 	private int diasMulta;
-	//Asociacion Multa y Prestamo
-	private Prestamo prestamo;
-	
+	private Prestamo prestamo; // Asociacion Multa y Prestamo
+
 	/**
 	 * Constructor de la clase
 	 * 
 	 * @param diasMulta
 	 * @param prestamo
 	 */
-	
 	public Multa(int diasMulta, Prestamo prestamo) {
 		super();
 		this.diasMulta = diasMulta;
@@ -29,6 +31,14 @@ public class Multa {
 		this.diasMulta = diasMulta;
 	}
 
+	public int getDiasMulta() {
+		return diasMulta;
+	}
+
+	public void setDiasMulta(int diasMulta) {
+		this.diasMulta = diasMulta;
+	}
+	
 	public Prestamo getPrestamo() {
 		return prestamo;
 	}
@@ -37,11 +47,4 @@ public class Multa {
 		this.prestamo = prestamo;
 	}
 
-	public int getDiasMulta() {
-		return diasMulta;
-	}
-	
-	public void setDiasMulta(int diasMulta) {
-		this.diasMulta = diasMulta;
-	}
 }
