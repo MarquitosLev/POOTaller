@@ -6,8 +6,8 @@ import java.util.StringTokenizer;
 import java.time.temporal.ChronoUnit;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.time.LocalDate;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalDateTime;
 
 /**
  * Clase que representa el proceso de prestamo y devolucion de un ejemplar en la
@@ -19,10 +19,10 @@ import java.time.LocalDate;
  *
  */
 public class Prestamo implements guardado {
-	private LocalDate fechaHoraPrestada;
+	private LocalDateTime fechaHoraPrestada;
 	private String funcionarioPrestador;
-	private LocalDate fechaHoraADevolver;
-	private LocalDate fechaDevuelta;
+	private LocalDateTime fechaHoraADevolver;
+	private LocalDateTime fechaDevuelta;
 	private String funcionarioDevuelta;
 	private Boolean aDomicilio;
 	private Lector lector;
@@ -42,7 +42,7 @@ public class Prestamo implements guardado {
 	 * @param ejemplar
 	 */
 	public Prestamo(String funcionarioPrestador, Lector lector, Boolean aDomicilio, Ejemplar ejemplar) {
-		this.fechaHoraPrestada = LocalDate.now();
+		this.fechaHoraPrestada = LocalDateTime.now();
 		this.funcionarioPrestador = funcionarioPrestador;
 		this.fechaHoraADevolver = this.fechaHoraPrestada.plusDays(4);
 		this.lector = lector;
@@ -50,7 +50,7 @@ public class Prestamo implements guardado {
 		this.ejemplar = ejemplar;
 	}
 
-	public Prestamo(LocalDate fechaHoraPrestada, String funcionarioPrestador, LocalDate fechaHoraADevolver,
+	public Prestamo(LocalDateTime fechaHoraPrestada, String funcionarioPrestador, LocalDateTime fechaHoraADevolver,
 			Boolean aDomicilio, Lector lector, Ejemplar ejemplar) {
 		this.fechaHoraPrestada = fechaHoraPrestada;
 		this.funcionarioPrestador = funcionarioPrestador;
@@ -74,9 +74,9 @@ public class Prestamo implements guardado {
 	 * @param ejemplar
 	 */
 
-	public Prestamo(String funcionarioPrestador, LocalDate fechaDevuelta, String funcionarioDevuelta, Lector lector,
+	public Prestamo(String funcionarioPrestador, LocalDateTime fechaDevuelta, String funcionarioDevuelta, Lector lector,
 			Boolean aDomicilio, Ejemplar ejemplar) {
-		this.fechaHoraPrestada = LocalDate.now();
+		this.fechaHoraPrestada = LocalDateTime.now();
 		this.funcionarioPrestador = funcionarioPrestador;
 		this.fechaHoraADevolver = this.fechaHoraPrestada.plusDays(4);
 		this.fechaDevuelta = fechaDevuelta;
@@ -91,10 +91,10 @@ public class Prestamo implements guardado {
 	 */
 
 	public Prestamo() {
-		this.fechaHoraPrestada = LocalDate.now();
+		this.fechaHoraPrestada = LocalDateTime.now();
 		this.funcionarioPrestador = "";
 		this.fechaHoraADevolver = this.fechaHoraPrestada.plusDays(4);
-		this.fechaDevuelta = LocalDate.of(2000, 1, 1);
+		this.fechaDevuelta = LocalDateTime.of(2000, 1, 1, 1, 1);
 		this.funcionarioDevuelta = "";
 		this.multas = new ArrayList<Multa>();
 		this.lector = new Lector();
@@ -102,8 +102,8 @@ public class Prestamo implements guardado {
 
 	}
 
-	public Prestamo(LocalDate fechaHoraPrestada, String funcionarioPrestador, LocalDate fechaHoraADevolver,
-			LocalDate fechaDevuelta, String funcionarioDevuelta, Boolean aDomicilio, Lector lector, Ejemplar ejemplar) {
+	public Prestamo(LocalDateTime fechaHoraPrestada, String funcionarioPrestador, LocalDateTime fechaHoraADevolver,
+			LocalDateTime fechaDevuelta, String funcionarioDevuelta, Boolean aDomicilio, Lector lector, Ejemplar ejemplar) {
 		this.fechaHoraPrestada = fechaHoraPrestada;
 		this.funcionarioPrestador = funcionarioPrestador;
 		this.fechaHoraADevolver = fechaHoraADevolver;
@@ -122,7 +122,7 @@ public class Prestamo implements guardado {
 		this.multas = multas;
 	}
 
-	public LocalDate getFechaHoraPrestada() {
+	public LocalDateTime getFechaHoraPrestada() {
 		return fechaHoraPrestada;
 	}
 
@@ -134,7 +134,7 @@ public class Prestamo implements guardado {
 		this.funcionarioPrestador = funcionarioPrestador;
 	}
 
-	public LocalDate getFechaHoraADevolver() {
+	public LocalDateTime getFechaHoraADevolver() {
 		return fechaHoraADevolver;
 	}
 
@@ -142,11 +142,11 @@ public class Prestamo implements guardado {
 		this.fechaHoraADevolver = this.fechaHoraPrestada.plusDays(4);
 	}
 
-	public LocalDate getFechaDevuelta() {
+	public LocalDateTime getFechaDevuelta() {
 		return fechaDevuelta;
 	}
 
-	public void setFechaDevuelta(LocalDate fechaDevuelta) {
+	public void setFechaDevuelta(LocalDateTime fechaDevuelta) {
 		this.fechaDevuelta = fechaDevuelta;
 	}
 
@@ -216,7 +216,7 @@ public class Prestamo implements guardado {
 				String lector;
 				while ((lector = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
 					StringTokenizer x = new StringTokenizer(lector, "/");
-					lista.add(new Prestamo(LocalDate.parse(x.nextToken()), x.nextToken(), LocalDate.parse(x.nextToken()),
+					lista.add(new Prestamo(LocalDateTime.parse(x.nextToken()), x.nextToken(), LocalDateTime.parse(x.nextToken()),
 							Boolean.parseBoolean(x.nextToken()), new Lector(Integer.parseInt(x.nextToken())),
 									new Ejemplar(Integer.parseInt(x.nextToken()))));
 	
@@ -230,8 +230,8 @@ public class Prestamo implements guardado {
 				String lector;
 				while ((lector = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
 					StringTokenizer x = new StringTokenizer(lector, "/");
-					lista.add(new Prestamo(LocalDate.parse(x.nextToken()), x.nextToken(), LocalDate.parse(x.nextToken()),
-							LocalDate.parse(x.nextToken()), x.nextToken(),
+					lista.add(new Prestamo(LocalDateTime.parse(x.nextToken()), x.nextToken(), LocalDateTime.parse(x.nextToken()),
+							LocalDateTime.parse(x.nextToken()), x.nextToken(),
 							Boolean.parseBoolean(x.nextToken()), new Lector(Integer.parseInt(x.nextToken())),
 									new Ejemplar(Integer.parseInt(x.nextToken()))));
 	

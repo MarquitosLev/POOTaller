@@ -856,15 +856,16 @@ public class ventanaPrincipal extends JFrame {
 		btnDevuelto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Metodos de ejemplares devueltos
-
+				
+				int minuto = Integer.parseInt(textDiaDevuelto.getText());
+				int hora = Integer.parseInt(textDiaDevuelto.getText());
 				int dia = Integer.parseInt(textDiaDevuelto.getText());
 				int mes = Integer.parseInt(textMesDevuelto.getText());
 				int anio = Integer.parseInt(textAnioDevuelto.getText());
-
 				/**
 				 * COMPROBAR SI LA FECHA SE INGRESO MAL, NO CON TRY
 				 */
-				LocalDate fechaDevuelta = LocalDate.of(anio, mes, dia);
+				LocalDateTime fechaDevuelta = LocalDateTime.of(anio, mes, dia, hora, minuto);
 
 				String funcionario = textFuncRecibidor.getText();
 

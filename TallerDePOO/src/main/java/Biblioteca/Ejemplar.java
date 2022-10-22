@@ -3,7 +3,7 @@ package Biblioteca;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -15,9 +15,9 @@ public class Ejemplar implements guardado{
 	private String observaciones;
 	private boolean disponible;
 	private int cantPedidas;
-	private LocalDate fechaAdquisicion;
+	private LocalDateTime fechaAdquisicion;
 	private FormaAdquirida formaAdquirida;
-	private LocalDate fechaDeBaja;
+	private LocalDateTime fechaDeBaja;
 	private String motivoDeBaja; 
 	private String codUbicacion;
 	private Obra obra;
@@ -35,7 +35,7 @@ public class Ejemplar implements guardado{
 		this.formaAdquirida = formaAdquirida;
 		this.codUbicacion = codUbicacion;
 		this.obra = obra;
-		this.fechaAdquisicion = LocalDate.now();
+		this.fechaAdquisicion = LocalDateTime.now();
 		this.cantPedidas = 0;
 
 		// Codigo de barra
@@ -49,7 +49,7 @@ public class Ejemplar implements guardado{
 	
 	//Constructor para devolucion
 	public Ejemplar(int idEjemplar, String observaciones, boolean disponible, FormaAdquirida formaAdquirida,
-			LocalDate fechaAdquisicion, String codUbicacion, Obra obra, int cantPedidas) {
+			LocalDateTime fechaAdquisicion, String codUbicacion, Obra obra, int cantPedidas) {
 		
 		this.idEjemplar = idEjemplar;
 		this.observaciones = observaciones;
@@ -62,7 +62,7 @@ public class Ejemplar implements guardado{
 	}
 
 	public Ejemplar(int idEjemplar, String observaciones, boolean disponible, int cantPedidas,
-			LocalDate fechaAdquisicion, FormaAdquirida formaAdquirida, LocalDate fechaDeBaja, String motivoDeBaja,
+			LocalDateTime fechaAdquisicion, FormaAdquirida formaAdquirida, LocalDateTime fechaDeBaja, String motivoDeBaja,
 			String codUbicacion, Obra obra, Lector lector) throws BarcodeException, OutputException {
 		this.idEjemplar = idEjemplar;
 		this.observaciones = observaciones;
@@ -70,7 +70,7 @@ public class Ejemplar implements guardado{
 		this.cantPedidas = cantPedidas;
 		this.fechaAdquisicion = fechaAdquisicion;
 		this.formaAdquirida = formaAdquirida;
-		this.fechaDeBaja = LocalDate.now();
+		this.fechaDeBaja = LocalDateTime.now();
 		this.motivoDeBaja = motivoDeBaja;
 		this.codUbicacion = codUbicacion;
 		this.obra = obra;
@@ -83,10 +83,10 @@ public class Ejemplar implements guardado{
 		this.observaciones = "";
 		this.disponible = true;
 		this.cantPedidas = 0;
-		this.fechaAdquisicion = LocalDate.of(1900, 1, 1);
+		this.fechaAdquisicion = LocalDateTime.of(1900, 1, 1, 1, 1);
 		// this.formaAdquirida = formaAdquirida.Otro; A esta todavía no la se hacer xd.
 		// Creo que hay que modificar algo en la enum.
-		this.fechaDeBaja = LocalDate.of(1900, 1, 1);
+		this.fechaDeBaja = LocalDateTime.of(1900, 1, 1, 1, 1);
 		this.motivoDeBaja = " ";
 		this.codUbicacion = " ";
 		this.obra = new Obra();
@@ -134,11 +134,11 @@ public class Ejemplar implements guardado{
 		this.cantPedidas = cantPedidas;
 	}
 
-	public LocalDate getFechaAdquisicion() {
+	public LocalDateTime getFechaAdquisicion() {
 		return fechaAdquisicion;
 	}
 
-	public void setFechaAdquisicion(LocalDate fechaAdquisicion) {
+	public void setFechaAdquisicion(LocalDateTime fechaAdquisicion) {
 		this.fechaAdquisicion = fechaAdquisicion;
 	}
 
@@ -150,11 +150,11 @@ public class Ejemplar implements guardado{
 		this.formaAdquirida = formaAdquirida;
 	}
 
-	public LocalDate getFechaDeBaja() {
+	public LocalDateTime getFechaDeBaja() {
 		return fechaDeBaja;
 	}
 
-	public void setFechaDeBaja(LocalDate fechaDeBaja) {
+	public void setFechaDeBaja(LocalDateTime fechaDeBaja) {
 		this.fechaDeBaja = fechaDeBaja;
 	}
 
@@ -211,7 +211,7 @@ public class Ejemplar implements guardado{
 			while ((lector = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
 				StringTokenizer x = new StringTokenizer(lector, "/");
 				lista.add(new Ejemplar(Integer.parseInt(x.nextToken()), x.nextToken(), Boolean.parseBoolean(x.nextToken()),
-						FormaAdquirida.valueOf(x.nextToken()), LocalDate.parse(x.nextToken()), x.nextToken(), new Obra(x.nextToken()),
+						FormaAdquirida.valueOf(x.nextToken()), LocalDateTime.parse(x.nextToken()), x.nextToken(), new Obra(x.nextToken()),
 						Integer.parseInt(x.nextToken())));
 
 			}

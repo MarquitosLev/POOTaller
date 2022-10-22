@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -278,7 +278,7 @@ public class MetodosTxt {
 				StringTokenizer x = new StringTokenizer(ejemplarNoDisponible, "/");
 				datosEjemplar.add(new Ejemplar(Integer.parseInt(x.nextToken()), x.nextToken(),
 						Boolean.parseBoolean(x.nextToken()), FormaAdquirida.valueOf(x.nextToken()),
-						LocalDate.parse(x.nextToken()), x.nextToken(), new Obra(x.nextToken()),
+						LocalDateTime.parse(x.nextToken()), x.nextToken(), new Obra(x.nextToken()),
 						Integer.parseInt(x.nextToken())));// agrega al arraylist de String
 			}
 		} catch (Exception e) {
@@ -341,7 +341,7 @@ public class MetodosTxt {
 
 	}
 
-	public void guardarPrestamoTerminado(LocalDate fechaDevuelta, String funcionario, int ejemplar) {
+	public void guardarPrestamoTerminado(LocalDateTime fechaDevuelta, String funcionario, int ejemplar) {
 
 		if (comprobarFuncionario(funcionario)) { // Comprueba que el funcionario exista
 
@@ -452,7 +452,7 @@ public class MetodosTxt {
 	}
 	
 	public boolean fechaPasada(Prestamo pres) {
-		Long x = ChronoUnit.DAYS.between(pres.getFechaHoraADevolver(), LocalDate.now()); // 20-10 < 21-10
+		Long x = ChronoUnit.DAYS.between(pres.getFechaHoraADevolver(), LocalDateTime.now()); // 20-10 < 21-10
 		if(x < 0) {
 			return false;
 		}else {

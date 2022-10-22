@@ -1,3 +1,0 @@
-2828/obeservacion1/true/Donacion/2022-10-21/A111/Primero/0/
-5213/obeservacion2/false/Compra/2022-10-21/A222/Segundo/1/
-3119/obeservacion2/true/Otro/2022-10-21/A333/Tercero/8/
