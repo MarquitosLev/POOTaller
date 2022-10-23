@@ -6,16 +6,22 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Biblioteca.Edicion;
+import Biblioteca.MetodosTxt;
 import Biblioteca.Obra;
+import Biblioteca.guardado;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class ventanaEditorial extends JFrame {
 
@@ -28,12 +34,16 @@ public class ventanaEditorial extends JFrame {
 	private JTextField textPaginas;
 	private JTextField textIdioma;
 	private JTextField textObra;
+	private MetodosTxt metodo;
 
 	public ventanaEditorial(ventanaPrincipal ventanaPrincipal) {
-		ventanaNuevaEditorial(ventanaPrincipal);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ventanaEditorial.class.getResource("/imagenes/icon.png")));
+		setTitle("Nueva Edicion");
+		metodo = new MetodosTxt();
+		ventanaNuevaEditorial(ventanaPrincipal, metodo);
 	}
 
-	public void ventanaNuevaEditorial(final ventanaPrincipal ventanaPrincipal) {
+	public void ventanaNuevaEditorial(final ventanaPrincipal ventanaPrincipal, final MetodosTxt metodo) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 521, 383);
 		contentPane = new JPanel();
@@ -136,20 +146,23 @@ public class ventanaEditorial extends JFrame {
 		JButton btnRegEdicion = new JButton("Registrar Editorial");
 		btnRegEdicion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				String edicion = textEditorial.getText();
-				String pais = textPais.getName();
-				int numero = Integer.parseInt(textNum.getText());
-				int anio = Integer.parseInt(textAnio.getText());
-				int paginas = Integer.parseInt(textPaginas.getText());
-				int volumen = Integer.parseInt(textVolumen.getText());
-				String idioma = textIdioma.getText();
-				String tituloObra = textObra.getText();
-
-				Obra obra = buscarObra();
-
-				// Edicion edicion = new Edicion(edicion, pais, numero, anio, volumen, paginas,
-				// idioma );
+				
+				try {
+					String editorial = textEditorial.getText();
+					String pais = textPais.getText();
+					int numero = Integer.parseInt(textNum.getText());
+					int anio = Integer.parseInt(textAnio.getText());
+					int paginas = Integer.parseInt(textPaginas.getText());
+					int volumen = Integer.parseInt(textVolumen.getText());
+					String idioma = textIdioma.getText();
+					String tituloObra = textObra.getText();
+					Edicion edicion = new Edicion(editorial, pais, numero, anio, volumen, paginas, idioma,
+							new Obra(tituloObra));
+					metodo.guardar(edicion, "Editoriales.txt");
+					JOptionPane.showMessageDialog(null, "Registrado", "Exito", JOptionPane.INFORMATION_MESSAGE);
+				} catch (RuntimeException edicion) {
+					JOptionPane.showMessageDialog(null, "Datos mal ingresados", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 
 			}
 		});
@@ -171,10 +184,5 @@ public class ventanaEditorial extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(ventanaEditorial.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		lblNewLabel.setBounds(0, 0, 505, 344);
 		contentPane.add(lblNewLabel);
-	}
-
-	protected Obra buscarObra() {
-		
-		return null;
 	}
 }

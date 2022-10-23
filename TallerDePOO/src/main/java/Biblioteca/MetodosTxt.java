@@ -27,7 +27,6 @@ public class MetodosTxt {
 	ArrayList<Funcionario> datosFunc;
 	ArrayList<Integer> datosLector;
 	ArrayList<String> datoObra;
-	ArrayList<Integer> datoEjemplar;
 	ArrayList<Prestamo> listaPrestamo;
 	ArrayList<Ejemplar> listaEjemplar;
 	ArrayList<Obra> listaObra;
@@ -224,30 +223,21 @@ public class MetodosTxt {
 				} catch (Exception e) {
 				}
 				break;
-				
+
 			}
 		}
 		guardar(ejemplar, "Ejemplares.txt");
 	}
 
 	public boolean existeEjemplar(int id) {
-		datoEjemplar = new ArrayList<Integer>();
-		try {
-			BufferedReader br = new BufferedReader(new FileReader("Ejemplares.txt"));
-			String ejemplar;
-			while ((ejemplar = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
-				StringTokenizer x = new StringTokenizer(ejemplar, "/");
-				datoEjemplar.add(Integer.parseInt(x.nextToken()));// agrega al arraylist de int
-			}
-		} catch (Exception e) {
-		}
+		listaEjemplar = Ejemplar.leerTexto();
 
-		if (datoEjemplar.size() == 0) {
+		if (listaEjemplar.size() == 0) {
 			return false;
 		}
 
-		for (int i = 0; i < datoEjemplar.size(); i++) {
-			if ((datoEjemplar.get(i).equals(id))) {
+		for (int i = 0; i < listaEjemplar.size(); i++) {
+			if (listaEjemplar.get(i).getIdEjemplar() == id) {
 				return true;// retorna true si el id se encuentra en el txt
 			}
 		}
@@ -340,7 +330,7 @@ public class MetodosTxt {
 				break;
 			}
 		}
-		
+
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter("Obras.txt"));// Vacia el txt
 			bw.write("");
@@ -446,7 +436,6 @@ public class MetodosTxt {
 
 	public boolean fechaPasada(Prestamo pres) {
 		Long x = ChronoUnit.DAYS.between(pres.getFechaHoraADevolver(), LocalDateTime.now()); // 20-10 < 21-10
-		System.out.println(x);
 		if (x < 0) {
 			return false;
 		} else {
@@ -455,24 +444,24 @@ public class MetodosTxt {
 	}
 
 	public boolean hayDisponibles(int id) {
-
 		ArrayList<Ejemplar> ejemplares = Ejemplar.leerTexto();
 		ArrayList<Obra> obras = Obra.leerTexto();
 
-		for (int i = 0; i < ejemplares.size(); i++) {
-
-			for (int t = 0; t < obras.size(); t++) {
+		for (int i = 0; i < obras.size(); i++) {
+			for (int t = 0; t < ejemplares.size(); t++) { 
 				// Si el id del ejemplar y el titulo de obra y ejemplar son iguales, es
-				// verdadero
-				if (ejemplares.get(i).getIdEjemplar() == id
-						&& ejemplares.get(i).getObra().getTitulo().equals(obras.get(t).getTitulo())) {
-
-					if (obras.get(t).getCantEjemDisponible() > 0) {
+				// verdadero			
+				
+				if (ejemplares.get(t).getIdEjemplar() == id
+						&& ejemplares.get(t).getObra().getTitulo().equals(obras.get(i).getTitulo())) {
+					if (obras.get(i).getCantEjemDisponible() > 0) {
 						return true;
 					}
-				}
+					
+				}	
 			}
 		}
+	
 		return false;
 	}
 

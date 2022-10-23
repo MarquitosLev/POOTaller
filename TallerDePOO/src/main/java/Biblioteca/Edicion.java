@@ -1,5 +1,10 @@
 package Biblioteca;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
 /**
  * Clase que representa la edicion de cada obra.
  * 
@@ -10,7 +15,7 @@ package Biblioteca;
  *
  */
 
-public class Edicion {
+public class Edicion implements guardado {
 	private String editorial;
 	private String pais;
 	private int num;
@@ -48,6 +53,10 @@ public class Edicion {
 		this.paginas = paginas;
 		this.idioma = idioma;
 		this.obra = obra;
+	}
+
+	public Edicion() {
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -211,6 +220,49 @@ public class Edicion {
 	 */
 	public void setObra(Obra obra) {
 		this.obra = obra;
+	}
+
+	/**
+	 * 
+	 * 
+	 * @return ArrayList con los atributos de la instancia creada
+	 */
+
+	public ArrayList<Object> obtenerLista() {
+		// new Edicion(editorial, pais, numero, anio, volumen, paginas, idioma, new
+		// Obra(tituloObra))
+		ArrayList<Object> lista = new ArrayList<Object>();
+		lista.add(getEditorial());
+		lista.add(getPais());
+		lista.add(getNum());
+		lista.add(getAnio());
+		lista.add(getVolumen());
+		lista.add(getPaginas());
+		lista.add(getIdioma());
+		lista.add(getObra().getTitulo());
+		return lista;
+	}
+
+	public static ArrayList<Edicion> leerTexto(){
+		ArrayList<Edicion> lista = new ArrayList<Edicion>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("Editoriales.txt"));
+			String ed;
+			while ((ed = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+				StringTokenizer x = new StringTokenizer(ed, "/");
+				lista.add(new Edicion(x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()),
+						Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()),
+						x.nextToken(), new Obra(x.nextToken())));
+			}
+		} catch (Exception e) {
+		}
+		return lista;
+	}
+	
+	@Override
+	public String toString() {
+		return "Edicion [editorial=" + editorial + ", pais=" + pais + ", num=" + num + ", anio=" + anio + ", volumen="
+				+ volumen + ", paginas=" + paginas + ", idioma=" + idioma + ", obra=" + obra.getTitulo() + "]";
 	}
 
 }
