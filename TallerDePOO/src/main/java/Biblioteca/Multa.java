@@ -16,9 +16,9 @@ public class Multa {
 	private Prestamo prestamo; // Asociacion Multa y Prestamo
 
 	/**
-	 * Constructor de la clase
+	 * Constructor parametrizado de la clase.
 	 * 
-	 * @param diasMulta
+	 * @param diasMulta 
 	 * @param prestamo
 	 */
 	public Multa(int diasMulta, Prestamo prestamo) {
