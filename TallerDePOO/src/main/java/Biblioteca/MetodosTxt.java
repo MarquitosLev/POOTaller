@@ -120,7 +120,6 @@ public class MetodosTxt {
 		return false;
 	}
 
-
 	/**
 	 * Metodo encargado de comprobar que el lector ya se encuentra almacenado dentro
 	 * del ArrayList de Lectores.
@@ -179,6 +178,8 @@ public class MetodosTxt {
 			String obra;
 			while ((obra = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
 				StringTokenizer x = new StringTokenizer(obra, "/");
+				x.nextToken();
+				x.nextToken();
 				datoObra.add(x.nextToken());// agrega al arraylist de String
 			}
 		} catch (Exception e) {
@@ -206,37 +207,25 @@ public class MetodosTxt {
 	 */
 
 	public void guardarEjemplar(Ejemplar ejemplar) {
-		ArrayList<Obra> datosObra = new ArrayList<Obra>();
-		try {
-			BufferedReader br2 = new BufferedReader(new FileReader("Obras.txt"));
-			String obra;
-			while ((obra = br2.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
-				StringTokenizer x = new StringTokenizer(obra, "/");
-				datosObra.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), x.nextToken(),
-						x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(),
-						Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), Area.valueOf(x.nextToken()),
-						tipoObra.valueOf(x.nextToken())));// agrega al arraylist de String
-			}
-		} catch (Exception e) {
-		}
+		ArrayList<Obra> datosObra = Obra.leerTexto();
 
 		for (int i = 0; i < datosObra.size(); i++) { // Recorre el nuevo ArrayList agregando 1 ejemplar a la obra
 														// ingresada
-			if ((datosObra.get(i).equals(ejemplar.getObra()))) {
-				datosObra.get(i).setCantEjem(datosObra.get(i).getCantEjem());
+			if ((datosObra.get(i).getTitulo().equals(ejemplar.getObra().getTitulo()))) {
+				datosObra.get(i).setCantEjem(datosObra.get(i).getCantEjem() + 1);
 				datosObra.get(i).setCantEjemDisponible(datosObra.get(i).getCantEjemDisponible() + 1);
+				try {
+					BufferedWriter bw = new BufferedWriter(new FileWriter("Obras.txt"));
+					bw.write("");
+					bw.close();
+					for (int j = 0; j < datosObra.size(); j++) {
+						guardar(datosObra.get(j), "Obras.txt");
+					}
+				} catch (Exception e) {
+				}
 				break;
+				
 			}
-		}
-
-		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter("Obras.txt"));
-			bw.write("");
-			bw.close();
-			for (int i = 0; i < datosObra.size(); i++) {
-				guardar(datosObra.get(i), "Obras.txt");
-			}
-		} catch (Exception e) {
 		}
 		guardar(ejemplar, "Ejemplares.txt");
 	}
@@ -341,19 +330,40 @@ public class MetodosTxt {
 
 	}
 
+	public void AumentoEjemplarDisponible(String ejemplar) {
+
+		ArrayList<Obra> datosObra = Obra.leerTexto();
+		for (int j = 0; j < datosObra.size(); j++) { // Recorre el nuevo ArrayList agregando 1 ejemplar
+			// a la obra // ingresada
+			if ((datosObra.get(j).getTitulo().equals(ejemplar))) {
+				datosObra.get(j).setCantEjemDisponible(datosObra.get(j).getCantEjemDisponible() + 1);
+				break;
+			}
+		}
+		
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter("Obras.txt"));// Vacia el txt
+			bw.write("");
+			bw.close();
+			for (int q = 0; q < datosObra.size(); q++) {
+				guardar(datosObra.get(q), "Obras.txt");
+			}
+		} catch (Exception e) {
+		}
+	}
+
 	public void guardarPrestamoTerminado(LocalDateTime fechaDevuelta, String funcionario, int ejemplar) {
 
 		if (comprobarFuncionario(funcionario)) { // Comprueba que el funcionario exista
 
 			if (existeEjemplar(ejemplar)) { // Comprueba que el ejemplar exista
-				
+
 				ArrayList<Prestamo> datosPrestamo = Prestamo.leerTexto(1);
-				
-				
+
 				// Recorre el ArrayList de Prestamos buscando el que
 				// coincide con el ejemplar ingresado
-				for (int i = 0; i < datosPrestamo.size(); i++) { 
-					Ejemplar EjemplarAux = new Ejemplar(ejemplar); 
+				for (int i = 0; i < datosPrestamo.size(); i++) {
+					Ejemplar EjemplarAux = new Ejemplar(ejemplar);
 					if (datosPrestamo.get(i).getEjemplar().getIdEjemplar() == EjemplarAux.getIdEjemplar()) {
 						Prestamo aux = datosPrestamo.get(i);
 						Prestamo prestamoDevuelto = new Prestamo(aux.getFechaHoraPrestada(),
@@ -385,8 +395,6 @@ public class MetodosTxt {
 						} catch (Exception e) {
 
 						}
-						// Obtengo las obras del Obras.txt
-						ArrayList<Obra> datosObra = Obra.leerTexto();
 
 						// Obtengo los ejemplares del Ejemplares.txt
 						ArrayList<Ejemplar> datosEjemplar = Ejemplar.leerTexto();
@@ -405,7 +413,6 @@ public class MetodosTxt {
 							}
 						}
 
-						// ERRORES AL REESCRIBIR EL EJEMPLARES.TXT
 						try {
 							BufferedWriter bw = new BufferedWriter(new FileWriter("Ejemplares.txt"));// Vacia el txt
 							bw.write("");
@@ -416,22 +423,7 @@ public class MetodosTxt {
 						} catch (Exception e) {
 						}
 
-						for (int j = 0; j < datosObra.size(); j++) { // Recorre el nuevo ArrayList agregando 1 ejemplar
-																		// a la obra // ingresada
-							if ((datosObra.get(j).getTitulo().equals(nuevo))) {
-								datosObra.get(j).setCantEjemDisponible(datosObra.get(j).getCantEjemDisponible() + 1);
-								break;
-							}
-						}
-
-						// ERRORES AL REESCRIBIR EL OBRAS.TXT
 						try {
-							BufferedWriter bw = new BufferedWriter(new FileWriter("Obras.txt"));// Vacia el txt
-							bw.write("");
-							bw.close();
-							for (int q = 0; q < datosObra.size(); q++) {
-								guardar(datosObra.get(q), "Obras.txt");
-							}
 							BufferedWriter bw2 = new BufferedWriter(new FileWriter("Prestamos.txt"));// Vacia el txt
 							bw2.write("");
 							bw2.close();
@@ -440,44 +432,48 @@ public class MetodosTxt {
 							}
 						} catch (Exception e) {
 						}
+						AumentoEjemplarDisponible(nuevo);
 						break;
 					}
 				}
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(null, "No existe el Ejemplar", "Error", JOptionPane.ERROR_MESSAGE);
 			}
-		}else {
+		} else {
 			JOptionPane.showMessageDialog(null, "No existe el Funcionario", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	public boolean fechaPasada(Prestamo pres) {
 		Long x = ChronoUnit.DAYS.between(pres.getFechaHoraADevolver(), LocalDateTime.now()); // 20-10 < 21-10
-		if(x < 0) {
+		System.out.println(x);
+		if (x < 0) {
 			return false;
-		}else {
+		} else {
 			return true;
 		}
 	}
 
 	public boolean hayDisponibles(int id) {
-		
+
 		ArrayList<Ejemplar> ejemplares = Ejemplar.leerTexto();
 		ArrayList<Obra> obras = Obra.leerTexto();
-		
-		for(int i = 0; i < ejemplares.size(); i++) {
-			
-			for(int t = 0; t < obras.size(); t++) {
-				//Si el id del ejemplar y el titulo de obra y ejemplar son iguales, es verdadero
-				if(ejemplares.get(i).getIdEjemplar() == id && 
-						ejemplares.get(i).getObra().getTitulo().equals(obras.get(t).getTitulo())) {
-					
-					if(obras.get(t).getCantEjemDisponible() > 0) {
+
+		for (int i = 0; i < ejemplares.size(); i++) {
+
+			for (int t = 0; t < obras.size(); t++) {
+				// Si el id del ejemplar y el titulo de obra y ejemplar son iguales, es
+				// verdadero
+				if (ejemplares.get(i).getIdEjemplar() == id
+						&& ejemplares.get(i).getObra().getTitulo().equals(obras.get(t).getTitulo())) {
+
+					if (obras.get(t).getCantEjemDisponible() > 0) {
 						return true;
 					}
 				}
-			}	
+			}
 		}
 		return false;
 	}
+
 }

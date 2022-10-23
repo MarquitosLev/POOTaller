@@ -42,12 +42,18 @@ public class Prestamo implements guardado {
 	 * @param ejemplar
 	 */
 	public Prestamo(String funcionarioPrestador, Lector lector, Boolean aDomicilio, Ejemplar ejemplar) {
+		this.aDomicilio = aDomicilio;
 		this.fechaHoraPrestada = LocalDateTime.now();
 		this.funcionarioPrestador = funcionarioPrestador;
-		this.fechaHoraADevolver = this.fechaHoraPrestada.plusDays(4);
+		if (this.aDomicilio) {
+			this.fechaHoraADevolver = this.fechaHoraPrestada.plusDays(4);
+		} else {
+			this.fechaHoraADevolver = this.fechaHoraPrestada.plusHours(3);
+		}
 		this.lector = lector;
-		this.aDomicilio = aDomicilio;
 		this.ejemplar = ejemplar;
+		
+		
 	}
 
 	public Prestamo(LocalDateTime fechaHoraPrestada, String funcionarioPrestador, LocalDateTime fechaHoraADevolver,
@@ -218,7 +224,7 @@ public class Prestamo implements guardado {
 					StringTokenizer x = new StringTokenizer(lector, "/");
 					lista.add(new Prestamo(LocalDateTime.parse(x.nextToken()), x.nextToken(), LocalDateTime.parse(x.nextToken()),
 							Boolean.parseBoolean(x.nextToken()), new Lector(Integer.parseInt(x.nextToken())),
-									new Ejemplar(Integer.parseInt(x.nextToken()))));
+									new Ejemplar(Integer.parseInt(x.nextToken()) )));
 	
 				}
 			} catch (Exception e) {
@@ -233,7 +239,7 @@ public class Prestamo implements guardado {
 					lista.add(new Prestamo(LocalDateTime.parse(x.nextToken()), x.nextToken(), LocalDateTime.parse(x.nextToken()),
 							LocalDateTime.parse(x.nextToken()), x.nextToken(),
 							Boolean.parseBoolean(x.nextToken()), new Lector(Integer.parseInt(x.nextToken())),
-									new Ejemplar(Integer.parseInt(x.nextToken()))));
+									new Ejemplar(Integer.parseInt(x.nextToken()) )));
 	
 				}
 			} catch (Exception e) {

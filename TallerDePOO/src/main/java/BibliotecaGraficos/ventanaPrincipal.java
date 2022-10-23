@@ -629,7 +629,6 @@ public class ventanaPrincipal extends JFrame {
 				for (int x = modelo.getRowCount() - 1; x >= 0; x--) {
 					modelo.removeRow(x);
 				}
-
 				// Busca los prestamos
 				for (int i = 0; i < prestamos.size(); i++) {
 					// Busca los lectores, para obtener sus atributos
@@ -783,7 +782,8 @@ public class ventanaPrincipal extends JFrame {
 					try {
 						Ejemplar ejemplar = new Ejemplar(ran, observaciones, true, formaAdqui, codUbi, obra);
 						// Guarda el primer ejemplar de la obra
-						metodo.guardar(ejemplar, "Ejemplares.txt");
+						metodo.guardarEjemplar(ejemplar);
+						
 					} catch (BarcodeException e1) {
 						e1.printStackTrace();
 					} catch (OutputException e1) {
@@ -856,16 +856,10 @@ public class ventanaPrincipal extends JFrame {
 		btnDevuelto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Metodos de ejemplares devueltos
-				
-				int minuto = Integer.parseInt(textDiaDevuelto.getText());
-				int hora = Integer.parseInt(textDiaDevuelto.getText());
-				int dia = Integer.parseInt(textDiaDevuelto.getText());
-				int mes = Integer.parseInt(textMesDevuelto.getText());
-				int anio = Integer.parseInt(textAnioDevuelto.getText());
 				/**
 				 * COMPROBAR SI LA FECHA SE INGRESO MAL, NO CON TRY
 				 */
-				LocalDateTime fechaDevuelta = LocalDateTime.of(anio, mes, dia, hora, minuto);
+				LocalDateTime fechaDevuelta = LocalDateTime.now();
 
 				String funcionario = textFuncRecibidor.getText();
 
@@ -879,9 +873,6 @@ public class ventanaPrincipal extends JFrame {
 				}
 				textIDEjemplarDevuelta.setText("");
 				textFuncRecibidor.setText("");
-				textDiaDevuelto.setText("");
-				textMesDevuelto.setText("");
-				textAnioDevuelto.setText("");
 			}
 		});
 		btnDevuelto.setBounds(493, 291, 89, 28);
