@@ -54,9 +54,9 @@ public class Docente extends Lector {
 
 	public Docente(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
 			String sex, String nac, String domi, int codPos, String dep, String localidad, int canMulta,
-			Boolean estaMultado, String carrera) {
+			Boolean estaMultado, int diasMultado, String carrera) {
 		super(nom, apellido, tipDoc, numDoc, correo, numCel, fecNac, sex, nac, domi, codPos, dep, localidad, canMulta,
-				estaMultado);
+				estaMultado, diasMultado);
 		this.carrera = carrera;
 	}
 
@@ -97,6 +97,7 @@ public class Docente extends Lector {
 		lista.add(getLocalidad());
 		lista.add(getCanMulta());
 		lista.add(getEstaMultado());
+		lista.add(getDiasMultado());
 		lista.add(this.getClass().getSimpleName());
 		lista.add(getCarrera());
 		return lista;

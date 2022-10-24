@@ -359,7 +359,30 @@ public class MetodosTxt {
 								aux.getFuncionarioPrestador(), aux.getFechaHoraADevolver(), fechaDevuelta, funcionario,
 								aux.getaDomicilio(), aux.getLector(), aux.getEjemplar());
 						datosPrestamo.remove(i); // Despues de crear el prestamoDevuelto borra el prestamo del array
-
+						
+						// Metodo para agregar una multa al lector
+						if(aux.compararFecha()) {
+							ArrayList<Lector> lectores = Lector.leerTexto();
+							for (int b = 0; b< lectores.size();b++) {
+								if (lectores.get(i).getNumDoc() == aux.getLector().getNumDoc()) {
+									lectores.get(i).setEstaMultado(true);
+									lectores.get(i).setCanMulta(lectores.get(i).getCanMulta()+1);
+									// AGREGAR VENTANA PIDIENDO CANTIDAD DE DIAS DE MULTA PARA AGREGAR
+									//lectores.get(i).setDiasMultado(lectores.get(i).getDiasMultado()+dias);
+								}
+							}
+							try {
+								BufferedWriter bw2 = new BufferedWriter(new FileWriter("Lectores.txt"));// Vacia el txt
+								bw2.write("");
+								bw2.close();
+								for (int l = 0; l < datosPrestamo.size(); l++) {
+									guardar(datosPrestamo.get(l), "Lectores.txt");
+								}
+							} catch (Exception e) {
+							}
+							
+						}
+							
 						try {
 							File txt = new File("PrestamosTerminados.txt");
 							if (!txt.exists()) { // Crea el archivo txt en caso de que no exista
@@ -466,26 +489,29 @@ public class MetodosTxt {
 	
 	public void extenderDias(int dias, int ejemplar) {
 		ArrayList<Prestamo> prestamos = Prestamo.leerTexto(1);
+		Boolean aux = true;
 		try {
 			for (int i = 0; i<prestamos.size(); i++) {
 				if (prestamos.get(i).getEjemplar().getIdEjemplar() == ejemplar) {
 					prestamos.get(i).setFechaHoraADevolver(prestamos.get(i).getFechaHoraADevolver().plusDays(dias));
-					JOptionPane.showMessageDialog(null, "Se han extendido " + dias + " dias al préstamo", "Exito", JOptionPane.INFORMATION_MESSAGE);
+					
+					BufferedWriter bw = new BufferedWriter(new FileWriter("Prestamos.txt"));// Vacia el txt
+					bw.write("");
+					bw.close();
+					for (int q = 0; q < prestamos.size(); q++) {
+						guardar(prestamos.get(q), "Prestamos.txt");
+					}
+					aux = false;
 				break;
 				}
-				JOptionPane.showMessageDialog(null, "Ejemplar " + ejemplar + " no se encuentra en Prestamos.", "Error",
-						JOptionPane.ERROR_MESSAGE);
 			}
 		} catch(Exception e) {
 		}
-		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter("Prestamos.txt"));// Vacia el txt
-			bw.write("");
-			bw.close();
-			for (int q = 0; q < prestamos.size(); q++) {
-				guardar(prestamos.get(q), "Prestamos.txt");
-			}
-		} catch (Exception e) {
+		if (aux == true) {
+			JOptionPane.showMessageDialog(null, "Ejemplar " + ejemplar + " no se encuentra en Prestamos.", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(null, "Se han extendido " + dias + " dias al préstamo", "Exito", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
   }

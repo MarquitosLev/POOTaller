@@ -48,6 +48,7 @@ public class Alumno extends Lector {
 		lista.add(getLocalidad());
 		lista.add(getCanMulta());
 		lista.add(getEstaMultado());
+		lista.add(getDiasMultado());
 		lista.add(this.getClass().getSimpleName());
 		lista.add("");
 		return lista;

@@ -1,5 +1,7 @@
 package Biblioteca;
 
+import java.util.ArrayList;
+
 /**
  * Clase que representa la multa que se le coloca a un lector por infringir con
  * los tiempos de devolucion de un ejemplar.
@@ -9,7 +11,7 @@ package Biblioteca;
  * @author Sebastian Etchepare
  * @author Santiago Fernandez Gomez
  */
-public class Multa {
+public class Multa implements guardado{
 	private int diasMulta;
 	private Prestamo prestamo; // Asociacion Multa y Prestamo
 
@@ -44,5 +46,11 @@ public class Multa {
 	public void setPrestamo(Prestamo prestamo) {
 		this.prestamo = prestamo;
 	}
-
+	
+	public ArrayList<Object> obtenerLista() {
+		ArrayList<Object> lista = new ArrayList<Object>();
+		lista.add(getDiasMulta());
+		lista.add(getPrestamo().getEjemplar());
+		return lista;
+	}
 }

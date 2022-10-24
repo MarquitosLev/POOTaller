@@ -18,7 +18,8 @@ import java.time.LocalDate;
 public class Lector extends Persona implements guardado{
 	private int canMulta;
 	private Boolean estaMultado;
-	private ArrayList<Ejemplar> ejemplares;
+	private int diasMultado;
+	
 	
 	/**
 	 * Constructor parametrizado de la clase.
@@ -43,7 +44,7 @@ public class Lector extends Persona implements guardado{
 	
 	public Lector(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
 			String sex, String nac, String domi, int codPos, String dep, String localidad, int canMulta,
-			Boolean estaMultado) {
+			Boolean estaMultado, int diasMultado) {
 		super(nom, apellido, tipDoc, numDoc, correo, numCel, fecNac, sex, nac, domi, codPos, dep, localidad);
 		this.canMulta = canMulta;
 		this.estaMultado = estaMultado;
@@ -74,6 +75,7 @@ public class Lector extends Persona implements guardado{
 		super(nom, apellido, tipDoc, numDoc, correo, numCel, fecNac, sex, nac, domi, codPos, dep, localidad);
 		this.canMulta = 0;
 		this.estaMultado = false;
+		this.diasMultado = 0;
 	}
 	
 	/**
@@ -89,7 +91,6 @@ public class Lector extends Persona implements guardado{
 	public Lector() {
 		this.canMulta = 0;
 		this.estaMultado = false;
-		this.ejemplares = new ArrayList<Ejemplar>();
 	}
 
 	public int getCanMulta() {
@@ -108,18 +109,20 @@ public class Lector extends Persona implements guardado{
 		this.estaMultado = estaMultado;
 	}
 
-	public ArrayList<Ejemplar> getEjemplar() {
-		return ejemplares;
-	}
-
-	public void setEjemplar(ArrayList<Ejemplar> ejemplar) {
-		this.ejemplares = ejemplar;
-	}
-
 	public String toString() {
 		return super.toString();
 	}
 	
+	public int getDiasMultado() {
+		return diasMultado;
+	}
+
+
+	public void setDiasMultado(int diasMultado) {
+		this.diasMultado = diasMultado;
+	}
+
+
 	/**
 	 * Metodo que se encarga de crear un ArrayList del tipo 'Object' y agrega a los atributos de la clase dentro.
 	 */
@@ -141,6 +144,7 @@ public class Lector extends Persona implements guardado{
 		lista.add(getLocalidad());
 		lista.add(getCanMulta());
 		lista.add(getEstaMultado());
+		lista.add(getDiasMultado());
 		lista.add(this.getClass().getSimpleName());
 		lista.add("");
 		return lista;
@@ -156,7 +160,7 @@ public class Lector extends Persona implements guardado{
 				lista.add(new Lector(x.nextToken(), x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()),
 						x.nextToken(), Integer.parseInt(x.nextToken()), LocalDate.parse(x.nextToken()), x.nextToken(),
 						x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()), x.nextToken(), x.nextToken(),
-						Integer.parseInt(x.nextToken()), Boolean.parseBoolean(lector)));
+						Integer.parseInt(x.nextToken()), Boolean.parseBoolean(lector), Integer.parseInt(x.nextToken())));
 
 			}
 		} catch (Exception e) {
