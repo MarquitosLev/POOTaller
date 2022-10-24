@@ -144,8 +144,8 @@ public class Prestamo implements guardado {
 		return fechaHoraADevolver;
 	}
 
-	public void setFechaHoraADevolver() {
-		this.fechaHoraADevolver = this.fechaHoraPrestada.plusDays(4);
+	public void setFechaHoraADevolver(LocalDateTime fechaHoraADevolver) {
+		this.fechaHoraADevolver = fechaHoraADevolver;
 	}
 
 	public LocalDateTime getFechaDevuelta() {

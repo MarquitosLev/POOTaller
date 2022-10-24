@@ -880,7 +880,7 @@ public class ventanaPrincipal extends JFrame {
 
 				int id = Integer.parseInt(textIDEjemplarExtencion.getText());
 				int dias = Integer.parseInt(textDiasExtencion.getText());
-
+				metodo.extenderDias(dias, id);
 				/*
 				 * Metodo para extender dias al prestamo
 				 */

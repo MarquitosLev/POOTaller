@@ -463,5 +463,30 @@ public class MetodosTxt {
 
 		return false;
 	}
+	
+	public void extenderDias(int dias, int ejemplar) {
+		ArrayList<Prestamo> prestamos = Prestamo.leerTexto(1);
+		try {
+			for (int i = 0; i<prestamos.size(); i++) {
+				if (prestamos.get(i).getEjemplar().getIdEjemplar() == ejemplar) {
+					prestamos.get(i).setFechaHoraADevolver(prestamos.get(i).getFechaHoraADevolver().plusDays(dias));
+					JOptionPane.showMessageDialog(null, "Se han extendido " + dias + " dias al préstamo", "Exito", JOptionPane.INFORMATION_MESSAGE);
+				break;
+				}
+				JOptionPane.showMessageDialog(null, "Ejemplar " + ejemplar + " no se encuentra en Prestamos.", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			}
+		} catch(Exception e) {
+		}
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter("Prestamos.txt"));// Vacia el txt
+			bw.write("");
+			bw.close();
+			for (int q = 0; q < prestamos.size(); q++) {
+				guardar(prestamos.get(q), "Prestamos.txt");
+			}
+		} catch (Exception e) {
+		}
+	}
+  }
 
-}
