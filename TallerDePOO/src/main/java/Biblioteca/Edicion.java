@@ -189,7 +189,7 @@ public class Edicion implements guardado {
 	/**
 	 * Metodo que devuelve el formato en el que se encuentra la obra.
 	 * 
-	 * @return Retorna el formato almacenado, que es de tipo "formatoObra" (una enumeracion).
+	 * @return Retorna el formato almacenado, que es de tipo "formatoObra".
 	 */
 	public formatoObra getFormato() {
 		return formato;

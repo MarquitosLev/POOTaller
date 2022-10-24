@@ -261,62 +261,123 @@ public class Obra implements guardado {
 	}
 
 	/**
+	 * Metodo que devuelve el nombre del primer autor de la obra.
 	 * 
-	 * 
-	 * @return
+	 * @return Retorna un texto con el nombre almacenado del primer autor de la obra.
 	 */
 	public String getAutor1() {
 		return autor1;
 	}
 
+	/**
+	 * Metodo que settea el atributo "autor1" de la clase.
+	 * 
+	 * @param autor1 Se pasa el nombre del primer autor, y se lo agrega al atributo.
+	 */
 	public void setAutor1(String autor1) {
 		this.autor1 = autor1;
 	}
 
+	/**
+	 * Metodo que devuelve el nombre del segundo autor de la obra.
+	 * 
+	 * @return Retorna un texto con el nombre guardado del segundo autor de la obra.
+	 */
 	public String getAutor2() {
 		return autor2;
 	}
 
+	/**
+	 * Metodo que settea el atributo "autor2" de la clase.
+	 * 
+	 * @param autor2 Se pasa el nombre del segundo autor, y se lo agrega al atributo.
+	 */
 	public void setAutor2(String autor2) {
 		this.autor2 = autor2;
 	}
 
+	/**
+	 * Metodo que devuelve el nombre del tercer autor de la obra.
+	 * 
+	 * @return Retorna un texto con el nombre almacenado del tercer autor de la obra.
+	 */
 	public String getAutor3() {
 		return autor3;
 	}
 
+	/**
+	 * Metodo que settea el atributo "autor3" de la clase.
+	 * 
+	 * @param autor3 Se pasa el nombre del tercer autor, y se lo agrega al atributo.
+	 */
 	public void setAutor3(String autor3) {
 		this.autor3 = autor3;
 	}
 
+	/**
+	 * Metodo que devuelve el genero de la obra.
+	 * 
+	 * @return Retorna un String con el genero almacenado en el atributo.
+	 */
 	public String getGenero() {
 		return genero;
 	}
 
+	/**
+	 * Metodo que settea el atributo "genero" de la clase.
+	 * 
+	 * @param genero Se pasa el genero de la obra, y se lo agrega al atributo.
+	 */
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
 
+	/**
+	 * Metodo que devuelve el ISBN (Numero Internacional Normalizado para Libros) de la obra.
+	 * 
+	 * @return Retorna un entero con el ISBN almacenado en el atributo.
+	 */
 	public int getIsbn() {
 		return isbn;
 	}
 
+	
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Metodo que devuelve el area tematica de la obra.
+	 * 
+	 * @return Retorna el area almacenada en el atributo, que es de tipo "Area".
+	 */
 	public Area getArea() {
 		return area;
 	}
 
+	/**
+	 * Metodo que settea el atributo "area" de la clase.
+	 * 
+	 * @param area Se pasa el area tematica a agregar al atributo.
+	 */
 	public void setArea(Area area) {
 		this.area = area;
 	}
 
+	/**
+	 * Metodo que devuelve el tipo de la obra.
+	 * 
+	 * @return Retorna el tipo de obra guardado en el atributo, que es de tipo "tipoObra".
+	 */
 	public tipoObra getTipo() {
 		return tipo;
 	}
 
+	/**
+	 * Metodo que settea el atributo "tipo" de la clase.
+	 * 
+	 * @param tipo Se pasa el tipo de obra, y se lo agrega al atributo.
+	 */
 	public void setTipo(tipoObra tipo) {
 		this.tipo = tipo;
 	}
