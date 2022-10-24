@@ -19,10 +19,11 @@ import javax.swing.JOptionPane;
  * dentro de ArrayLists, los recorridos de dichas clases y a la vez que
  * verifican su existencia o no.
  * 
+ * @author Leandro Gonzalez Fister
+ * @author Marcos Leiva
  * @author Sebastian Etchepare
- *
+ * @author Santiago Fernandez Gomez
  */
-
 public class MetodosTxt {
 	ArrayList<Funcionario> datosFunc;
 	ArrayList<Integer> datosLector;
@@ -73,7 +74,7 @@ public class MetodosTxt {
 	 *             'Funcionario', para comprobar si el mismo ya existe dentro del
 	 *             ArrayList de funcionario.
 	 * 
-	 * @return retorna 'verdadero' o 'Falso' para indicar si el funcionario se
+	 * @return Retorna 'Verdadero' o 'Falso' para indicar si el funcionario se
 	 *         encuentra o no guardado en el ArrayList.
 	 */
 	public boolean comprobarFuncionario(String user) {
@@ -129,7 +130,6 @@ public class MetodosTxt {
 	 * @return En el caso de que el DNI se encuentre, retorna verdadero, por ende,
 	 *         el lector existe. En caso contrario, retorna falso
 	 */
-
 	public boolean existeLector(int dni) {
 		datosLector = new ArrayList<Integer>();
 		try {
@@ -162,12 +162,12 @@ public class MetodosTxt {
 	}
 
 	/**
-	 * Función que busca en los archivos .txt si existe una determinada obra.
+	 * Metodo que busca en los archivos .txt si existe una determinada obra.
 	 * 
 	 * @param titu Se le pasa el titulo de la obra para buscar si se encuentra o no
 	 *             almacenada.
 	 * 
-	 * @return retorna 'Verdadero' en caso de encontrar alguna coicidencia y 'Falso'
+	 * @return Retorna 'Verdadero' en caso de encontrar alguna coicidencia y 'Falso'
 	 *         en caso contrario.
 	 */
 	public boolean existeObra(String titu) {
@@ -201,10 +201,9 @@ public class MetodosTxt {
 	 * le suma 1 a la cantidad de ejemplares y cantidad de ejemplares disponibles a
 	 * la obra
 	 * 
-	 * @param ejemplar Se le pasa como parámetro el ejemplar que quiere ser
-	 *                 añadido al ArrayList y posteriormente al .txt
+	 * @param ejemplar Se le pasa como parámetro el ejemplar que quiere ser añadido
+	 *                 al ArrayList y posteriormente al .txt
 	 */
-
 	public void guardarEjemplar(Ejemplar ejemplar) {
 		ArrayList<Obra> datosObra = Obra.leerTexto();
 
@@ -448,20 +447,20 @@ public class MetodosTxt {
 		ArrayList<Obra> obras = Obra.leerTexto();
 
 		for (int i = 0; i < obras.size(); i++) {
-			for (int t = 0; t < ejemplares.size(); t++) { 
+			for (int t = 0; t < ejemplares.size(); t++) {
 				// Si el id del ejemplar y el titulo de obra y ejemplar son iguales, es
-				// verdadero			
-				
+				// verdadero
+
 				if (ejemplares.get(t).getIdEjemplar() == id
 						&& ejemplares.get(t).getObra().getTitulo().equals(obras.get(i).getTitulo())) {
 					if (obras.get(i).getCantEjemDisponible() > 0) {
 						return true;
 					}
-					
-				}	
+
+				}
 			}
 		}
-	
+
 		return false;
 	}
 

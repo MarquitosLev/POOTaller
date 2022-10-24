@@ -7,7 +7,6 @@ package Biblioteca;
  * @author Marcos Leiva
  * @author Sebastian Etchepare
  * @author Santiago Fernandez Gomez
- *
  */
 public enum formatoObra {
 	electronico, cd, dvd, papel, video, otro;

@@ -8,9 +8,7 @@ package Biblioteca;
  * @author Marcos Leiva
  * @author Sebastian Etchepare
  * @author Santiago Fernandez Gomez
- * 
  */
-
 public class Multa {
 	private int diasMulta;
 	private Prestamo prestamo; // Asociacion Multa y Prestamo

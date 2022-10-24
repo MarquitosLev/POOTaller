@@ -83,19 +83,12 @@ public class Funcionario implements guardado {
 		this.contrasenia = contrasenia;
 	}
 
-	public void registrarObservaciones() {
-		// falta completar
-	}
-
-	public void realizarPrestamo() {
-		// falta completar
-	}
-
 	/**
 	 * Metodo que se encarga de crear un ArrayList del tipo 'Object' e ir agregando
 	 * los atributos de la clase dentro.
+	 * 
+	 * @return Retorna un ArrayList con los atributos de la clase.
 	 */
-
 	public ArrayList<Object> obtenerLista() {
 		ArrayList<Object> lista = new ArrayList<Object>();
 		lista.add(getUsuario());
@@ -103,6 +96,11 @@ public class Funcionario implements guardado {
 		return lista;
 	}
 
+	/**
+	 * Metodo que lee el archivo "Funcionarios.txt" y retorna un ArrayList de todos los objetos.
+	 * 
+	 * @return Retorna un ArrayList con todos los objetos existentes en el txt.
+	 */
 	public static ArrayList<Funcionario> leerTexto() {
 		ArrayList<Funcionario> lista = new ArrayList<Funcionario>();
 		try {

@@ -4,13 +4,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
- * Clase que representa al tipo de lector 'Docente'
+ * Clase que representa al tipo de lector "Docente".
  * 
  * @author Leandro Gonzalez Fister
  * @author Marcos Leiva
  * @author Sebastian Etchepare
  * @author Santiago Fernandez Gomez
- *
  */
 public class Docente extends Lector {
 	private String carrera;

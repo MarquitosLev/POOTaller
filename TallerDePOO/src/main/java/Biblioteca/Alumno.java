@@ -3,10 +3,18 @@ package Biblioteca;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Clase que representa al tipo de lector "Alumno".
+ * 
+ * @author Leandro Gonzalez Fister
+ * @author Marcos Leiva
+ * @author Sebastian Etchepare
+ * @author Santiago Fernandez Gomez
+ */
 public class Alumno extends Lector {
-	//Creación de la asociación entre el funcionario y el alumno. No se si se trata de doble direccionalidad en este caso. 
-	private Funcionario funcionario;
-	
+	private Funcionario funcionario; // Creación de la asociación entre el funcionario y el alumno. No se si se trata
+										// de doble direccionalidad en este caso.
+
 	public Alumno(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
 			String sex, String nac, String domi, int codPos, String dep, String localidad) {
 		super(nom, apellido, tipDoc, numDoc, correo, numCel, fecNac, sex, nac, domi, codPos, dep, localidad);
@@ -20,11 +28,11 @@ public class Alumno extends Lector {
 		this.funcionario = funcionario;
 	}
 
-	public void Consultar(){
+	public void Consultar() {
 	}
-	
+
 	public ArrayList<Object> obtenerLista() {
-		ArrayList<Object>  lista = new ArrayList<Object> ();
+		ArrayList<Object> lista = new ArrayList<Object>();
 		lista.add(getNom());
 		lista.add(getApellido());
 		lista.add(getTipDoc());

@@ -1,4 +1,5 @@
 package Biblioteca;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.LocalDate;
@@ -12,11 +13,9 @@ import java.util.StringTokenizer;
  * @author Marcos Leiva
  * @author Sebastián Etchepare
  * @author Santiago Fernandez Gomez
- * 
- * */
+ */
+public class Obra implements guardado {
 
-public class Obra implements guardado{
-	
 	private int cantEjem;
 	private int cantEjemDisponible;
 	private String titulo;
@@ -27,13 +26,13 @@ public class Obra implements guardado{
 	private String genero;
 	private int isbn;
 	private int id;
-	private Area area; //Enumeracion
-	private tipoObra tipo; //Enumeracion
-	//private Coleccion perteneceA; //Unidireccionalidad con multiplicidad. Quitar comentario en constructores
+	private Area area; // Enumeracion
+	private tipoObra tipo; // Enumeracion
+	// private Coleccion perteneceA; //Unidireccionalidad con multiplicidad. Quitar
+	// comentario en constructores
 	private ArrayList<Ejemplar> ejemplares;
 	private ArrayList<Edicion> ediciones;
-	//Creación de la asociación entre funcionario, obra y reserva;
-	private Reserva funcionario;
+	private Reserva funcionario; // Creación de la asociación entre funcionario, obra y reserva
 
 	public Obra() {
 		super();
@@ -53,9 +52,9 @@ public class Obra implements guardado{
 		this.ejemplares = new ArrayList<Ejemplar>();
 		this.ediciones = new ArrayList<Edicion>();
 	}
-	
+
 	/**
-	 * Constructor de la clase Obra. 
+	 * Constructor de la clase Obra.
 	 * 
 	 * @param titulo
 	 * @param subtitulo
@@ -68,7 +67,8 @@ public class Obra implements guardado{
 	 * @param area
 	 * @param tipo
 	 */
-	public Obra(String titulo, String subtitulo, String autor1, String autor2, String autor3, String genero, int isbn, int id, Area area, tipoObra tipo) {
+	public Obra(String titulo, String subtitulo, String autor1, String autor2, String autor3, String genero, int isbn,
+			int id, Area area, tipoObra tipo) {
 		super();
 		this.cantEjem = 1;
 		this.cantEjemDisponible = 1;
@@ -84,9 +84,9 @@ public class Obra implements guardado{
 		this.tipo = tipo;
 //		this.perteneceA = perteneceA;
 	}
-	
+
 	/**
-	 * Constructor de la clase Obra. 
+	 * Constructor de la clase Obra.
 	 * 
 	 * @param cantEjem
 	 * @param cantEjemDisponible
@@ -101,8 +101,9 @@ public class Obra implements guardado{
 	 * @param area
 	 * @param tipo
 	 */
-	
-	public Obra(int cantEjem, int cantEjemDisponible, String titulo, String subtitulo, String autor1, String autor2, String autor3, String genero, int isbn, int id, Area area, tipoObra tipo) {
+
+	public Obra(int cantEjem, int cantEjemDisponible, String titulo, String subtitulo, String autor1, String autor2,
+			String autor3, String genero, int isbn, int id, Area area, tipoObra tipo) {
 		super();
 		this.cantEjem = cantEjem;
 		this.cantEjemDisponible = cantEjemDisponible;
@@ -118,20 +119,25 @@ public class Obra implements guardado{
 		this.tipo = tipo;
 //		this.perteneceA = perteneceA;
 	}
-	
+
+	/**
+	 * Constructor en el que solo se le pasa el titulo de la obra.
+	 * 
+	 * @param titulo Se le pasa el titulo a agregar.
+	 */
 	public Obra(String titulo) {
 		this.titulo = titulo;
 	}
 
 	/**
-	 * Función que retorna el funcionario del tipo 'Reserva'
+	 * Metodo que retorna el funcionario del tipo 'Reserva'
 	 * 
 	 * @return retorna el funcionario que se encuentre almacenado.
 	 */
 	public Reserva getFuncionario() {
 		return funcionario;
 	}
-	
+
 	/**
 	 * Metodo que settea el atributo 'funcionario' de la clase.
 	 * 
@@ -140,112 +146,163 @@ public class Obra implements guardado{
 	public void setFuncionario(Reserva funcionario) {
 		this.funcionario = funcionario;
 	}
-	
+
 	/**
-	 * Función que retorna ediciones.
+	 * Metodo que retorna ediciones.
 	 * 
-	 * @return las ediciones que se encuentran dentro del ArrayList del tipo Edición.
+	 * @return las ediciones que se encuentran dentro del ArrayList del tipo
+	 *         Edición.
 	 */
-	
+
 	public ArrayList<Edicion> getEdiciones() {
 		return ediciones;
 	}
 
 	/**
-	 * Metodo que se encarga de setear lo que se encuentre dentro del atributo 'ediciones'
+	 * Metodo que se encarga de setear lo que este dentro del atributo 'ediciones'
 	 * 
-	 * @param ediciones Se pasa como parámetro, un ArrayList que reemplaza el valor guardado en el correspondiente atributo.
+	 * @param ediciones Se pasa un ArrayList que reemplaza el/los valor/es
+	 *                  guardado/s en el correspondiente atributo.
 	 */
 	public void setEdiciones(ArrayList<Edicion> ediciones) {
 		this.ediciones = ediciones;
 	}
 
 	/**
+	 * Metodo que retorna ejemplares.
 	 * 
-	 * @return
+	 * @return Retorna un ArrayList con los ejemplares almacenados.
 	 */
-	
 	public ArrayList<Ejemplar> getEjemplares() {
 		return ejemplares;
 	}
 
+	/**
+	 * Metodo que settea el atributo "ejemplares" de la clase.
+	 * 
+	 * @param ejemplares Se pasa un ArrayList con los ejemplares a guardar.
+	 */
 	public void setEjemplares(ArrayList<Ejemplar> ejemplares) {
 		this.ejemplares = ejemplares;
 	}
 
+	/**
+	 * Metodo que devuelve un entero con la cantidad de ejemplares de la obra (ya
+	 * sea que esten disponibles o no).
+	 * 
+	 * @return Retorna un entero que indica la cantidad de ejemplares.
+	 */
 	public int getCantEjem() {
 		return cantEjem;
 	}
+
+	/**
+	 * Metodo que settea el atributo "cantEjem" de la clase.
+	 * 
+	 * @param cantEjem Se pasa la cantidad de ejemplares a agregar al atributo.
+	 */
 	public void setCantEjem(int cantEjem) {
 		this.cantEjem = cantEjem;
 	}
+
+	/**
+	 * Metodo que devuelve la cantidad de ejemplares de la obra que se encuentran disponibles.
+	 * 
+	 * @return Retorna un entero con la cantidad de ejemplares disponibles.
+	 */
 	public int getCantEjemDisponible() {
 		return cantEjemDisponible;
 	}
+
+	/**
+	 * Metodo que settea el atributo "cantEjemDisponible" de la clase.
+	 * 
+	 * @param cantEjemDisponible Se pasa la cantidad de ejemplares disponibles a agregar.
+	 */
 	public void setCantEjemDisponible(int cantEjemDisponible) {
 		this.cantEjemDisponible = cantEjemDisponible;
 	}
+
 	public String getTitulo() {
 		return titulo;
 	}
+
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
+
 	public String getSubtitulo() {
 		return subtitulo;
 	}
+
 	public void setSubtitulo(String subtitulo) {
 		this.subtitulo = subtitulo;
 	}
+
 	public String getAutor1() {
 		return autor1;
 	}
+
 	public void setAutor1(String autor1) {
 		this.autor1 = autor1;
 	}
+
 	public String getAutor2() {
 		return autor2;
 	}
+
 	public void setAutor2(String autor2) {
 		this.autor2 = autor2;
 	}
+
 	public String getAutor3() {
 		return autor3;
 	}
+
 	public void setAutor3(String autor3) {
 		this.autor3 = autor3;
 	}
+
 	public String getGenero() {
 		return genero;
 	}
+
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
+
 	public int getIsbn() {
 		return isbn;
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public Area getArea() {
 		return area;
 	}
+
 	public void setArea(Area area) {
 		this.area = area;
 	}
+
 	public tipoObra getTipo() {
 		return tipo;
 	}
+
 	public void setTipo(tipoObra tipo) {
 		this.tipo = tipo;
 	}
-	
+
 	/**
-	 * Metodo que se encarga de crear un array list del tipo objeto e ir agregando los atributos de la clase dentro. 
+	 * Metodo que se encarga de crear un array list del tipo objeto e ir agregando
+	 * los atributos de la clase dentro.
+	 * 
+	 * @return Retorna un ArrayList con todos los atributos de la clase.
 	 */
-	
 	public ArrayList<Object> obtenerLista() {
-		ArrayList<Object>  lista = new ArrayList<Object> ();
+		ArrayList<Object> lista = new ArrayList<Object>();
 		lista.add(getCantEjem());
 		lista.add(getCantEjemDisponible());
 		lista.add(getTitulo());
@@ -260,16 +317,22 @@ public class Obra implements guardado{
 		lista.add(getTipo());
 		return lista;
 	}
-	
-	public static ArrayList<Obra> leerTexto(){
+
+	/**
+	 * Metodo que lee el archivo "Obras.txt" y retorna un ArrayList de todos los
+	 * objetos que se encuentren ahi.
+	 * 
+	 * @return Retorna un ArrayList con todos los objetos existentes en el txt.
+	 */
+	public static ArrayList<Obra> leerTexto() {
 		ArrayList<Obra> lista = new ArrayList<Obra>();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("Obras.txt"));
 			String lector;
 			while ((lector = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
 				StringTokenizer x = new StringTokenizer(lector, "/");
-				lista.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()),
-						x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(),
+				lista.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), x.nextToken(),
+						x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(),
 						Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), Area.valueOf(x.nextToken()),
 						tipoObra.valueOf(x.nextToken())));
 			}

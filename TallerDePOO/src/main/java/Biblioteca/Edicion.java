@@ -12,9 +12,7 @@ import java.util.StringTokenizer;
  * @author Marcos Leiva
  * @author Sebastian Etchepare
  * @author Santiago Fernandez Gomez
- *
  */
-
 public class Edicion implements guardado {
 	private String editorial;
 	private String pais;
@@ -23,7 +21,7 @@ public class Edicion implements guardado {
 	private int volumen;
 	private int paginas;
 	private String idioma;
-	private formatoObra formato; // Falta Especificacion "Otro" en formato obra
+	private formatoObra formato;
 	private Obra obra;
 
 	/**
@@ -55,8 +53,10 @@ public class Edicion implements guardado {
 		this.obra = obra;
 	}
 
+	/**
+	 * Constructor por defecto de la clase.
+	 */
 	public Edicion() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -187,18 +187,18 @@ public class Edicion implements guardado {
 	}
 
 	/**
+	 * Metodo que devuelve el formato en el que se encuentra la obra.
 	 * 
-	 * 
-	 * @return
+	 * @return Retorna el formato almacenado, que es de tipo "formatoObra" (una enumeracion).
 	 */
 	public formatoObra getFormato() {
 		return formato;
 	}
 
 	/**
+	 * Metodo que settea el atributo "formato" de la clase.
 	 * 
-	 * 
-	 * @param formato
+	 * @param formato Se pasa el formato a agregar.
 	 */
 	public void setFormato(formatoObra formato) {
 		this.formato = formato;
@@ -223,11 +223,10 @@ public class Edicion implements guardado {
 	}
 
 	/**
+	 * Metodo que crea un ArrayList de tipo "Object" y va agregando los atributos de la clase adentro.
 	 * 
-	 * 
-	 * @return ArrayList con los atributos de la instancia creada
+	 * @return ArrayList con los atributos de la instancia creada.
 	 */
-
 	public ArrayList<Object> obtenerLista() {
 		// new Edicion(editorial, pais, numero, anio, volumen, paginas, idioma, new
 		// Obra(tituloObra))
@@ -243,6 +242,11 @@ public class Edicion implements guardado {
 		return lista;
 	}
 
+	/**
+	 * Metodo que lee el archivo "Editoriales.txt" y retorna un ArrayList con todos los objetos guardados.
+	 * 
+	 * @return Devuelve un ArrayList con todos los objetos existentes en el archivo.
+	 */
 	public static ArrayList<Edicion> leerTexto(){
 		ArrayList<Edicion> lista = new ArrayList<Edicion>();
 		try {
