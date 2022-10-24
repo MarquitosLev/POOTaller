@@ -11,7 +11,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 /**
  * La clase se encarga de almacenar un conjunto de metodos que sirven para
@@ -368,7 +370,7 @@ public class MetodosTxt {
 									lectores.get(i).setEstaMultado(true);
 									lectores.get(i).setCanMulta(lectores.get(i).getCanMulta()+1);
 									// AGREGAR VENTANA PIDIENDO CANTIDAD DE DIAS DE MULTA PARA AGREGAR
-									//lectores.get(i).setDiasMultado(lectores.get(i).getDiasMultado()+dias);
+									lectores.get(i).setDiasMultado(lectores.get(i).getDiasMultado()+5);
 								}
 							}
 							try {
@@ -512,6 +514,42 @@ public class MetodosTxt {
 					JOptionPane.ERROR_MESSAGE);
 		} else {
 			JOptionPane.showMessageDialog(null, "Se han extendido " + dias + " dias al préstamo", "Exito", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+	
+	public void imprimirEjemplaresArea(JTextArea textArea, JComboBox boxArea2) {
+		ArrayList<Ejemplar> ejemplares = Ejemplar.leerTexto();
+		ArrayList<Obra> obras = Obra.leerTexto();
+		/**
+		 * Recorre ejemplares
+		 */
+		for (int i = 0; i < ejemplares.size(); i++) {
+			/**
+			 * recorre obras
+			 */
+			for (int j = 0; j < obras.size(); j++) {
+				/*
+				 * Verifica si estan en la misma obra
+				 */
+				if (ejemplares.get(i).getObra().getTitulo().equals(obras.get(j).getTitulo())) {
+					/*
+					 * Verifica si es el area indicada
+					 */
+					if (obras.get(j).getArea().equals(boxArea2.getSelectedItem())) {
+						/*
+						 * verifica disponibilidad del ejemplar
+						 */
+						if (ejemplares.get(i).getDisponible()) {
+							/*
+							 * agrega al texto los datos (Titulo - IDEjemplar - Cantidad Disponible)
+							 */
+							textArea.append(obras.get(j).getTitulo() + " - " + ejemplares.get(i).getIdEjemplar()
+									+ " - " + obras.get(j).getCantEjemDisponible() + "\n");
+							textArea.append("----------------------------------------\n");
+						}
+					}
+				}
+			}
 		}
 	}
   }

@@ -42,6 +42,7 @@ import javax.swing.JTextPane;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.JTextArea;
 
 public class ventanaPrincipal extends JFrame {
 
@@ -80,7 +81,6 @@ public class ventanaPrincipal extends JFrame {
 	private JTextField textCarreras;
 	private JTextField textIDEjemplarExtencion;
 	private JTextField textDiasExtencion;
-	private JTable tablaEjemplarSegunArea;
 	private JTable tableSegEditorial;
 	private JTable tablaMultados;
 	private JTextField textEditorialBusca;
@@ -960,13 +960,14 @@ public class ventanaPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// Listado de Obras Segun Editorial elegida
 				Object[] vec = new Object[2];
-				int entradas = 0; 
+				int entradas = 0;
 				for (int x = modelEdic.getRowCount() - 1; x >= 0; x--) {
-					modelEdic.removeRow(x);			}
+					modelEdic.removeRow(x);
+				}
 				try {
 					String editorial = textEditorialBusca.getText();
 					ArrayList<Edicion> ediciones = Edicion.leerTexto();
-	
+
 					for (int j = 0; j < ediciones.size(); j++) {
 						if (ediciones.get(j).getEditorial().equals(editorial)) {
 							entradas++;
@@ -978,12 +979,14 @@ public class ventanaPrincipal extends JFrame {
 
 						}
 					}
-					if(entradas == 0) {
-						JOptionPane.showMessageDialog(null,  "No existe la editorial", "Error", JOptionPane.INFORMATION_MESSAGE);
+					if (entradas == 0) {
+						JOptionPane.showMessageDialog(null, "No existe la editorial", "Error",
+								JOptionPane.INFORMATION_MESSAGE);
 					}
 
 				} catch (Exception c) {
-					JOptionPane.showMessageDialog(null,  "No existe la editorial", "Error", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "No existe la editorial", "Error",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
 
 			}
@@ -1011,18 +1014,55 @@ public class ventanaPrincipal extends JFrame {
 		tabbedEstadisticas.addTab("Ejemplar s/Area", null, EjemplaresArea, null);
 		EjemplaresArea.setLayout(null);
 
-		tablaEjemplarSegunArea = new JTable((TableModel) null);
-		tablaEjemplarSegunArea.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		tablaEjemplarSegunArea.setBounds(43, 11, 649, 302);
-		EjemplaresArea.add(tablaEjemplarSegunArea);
-
-		JComboBox boxArea2 = new JComboBox();
+		final JComboBox boxArea2 = new JComboBox();
 		boxArea2.setModel(new DefaultComboBoxModel(Area.values()));
-		boxArea2.setBounds(43, 330, 124, 26);
+		boxArea2.setBounds(118, 102, 124, 26);
 		EjemplaresArea.add(boxArea2);
 
+		final JTextArea textArea = new JTextArea();
+		textArea.setFont(new Font("Dubai Medium", Font.PLAIN, 15));
+		textArea.setBounds(290, 42, 379, 283);
+		EjemplaresArea.add(textArea);
+
 		JButton btnBuscarEjemplaresArea = new JButton("Buscar");
-		btnBuscarEjemplaresArea.setBounds(191, 330, 94, 26);
+		btnBuscarEjemplaresArea.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				/*
+				 * Ejemplares disponibles para préstamo para un área de referencia determinada.
+				 */
+				textArea.setText("");
+				int select = boxArea2.getSelectedIndex();
+
+				switch (select) {
+				case (0):
+					// Matematicas
+					metodo.imprimirEjemplaresArea(textArea, boxArea2);
+					break;
+				case (1):
+					// Programacion
+					metodo.imprimirEjemplaresArea(textArea, boxArea2);
+					break;
+				case (2):
+					// Contabilidad
+					metodo.imprimirEjemplaresArea(textArea, boxArea2);
+					break;
+				case (3):
+					// Ad Empresas
+					metodo.imprimirEjemplaresArea(textArea, boxArea2);
+					break;
+				case (4):
+					// S. Operativo
+					metodo.imprimirEjemplaresArea(textArea, boxArea2);
+					break;
+				case (5):
+					// Otro
+					metodo.imprimirEjemplaresArea(textArea, boxArea2);
+					break;
+				}
+
+			}
+		});
+		btnBuscarEjemplaresArea.setBounds(135, 163, 94, 26);
 		EjemplaresArea.add(btnBuscarEjemplaresArea);
 
 		JLabel lblNewLabel_13_1_1 = new JLabel("");
