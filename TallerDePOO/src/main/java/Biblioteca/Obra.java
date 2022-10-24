@@ -28,6 +28,7 @@ public class Obra implements guardado {
 	private int id;
 	private Area area; // Enumeracion
 	private tipoObra tipo; // Enumeracion
+	private ArrayList<Coleccion> colecciones;
 	// private Coleccion perteneceA; //Unidireccionalidad con multiplicidad. Quitar
 	// comentario en constructores
 	private ArrayList<Ejemplar> ejemplares;
@@ -223,22 +224,47 @@ public class Obra implements guardado {
 		this.cantEjemDisponible = cantEjemDisponible;
 	}
 
+	/**
+	 * Metodo que devuelve el titulo de la obra.
+	 * 
+	 * @return Retorna un String con el titulo almacenado en el atributo.
+	 */
 	public String getTitulo() {
 		return titulo;
 	}
 
+	/**
+	 * Metodo que settea el atributo "titulo" de la clase.
+	 * 
+	 * @param titulo Se pasa el titulo que se quiere agregar.
+	 */
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
 
+	/**
+	 * Metodo que devuelve el subtitulo de la obra.
+	 * 
+	 * @return Retorna un String con el subtitulo guardado.
+	 */
 	public String getSubtitulo() {
 		return subtitulo;
 	}
 
+	/**
+	 * Metodo que settea el atributo "subtitulo" de la clase.
+	 * 
+	 * @param subtitulo Se pasa el subtitulo a agregar.
+	 */
 	public void setSubtitulo(String subtitulo) {
 		this.subtitulo = subtitulo;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public String getAutor1() {
 		return autor1;
 	}
