@@ -188,13 +188,8 @@ public class Prestamo implements guardado {
 		this.ejemplar = ejemplar;
 	}
 
-	public boolean compararFecha() {
-		Long x = ChronoUnit.DAYS.between(getFechaHoraADevolver(), getFechaDevuelta());
-		if (x >= 0) {
-			return true;
-		} else {
-			return false;
-		}
+	public static Long compararFecha(LocalDateTime fechaHoraADevolver, LocalDateTime fechaHoraDevuelta) {
+		return ChronoUnit.DAYS.between(fechaHoraADevolver, fechaHoraDevuelta);
 	}
 
 	/**

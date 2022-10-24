@@ -360,30 +360,37 @@ public class MetodosTxt {
 						Prestamo prestamoDevuelto = new Prestamo(aux.getFechaHoraPrestada(),
 								aux.getFuncionarioPrestador(), aux.getFechaHoraADevolver(), fechaDevuelta, funcionario,
 								aux.getaDomicilio(), aux.getLector(), aux.getEjemplar());
-						datosPrestamo.remove(i); // Despues de crear el prestamoDevuelto borra el prestamo del array
 						
+						System.out.println("Si");
 						// Metodo para agregar una multa al lector
-						if(aux.compararFecha()) {
+						Long comparacion = ChronoUnit.DAYS.between(aux.getFechaHoraADevolver(), fechaDevuelta);
+						System.out.println(comparacion);
+						if(comparacion > 0) {
+							System.out.println("Entrando a comparacion");
 							ArrayList<Lector> lectores = Lector.leerTexto();
-							for (int b = 0; b< lectores.size();b++) {
-								if (lectores.get(i).getNumDoc() == aux.getLector().getNumDoc()) {
-									lectores.get(i).setEstaMultado(true);
-									lectores.get(i).setCanMulta(lectores.get(i).getCanMulta()+1);
-									// AGREGAR VENTANA PIDIENDO CANTIDAD DE DIAS DE MULTA PARA AGREGAR
-									lectores.get(i).setDiasMultado(lectores.get(i).getDiasMultado()+5);
+							for (int b = 0; b < lectores.size();b++) {
+								System.out.println("Entrando a lectores");
+								 if (lectores.get(b).getNumDoc() == aux.getLector().getNumDoc()) {
+									System.out.println("lectoresTRue");
+									lectores.get(b).setEstaMultado(true);
+									lectores.get(b).setCanMulta(lectores.get(b).getCanMulta()+1);
+									lectores.get(b).setDiasMultado(lectores.get(b).getDiasMultado()+(comparacion*3));
+									
+									try {
+										BufferedWriter bw2 = new BufferedWriter(new FileWriter("Lectores.txt"));// Vacia el txt
+										bw2.write("");
+										bw2.close();
+										for (int l = 0; l < lectores.size(); l++) {
+											guardar(lectores.get(l), "Lectores.txt");
+										}
+									} catch (Exception e) {
+									}
+									break;
 								}
-							}
-							try {
-								BufferedWriter bw2 = new BufferedWriter(new FileWriter("Lectores.txt"));// Vacia el txt
-								bw2.write("");
-								bw2.close();
-								for (int l = 0; l < datosPrestamo.size(); l++) {
-									guardar(datosPrestamo.get(l), "Lectores.txt");
-								}
-							} catch (Exception e) {
 							}
 							
 						}
+						datosPrestamo.remove(i); // Despues de crear el prestamoDevuelto borra el prestamo del array
 							
 						try {
 							File txt = new File("PrestamosTerminados.txt");

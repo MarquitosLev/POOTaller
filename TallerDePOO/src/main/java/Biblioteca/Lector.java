@@ -18,7 +18,7 @@ import java.time.LocalDate;
 public class Lector extends Persona implements guardado{
 	private int canMulta;
 	private Boolean estaMultado;
-	private int diasMultado;
+	private Long diasMultado;
 	
 	
 	/**
@@ -44,10 +44,11 @@ public class Lector extends Persona implements guardado{
 	
 	public Lector(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
 			String sex, String nac, String domi, int codPos, String dep, String localidad, int canMulta,
-			Boolean estaMultado, int diasMultado) {
+			Boolean estaMultado, Long diasMultado) {
 		super(nom, apellido, tipDoc, numDoc, correo, numCel, fecNac, sex, nac, domi, codPos, dep, localidad);
 		this.canMulta = canMulta;
 		this.estaMultado = estaMultado;
+		this.diasMultado = diasMultado;
 	}
 	
 	
@@ -75,7 +76,7 @@ public class Lector extends Persona implements guardado{
 		super(nom, apellido, tipDoc, numDoc, correo, numCel, fecNac, sex, nac, domi, codPos, dep, localidad);
 		this.canMulta = 0;
 		this.estaMultado = false;
-		this.diasMultado = 0;
+		this.diasMultado = (long) 0;
 	}
 	
 	/**
@@ -113,15 +114,16 @@ public class Lector extends Persona implements guardado{
 		return super.toString();
 	}
 	
-	public int getDiasMultado() {
+	public Long getDiasMultado() {
 		return diasMultado;
 	}
 
 
-	public void setDiasMultado(int diasMultado) {
+	public void setDiasMultado(Long diasMultado) {
 		this.diasMultado = diasMultado;
 	}
-
+	
+	
 
 	/**
 	 * Metodo que se encarga de crear un ArrayList del tipo 'Object' y agrega a los atributos de la clase dentro.
@@ -154,15 +156,17 @@ public class Lector extends Persona implements guardado{
 		ArrayList<Lector> lista = new ArrayList<Lector>();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("Lectores.txt"));
-			String lector;
-			while ((lector = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
-				StringTokenizer x = new StringTokenizer(lector, "/");
+			String leer;
+			while ((leer = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+				StringTokenizer x = new StringTokenizer(leer, "/");
+				System.out.println(lista);
 				lista.add(new Lector(x.nextToken(), x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()),
 						x.nextToken(), Integer.parseInt(x.nextToken()), LocalDate.parse(x.nextToken()), x.nextToken(),
 						x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()), x.nextToken(), x.nextToken(),
-						Integer.parseInt(x.nextToken()), Boolean.parseBoolean(lector), Integer.parseInt(x.nextToken())));
-
+						Integer.parseInt(x.nextToken()), Boolean.parseBoolean(x.nextToken()), Long.parseLong(x.nextToken())));
+				System.out.println(lista);
 			}
+			System.out.println(lista.size());
 		} catch (Exception e) {
 		}
 		return lista;
