@@ -2,7 +2,7 @@
 
 #### Repositorio dedicado al taller de la materia 'Programación Orientada a Objetos'
 
-## Nimbook ![](https://github.com/MarquitosLev/POOTaller/blob/test/TallerDePOO/src/main/java/imagenes/icon.png?raw=true)
+## Nimbook ![](https://github.com/MarquitosLev/POOTaller/blob/test/TallerDePOO/src/main/java/imagenes/logo.png?raw=true)
 
 ### Integrantes del grupo.
   
