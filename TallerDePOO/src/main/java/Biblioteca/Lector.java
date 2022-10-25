@@ -159,14 +159,11 @@ public class Lector extends Persona implements guardado{
 			String leer;
 			while ((leer = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
 				StringTokenizer x = new StringTokenizer(leer, "/");
-				System.out.println(lista);
 				lista.add(new Lector(x.nextToken(), x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()),
 						x.nextToken(), Integer.parseInt(x.nextToken()), LocalDate.parse(x.nextToken()), x.nextToken(),
 						x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()), x.nextToken(), x.nextToken(),
 						Integer.parseInt(x.nextToken()), Boolean.parseBoolean(x.nextToken()), Long.parseLong(x.nextToken())));
-				System.out.println(lista);
 			}
-			System.out.println(lista.size());
 		} catch (Exception e) {
 		}
 		return lista;

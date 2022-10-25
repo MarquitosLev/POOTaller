@@ -366,16 +366,14 @@ public class MetodosTxt {
 						Long comparacion = ChronoUnit.DAYS.between(aux.getFechaHoraADevolver(), fechaDevuelta);
 						System.out.println(comparacion);
 						if(comparacion > 0) {
-							System.out.println("Entrando a comparacion");
 							ArrayList<Lector> lectores = Lector.leerTexto();
 							for (int b = 0; b < lectores.size();b++) {
-								System.out.println("Entrando a lectores");
 								 if (lectores.get(b).getNumDoc() == aux.getLector().getNumDoc()) {
-									System.out.println("lectoresTRue");
 									lectores.get(b).setEstaMultado(true);
 									lectores.get(b).setCanMulta(lectores.get(b).getCanMulta()+1);
 									lectores.get(b).setDiasMultado(lectores.get(b).getDiasMultado()+(comparacion*3));
-									
+									Multa multa = new Multa((comparacion*3), new Prestamo(ejemplar));
+									guardar(multa, "Multas.txt");
 									try {
 										BufferedWriter bw2 = new BufferedWriter(new FileWriter("Lectores.txt"));// Vacia el txt
 										bw2.write("");
@@ -558,6 +556,20 @@ public class MetodosTxt {
 				}
 			}
 		}
+	}
+	
+	//Metodo que devuelve un ArrayList de los lectores con mas multas en cierta fecha dada
+	public ArrayList<Multa> lectoresPorFecha(LocalDateTime fechaMin, LocalDateTime fechaMax){
+		ArrayList<Multa> multas = Multa.leerTexto();
+		ArrayList<Multa> multasEnFecha = new ArrayList<Multa>();
+		for (int i = 0; i < multas.size(); i++) {
+			Long menor = ChronoUnit.DAYS.between(fechaMin, multas.get(i).getFechaHoraMultado());
+			Long mayor = ChronoUnit.DAYS.between(fechaMax, multas.get(i).getFechaHoraMultado());
+			if (menor <= 0 && mayor >= 0) {
+				multasEnFecha.add(multas.get(i));
+			}
+		}
+		return multasEnFecha;
 	}
   }
 

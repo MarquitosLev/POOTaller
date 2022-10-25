@@ -94,17 +94,11 @@ public class Prestamo implements guardado {
 
 	/**
 	 * Constructor por defecto de la clase.
+	 * @param i 
 	 */
 
-	public Prestamo() {
-		this.fechaHoraPrestada = LocalDateTime.now();
-		this.funcionarioPrestador = "";
-		this.fechaHoraADevolver = this.fechaHoraPrestada.plusDays(4);
-		this.fechaDevuelta = LocalDateTime.of(2000, 1, 1, 1, 1);
-		this.funcionarioDevuelta = "";
-		this.multas = new ArrayList<Multa>();
-		this.lector = new Lector();
-		this.ejemplar = new Ejemplar();
+	public Prestamo(int id) {
+		this.ejemplar = new Ejemplar(id);
 
 	}
 
@@ -186,10 +180,6 @@ public class Prestamo implements guardado {
 
 	public void setEjemplar(Ejemplar ejemplar) {
 		this.ejemplar = ejemplar;
-	}
-
-	public static Long compararFecha(LocalDateTime fechaHoraADevolver, LocalDateTime fechaHoraDevuelta) {
-		return ChronoUnit.DAYS.between(fechaHoraADevolver, fechaHoraDevuelta);
 	}
 
 	/**

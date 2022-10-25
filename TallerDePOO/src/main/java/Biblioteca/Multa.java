@@ -1,6 +1,10 @@
 package Biblioteca;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * Clase que representa la multa que se le coloca a un lector por infringir con
@@ -12,30 +16,36 @@ import java.util.ArrayList;
  * @author Santiago Fernandez Gomez
  */
 public class Multa implements guardado{
-	private int diasMulta;
+	private Long diasMulta;
 	private Prestamo prestamo; // Asociacion Multa y Prestamo
-
+	private LocalDateTime fechaHoraMultado;
 	/**
 	 * Constructor parametrizado de la clase.
 	 * 
 	 * @param diasMulta 
 	 * @param prestamo
 	 */
-	public Multa(int diasMulta, Prestamo prestamo) {
-		super();
+	public Multa(Long diasMulta, Prestamo prestamo) {
 		this.diasMulta = diasMulta;
 		this.prestamo = prestamo;
+		this.fechaHoraMultado = LocalDateTime.now();
+	}
+	
+	public Multa(Long diasMulta, Prestamo prestamo, LocalDateTime fechaHoraMultado) {
+		this.diasMulta = diasMulta;
+		this.prestamo = prestamo;
+		this.fechaHoraMultado = fechaHoraMultado;
 	}
 
-	public Multa(int diasMulta) {
+	public Multa(Long diasMulta) {
 		this.diasMulta = diasMulta;
 	}
 
-	public int getDiasMulta() {
+	public Long getDiasMulta() {
 		return diasMulta;
 	}
 
-	public void setDiasMulta(int diasMulta) {
+	public void setDiasMulta(Long diasMulta) {
 		this.diasMulta = diasMulta;
 	}
 	
@@ -47,10 +57,34 @@ public class Multa implements guardado{
 		this.prestamo = prestamo;
 	}
 	
+	public LocalDateTime getFechaHoraMultado() {
+		return fechaHoraMultado;
+	}
+
+	public void setFechaHoraMultado(LocalDateTime fechaHoraMultado) {
+		this.fechaHoraMultado = fechaHoraMultado;
+	}
+
 	public ArrayList<Object> obtenerLista() {
 		ArrayList<Object> lista = new ArrayList<Object>();
 		lista.add(getDiasMulta());
-		lista.add(getPrestamo().getEjemplar());
+		lista.add(getPrestamo().getEjemplar().getIdEjemplar());
+		lista.add(getFechaHoraMultado());
+		return lista;
+	}
+	
+	public static ArrayList<Multa> leerTexto(){
+		ArrayList<Multa> lista = new ArrayList<Multa>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("Multas.txt"));
+			String lector;
+			while ((lector = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+				StringTokenizer x = new StringTokenizer(lector, "/");
+				lista.add(new Multa(Long.parseLong(x.nextToken()), new Prestamo(new Ejemplar().getIdEjemplar()),
+						LocalDateTime.parse(x.nextToken())));
+			}
+		} catch (Exception e) {
+		}
 		return lista;
 	}
 }
