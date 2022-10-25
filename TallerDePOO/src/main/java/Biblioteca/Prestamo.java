@@ -94,7 +94,7 @@ public class Prestamo implements guardado {
 
 	/**
 	 * Constructor por defecto de la clase.
-	 * @param i 
+	 * @param id 
 	 */
 
 	public Prestamo(int id) {

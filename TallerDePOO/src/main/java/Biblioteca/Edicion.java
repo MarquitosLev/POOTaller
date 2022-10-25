@@ -37,7 +37,8 @@ public class Edicion implements guardado {
 	 *                  la obra.
 	 * @param idioma    Se pasa un texto con el idioma en el que esta escrito la
 	 *                  obra.
-	 * @param obra
+	 * @param obra      Se pasa un objeto de tipo "Obra" que contiene todos los
+	 *                  atributos de la clase Obra.
 	 */
 
 	public Edicion(String editorial, String pais, int num, int anio, int volumen, int paginas, String idioma,
@@ -205,25 +206,27 @@ public class Edicion implements guardado {
 	}
 
 	/**
+	 * Metodo que devuelve un objeto de tipo "Obra" con los atributos de su clase.
 	 * 
-	 * 
-	 * @return
+	 * @return Retorna el objeto almacenado de tipo "Obra".
 	 */
 	public Obra getObra() {
 		return obra;
 	}
 
 	/**
+	 * Metodo que settea el atributo "obra" de la clase.
 	 * 
-	 * 
-	 * @param obra
+	 * @param obra Se pasa un objeto de tipo "Obra" con los datos de una obra, y se
+	 *             lo agrega al atributo.
 	 */
 	public void setObra(Obra obra) {
 		this.obra = obra;
 	}
 
 	/**
-	 * Metodo que crea un ArrayList de tipo "Object" y va agregando los atributos de la clase adentro.
+	 * Metodo que crea un ArrayList de tipo "Object" y va agregando los atributos de
+	 * la clase adentro.
 	 * 
 	 * @return ArrayList con los atributos de la instancia creada.
 	 */
@@ -243,11 +246,12 @@ public class Edicion implements guardado {
 	}
 
 	/**
-	 * Metodo que lee el archivo "Editoriales.txt" y retorna un ArrayList con todos los objetos guardados.
+	 * Metodo que lee el archivo "Editoriales.txt" y retorna un ArrayList con todos
+	 * los objetos guardados.
 	 * 
 	 * @return Devuelve un ArrayList con todos los objetos existentes en el archivo.
 	 */
-	public static ArrayList<Edicion> leerTexto(){
+	public static ArrayList<Edicion> leerTexto() {
 		ArrayList<Edicion> lista = new ArrayList<Edicion>();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("Editoriales.txt"));
@@ -255,15 +259,20 @@ public class Edicion implements guardado {
 			while ((ed = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
 				StringTokenizer x = new StringTokenizer(ed, "/");
 				lista.add(new Edicion(x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()),
-						Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()),
-						x.nextToken(), new Obra(x.nextToken())));
+						Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()),
+						Integer.parseInt(x.nextToken()), x.nextToken(), new Obra(x.nextToken())));
 			}
 		} catch (Exception e) {
 		}
 		return lista;
 	}
-	
+
 	@Override
+	/**
+	 * Metodo que devuelve un String con todos los atributos de la clase.
+	 * 
+	 * @return Devuelve un String con todos los datos almacenados.
+	 */
 	public String toString() {
 		return "Edicion [editorial=" + editorial + ", pais=" + pais + ", num=" + num + ", anio=" + anio + ", volumen="
 				+ volumen + ", paginas=" + paginas + ", idioma=" + idioma + ", obra=" + obra.getTitulo() + "]";

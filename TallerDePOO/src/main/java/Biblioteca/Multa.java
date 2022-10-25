@@ -32,7 +32,7 @@ public class Multa implements guardado {
 	public Multa(Long diasMulta, Prestamo prestamo) {
 		this.diasMulta = diasMulta;
 		this.prestamo = prestamo;
-		this.fechaHoraMultado = LocalDateTime.now(); 
+		this.fechaHoraMultado = LocalDateTime.now();
 	}
 
 	/**
@@ -52,19 +52,23 @@ public class Multa implements guardado {
 	}
 
 	/**
+	 * Constructor usado para 
 	 * 
-	 * @param diasMulta  		Se pasa un Long con los dias de multa que tiene el lector.
-	 * @param lector			Se pasa el lector 
-	 * @param prestamo			Se pasa un objeto de tipo "Prestamo" con todos los atributos de la clase Prestamo.
-	 * @param fechaHoraMultado	Se pasa la fecha y hora en la que el lector fue multado.
+	 * @param diasMulta        Se pasa un Long con los dias de multa que tiene el
+	 *                         lector.
+	 * @param lector           Se pasa el lector
+	 * @param prestamo         Se pasa un objeto de tipo "Prestamo" con todos los
+	 *                         atributos de la clase Prestamo.
+	 * @param fechaHoraMultado Se pasa la fecha y hora en la que el lector fue
+	 *                         multado.
 	 */
-	public Multa(Long diasMulta,Lector lector, Prestamo prestamo, LocalDateTime fechaHoraMultado) {
+	public Multa(Long diasMulta, Lector lector, Prestamo prestamo, LocalDateTime fechaHoraMultado) {
 		this.diasMulta = diasMulta;
 		this.lector = lector;
 		this.prestamo = prestamo;
 		this.fechaHoraMultado = LocalDateTime.now();
 	}
-	
+
 	/**
 	 * Metodo que devuelve la cantidad de dias de multa que tiene el lector.
 	 * 
@@ -84,20 +88,29 @@ public class Multa implements guardado {
 		this.diasMulta = diasMulta;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public Lector getLector() {
 		return lector;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param lector
+	 */
 	public void setLector(Lector lector) {
 		this.lector = lector;
 	}
 
 	/**
-	 * Metodo que devuelve un objeto de tipo "Prestamo" con los atributos de la
+	 * Metodo que devuelve un objeto de tipo "Prestamo" con los atributos de su
 	 * clase.
 	 * 
-	 * @return Retorna el objeto almacenado de tipo "Prestamo" con los atributos de
-	 *         su clase.
+	 * @return Retorna el objeto almacenado de tipo "Prestamo".
 	 */
 	public Prestamo getPrestamo() {
 		return prestamo;
@@ -160,8 +173,8 @@ public class Multa implements guardado {
 			String lector;
 			while ((lector = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
 				StringTokenizer x = new StringTokenizer(lector, "/");
-				lista.add(new Multa(Long.parseLong(x.nextToken()),new Lector(Integer.parseInt(x.nextToken())), new Prestamo(Integer.parseInt(x.nextToken())),
-						LocalDateTime.parse(x.nextToken())));
+				lista.add(new Multa(Long.parseLong(x.nextToken()), new Lector(Integer.parseInt(x.nextToken())),
+						new Prestamo(Integer.parseInt(x.nextToken())), LocalDateTime.parse(x.nextToken())));
 			}
 		} catch (Exception e) {
 		}
