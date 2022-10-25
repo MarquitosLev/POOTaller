@@ -884,8 +884,9 @@ public class ventanaPrincipal extends JFrame {
 					if (ejemplares.get(i).getDisponible()) {
 						textDispo.append(
 								ejemplares.get(i).getIdEjemplar() + " - " + ejemplares.get(i).getObra().getTitulo()
-										+ " - "+ ejemplares.get(i).getObservaciones() + "\n");
-						textDispo.append("--------------------------------------------------------------------------\n");
+										+ " - " + ejemplares.get(i).getObservaciones() + "\n");
+						textDispo
+								.append("--------------------------------------------------------------------------\n");
 					}
 
 				}
@@ -1201,81 +1202,128 @@ public class ventanaPrincipal extends JFrame {
 				.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		lblNewLabel_13_1_2.setBounds(0, 0, 735, 396);
 		RankingMultados.add(lblNewLabel_13_1_2);
-		
+
 		JPanel MultadosPorPeriodo = new JPanel();
 		tabbedEstadisticas.addTab("Multados", null, MultadosPorPeriodo, null);
 		MultadosPorPeriodo.setLayout(null);
-		
-		JButton btnMultadosFechas = new JButton("Buscar");
-		btnMultadosFechas.setBounds(150, 235, 94, 26);
-		MultadosPorPeriodo.add(btnMultadosFechas);
-		
+
 		diaInicio = new JTextField();
-		diaInicio.setBounds(174, 104, 37, 20);
+		diaInicio.setBounds(150, 113, 37, 20);
 		MultadosPorPeriodo.add(diaInicio);
 		diaInicio.setColumns(10);
-		
+
 		mesInicio = new JTextField();
 		mesInicio.setColumns(10);
-		mesInicio.setBounds(223, 104, 37, 20);
+		mesInicio.setBounds(199, 113, 37, 20);
 		MultadosPorPeriodo.add(mesInicio);
-		
+
 		anioInicio = new JTextField();
 		anioInicio.setColumns(10);
-		anioInicio.setBounds(275, 104, 60, 20);
+		anioInicio.setBounds(251, 113, 60, 20);
 		MultadosPorPeriodo.add(anioInicio);
-		
+
 		diaFinal = new JTextField();
 		diaFinal.setColumns(10);
-		diaFinal.setBounds(174, 167, 37, 20);
+		diaFinal.setBounds(150, 166, 37, 20);
 		MultadosPorPeriodo.add(diaFinal);
-		
+
 		mesFinal = new JTextField();
 		mesFinal.setColumns(10);
-		mesFinal.setBounds(223, 167, 37, 20);
+		mesFinal.setBounds(199, 166, 37, 20);
 		MultadosPorPeriodo.add(mesFinal);
-		
+
 		anioFinal = new JTextField();
 		anioFinal.setColumns(10);
-		anioFinal.setBounds(275, 167, 60, 20);
+		anioFinal.setBounds(251, 166, 60, 20);
 		MultadosPorPeriodo.add(anioFinal);
-		
+
+		final JTextArea textFined = new JTextArea();
+		textFined.setEditable(false);
+		textFined.setFont(new Font("Dubai Medium", Font.PLAIN, 15));
+		textFined.setBounds(0, 111, 366, 302);
+		MultadosPorPeriodo.add(textFined);
+
+		JScrollPane scrollFined = new JScrollPane(textFined);
+		scrollFined.setBounds(357, 53, 339, 282);
+		MultadosPorPeriodo.add(scrollFined);
+
+		/*
+		 * Listado de lectores que tuvieron multas en cierto periodo de tiempo.
+		 */
+		JButton btnMultadosFechas = new JButton("Buscar");
+		btnMultadosFechas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				int diaI = Integer.parseInt(diaInicio.getText());
+				int mesI = Integer.parseInt(mesInicio.getText());
+				int anioI = Integer.parseInt(anioInicio.getText());
+
+				int diaF = Integer.parseInt(diaFinal.getText());
+				int mesF = Integer.parseInt(mesFinal.getText());
+				int anioF = Integer.parseInt(anioFinal.getText());
+
+				LocalDateTime fechaInicio = LocalDateTime.of(anioI, mesI, diaI, 0, 0);
+				LocalDateTime fechaFinal = LocalDateTime.of(anioF, mesF, diaF, 0, 0);
+
+				ArrayList<Multa> multas = metodo.lectoresPorFecha(fechaInicio, fechaFinal);
+				ArrayList<Lector> lectores = Lector.leerTexto();
+				for (int j = 0; j < multas.size(); j++) {
+					for (int i = 0; i < lectores.size(); i++) {
+						if (multas.get(j).getLector().getNumDoc() == lectores.get(i).getNumDoc()) {
+
+							textFined.append(lectores.get(i).getNom() + " - " + lectores.get(i).getNumDoc() + " - "
+									+ multas.get(j).getFechaHoraMultado() + "\n");
+							textFined.append("************************************\n");
+
+						}
+
+					}
+				}
+			}
+		});
+		btnMultadosFechas.setBounds(150, 235, 94, 26);
+		MultadosPorPeriodo.add(btnMultadosFechas);
+
 		JLabel lblNewLabel_15 = new JLabel("Fecha Inicial:");
 		lblNewLabel_15.setForeground(new Color(255, 255, 255));
 		lblNewLabel_15.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_15.setBounds(24, 106, 132, 16);
+		lblNewLabel_15.setBounds(0, 115, 132, 16);
 		MultadosPorPeriodo.add(lblNewLabel_15);
-		
+
 		JLabel lblNewLabel_15_1 = new JLabel("Fecha Final:");
 		lblNewLabel_15_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_15_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_15_1.setBounds(24, 169, 132, 16);
+		lblNewLabel_15_1.setBounds(0, 168, 132, 16);
 		MultadosPorPeriodo.add(lblNewLabel_15_1);
-		
+
 		JLabel lblNewLabel_16_1 = new JLabel("DIA");
 		lblNewLabel_16_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_16_1.setForeground(new Color(255, 255, 255));
-		lblNewLabel_16_1.setBounds(174, 76, 37, 16);
+		lblNewLabel_16_1.setBounds(150, 85, 37, 16);
 		MultadosPorPeriodo.add(lblNewLabel_16_1);
-		
+
 		JLabel lblNewLabel_16_2 = new JLabel("A\u00D1O");
 		lblNewLabel_16_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_16_2.setForeground(new Color(255, 255, 255));
-		lblNewLabel_16_2.setBounds(275, 76, 60, 16);
+		lblNewLabel_16_2.setBounds(251, 85, 60, 16);
 		MultadosPorPeriodo.add(lblNewLabel_16_2);
-		
+
 		JLabel lblNewLabel_16_1_1 = new JLabel("MES");
 		lblNewLabel_16_1_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_16_1_1.setForeground(Color.WHITE);
-		lblNewLabel_16_1_1.setBounds(223, 76, 37, 16);
+		lblNewLabel_16_1_1.setBounds(199, 85, 37, 16);
 		MultadosPorPeriodo.add(lblNewLabel_16_1_1);
-		
-		JTextArea textArea_1 = new JTextArea();
-		textArea_1.setBounds(358, 30, 337, 301);
-		MultadosPorPeriodo.add(textArea_1);
-		
+
+		JLabel lblNewLabel_16 = new JLabel("Lectores con multas en un periodo de tiempo");
+		lblNewLabel_16.setForeground(new Color(75, 0, 130));
+		lblNewLabel_16.setFont(new Font("Lucida Sans Unicode", Font.BOLD, 14));
+		lblNewLabel_16.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_16.setBounds(0, 4, 353, 79);
+		MultadosPorPeriodo.add(lblNewLabel_16);
+
 		JLabel lblNewLabel_13_1_2_1 = new JLabel("");
-		lblNewLabel_13_1_2_1.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
+		lblNewLabel_13_1_2_1
+				.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		lblNewLabel_13_1_2_1.setBounds(0, 0, 735, 396);
 		MultadosPorPeriodo.add(lblNewLabel_13_1_2_1);
 

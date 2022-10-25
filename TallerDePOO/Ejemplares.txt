@@ -1,5 +1,5 @@
-6525/Bien/true/Donacion/2022-10-23T15:24:21.367271400/Y912/Aristoteles/2/
-3917/Bien roto/false/Compra/2022-10-23T15:25:19.222350100/T22/Manfredi/4/
-4461/Bien roto x2/true/Compra/2022-10-23T15:25:33.638754600/T221/Manfredi/6/
-1584/Perfecto Estado pa/true/Donacion/2022-10-25T03:25:23.211918600/Y412/Harry Potter/0/
-5796/Perfecto Estado pa/true/Donacion/2022-10-25T03:25:38.132758/Y412/Harry Potter/0/
+6525/Bien/true/Donacion/2022-10-23T15:24:21.367271400/Y912/Aristoteles/3/
+3917/Bien roto/true/Compra/2022-10-23T15:25:19.222350100/T22/Manfredi/5/
+4461/Bien roto x2/true/Compra/2022-10-23T15:25:33.638754600/T221/Manfredi/8/
+1584/Perfecto Estado pa/true/Donacion/2022-10-25T03:25:23.211918600/Y412/Harry Potter/2/
+5796/Perfecto Estado pa/true/Donacion/2022-10-25T03:25:38.132758/Y415/Harry Potter/0/

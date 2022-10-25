@@ -19,6 +19,7 @@ public class Multa implements guardado {
 	private Long diasMulta;
 	private Prestamo prestamo; // Asociacion Multa y Prestamo
 	private LocalDateTime fechaHoraMultado;
+	private Lector lector;
 
 	/**
 	 * Constructor que se usa para crear la multa nueva.
@@ -51,6 +52,20 @@ public class Multa implements guardado {
 	}
 
 	/**
+	 * 
+	 * @param diasMulta  		Se pasa un Long con los dias de multa que tiene el lector.
+	 * @param lector			Se pasa el lector 
+	 * @param prestamo			Se pasa un objeto de tipo "Prestamo" con todos los atributos de la clase Prestamo.
+	 * @param fechaHoraMultado	Se pasa la fecha y hora en la que el lector fue multado.
+	 */
+	public Multa(Long diasMulta,Lector lector, Prestamo prestamo, LocalDateTime fechaHoraMultado) {
+		this.diasMulta = diasMulta;
+		this.lector = lector;
+		this.prestamo = prestamo;
+		this.fechaHoraMultado = LocalDateTime.now();
+	}
+	
+	/**
 	 * Metodo que devuelve la cantidad de dias de multa que tiene el lector.
 	 * 
 	 * @return Retorna un Long con los dias de multa almacenado.
@@ -67,6 +82,14 @@ public class Multa implements guardado {
 	 */
 	public void setDiasMulta(Long diasMulta) {
 		this.diasMulta = diasMulta;
+	}
+
+	public Lector getLector() {
+		return lector;
+	}
+
+	public void setLector(Lector lector) {
+		this.lector = lector;
 	}
 
 	/**
@@ -118,7 +141,8 @@ public class Multa implements guardado {
 	public ArrayList<Object> obtenerLista() {
 		ArrayList<Object> lista = new ArrayList<Object>();
 		lista.add(getDiasMulta());
-		lista.add(getPrestamo().getLector());
+		lista.add(getLector().getNumDoc());
+		lista.add(getPrestamo().getEjemplar().getIdEjemplar());
 		lista.add(getFechaHoraMultado());
 		return lista;
 	}
@@ -136,7 +160,7 @@ public class Multa implements guardado {
 			String lector;
 			while ((lector = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
 				StringTokenizer x = new StringTokenizer(lector, "/");
-				lista.add(new Multa(Long.parseLong(x.nextToken()), new Prestamo(new Lector().getNumDoc()),
+				lista.add(new Multa(Long.parseLong(x.nextToken()),new Lector(Integer.parseInt(x.nextToken())), new Prestamo(Integer.parseInt(x.nextToken())),
 						LocalDateTime.parse(x.nextToken())));
 			}
 		} catch (Exception e) {

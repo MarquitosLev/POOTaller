@@ -354,6 +354,9 @@ public class MetodosTxt {
 
 						// Metodo para agregar una multa al lector
 						Long comparacion = ChronoUnit.DAYS.between(aux.getFechaHoraADevolver(), fechaDevuelta);
+						/*
+						 *  SI SE PASA DE LA FECHA A ENTREGAR (COMPARACION), SE PONE LA MULTA
+						 */
 						if (comparacion > 0) {
 							ArrayList<Lector> lectores = Lector.leerTexto();
 							for (int b = 0; b < lectores.size(); b++) {
@@ -362,12 +365,12 @@ public class MetodosTxt {
 									lectores.get(b).setCanMulta(lectores.get(b).getCanMulta() + 1);
 									lectores.get(b)
 											.setDiasMultado(lectores.get(b).getDiasMultado() + (comparacion * 3));
-									Multa multa = new Multa((comparacion * 3), new Prestamo(ejemplar));
+									
+									Multa multa = new Multa((comparacion * 3),new Lector(lectores.get(b).getNumDoc()), new Prestamo(ejemplar), LocalDateTime.now());
+									
 									guardar(multa, "Multas.txt");
 									try {
-										BufferedWriter bw2 = new BufferedWriter(new FileWriter("Lectores.txt"));// Vacia
-																												// el
-																												// txt
+										BufferedWriter bw2 = new BufferedWriter(new FileWriter("Lectores.txt"));																
 										bw2.write("");
 										bw2.close();
 										for (int l = 0; l < lectores.size(); l++) {
@@ -559,7 +562,7 @@ public class MetodosTxt {
 		for (int i = 0; i < multas.size(); i++) {
 			Long menor = ChronoUnit.DAYS.between(fechaMin, multas.get(i).getFechaHoraMultado());
 			Long mayor = ChronoUnit.DAYS.between(fechaMax, multas.get(i).getFechaHoraMultado());
-			if (menor <= 0 && mayor >= 0) {
+			if (menor >= 0 && mayor <= 0) {
 				multasEnFecha.add(multas.get(i));
 			}
 		}
