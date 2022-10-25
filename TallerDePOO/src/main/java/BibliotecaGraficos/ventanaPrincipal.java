@@ -656,13 +656,13 @@ public class ventanaPrincipal extends JFrame {
 					if (tipoLector == "Alumno") {
 						// Crea el Alumno
 						Lector alumno = new Alumno(nombre, apellido, tipDni, dni, correo, numCel, fechaNac, sexo,
-								lugNac, domicilio, codPos, departamento, localidad);
+								lugNac, domicilio, codPos, departamento, localidad, tipoLector);
 						// Agrega al txt el nuevo Alumno
 						metodo.guardar(alumno, "Lectores.txt");
 					} else if (tipoLector == "Docente") {
 						// Crea el docente
 						Lector docente = new Docente(nombre, apellido, tipDni, dni, correo, numCel, fechaNac, sexo,
-								lugNac, domicilio, codPos, departamento, localidad, carreraDocente);
+								lugNac, domicilio, codPos, departamento, localidad, tipoLector, carreraDocente);
 
 						// Setea carrera de docente
 						((Docente) docente).setCarrera(carreraDocente);
@@ -672,7 +672,7 @@ public class ventanaPrincipal extends JFrame {
 					} else {
 						// Agrega al txt el nuevo lector
 						Lector lector = new Lector(nombre, apellido, tipDni, dni, correo, numCel, fechaNac, sexo,
-								lugNac, domicilio, codPos, departamento, localidad);
+								lugNac, domicilio, codPos, departamento, localidad, tipoLector);
 						metodo.guardar(lector, "Lectores.txt");
 					}
 
@@ -787,7 +787,8 @@ public class ventanaPrincipal extends JFrame {
 					if (metodo.hayDisponibles(id)) {
 						Prestamo prestamo = new Prestamo(textFuncPrestador.getText(), new Lector(dni),
 								checkDomicilio.isSelected(), new Ejemplar(id));
-
+						//Suma 1 a la cantidad pedida de la obra segun el tipo de lector
+						metodo.guardarTipoEnObra(prestamo);
 						// Realiza los cambios de obra y ejemplar, si esta disponible y cantidad.
 						metodo.ejemplarPedido(new Ejemplar(id));
 						// Guarda el nuevo prestamo

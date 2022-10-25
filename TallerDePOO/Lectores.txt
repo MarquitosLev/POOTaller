@@ -1,2 +1,4 @@
-Juli/Alvarez/saddsa/44123123/@@sda/2442/2002-05-05/Masculino/saddsa/dsads/434/sdads/dsadsa/4/true/75/Lector//
-Tobby/Jackson/multi/999/correo@live.com/123412/2022-03-05/Masculino/concor/concord 123/3200/concor/concor/6/true/165/Lector//
+Juli/Alvarez/saddsa/44123123/@@sda/2442/2002-05-05/Masculino/saddsa/dsads/434/sdads/dsadsa/3/true/45/Lector//
+Tobby/Jackson/multi/999/correo@live.com/123412/2022-03-05/Masculino/concor/concord 123/3200/concor/concor/0/false/0/Docente/Diseño Grafico, Turismo/
+DocenteJuan/adsdsa/dsadsa/40123123/dfgfdfdgf/241241/1980-07-07/Masculino/fdsfdsfds/ggfgf/42124/fddfd/dsadsa/0/false/0/Docente/Administracion - sistemas/
+AlumnaRamona/fadfdf/sdffdsdfs/40111222/dfgfdgf/41241/2002-08-08/Femenino/fdsfdsfd/gfggfgf/412421/gfgffg/sdadsasda/0/false/0/Alumno//

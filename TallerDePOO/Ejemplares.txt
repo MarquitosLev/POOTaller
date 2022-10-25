@@ -1,3 +1,5 @@
-4959/Buen estado/true/Donacion/2022-10-25T12:37:45.460746400/I123/La Nona/0/
-4568/Paginas Rotas/true/Compra/2022-10-25T12:39:05.773494400/I124/La Nona/0/
-666/Muy buen estado, casi nuevo/true/Donacion/2022-10-25T12:42:14.884902/G467/Diario de Ana Frank/0/
+4444/rgre/false/Donacion/2022-10-25T14:28:38.187798800/4dsds/Harry/1/
+4446/rgre/true/Donacion/2022-10-25T14:28:52.359058200/sdsds/Harry/0/
+2222/gdfgdfg/true/Compra/2022-10-25T14:29:22.669590300/dsad2/Got/0/
+111/gdfgdfg/true/Compra/2022-10-25T14:29:31.182470100/fdsfsd/Got/0/
+1115/gdfgdfgg/true/Otro/2022-10-25T14:29:47.541843200/fdsfsdhg/Richa/0/

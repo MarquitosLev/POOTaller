@@ -174,7 +174,7 @@ public class MetodosTxt {
 	 *         en caso contrario.
 	 */
 	public boolean existeObra(String titu, String sub) {
-
+		
 		ArrayList<Obra> datoObra = Obra.leerTexto();
 
 		if (datoObra.size() == 0) {
@@ -182,7 +182,7 @@ public class MetodosTxt {
 		}
 
 		for (int i = 0; i < datoObra.size(); i++) {
-			if ((datoObra.get(i).getTitulo().equals(titu) && datoObra.get(i).getSubtitulo().equals(sub))) {
+			if ((datoObra.get(i).getTitulo().equals(titu) && datoObra.get(i).getSubtitulo().equals(sub) )) {
 				return true;// retorna true si el titulo se encuentra en el txt
 			}
 		}
@@ -278,19 +278,7 @@ public class MetodosTxt {
 		} catch (Exception e) {
 		}
 
-		ArrayList<Obra> datosObra = new ArrayList<Obra>();
-		try {
-			BufferedReader br = new BufferedReader(new FileReader("Obras.txt"));
-			String obra;
-			while ((obra = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
-				StringTokenizer x = new StringTokenizer(obra, "/");
-				datosObra.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), x.nextToken(),
-						x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(),
-						Integer.parseInt(x.nextToken()), Area.valueOf(x.nextToken()),
-						tipoObra.valueOf(x.nextToken())));// agrega al arraylist de String
-			}
-		} catch (Exception e) {
-		}
+		ArrayList<Obra> datosObra = Obra.leerTexto();
 
 		for (int i = 0; i < datosObra.size(); i++) { // Recorre el nuevo ArrayList quitando 1 ejemplar disponible a la
 														// obra
@@ -354,9 +342,6 @@ public class MetodosTxt {
 
 						// Metodo para agregar una multa al lector
 						Long comparacion = ChronoUnit.DAYS.between(aux.getFechaHoraADevolver(), fechaDevuelta);
-						/*
-						 * SI SE PASA DE LA FECHA A ENTREGAR (COMPARACION), SE PONE LA MULTA
-						 */
 						if (comparacion > 0) {
 							ArrayList<Lector> lectores = Lector.leerTexto();
 							for (int b = 0; b < lectores.size(); b++) {
@@ -365,13 +350,12 @@ public class MetodosTxt {
 									lectores.get(b).setCanMulta(lectores.get(b).getCanMulta() + 1);
 									lectores.get(b)
 											.setDiasMultado(lectores.get(b).getDiasMultado() + (comparacion * 3));
-
-									Multa multa = new Multa((comparacion * 3), new Lector(lectores.get(b).getNumDoc()),
-											new Prestamo(ejemplar), LocalDateTime.now());
-
+									Multa multa = new Multa((comparacion * 3), new Prestamo(ejemplar));
 									guardar(multa, "Multas.txt");
 									try {
-										BufferedWriter bw2 = new BufferedWriter(new FileWriter("Lectores.txt"));
+										BufferedWriter bw2 = new BufferedWriter(new FileWriter("Lectores.txt"));// Vacia
+																												// el
+																												// txt
 										bw2.write("");
 										bw2.close();
 										for (int l = 0; l < lectores.size(); l++) {
@@ -555,18 +539,6 @@ public class MetodosTxt {
 		}
 	}
 
-	public ArrayList<Reserva> obrasReservadasPorFecha(LocalDateTime fecha) {
-		ArrayList<Reserva> reservasPorFecha = new ArrayList<Reserva>();
-		ArrayList<Reserva> reservas = Reserva.leerTexto();
-		for (int i = 0; i < reservas.size(); i++) {
-			Long comp = ChronoUnit.DAYS.between(fecha, reservas.get(i).getFechaReserva());
-			if(comp <= 0) {
-				reservasPorFecha.add(reservas.get(i));
-			}
-		}
-		return reservasPorFecha;
-	}
-
 	// Metodo que devuelve un ArrayList de los lectores con mas multas en cierta
 	// fecha dada
 	public ArrayList<Multa> lectoresPorFecha(LocalDateTime fechaMin, LocalDateTime fechaMax) {
@@ -575,7 +547,7 @@ public class MetodosTxt {
 		for (int i = 0; i < multas.size(); i++) {
 			Long menor = ChronoUnit.DAYS.between(fechaMin, multas.get(i).getFechaHoraMultado());
 			Long mayor = ChronoUnit.DAYS.between(fechaMax, multas.get(i).getFechaHoraMultado());
-			if (menor >= 0 && mayor <= 0) {
+			if (menor <= 0 && mayor >= 0) {
 				multasEnFecha.add(multas.get(i));
 			}
 		}
@@ -596,15 +568,79 @@ public class MetodosTxt {
 		for (int b = 0; b < prestamos.size(); b++) {
 			if (prestamos.get(b).getEjemplar().getIdEjemplar() == id) {
 				for (int i = 0; i < lectores.size(); i++) {
-					if (lectores.get(i).getNumDoc() == dni) {
+					if(lectores.get(i).getNumDoc() == dni) {
 						Reserva reserva = new Reserva(new Lector(dni), new Ejemplar(id),
 								prestamos.get(b).getFechaHoraADevolver(), new Funcionario(func));
 						guardar(reserva, "Reservas.txt");
 					}
-
+					
 				}
 			}
 		}
 
+	}
+	
+	public ArrayList<Obra> obrasPorAlumDoc(){
+		ArrayList <Obra> obras = Obra.leerTexto();
+		Collections.sort(obras, new ordenarObraAlumDoc());
+		return obras;
+	}
+	
+	public ArrayList<Obra> obrasGeneral(){
+		ArrayList <Obra> obras = Obra.leerTexto();
+		Collections.sort(obras, new ordenarObraGeneral());
+		return obras;
+	}
+	
+	public void guardarTipoEnObra(Prestamo prestamo) {
+		ArrayList<Obra> obras = Obra.leerTexto();
+		ArrayList<Ejemplar> ejemplares = Ejemplar.leerTexto();
+		int aux = 0;
+		for (int j = 0; j < ejemplares.size(); j++) {
+			if (ejemplares.get(j).getIdEjemplar() == prestamo.getEjemplar().getIdEjemplar()) {
+				for (int h = 0; h < obras.size(); h++) {
+					if (obras.get(h).getTitulo().equals(ejemplares.get(j).getObra().getTitulo())) {
+						aux = h;
+						System.out.println(h);
+						break;
+					}
+				}
+			}
+		}
+		ArrayList<Lector> lectores = Lector.leerTexto();
+		for (int i = 0; i < lectores.size(); i++) {
+			if (lectores.get(i).getNumDoc() == prestamo.getLector().getNumDoc()) {
+				if (String.valueOf(lectores.get(i).getClase()).equals("Alumno") ||
+					String.valueOf(lectores.get(i).getClase()).equals("Docente")) {
+					obras.get(aux).setPedidaPorAlumDoc(obras.get(aux).getPedidaPorAlumDoc() + 1);
+					obras.get(aux).setPedidaGeneral(obras.get(aux).getPedidaGeneral() + 1);
+				} else {
+					obras.get(aux).setPedidaGeneral(obras.get(aux).getPedidaGeneral() + 1);
+				}
+				break;
+			}
+		}
+	
+	try {
+		BufferedWriter bw = new BufferedWriter(new FileWriter("Obras.txt"));// Vacia el txt
+		bw.write("");
+		bw.close();
+		for (int i = 0; i < obras.size(); i++) {
+			guardar(obras.get(i), "Obras.txt");
+		}
+	} catch (Exception e) {
+	}
+	}
+	
+	public ArrayList<Reserva> obrasReservadasPorFecha(LocalDateTime fecha) {
+		ArrayList<Reserva> reservasPorFecha = new ArrayList<Reserva>();
+		ArrayList<Reserva> reservas = Reserva.leerTexto();
+		for (int i = 0; i < reservas.size(); i++) {
+			Long comp = ChronoUnit.DAYS.between(fecha, reservas.get(i).getFechaReserva());
+			if(comp <= 0) {
+				reservasPorFecha.add(reservas.get(i));
+			}
+		}
+		return reservasPorFecha;
 	}
 }

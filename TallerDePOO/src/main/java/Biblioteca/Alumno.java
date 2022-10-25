@@ -36,8 +36,8 @@ public class Alumno extends Lector {
 	 *                  actualmente el alumno.
 	 */
 	public Alumno(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
-			String sex, String nac, String domi, int codPos, String dep, String localidad) {
-		super(nom, apellido, tipDoc, numDoc, correo, numCel, fecNac, sex, nac, domi, codPos, dep, localidad);
+			String sex, String nac, String domi, int codPos, String dep, String localidad, String clase) {
+		super(nom, apellido, tipDoc, numDoc, correo, numCel, fecNac, sex, nac, domi, codPos, dep, localidad, clase);
 	}
 
 	/**

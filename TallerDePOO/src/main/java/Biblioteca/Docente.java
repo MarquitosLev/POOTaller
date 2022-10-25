@@ -39,8 +39,8 @@ public class Docente extends Lector {
 	 *                  el docente.
 	 */
 	public Docente(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
-			String sex, String nac, String domi, int codPos, String dep, String localidad, String carrera) {
-		super(nom, apellido, tipDoc, numDoc, correo, numCel, fecNac, sex, nac, domi, codPos, dep, localidad);
+			String sex, String nac, String domi, int codPos, String dep, String localidad, String clase, String carrera) {
+		super(nom, apellido, tipDoc, numDoc, correo, numCel, fecNac, sex, nac, domi, codPos, dep, localidad, clase);
 		this.carrera = carrera;
 	}
 
@@ -67,9 +67,9 @@ public class Docente extends Lector {
 	 */
 	public Docente(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
 			String sex, String nac, String domi, int codPos, String dep, String localidad, int canMulta,
-			Boolean estaMultado, Long diasMultado, String carrera) {
+			Boolean estaMultado, Long diasMultado, String clase, String carrera) {
 		super(nom, apellido, tipDoc, numDoc, correo, numCel, fecNac, sex, nac, domi, codPos, dep, localidad, canMulta,
-				estaMultado, diasMultado);
+				estaMultado, diasMultado, clase);
 		this.carrera = carrera;
 	}
 

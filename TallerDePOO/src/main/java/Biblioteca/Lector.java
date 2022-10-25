@@ -19,7 +19,7 @@ public class Lector extends Persona implements guardado{
 	private int canMulta;
 	private Boolean estaMultado;
 	private Long diasMultado;
-	
+	private String clase;
 	
 	/**
 	 * Constructor parametrizado de la clase.
@@ -44,11 +44,12 @@ public class Lector extends Persona implements guardado{
 	
 	public Lector(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
 			String sex, String nac, String domi, int codPos, String dep, String localidad, int canMulta,
-			Boolean estaMultado, Long diasMultado) {
+			Boolean estaMultado, Long diasMultado, String clase) {
 		super(nom, apellido, tipDoc, numDoc, correo, numCel, fecNac, sex, nac, domi, codPos, dep, localidad);
 		this.canMulta = canMulta;
 		this.estaMultado = estaMultado;
 		this.diasMultado = diasMultado;
+		this.clase = clase;
 	}
 	
 	
@@ -71,12 +72,13 @@ public class Lector extends Persona implements guardado{
 	 * 
 	 */
 	public Lector(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
-			String sex, String nac, String domi, int codPos, String dep, String localidad) {
+			String sex, String nac, String domi, int codPos, String dep, String localidad, String clase) {
 		
 		super(nom, apellido, tipDoc, numDoc, correo, numCel, fecNac, sex, nac, domi, codPos, dep, localidad);
 		this.canMulta = 0;
 		this.estaMultado = false;
 		this.diasMultado = (long) 0;
+		this.clase = this.getClass().getSimpleName();
 	}
 	
 	/**
@@ -122,8 +124,16 @@ public class Lector extends Persona implements guardado{
 	public void setDiasMultado(Long diasMultado) {
 		this.diasMultado = diasMultado;
 	}
-	
-	
+
+	public String getClase() {
+		return clase;
+	}
+
+
+	public void setClase(String clase) {
+		this.clase = clase;
+	}
+
 
 	/**
 	 * Metodo que se encarga de crear un ArrayList del tipo 'Object' y agrega a los atributos de la clase dentro.
@@ -162,7 +172,8 @@ public class Lector extends Persona implements guardado{
 				lista.add(new Lector(x.nextToken(), x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()),
 						x.nextToken(), Integer.parseInt(x.nextToken()), LocalDate.parse(x.nextToken()), x.nextToken(),
 						x.nextToken(), x.nextToken(), Integer.parseInt(x.nextToken()), x.nextToken(), x.nextToken(),
-						Integer.parseInt(x.nextToken()), Boolean.parseBoolean(x.nextToken()), Long.parseLong(x.nextToken())));
+						Integer.parseInt(x.nextToken()), Boolean.parseBoolean(x.nextToken()), Long.parseLong(x.nextToken()),
+						x.nextToken()));
 			}
 		} catch (Exception e) {
 		}

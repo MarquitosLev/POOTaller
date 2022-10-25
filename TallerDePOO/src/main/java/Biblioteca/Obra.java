@@ -34,7 +34,9 @@ public class Obra implements guardado {
 	private ArrayList<Ejemplar> ejemplares;
 	private ArrayList<Edicion> ediciones;
 	private Reserva funcionario; // Creación de la asociación entre funcionario, obra y reserva
-
+	private int pedidaPorAlumDoc;
+	private int pedidaGeneral;
+	
 	public Obra() {
 		super();
 		this.cantEjem = 0;
@@ -51,6 +53,8 @@ public class Obra implements guardado {
 //		this.perteneceA = Coleccion();
 		this.ejemplares = new ArrayList<Ejemplar>();
 		this.ediciones = new ArrayList<Edicion>();
+		this.pedidaPorAlumDoc = 0;
+		this.pedidaGeneral = 0;
 	}
 
 	/**
@@ -81,6 +85,8 @@ public class Obra implements guardado {
 		this.isbn = isbn;
 		this.area = area;
 		this.tipo = tipo;
+		this.pedidaPorAlumDoc = 0;
+		this.pedidaGeneral = 0;
 //		this.perteneceA = perteneceA;
 	}
 
@@ -102,7 +108,7 @@ public class Obra implements guardado {
 	 */
 
 	public Obra(int cantEjem, int cantEjemDisponible, String titulo, String subtitulo, String autor1, String autor2,
-			String autor3, String genero, int isbn,Area area, tipoObra tipo) {
+			String autor3, String genero, int isbn,Area area, tipoObra tipo, int pedidaPorAlumDoc, int pedidaGeneral) {
 		super();
 		this.cantEjem = cantEjem;
 		this.cantEjemDisponible = cantEjemDisponible;
@@ -115,6 +121,8 @@ public class Obra implements guardado {
 		this.isbn = isbn;
 		this.area = area;
 		this.tipo = tipo;
+		this.pedidaPorAlumDoc = pedidaPorAlumDoc;
+		this.pedidaGeneral = pedidaGeneral;
 //		this.perteneceA = perteneceA;
 	}
 
@@ -382,6 +390,22 @@ public class Obra implements guardado {
 		this.tipo = tipo;
 	}
 	
+	public int getPedidaPorAlumDoc() {
+		return pedidaPorAlumDoc;
+	}
+
+	public void setPedidaPorAlumDoc(int pedidaPorAlumDoc) {
+		this.pedidaPorAlumDoc = pedidaPorAlumDoc;
+	}
+
+	public int getPedidaGeneral() {
+		return pedidaGeneral;
+	}
+
+	public void setPedidaGeneral(int pedidaGeneral) {
+		this.pedidaGeneral = pedidaGeneral;
+	}
+
 	
 
 	/**
@@ -403,6 +427,8 @@ public class Obra implements guardado {
 		lista.add(getIsbn());
 		lista.add(getArea());
 		lista.add(getTipo());
+		lista.add(getPedidaPorAlumDoc());
+		lista.add(getPedidaGeneral());
 		return lista;
 	}
 
@@ -423,7 +449,7 @@ public class Obra implements guardado {
 				lista.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), x.nextToken(),
 						x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(),
 						Integer.parseInt(x.nextToken()),Area.valueOf(x.nextToken()),
-						tipoObra.valueOf(x.nextToken())));
+						tipoObra.valueOf(x.nextToken()), Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken())));
 			}
 		} catch (Exception e) {
 		}
