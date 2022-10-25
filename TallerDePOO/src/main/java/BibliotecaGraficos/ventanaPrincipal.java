@@ -40,6 +40,7 @@ import Biblioteca.Funcionario;
 import Biblioteca.Lector;
 import Biblioteca.Obra;
 import Biblioteca.Prestamo;
+import Biblioteca.Reserva;
 import Biblioteca.MetodosTxt;
 import Biblioteca.Multa;
 
@@ -96,6 +97,9 @@ public class ventanaPrincipal extends JFrame {
 	private JTextField diaFinal;
 	private JTextField mesFinal;
 	private JTextField anioFinal;
+	private JTextField diaReser;
+	private JTextField mesReser;
+	private JTextField anioReser;
 
 	public ventanaPrincipal(String userWelcome) {
 		MetodosTxt listFunc = new MetodosTxt();
@@ -1253,7 +1257,7 @@ public class ventanaPrincipal extends JFrame {
 		JButton btnMultadosFechas = new JButton("Buscar");
 		btnMultadosFechas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				textFined.setText("");
 				int diaI = Integer.parseInt(diaInicio.getText());
 				int mesI = Integer.parseInt(mesInicio.getText());
 				int anioI = Integer.parseInt(anioInicio.getText());
@@ -1326,6 +1330,94 @@ public class ventanaPrincipal extends JFrame {
 				.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		lblNewLabel_13_1_2_1.setBounds(0, 0, 735, 396);
 		MultadosPorPeriodo.add(lblNewLabel_13_1_2_1);
+
+		JPanel Reservadas = new JPanel();
+		tabbedEstadisticas.addTab("Reservadas", null, Reservadas, null);
+		Reservadas.setLayout(null);
+
+		diaReser = new JTextField();
+		diaReser.setColumns(10);
+		diaReser.setBounds(103, 154, 37, 20);
+		Reservadas.add(diaReser);
+
+		mesReser = new JTextField();
+		mesReser.setColumns(10);
+		mesReser.setBounds(152, 154, 37, 20);
+		Reservadas.add(mesReser);
+
+		anioReser = new JTextField();
+		anioReser.setColumns(10);
+		anioReser.setBounds(204, 154, 60, 20);
+		Reservadas.add(anioReser);
+
+		JLabel lblNewLabel_17 = new JLabel("Fecha:");
+		lblNewLabel_17.setForeground(new Color(255, 255, 255));
+		lblNewLabel_17.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_17.setBounds(12, 156, 73, 16);
+		Reservadas.add(lblNewLabel_17);
+
+		JLabel lblNewLabel_18 = new JLabel("Obras que se encuentran reservadas a partir de una fecha determinada.");
+		lblNewLabel_18.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblNewLabel_18.setForeground(new Color(255, 255, 255));
+		lblNewLabel_18.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_18.setBounds(30, 12, 658, 33);
+		Reservadas.add(lblNewLabel_18);
+
+		final JTextArea obrasReservadas = new JTextArea();
+		obrasReservadas.setBounds(345, 57, 300, 295);
+		Reservadas.add(obrasReservadas);
+		
+		JScrollPane scrollPane = new JScrollPane(obrasReservadas);
+		scrollPane.setBounds(328, 57, 317, 299);
+		Reservadas.add(scrollPane);
+
+		JButton btnNewButton = new JButton("Buscar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				/*
+				 * Obras que se encuentran reservadas a partir de una fecha determinada
+				 */
+				obrasReservadas.setText("");
+				int diaR = Integer.parseInt(diaReser.getText());
+				int mesR = Integer.parseInt(mesReser.getText());
+				int anioR = Integer.parseInt(anioReser.getText());
+
+				LocalDateTime fecha = LocalDateTime.of(anioR, mesR, diaR, 0, 0);
+				ArrayList<Reserva> reservas = metodo.obrasReservadasPorFecha(fecha);
+				ArrayList<Obra> obras = Obra.leerTexto();
+				ArrayList<Ejemplar> ejemplar = Ejemplar.leerTexto();
+				for (int z = 0; z < reservas.size(); z++) {
+					for (int l = 0; l < ejemplar.size(); l++) {
+						if (ejemplar.get(l).getIdEjemplar() == reservas.get(z).getEjemplarReservado().getIdEjemplar()) {
+							for (int a = 0; a < obras.size(); a++) {
+								/*
+								 * Si el titulo es igual al de la obra, pone los datos de obra
+								 */
+								if (obras.get(a).getTitulo().equals(ejemplar.get(l).getObra().getTitulo())) {
+									obrasReservadas
+											.append(ejemplar.get(l).getIdEjemplar() + " - " + obras.get(a).getTitulo()
+													+ " - " + reservas.get(z).getFechaReserva() + "\n");
+									obrasReservadas.append("*******************************************************\n");
+								}
+							}
+						}
+
+					}
+				}
+
+			}
+
+		});
+		btnNewButton.setBounds(122, 199, 98, 26);
+		Reservadas.add(btnNewButton);
+
+		JLabel lblNewLabel_13_1_2_1_1 = new JLabel("");
+		lblNewLabel_13_1_2_1_1
+				.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
+		lblNewLabel_13_1_2_1_1.setBounds(0, 0, 735, 396);
+		Reservadas.add(lblNewLabel_13_1_2_1_1);
+		
+		
 
 		JLabel lblNewLabel_11 = new JLabel("");
 		lblNewLabel_11.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));

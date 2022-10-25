@@ -387,6 +387,8 @@ public class Obra implements guardado {
 	public void setTipo(tipoObra tipo) {
 		this.tipo = tipo;
 	}
+	
+	
 
 	/**
 	 * Metodo que se encarga de crear un ArrayList del tipo objeto e ir agregando

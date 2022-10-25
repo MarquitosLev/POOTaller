@@ -1,7 +1,10 @@
 package Biblioteca;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * Clase que representa el proceso de reserva de una obra. 
@@ -67,6 +70,21 @@ public class Reserva implements guardado {
 		return lista;
 	}
 
+	public static ArrayList<Reserva> leerTexto() {
+		ArrayList<Reserva> lista = new ArrayList<Reserva>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("Reservas.txt"));
+			String res;
+			while ((res = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+				StringTokenizer x = new StringTokenizer(res, "/");
+				lista.add(new Reserva(new Lector(Integer.parseInt(x.nextToken())), 
+						new Ejemplar(Integer.parseInt(x.nextToken())), LocalDateTime.parse(x.nextToken()),
+						new Funcionario(x.nextToken())));
+			}
+		} catch (Exception e) {
+		}
+		return lista;
+	}
 	
 	
 }

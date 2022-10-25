@@ -174,7 +174,7 @@ public class MetodosTxt {
 	 *         en caso contrario.
 	 */
 	public boolean existeObra(String titu, String sub) {
-		
+
 		ArrayList<Obra> datoObra = Obra.leerTexto();
 
 		if (datoObra.size() == 0) {
@@ -182,7 +182,7 @@ public class MetodosTxt {
 		}
 
 		for (int i = 0; i < datoObra.size(); i++) {
-			if ((datoObra.get(i).getTitulo().equals(titu) && datoObra.get(i).getSubtitulo().equals(sub) )) {
+			if ((datoObra.get(i).getTitulo().equals(titu) && datoObra.get(i).getSubtitulo().equals(sub))) {
 				return true;// retorna true si el titulo se encuentra en el txt
 			}
 		}
@@ -355,7 +355,7 @@ public class MetodosTxt {
 						// Metodo para agregar una multa al lector
 						Long comparacion = ChronoUnit.DAYS.between(aux.getFechaHoraADevolver(), fechaDevuelta);
 						/*
-						 *  SI SE PASA DE LA FECHA A ENTREGAR (COMPARACION), SE PONE LA MULTA
+						 * SI SE PASA DE LA FECHA A ENTREGAR (COMPARACION), SE PONE LA MULTA
 						 */
 						if (comparacion > 0) {
 							ArrayList<Lector> lectores = Lector.leerTexto();
@@ -365,12 +365,13 @@ public class MetodosTxt {
 									lectores.get(b).setCanMulta(lectores.get(b).getCanMulta() + 1);
 									lectores.get(b)
 											.setDiasMultado(lectores.get(b).getDiasMultado() + (comparacion * 3));
-									
-									Multa multa = new Multa((comparacion * 3),new Lector(lectores.get(b).getNumDoc()), new Prestamo(ejemplar), LocalDateTime.now());
-									
+
+									Multa multa = new Multa((comparacion * 3), new Lector(lectores.get(b).getNumDoc()),
+											new Prestamo(ejemplar), LocalDateTime.now());
+
 									guardar(multa, "Multas.txt");
 									try {
-										BufferedWriter bw2 = new BufferedWriter(new FileWriter("Lectores.txt"));																
+										BufferedWriter bw2 = new BufferedWriter(new FileWriter("Lectores.txt"));
 										bw2.write("");
 										bw2.close();
 										for (int l = 0; l < lectores.size(); l++) {
@@ -554,6 +555,18 @@ public class MetodosTxt {
 		}
 	}
 
+	public ArrayList<Reserva> obrasReservadasPorFecha(LocalDateTime fecha) {
+		ArrayList<Reserva> reservasPorFecha = new ArrayList<Reserva>();
+		ArrayList<Reserva> reservas = Reserva.leerTexto();
+		for (int i = 0; i < reservas.size(); i++) {
+			Long comp = ChronoUnit.DAYS.between(fecha, reservas.get(i).getFechaReserva());
+			if(comp <= 0) {
+				reservasPorFecha.add(reservas.get(i));
+			}
+		}
+		return reservasPorFecha;
+	}
+
 	// Metodo que devuelve un ArrayList de los lectores con mas multas en cierta
 	// fecha dada
 	public ArrayList<Multa> lectoresPorFecha(LocalDateTime fechaMin, LocalDateTime fechaMax) {
@@ -583,12 +596,12 @@ public class MetodosTxt {
 		for (int b = 0; b < prestamos.size(); b++) {
 			if (prestamos.get(b).getEjemplar().getIdEjemplar() == id) {
 				for (int i = 0; i < lectores.size(); i++) {
-					if(lectores.get(i).getNumDoc() == dni) {
+					if (lectores.get(i).getNumDoc() == dni) {
 						Reserva reserva = new Reserva(new Lector(dni), new Ejemplar(id),
 								prestamos.get(b).getFechaHoraADevolver(), new Funcionario(func));
 						guardar(reserva, "Reservas.txt");
 					}
-					
+
 				}
 			}
 		}
