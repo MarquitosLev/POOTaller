@@ -2,7 +2,7 @@
 
 #### Repositorio dedicado al taller de la materia 'Programación Orientada a Objetos'
 
-## Nimbook !C:\Users\Leiva\Desktop\Facultad\Prog. Orientada a Objetos\Taller 2022\Imagenes Taller
+## Nimbook !(https://github.com/MarquitosLev/POOTaller/blob/test/TallerDePOO/src/main/java/imagenes/icon.png?raw=true)
 
 ### Integrantes del grupo.
   
