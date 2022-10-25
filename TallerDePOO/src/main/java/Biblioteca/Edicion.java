@@ -228,7 +228,7 @@ public class Edicion implements guardado {
 	 * Metodo que crea un ArrayList de tipo "Object" y va agregando los atributos de
 	 * la clase adentro.
 	 * 
-	 * @return ArrayList con los atributos de la instancia creada.
+	 * @return Retorna un ArrayList con los atributos de la instancia creada.
 	 */
 	public ArrayList<Object> obtenerLista() {
 		// new Edicion(editorial, pais, numero, anio, volumen, paginas, idioma, new
