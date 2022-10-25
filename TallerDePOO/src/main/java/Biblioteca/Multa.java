@@ -52,7 +52,7 @@ public class Multa implements guardado {
 	}
 
 	/**
-	 * Constructor usado para 
+	 * Constructor usado para leer las multas.
 	 * 
 	 * @param diasMulta        Se pasa un Long con los dias de multa que tiene el
 	 *                         lector.
@@ -89,18 +89,19 @@ public class Multa implements guardado {
 	}
 
 	/**
+	 * Metodo que devuelve un objeto de tipo "Lector" con los atributos de su clase.
 	 * 
-	 * 
-	 * @return
+	 * @return Retorna el objeto almacenado de tipo "Lector".
 	 */
 	public Lector getLector() {
 		return lector;
 	}
 
 	/**
+	 * Metodo que settea el atributo "lector" de la clase.
 	 * 
-	 * 
-	 * @param lector
+	 * @param lector Se pasa un objeto de tipo "Lector" con los datos de un lector,
+	 *               y se lo agrega al atributo.
 	 */
 	public void setLector(Lector lector) {
 		this.lector = lector;
