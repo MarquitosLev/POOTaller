@@ -62,7 +62,7 @@ public class Multa implements guardado {
 		this.diasMulta = diasMulta;
 		this.lector = lector;
 		this.prestamo = prestamo;
-		this.fechaHoraMultado = LocalDateTime.now();
+		this.fechaHoraMultado = fechaHoraMultado;
 	}
 	
 	/**

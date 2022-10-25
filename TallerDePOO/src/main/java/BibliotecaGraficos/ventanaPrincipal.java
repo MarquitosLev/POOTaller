@@ -595,7 +595,8 @@ public class ventanaPrincipal extends JFrame {
 					for (int j = 0; j < lectores.size(); j++) {
 						// Verifica si es a domicilio, si se paso de la fecha y si el dni del lector
 						// de prestamo es igual al dni de lista lector
-						if (prestamos.get(i).getaDomicilio() && metodo.fechaPasada(prestamos.get(i))
+						
+						if (prestamos.get(i).getaDomicilio() && !metodo.fechaPasada(prestamos.get(i))
 								&& prestamos.get(i).getLector().getNumDoc() == lectores.get(j).getNumDoc()) {
 							Object[] vec = new Object[6];
 							vec[0] = lectores.get(j).getNom();
@@ -731,7 +732,7 @@ public class ventanaPrincipal extends JFrame {
 
 				tipoObra tipoObra = (tipoObra) boxTipoObra.getSelectedItem();
 
-				Obra obra = new Obra(titulo, subtitulo, priAutor, segAutor, terAutor, genero, isbn,area, tipoObra);
+				Obra obra = new Obra(titulo, subtitulo, priAutor, segAutor, terAutor, genero, isbn, area, tipoObra);
 
 				// Si es la primera vez que se ingresa el titulo, se agrega obra y primer
 				// ejemplar
@@ -787,7 +788,7 @@ public class ventanaPrincipal extends JFrame {
 					if (metodo.hayDisponibles(id)) {
 						Prestamo prestamo = new Prestamo(textFuncPrestador.getText(), new Lector(dni),
 								checkDomicilio.isSelected(), new Ejemplar(id));
-						//Suma 1 a la cantidad pedida de la obra segun el tipo de lector
+						// Suma 1 a la cantidad pedida de la obra segun el tipo de lector
 						metodo.guardarTipoEnObra(prestamo);
 						// Realiza los cambios de obra y ejemplar, si esta disponible y cantidad.
 						metodo.ejemplarPedido(new Ejemplar(id));
@@ -942,8 +943,13 @@ public class ventanaPrincipal extends JFrame {
 		ListaMorosos.add(lblNewLabel_12);
 
 		final JTextArea textSoliObra = new JTextArea();
+		textSoliObra.setFont(new Font("Franklin Gothic Book", Font.PLAIN, 15));
 		textSoliObra.setBounds(273, 12, 435, 352);
 		listaObrasSolicitadas.add(textSoliObra);
+
+		JScrollPane scrollAlumDoc = new JScrollPane(textSoliObra);
+		scrollAlumDoc.setBounds(315, 12, 393, 350);
+		listaObrasSolicitadas.add(scrollAlumDoc);
 
 		JButton btnAlumDoc = new JButton("Alumno / Docente");
 		btnAlumDoc.addActionListener(new ActionListener() {
@@ -951,86 +957,39 @@ public class ventanaPrincipal extends JFrame {
 				/*
 				 * ACTUALIZA OBRAS MAS SOLICITADAS POR ALUMNO Y DOCENTE
 				 */
-				ArrayList<Lector> lectores = Lector.leerTexto();
-				ArrayList<Ejemplar> ejemplares = Ejemplar.leerTexto();
-				try {
-					FileReader fr = new FileReader("PrestamosTerminados.txt");
-					BufferedReader br = new BufferedReader(fr);
-					String l;
-					int dni = 0;
-					int idEj = 0;
-					while ((l = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+				textSoliObra.setText("");
+				ArrayList<Obra> obras = metodo.obrasPorAlumDoc();
 
-						StringTokenizer x = new StringTokenizer(l, "/"); // Se crea un String hasta que aparezca el "-"
-						x.nextToken();
-						x.nextToken();
-						x.nextToken();
-						x.nextToken();
-						x.nextToken();
-						x.nextToken();
-						dni = Integer.parseInt(x.nextToken());
-						idEj = Integer.parseInt(x.nextToken());
-
-						/*
-						 * Busca tipo de lector
-						 */
-						try {
-							FileReader f = new FileReader("Lectores.txt");
-							BufferedReader b = new BufferedReader(f);
-							String li;
-							String tipo = "";
-							while ((li = b.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
-								StringTokenizer x1 = new StringTokenizer(li, "/");
-								x1.nextToken();
-								x1.nextToken();
-								x1.nextToken();
-								x1.nextToken();
-								x1.nextToken();
-								x1.nextToken();
-								x1.nextToken();
-								x1.nextToken();
-								x1.nextToken();
-								x1.nextToken();
-								x1.nextToken();
-								x1.nextToken();
-								x1.nextToken();
-								x1.nextToken();
-								x1.nextToken();
-								x1.nextToken();
-								tipo = x1.nextToken();
-
-								for (int i = 0; i < lectores.size(); i++) {
-
-									if (tipo.equals("Docente")
-											|| tipo.equals("Alumno") && (lectores.get(i).getNumDoc() == dni)) {
-										for (int j = 0; j < ejemplares.size(); j++) {
-
-											if (ejemplares.get(j).getIdEjemplar() == idEj) {
-
-												textSoliObra.append(ejemplares.get(j).getObra().getTitulo() + " - "
-														+ tipo + " - " + ejemplares.get(j).getIdEjemplar() + "\n");
-												textSoliObra.append("-----------------\n");
-											}
-										}
-									}
-								}
-
-							}
-						} catch (Exception c) {
-						}
-
-					}
-				} catch (Exception c) {
+				for (int i = 0; i < obras.size(); i++) {
+					textSoliObra.append(obras.get(i).getTitulo() + " - " + obras.get(i).getAutor1() + " - "
+							+ obras.get(i).getPedidaPorAlumDoc() + "\n");
+					textSoliObra.append("*****************************************************\n");
 				}
 
 			}
 		});
-		btnAlumDoc.setBounds(63, 120, 155, 23);
-		listaObrasSolicitadas.add(btnAlumDoc);
 
 		JButton btnPublicoGeneral = new JButton("Publico General");
+		btnPublicoGeneral.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				/*
+				 * ACTUALIZA OBRAS MAS SOLICITADAS POR PUBLICO EN GENERAL
+				 */
+				textSoliObra.setText("");
+				ArrayList<Obra> obras = metodo.obrasGeneral();
+
+				for (int i = 0; i < obras.size(); i++) {
+					textSoliObra.append(obras.get(i).getTitulo() + " - " + obras.get(i).getAutor1() + " - "
+							+ obras.get(i).getPedidaGeneral() + "\n");
+					textSoliObra.append("*****************************************************\n");
+				}
+
+			}
+		});
 		btnPublicoGeneral.setBounds(63, 209, 155, 23);
 		listaObrasSolicitadas.add(btnPublicoGeneral);
+		btnAlumDoc.setBounds(63, 120, 155, 23);
+		listaObrasSolicitadas.add(btnAlumDoc);
 
 		JLabel lblNewLabel_13 = new JLabel("");
 		lblNewLabel_13.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
@@ -1347,23 +1306,11 @@ public class ventanaPrincipal extends JFrame {
 		anioReser.setBounds(204, 154, 60, 20);
 		Reservadas.add(anioReser);
 
-		JLabel lblNewLabel_17 = new JLabel("Fecha:");
-		lblNewLabel_17.setForeground(new Color(255, 255, 255));
-		lblNewLabel_17.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_17.setBounds(12, 156, 73, 16);
-		Reservadas.add(lblNewLabel_17);
-
-		JLabel lblNewLabel_18 = new JLabel("Obras que se encuentran reservadas a partir de una fecha determinada.");
-		lblNewLabel_18.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblNewLabel_18.setForeground(new Color(255, 255, 255));
-		lblNewLabel_18.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_18.setBounds(30, 12, 658, 33);
-		Reservadas.add(lblNewLabel_18);
-
 		final JTextArea obrasReservadas = new JTextArea();
+		obrasReservadas.setEditable(false);
 		obrasReservadas.setBounds(345, 57, 300, 295);
 		Reservadas.add(obrasReservadas);
-		
+
 		JScrollPane scrollPane = new JScrollPane(obrasReservadas);
 		scrollPane.setBounds(328, 57, 317, 299);
 		Reservadas.add(scrollPane);
@@ -1408,13 +1355,24 @@ public class ventanaPrincipal extends JFrame {
 		btnNewButton.setBounds(122, 199, 98, 26);
 		Reservadas.add(btnNewButton);
 
+		JLabel lblNewLabel_17 = new JLabel("Fecha:");
+		lblNewLabel_17.setForeground(new Color(255, 255, 255));
+		lblNewLabel_17.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_17.setBounds(12, 156, 73, 16);
+		Reservadas.add(lblNewLabel_17);
+
+		JLabel lblNewLabel_18 = new JLabel("Obras que se encuentran reservadas a partir de una fecha determinada.");
+		lblNewLabel_18.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblNewLabel_18.setForeground(new Color(255, 255, 255));
+		lblNewLabel_18.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_18.setBounds(30, 12, 658, 33);
+		Reservadas.add(lblNewLabel_18);
+
 		JLabel lblNewLabel_13_1_2_1_1 = new JLabel("");
 		lblNewLabel_13_1_2_1_1
 				.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		lblNewLabel_13_1_2_1_1.setBounds(0, 0, 735, 396);
 		Reservadas.add(lblNewLabel_13_1_2_1_1);
-		
-		
 
 		JLabel lblNewLabel_11 = new JLabel("");
 		lblNewLabel_11.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));

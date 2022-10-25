@@ -547,7 +547,7 @@ public class MetodosTxt {
 		for (int i = 0; i < multas.size(); i++) {
 			Long menor = ChronoUnit.DAYS.between(fechaMin, multas.get(i).getFechaHoraMultado());
 			Long mayor = ChronoUnit.DAYS.between(fechaMax, multas.get(i).getFechaHoraMultado());
-			if (menor <= 0 && mayor >= 0) {
+			if ((menor <= 0 && mayor <= 0)) {
 				multasEnFecha.add(multas.get(i));
 			}
 		}
@@ -601,7 +601,6 @@ public class MetodosTxt {
 				for (int h = 0; h < obras.size(); h++) {
 					if (obras.get(h).getTitulo().equals(ejemplares.get(j).getObra().getTitulo())) {
 						aux = h;
-						System.out.println(h);
 						break;
 					}
 				}
@@ -613,7 +612,6 @@ public class MetodosTxt {
 				if (String.valueOf(lectores.get(i).getClase()).equals("Alumno") ||
 					String.valueOf(lectores.get(i).getClase()).equals("Docente")) {
 					obras.get(aux).setPedidaPorAlumDoc(obras.get(aux).getPedidaPorAlumDoc() + 1);
-					obras.get(aux).setPedidaGeneral(obras.get(aux).getPedidaGeneral() + 1);
 				} else {
 					obras.get(aux).setPedidaGeneral(obras.get(aux).getPedidaGeneral() + 1);
 				}
