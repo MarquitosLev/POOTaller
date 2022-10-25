@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-
+import java.util.Random;
 import net.sourceforge.barbecue.*;
 import net.sourceforge.barbecue.output.OutputException;
 
@@ -104,10 +104,12 @@ public class Ejemplar implements guardado{
 	 * CODIGO DE BARRA
 	 */
 	private void setCodBarr() throws BarcodeException, OutputException{
-		String aux = this.codUbicacion + " " + String.valueOf(this.idEjemplar);
-    	Barcode CodBarr = BarcodeFactory.createCode128(aux);
-    	File file = new File("src/main/java/codigosBarra/" + aux + ".png");
-    	BarcodeImageHandler.savePNG(CodBarr, file);
+		Random r = new Random();
+		int ran = r.nextInt(10000);
+		String aux = this.codUbicacion + " " + String.valueOf(ran) + " " + String.valueOf(this.idEjemplar);
+    		Barcode CodBarr = BarcodeFactory.createCode128(aux);
+    		File file = new File("src/main/java/codigosBarra/" + aux + ".png");
+    		BarcodeImageHandler.savePNG(CodBarr, file);
     }
 
 	public String getObservaciones() {
