@@ -25,22 +25,7 @@ public class ventana extends JFrame {
 	private JTextField usuario;
 	private JPasswordField contrasenia;
 	private MetodosTxt listaFunc;
-	
-	//PRINCIPAL
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ventana frame = new ventana();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	//Constructor que crea ventana
 	public ventana() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ventana.class.getResource("/imagenes/icon.png")));
 		listaFunc = new MetodosTxt();
