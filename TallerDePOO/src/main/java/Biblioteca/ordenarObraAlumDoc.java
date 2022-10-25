@@ -1,13 +1,6 @@
 package Biblioteca;
 
 import java.util.Comparator;
-<<<<<<< HEAD
-/**
- * Compara las veces pedidas por Tipo de Lector
- * 
- * @author Marcos Leiva
-=======
-
 /**
  * Clase que ordena las obras segun la cantidad de veces pedidas por alumnos y
  * docentes.
@@ -16,9 +9,8 @@ import java.util.Comparator;
  * @author Marcos Leiva
  * @author Sebastian Etchepare
  * @author Santiago Fernandez Gomez
->>>>>>> b5f72b0edad1ab7e50ee40a4cdd7bcb4654f11d5
- *
  */
+
 class ordenarObraAlumDoc implements Comparator<Obra> {
 
 	/**
