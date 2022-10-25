@@ -37,10 +37,6 @@ public class Multa implements guardado{
 		this.fechaHoraMultado = fechaHoraMultado;
 	}
 
-	public Multa(Long diasMulta) {
-		this.diasMulta = diasMulta;
-	}
-
 	public Long getDiasMulta() {
 		return diasMulta;
 	}
@@ -68,7 +64,7 @@ public class Multa implements guardado{
 	public ArrayList<Object> obtenerLista() {
 		ArrayList<Object> lista = new ArrayList<Object>();
 		lista.add(getDiasMulta());
-		lista.add(getPrestamo().getEjemplar().getIdEjemplar());
+		lista.add(getPrestamo().getLector());
 		lista.add(getFechaHoraMultado());
 		return lista;
 	}
@@ -80,7 +76,7 @@ public class Multa implements guardado{
 			String lector;
 			while ((lector = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
 				StringTokenizer x = new StringTokenizer(lector, "/");
-				lista.add(new Multa(Long.parseLong(x.nextToken()), new Prestamo(new Ejemplar().getIdEjemplar()),
+				lista.add(new Multa(Long.parseLong(x.nextToken()), new Prestamo(new Lector().getNumDoc()),
 						LocalDateTime.parse(x.nextToken())));
 			}
 		} catch (Exception e) {

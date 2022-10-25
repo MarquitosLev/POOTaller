@@ -425,6 +425,43 @@ public class Obra implements guardado {
 			}
 		} catch (Exception e) {
 		}
-		return lista;
+		ArrayList<Obra> listaOrdenada = new ArrayList<Obra>();
+		for (int i = 0; i < lista.size(); i++) {
+			if (lista.get(i).getArea() == Area.valueOf("Matematica")) {
+				listaOrdenada.add(lista.get(i));
+			}	
+		}
+		
+		for (int j = 0; j < lista.size(); j++) {
+			if (lista.get(j).getArea() == Area.valueOf("Programacion")) {
+				listaOrdenada.add(lista.get(j));
+			}		
+		}
+		
+		for (int u = 0; u < lista.size(); u++) {
+			if (lista.get(u).getArea() == Area.valueOf("Contabilidad")) {
+				listaOrdenada.add(lista.get(u));
+			}
+				
+		}
+		for (int r = 0; r < lista.size(); r++) {
+			if (lista.get(r).getArea() == Area.valueOf("AdEmpresa")) {
+				listaOrdenada.add(lista.get(r));
+			}	
+		}
+		
+		for (int z = 0; z < lista.size(); z++) {
+			if (lista.get(z).getArea() == Area.valueOf("SisOperativo")) {
+				listaOrdenada.add(lista.get(z));
+			}	
+		}
+		
+		for (int v = 0; v < lista.size(); v++) {
+			if (lista.get(v).getArea() == Area.valueOf("otro")) {
+				listaOrdenada.add(lista.get(v));
+			}	
+		}
+		
+		return listaOrdenada;
 	}
 }
