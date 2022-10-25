@@ -174,7 +174,7 @@ public class MetodosTxt {
 	 *         en caso contrario.
 	 */
 	public boolean existeObra(String titu, String sub) {
-		
+
 		ArrayList<Obra> datoObra = Obra.leerTexto();
 
 		if (datoObra.size() == 0) {
@@ -182,7 +182,7 @@ public class MetodosTxt {
 		}
 
 		for (int i = 0; i < datoObra.size(); i++) {
-			if ((datoObra.get(i).getTitulo().equals(titu) && datoObra.get(i).getSubtitulo().equals(sub) )) {
+			if ((datoObra.get(i).getTitulo().equals(titu) && datoObra.get(i).getSubtitulo().equals(sub))) {
 				return true;// retorna true si el titulo se encuentra en el txt
 			}
 		}
@@ -544,12 +544,19 @@ public class MetodosTxt {
 	public ArrayList<Multa> lectoresPorFecha(LocalDateTime fechaMin, LocalDateTime fechaMax) {
 		ArrayList<Multa> multas = Multa.leerTexto();
 		ArrayList<Multa> multasEnFecha = new ArrayList<Multa>();
-		for (int i = 0; i < multas.size(); i++) {
-			Long menor = ChronoUnit.DAYS.between(fechaMin, multas.get(i).getFechaHoraMultado());
-			Long mayor = ChronoUnit.DAYS.between(fechaMax, multas.get(i).getFechaHoraMultado());
-			if ((menor <= 0 && mayor <= 0)) {
-				multasEnFecha.add(multas.get(i));
-			}
+		try {
+			
+			for (int i = 0; i < multas.size(); i++) {
+				Long menor = ChronoUnit.DAYS.between(fechaMin.truncatedTo(ChronoUnit.DAYS),
+						multas.get(i).getFechaHoraMultado().truncatedTo(ChronoUnit.DAYS));
+				Long mayor = ChronoUnit.DAYS.between(fechaMax.truncatedTo(ChronoUnit.DAYS),
+						multas.get(i).getFechaHoraMultado().truncatedTo(ChronoUnit.DAYS));
+				if ((menor >= 0 && mayor <= 0)) {
+					multasEnFecha.add(multas.get(i));
+				}
+			}	
+		} catch (Exception c) {
+			JOptionPane.showMessageDialog(null, "No Ingreso fechas", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		return multasEnFecha;
 	}
@@ -568,30 +575,30 @@ public class MetodosTxt {
 		for (int b = 0; b < prestamos.size(); b++) {
 			if (prestamos.get(b).getEjemplar().getIdEjemplar() == id) {
 				for (int i = 0; i < lectores.size(); i++) {
-					if(lectores.get(i).getNumDoc() == dni) {
+					if (lectores.get(i).getNumDoc() == dni) {
 						Reserva reserva = new Reserva(new Lector(dni), new Ejemplar(id),
 								prestamos.get(b).getFechaHoraADevolver(), new Funcionario(func));
 						guardar(reserva, "Reservas.txt");
 					}
-					
+
 				}
 			}
 		}
 
 	}
-	
-	public ArrayList<Obra> obrasPorAlumDoc(){
-		ArrayList <Obra> obras = Obra.leerTexto();
+
+	public ArrayList<Obra> obrasPorAlumDoc() {
+		ArrayList<Obra> obras = Obra.leerTexto();
 		Collections.sort(obras, new ordenarObraAlumDoc());
 		return obras;
 	}
-	
-	public ArrayList<Obra> obrasGeneral(){
-		ArrayList <Obra> obras = Obra.leerTexto();
+
+	public ArrayList<Obra> obrasGeneral() {
+		ArrayList<Obra> obras = Obra.leerTexto();
 		Collections.sort(obras, new ordenarObraGeneral());
 		return obras;
 	}
-	
+
 	public void guardarTipoEnObra(Prestamo prestamo) {
 		ArrayList<Obra> obras = Obra.leerTexto();
 		ArrayList<Ejemplar> ejemplares = Ejemplar.leerTexto();
@@ -609,8 +616,8 @@ public class MetodosTxt {
 		ArrayList<Lector> lectores = Lector.leerTexto();
 		for (int i = 0; i < lectores.size(); i++) {
 			if (lectores.get(i).getNumDoc() == prestamo.getLector().getNumDoc()) {
-				if (String.valueOf(lectores.get(i).getClase()).equals("Alumno") ||
-					String.valueOf(lectores.get(i).getClase()).equals("Docente")) {
+				if (String.valueOf(lectores.get(i).getClase()).equals("Alumno")
+						|| String.valueOf(lectores.get(i).getClase()).equals("Docente")) {
 					obras.get(aux).setPedidaPorAlumDoc(obras.get(aux).getPedidaPorAlumDoc() + 1);
 				} else {
 					obras.get(aux).setPedidaGeneral(obras.get(aux).getPedidaGeneral() + 1);
@@ -618,24 +625,24 @@ public class MetodosTxt {
 				break;
 			}
 		}
-	
-	try {
-		BufferedWriter bw = new BufferedWriter(new FileWriter("Obras.txt"));// Vacia el txt
-		bw.write("");
-		bw.close();
-		for (int i = 0; i < obras.size(); i++) {
-			guardar(obras.get(i), "Obras.txt");
+
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter("Obras.txt"));// Vacia el txt
+			bw.write("");
+			bw.close();
+			for (int i = 0; i < obras.size(); i++) {
+				guardar(obras.get(i), "Obras.txt");
+			}
+		} catch (Exception e) {
 		}
-	} catch (Exception e) {
 	}
-	}
-	
+
 	public ArrayList<Reserva> obrasReservadasPorFecha(LocalDateTime fecha) {
 		ArrayList<Reserva> reservasPorFecha = new ArrayList<Reserva>();
 		ArrayList<Reserva> reservas = Reserva.leerTexto();
 		for (int i = 0; i < reservas.size(); i++) {
 			Long comp = ChronoUnit.DAYS.between(fecha, reservas.get(i).getFechaReserva());
-			if(comp <= 0) {
+			if (comp <= 0) {
 				reservasPorFecha.add(reservas.get(i));
 			}
 		}

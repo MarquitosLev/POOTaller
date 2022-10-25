@@ -595,7 +595,7 @@ public class ventanaPrincipal extends JFrame {
 					for (int j = 0; j < lectores.size(); j++) {
 						// Verifica si es a domicilio, si se paso de la fecha y si el dni del lector
 						// de prestamo es igual al dni de lista lector
-						
+
 						if (prestamos.get(i).getaDomicilio() && !metodo.fechaPasada(prestamos.get(i))
 								&& prestamos.get(i).getLector().getNumDoc() == lectores.get(j).getNumDoc()) {
 							Object[] vec = new Object[6];
@@ -1214,30 +1214,32 @@ public class ventanaPrincipal extends JFrame {
 		btnMultadosFechas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textFined.setText("");
-				int diaI = Integer.parseInt(diaInicio.getText());
-				int mesI = Integer.parseInt(mesInicio.getText());
-				int anioI = Integer.parseInt(anioInicio.getText());
+				
+				try {
+					int diaI = Integer.parseInt(diaInicio.getText());
+					int mesI = Integer.parseInt(mesInicio.getText());
+					int anioI = Integer.parseInt(anioInicio.getText());
 
-				int diaF = Integer.parseInt(diaFinal.getText());
-				int mesF = Integer.parseInt(mesFinal.getText());
-				int anioF = Integer.parseInt(anioFinal.getText());
+					int diaF = Integer.parseInt(diaFinal.getText());
+					int mesF = Integer.parseInt(mesFinal.getText());
+					int anioF = Integer.parseInt(anioFinal.getText());
 
-				LocalDateTime fechaInicio = LocalDateTime.of(anioI, mesI, diaI, 0, 0);
-				LocalDateTime fechaFinal = LocalDateTime.of(anioF, mesF, diaF, 0, 0);
-
-				ArrayList<Multa> multas = metodo.lectoresPorFecha(fechaInicio, fechaFinal);
-				ArrayList<Lector> lectores = Lector.leerTexto();
-				for (int j = 0; j < multas.size(); j++) {
-					for (int i = 0; i < lectores.size(); i++) {
-						if (multas.get(j).getLector().getNumDoc() == lectores.get(i).getNumDoc()) {
-
-							textFined.append(lectores.get(i).getNom() + " - " + lectores.get(i).getNumDoc() + " - "
-									+ multas.get(j).getFechaHoraMultado() + "\n");
-							textFined.append("************************************\n");
+					LocalDateTime fechaInicio = LocalDateTime.of(anioI, mesI, diaI, 0, 0);
+					LocalDateTime fechaFinal = LocalDateTime.of(anioF, mesF, diaF, 0, 0);
+					ArrayList<Multa> multas = metodo.lectoresPorFecha(fechaInicio, fechaFinal);
+					ArrayList<Lector> lectores = Lector.leerTexto();
+					for (int j = 0; j < multas.size(); j++) {
+						for (int i = 0; i < lectores.size(); i++) {
+							if (multas.get(j).getLector().getNumDoc() == lectores.get(i).getNumDoc()) {
+								textFined.append(lectores.get(i).getNom() + " - " + lectores.get(i).getNumDoc() + " - "
+										+ multas.get(j).getFechaHoraMultado() + "\n");
+								textFined.append("************************************\n");
+							}
 
 						}
-
 					}
+				} catch (Exception t) {
+					JOptionPane.showMessageDialog(null, "Fechas mal ingresadas", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
