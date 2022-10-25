@@ -1,6 +1,7 @@
 package Biblioteca;
 
 import java.util.ArrayList;
+
 /**
  * Clase que representa las colecciones a las que puede pertenecer una obra.
  * 
@@ -16,18 +17,20 @@ public class Coleccion extends Obra {
 
 	/**
 	 * Constructor de la clase. Se lo llama al constructor de la clase Obra, y
-	 * ademas se le pasa tambien el nombre de la coleccion.
+	 * ademas se le pasa tambien el nombre y el ISBN de la coleccion.
 	 * 
-	 * @param nomColeccion Se pasa un texto con el nombre de la coleccion que se
-	 *                     quiere agregar.
+	 * @param nomColeccion  Se pasa un texto con el nombre de la coleccion.
+	 * @param isbnColeccion Se pasa un entero con el isbn de la coleccion.
 	 */
-	public Coleccion(String nomColeccion) {
+	public Coleccion(String nomColeccion, int isbnColeccion) {
 		super();
 		this.nomColeccion = nomColeccion;
+		this.isbnColeccion = isbnColeccion;
 	}
 
 	/**
-	 * Metodo que devuelve el o los nombres de las colecciones a las que puede pertenecer una obra.
+	 * Metodo que devuelve el o los nombres de las colecciones a las que puede
+	 * pertenecer una obra.
 	 * 
 	 * @return Retorna un String con el o los nombres guardados.
 	 */
@@ -45,7 +48,8 @@ public class Coleccion extends Obra {
 	}
 
 	/**
-	 * Metodo que devuelve el ISBN (Numero Internacional Normalizado para Libros) de la coleccion.
+	 * Metodo que devuelve el ISBN (Numero Internacional Normalizado para Libros) de
+	 * la coleccion.
 	 * 
 	 * @return Retorna un entero con el ISBN de la coleccion.
 	 */

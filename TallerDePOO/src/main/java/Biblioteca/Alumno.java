@@ -34,6 +34,8 @@ public class Alumno extends Lector {
 	 *                  ubicado el alumno.
 	 * @param localidad Se pasa un texto en el que esta la localidad donde vive
 	 *                  actualmente el alumno.
+	 * @param clase     Se pasa un texto con el tipo de lector (en este caso, va a
+	 *                  pasar que es Alumno).
 	 */
 	public Alumno(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
 			String sex, String nac, String domi, int codPos, String dep, String localidad, String clase) {
@@ -41,11 +43,10 @@ public class Alumno extends Lector {
 	}
 
 	/**
-	 * Metodo que devuelve un objeto de tipo "Funcionario" con los atributos de la
+	 * Metodo que devuelve un objeto de tipo "Funcionario" con los atributos de su
 	 * clase.
 	 * 
-	 * @return Retorna el objeto almacenado de tipo "Funcionario" con los atributos
-	 *         de su clase.
+	 * @return Retorna el objeto almacenado de tipo "Funcionario".
 	 */
 	public Funcionario getFuncionario() {
 		return funcionario;
