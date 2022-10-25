@@ -718,7 +718,7 @@ public class ventanaPrincipal extends JFrame {
 
 				String titulo = textTitulo.getText();
 				String subtitulo = textSubtitulo.getText();
-				int isbn = Integer.parseInt(textISBN.getText());
+				String isbn = textISBN.getText();
 				int id = Integer.parseInt(textID.getText());
 				String priAutor = textPriAutor.getText();
 				String segAutor = textSegAutor.getText();

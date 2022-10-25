@@ -24,7 +24,7 @@ public class Obra implements guardado {
 	private String autor2;
 	private String autor3;
 	private String genero;
-	private int isbn;
+	private String isbn;
 	private int id;
 	private Area area; // Enumeracion
 	private tipoObra tipo; // Enumeracion
@@ -47,7 +47,7 @@ public class Obra implements guardado {
 		this.autor2 = "";
 		this.autor3 = "";
 		this.genero = "";
-		this.isbn = 0;
+		this.isbn = "";
 //		this.area =  "";
 //		this.tipo =  "";
 //		this.perteneceA = Coleccion();
@@ -71,7 +71,7 @@ public class Obra implements guardado {
 	 * @param area
 	 * @param tipo
 	 */
-	public Obra(String titulo, String subtitulo, String autor1, String autor2, String autor3, String genero, int isbn,
+	public Obra(String titulo, String subtitulo, String autor1, String autor2, String autor3, String genero, String isbn,
 			Area area, tipoObra tipo) {
 		super();
 		this.cantEjem = 1;
@@ -108,7 +108,7 @@ public class Obra implements guardado {
 	 */
 
 	public Obra(int cantEjem, int cantEjemDisponible, String titulo, String subtitulo, String autor1, String autor2,
-			String autor3, String genero, int isbn,Area area, tipoObra tipo, int pedidaPorAlumDoc, int pedidaGeneral) {
+			String autor3, String genero, String isbn,Area area, tipoObra tipo, int pedidaPorAlumDoc, int pedidaGeneral) {
 		super();
 		this.cantEjem = cantEjem;
 		this.cantEjemDisponible = cantEjemDisponible;
@@ -348,7 +348,7 @@ public class Obra implements guardado {
 	 * 
 	 * @return Retorna un entero con el ISBN almacenado en el atributo.
 	 */
-	public int getIsbn() {
+	public String getIsbn() {
 		return isbn;
 	}
 
@@ -448,7 +448,7 @@ public class Obra implements guardado {
 				StringTokenizer x = new StringTokenizer(lector, "/");
 				lista.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), x.nextToken(),
 						x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(),
-						Integer.parseInt(x.nextToken()),Area.valueOf(x.nextToken()),
+						x.nextToken(),Area.valueOf(x.nextToken()),
 						tipoObra.valueOf(x.nextToken()), Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken())));
 			}
 		} catch (Exception e) {
