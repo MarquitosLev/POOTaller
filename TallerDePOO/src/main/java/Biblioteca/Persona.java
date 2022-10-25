@@ -28,24 +28,19 @@ public abstract class Persona {
 	private String localidad;
 
 	/**
-	 * Constructor parametrizado de la clase Persona
+	 * Constructor usado para crear a la persona.
 	 * 
-	 * @param nom       Se pasa un texto que contiene el/los nuevo/s nombre/s del
-	 *                  sujeto
+	 * @param nom       Se pasa un texto que contiene el/los nombre/s del sujeto
 	 * 
-	 * @param apellido  Se pasa un texto con el/los nuevo/s apellido/s del
-	 *                  individuo.
+	 * @param apellido  Se pasa un texto con el/los apellido/s del individuo.
 	 * 
-	 * @param tipDoc    Se pasa un texto con el nuevo tipo de documento a colocar
+	 * @param tipDoc    Se pasa un texto con el tipo de documento a colocar.
 	 * 
-	 * @param numDoc    Se pasa un entero con el nuevo numero de documento a
-	 *                  colocar.
+	 * @param numDoc    Se pasa un entero con el numero de documento a colocar.
 	 * 
-	 * @param correo    Se pasa un texto con el nuevo correo perteneciente a la
-	 *                  persona.
+	 * @param correo    Se pasa un texto con el correo perteneciente a la persona.
 	 * 
-	 * @param numCel    Se pasa un entero con el nuevo numero de celular de la
-	 *                  persona.
+	 * @param numCel    Se pasa un entero con el numero de celular de la persona.
 	 * 
 	 * @param fecNac    Se pasa la fecha de nacimiento que se quiere agregar, que es
 	 *                  de tipo "LocalDate".
@@ -360,8 +355,9 @@ public abstract class Persona {
 	 * @return Devuelve un String con todos los datos almacenados.
 	 */
 	public String toString() {
-		return nom + " - " + apellido +" - " + tipDoc +" - " + numDoc +" - " + correo +" - " +
-	numCel +" - " + fecNac +" - " + sex +" - " + lugarNac +" - " + domi +" - " + codPos +" - " + dep +" - " + localidad;
+		return nom + " - " + apellido + " - " + tipDoc + " - " + numDoc + " - " + correo + " - " + numCel + " - "
+				+ fecNac + " - " + sex + " - " + lugarNac + " - " + domi + " - " + codPos + " - " + dep + " - "
+				+ localidad;
 	}
 
 }

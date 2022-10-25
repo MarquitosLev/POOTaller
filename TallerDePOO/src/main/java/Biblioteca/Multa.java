@@ -15,28 +15,34 @@ import java.util.StringTokenizer;
  * @author Sebastian Etchepare
  * @author Santiago Fernandez Gomez
  */
-public class Multa implements guardado{
+public class Multa implements guardado {
 	private Long diasMulta;
 	private Prestamo prestamo; // Asociacion Multa y Prestamo
 	private LocalDateTime fechaHoraMultado;
+
 	/**
 	 * Constructor que se usa para crear la multa nueva.
 	 * 
-	 * @param diasMulta Se pasa un Long con la cantidad de dias de multa que tiene el lector.
-	 * @param prestamo 
+	 * @param diasMulta Se pasa un Long con la cantidad de dias de multa que tiene
+	 *                  el lector.
+	 * @param prestamo  Se pasa un objeto de tipo "Prestamo" que contiene todos los
+	 *                  atributos de la clase Prestamo.
 	 */
 	public Multa(Long diasMulta, Prestamo prestamo) {
 		this.diasMulta = diasMulta;
 		this.prestamo = prestamo;
-		this.fechaHoraMultado = LocalDateTime.now(); //da la fecha y hora actual.
+		this.fechaHoraMultado = LocalDateTime.now(); 
 	}
-	
+
 	/**
 	 * Constructor que sirve para leer las multas del txt.
 	 * 
-	 * @param diasMulta Se pasa un Long con los dias de multa que tiene el lector.
-	 * @param prestamo 
-	 * @param fechaHoraMultado Se pasa la fecha y hora en la que el lector fue multado.
+	 * @param diasMulta        Se pasa un Long con los dias de multa que tiene el
+	 *                         lector.
+	 * @param prestamo         Se pasa un objeto de tipo "Prestamo" con todos los
+	 *                         atributos de la clase Prestamo.
+	 * @param fechaHoraMultado Se pasa la fecha y hora en la que el lector fue
+	 *                         multado.
 	 */
 	public Multa(Long diasMulta, Prestamo prestamo, LocalDateTime fechaHoraMultado) {
 		this.diasMulta = diasMulta;
@@ -56,42 +62,48 @@ public class Multa implements guardado{
 	/**
 	 * Metodo que settea el atributo "diasMulta" de la clase.
 	 * 
-	 * @param diasMulta Se pasa los dias de multa del lector, y se lo agrega al atributo.
+	 * @param diasMulta Se pasa los dias de multa del lector, y se lo agrega al
+	 *                  atributo.
 	 */
 	public void setDiasMulta(Long diasMulta) {
 		this.diasMulta = diasMulta;
 	}
-	
+
 	/**
+	 * Metodo que devuelve un objeto de tipo "Prestamo" con los atributos de la
+	 * clase.
 	 * 
-	 * 
-	 * @return
+	 * @return Retorna el objeto almacenado de tipo "Prestamo" con los atributos de
+	 *         su clase.
 	 */
 	public Prestamo getPrestamo() {
 		return prestamo;
 	}
 
 	/**
+	 * Metodo que settea el atributo "prestamo" de la clase.
 	 * 
-	 * 
-	 * @param prestamo
+	 * @param prestamo Se pasa un objeto de tipo "Prestamo" con los datos de un
+	 *                 prestamo, y se lo agrega al atributo.
 	 */
 	public void setPrestamo(Prestamo prestamo) {
 		this.prestamo = prestamo;
 	}
+
 	/**
+	 * Metodo que devuelve la fecha y hora en la que fue multado el lector.
 	 * 
-	 * 
-	 * @return
+	 * @return Retorna la fecha y hora almacenada en el atributo.
 	 */
 	public LocalDateTime getFechaHoraMultado() {
 		return fechaHoraMultado;
 	}
 
 	/**
+	 * Metodo que settea el atributo "fechaHoraMultado" de la clase.
 	 * 
-	 * 
-	 * @param fechaHoraMultado
+	 * @param fechaHoraMultado Se pasa la fecha y hora en la que fue multado, y se
+	 *                         la agrega al atributo.
 	 */
 	public void setFechaHoraMultado(LocalDateTime fechaHoraMultado) {
 		this.fechaHoraMultado = fechaHoraMultado;
@@ -110,14 +122,14 @@ public class Multa implements guardado{
 		lista.add(getFechaHoraMultado());
 		return lista;
 	}
-	
+
 	/**
 	 * Metodo que lee el archivo "Multas.txt" y retorna un ArrayList de todos los
 	 * objetos que se encuentren ahi.
 	 * 
 	 * @return Retorna un ArrayList con todos los objetos existentes en el txt.
 	 */
-	public static ArrayList<Multa> leerTexto(){
+	public static ArrayList<Multa> leerTexto() {
 		ArrayList<Multa> lista = new ArrayList<Multa>();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("Multas.txt"));

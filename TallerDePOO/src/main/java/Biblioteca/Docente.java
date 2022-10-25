@@ -13,38 +13,30 @@ import java.util.ArrayList;
  */
 public class Docente extends Lector {
 	private String carrera;
-	private Funcionario funcionario; // Asociación entre docente y funcionario. Aunque no se si se trata de doble
-										// direccionalidad en este caso.
+	private Funcionario funcionario; // Asociación entre docente y funcionario.
 
 	/**
-	 * Constructor parametrizado de la clase Docente.
+	 * Constructor usado para crear al docente.
 	 * 
-	 * @param nom         Se pasa un String con el nombre o los nombres del docente.
-	 * @param apellido    Se pasa un String con el apellido o los apellidos del
-	 *                    docente.
-	 * @param tipDoc      Se pasa un texto con el tipo de documento del docente.
-	 * @param numDoc      Se pasa un valor entero con el numero de documento del
-	 *                    docente.
-	 * @param correo      Se pasa un texto con el correo perteneciente al docente.
-	 * @param numCel      Se pasa un valor entero con el numero de celular
-	 *                    correspondiente al docente.
-	 * @param fecNac      Se pasa la fecha de nacimiento del docente, en forma de un
-	 *                    "LocalDate".
-	 * @param sex         Se pasa un String con el sexo al cual se identifica el
-	 *                    docente.
-	 * @param nac         Se pasa un String con el lugar de nacimiento del docente.
-	 * @param domi        Se pasa un texto con el domicilio del docente.
-	 * @param codPos      Se pasa un valor entero con el codigo postal del docente.
-	 * @param dep         Se pasa un String con el departamento donde vive el
-	 *                    docente.
-	 * @param localidad   Se pasa un texto con la localidad donde reside el docente.
-	 * @param canMulta
-	 * @param estaMultado
-	 * @param ejemplares
-	 * @param carrera     Se pasa un String con la/s carrera/s relacionada/s al
-	 *                    docente.
-	 * @param funcionario
-	 * 
+	 * @param nom       Se pasa un texto que contiene el/los nombre/s del docente.
+	 * @param apellido  Se pasa un texto con el/los apellido/s del docente.
+	 * @param tipDoc    Se pasa un texto con el tipo de documento a colocar.
+	 * @param numDoc    Se pasa un entero con el numero de documento a colocar.
+	 * @param correo    Se pasa un texto con el correo perteneciente al docente.
+	 * @param numCel    Se pasa un entero con el numero de celular del docente.
+	 * @param fecNac    Se pasa la fecha de nacimiento que se quiere agregar, que es
+	 *                  de tipo "LocalDate".
+	 * @param sex       Se pasa un texto que contiene el sexo con el que se siente
+	 *                  identificado el docente.
+	 * @param nac       Se pasa un texto con el lugar donde nacio el docente.
+	 * @param domi      Se pasa un texto con el domicilio donde reside el docente.
+	 * @param codPos    Aqui se encuentra el codigo postal, que es un entero.
+	 * @param dep       Se pasa un texto con el departamento donde se encuentra
+	 *                  ubicado el docente.
+	 * @param localidad Se pasa un texto en el que esta la localidad donde vive
+	 *                  actualmente el docente.
+	 * @param carrera   Se pasa un texto con la carrera a la cual esta relacionada
+	 *                  el docente.
 	 */
 	public Docente(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
 			String sex, String nac, String domi, int codPos, String dep, String localidad, String carrera) {
@@ -52,6 +44,27 @@ public class Docente extends Lector {
 		this.carrera = carrera;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param nom
+	 * @param apellido
+	 * @param tipDoc
+	 * @param numDoc
+	 * @param correo
+	 * @param numCel
+	 * @param fecNac
+	 * @param sex
+	 * @param nac
+	 * @param domi
+	 * @param codPos
+	 * @param dep
+	 * @param localidad
+	 * @param canMulta
+	 * @param estaMultado
+	 * @param diasMultado
+	 * @param carrera
+	 */
 	public Docente(String nom, String apellido, String tipDoc, int numDoc, String correo, int numCel, LocalDate fecNac,
 			String sex, String nac, String domi, int codPos, String dep, String localidad, int canMulta,
 			Boolean estaMultado, Long diasMultado, String carrera) {
@@ -76,10 +89,12 @@ public class Docente extends Lector {
 		this.carrera = carrera;
 	}
 
-	public void Consultar() {
-
-	}
-
+	/**
+	 * Metodo que se encarga de crear un ArrayList del tipo objeto e ir agregando
+	 * los atributos de la clase dentro.
+	 * 
+	 * @return Retorna un ArrayList con todos los atributos de la clase.
+	 */
 	public ArrayList<Object> obtenerLista() {
 		ArrayList<Object> lista = new ArrayList<Object>();
 		lista.add(getNom());

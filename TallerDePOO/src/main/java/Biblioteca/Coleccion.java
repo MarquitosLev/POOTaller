@@ -54,18 +54,18 @@ public class Coleccion extends Obra {
 	}
 
 	/**
+	 * Metodo que devuelve obras.
 	 * 
-	 * 
-	 * @return
+	 * @return Retorna un ArrayList con las obras almacenadas.
 	 */
 	public ArrayList<Obra> getObras() {
 		return obras;
 	}
 
 	/**
+	 * Metodo que settea el atributo "obras" de la clase.
 	 * 
-	 * 
-	 * @param obras
+	 * @param obras Se pasa un ArrayList con las obras a agregar al atributo.
 	 */
 	public void setObras(ArrayList<Obra> obras) {
 		this.obras = obras;
