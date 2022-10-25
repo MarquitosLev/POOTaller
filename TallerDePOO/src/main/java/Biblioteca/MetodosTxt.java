@@ -711,4 +711,28 @@ public class MetodosTxt {
 		}
 		return reservasPorFecha;
 	}
+	
+	public Ejemplar bajaEjemplar(int ejemplar, String motivo) {
+		ArrayList<Ejemplar> ejemplares = Ejemplar.leerTexto();
+		Ejemplar Aux = null;
+		for (int i = 0; i < ejemplares.size(); i++) {
+			if (ejemplares.get(i).getIdEjemplar() == ejemplar) {
+				Aux = ejemplares.get(i);
+				ejemplares.remove(i);
+			}
+		}
+		
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter("Ejemplares.txt"));
+			bw.write("");
+			bw.close();
+			for (int y = 0; y < ejemplares.size(); y++) {
+				guardar(ejemplares.get(y), "Ejemplares.txt");
+			}
+		} catch (Exception e) {
+		}
+		
+		return Aux;
+	}
+	
 }

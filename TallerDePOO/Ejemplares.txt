@@ -1,5 +1,5 @@
 4444/rgre/false/Donacion/2022-10-25T14:28:38.187798800/4dsds/Harry/1/
 4446/rgre/false/Donacion/2022-10-25T14:28:52.359058200/sdsds/Harry/1/
 2222/gdfgdfg/true/Compra/2022-10-25T14:29:22.669590300/dsad2/Got/0/
-111/gdfgdfg/true/Compra/2022-10-25T14:29:31.182470100/fdsfsd/Got/0/
+111/gdfgdfg/true/Compra/2022-10-25T14:29:31.182470100/fdsfsd/Got/1/
 1115/gdfgdfgg/true/Otro/2022-10-25T14:29:47.541843200/fdsfsdhg/Richa/0/

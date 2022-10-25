@@ -3,3 +3,4 @@ Tobby/Jackson/multi/999/correo@live.com/123412/2022-03-05/Masculino/concor/conco
 DocenteJuan/adsdsa/dsadsa/40123123/dfgfdfdgf/241241/1980-07-07/Masculino/fdsfdsfds/ggfgf/42124/fddfd/dsadsa/0/false/0/Docente/Administracion - sistemas/
 AlumnaRamona/fadfdf/sdffdsdfs/40111222/dfgfdgf/41241/2002-08-08/Femenino/fdsfdsfd/gfggfgf/412421/gfgffg/sdadsasda/0/false/0/Alumno//
 Carlos/Garcia/tarjeta/121121/arroba@.com/234521/1996-10-11/No Binario/aca/auuuu/3200/Concor/Concor/0/false/0/Alumno//
+Hector/Gonzalez/Libreta/20010902/hectorgonzalez@gmail.com/6135271/1974-08-04/Masculino/Chajari/Monterrey 2041/3500/Federacion/Chajari/0/false/0/Docente/Ingenieria en alimentos/
