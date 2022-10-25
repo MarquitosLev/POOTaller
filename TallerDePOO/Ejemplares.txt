@@ -1,5 +1,3 @@
-6525/Bien/true/Donacion/2022-10-23T15:24:21.367271400/Y912/Aristoteles/3/
-3917/Bien roto/true/Compra/2022-10-23T15:25:19.222350100/T22/Manfredi/5/
-4461/Bien roto x2/true/Compra/2022-10-23T15:25:33.638754600/T221/Manfredi/8/
-1584/Perfecto Estado pa/true/Donacion/2022-10-25T03:25:23.211918600/Y412/Harry Potter/2/
-5796/Perfecto Estado pa/false/Donacion/2022-10-25T03:25:38.132758/Y415/Harry Potter/1/
+4959/Buen estado/true/Donacion/2022-10-25T12:37:45.460746400/I123/La Nona/0/
+4568/Paginas Rotas/true/Compra/2022-10-25T12:39:05.773494400/I124/La Nona/0/
+666/Muy buen estado, casi nuevo/true/Donacion/2022-10-25T12:42:14.884902/G467/Diario de Ana Frank/0/

@@ -286,7 +286,7 @@ public class MetodosTxt {
 				StringTokenizer x = new StringTokenizer(obra, "/");
 				datosObra.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), x.nextToken(),
 						x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(),
-						Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), Area.valueOf(x.nextToken()),
+						Integer.parseInt(x.nextToken()), Area.valueOf(x.nextToken()),
 						tipoObra.valueOf(x.nextToken())));// agrega al arraylist de String
 			}
 		} catch (Exception e) {

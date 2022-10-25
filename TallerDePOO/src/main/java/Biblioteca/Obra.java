@@ -46,7 +46,6 @@ public class Obra implements guardado {
 		this.autor3 = "";
 		this.genero = "";
 		this.isbn = 0;
-		this.id = 0;
 //		this.area =  "";
 //		this.tipo =  "";
 //		this.perteneceA = Coleccion();
@@ -69,7 +68,7 @@ public class Obra implements guardado {
 	 * @param tipo
 	 */
 	public Obra(String titulo, String subtitulo, String autor1, String autor2, String autor3, String genero, int isbn,
-			int id, Area area, tipoObra tipo) {
+			Area area, tipoObra tipo) {
 		super();
 		this.cantEjem = 1;
 		this.cantEjemDisponible = 1;
@@ -80,7 +79,6 @@ public class Obra implements guardado {
 		this.autor3 = autor3;
 		this.genero = genero;
 		this.isbn = isbn;
-		this.id = id;
 		this.area = area;
 		this.tipo = tipo;
 //		this.perteneceA = perteneceA;
@@ -104,7 +102,7 @@ public class Obra implements guardado {
 	 */
 
 	public Obra(int cantEjem, int cantEjemDisponible, String titulo, String subtitulo, String autor1, String autor2,
-			String autor3, String genero, int isbn, int id, Area area, tipoObra tipo) {
+			String autor3, String genero, int isbn,Area area, tipoObra tipo) {
 		super();
 		this.cantEjem = cantEjem;
 		this.cantEjemDisponible = cantEjemDisponible;
@@ -115,7 +113,6 @@ public class Obra implements guardado {
 		this.autor3 = autor3;
 		this.genero = genero;
 		this.isbn = isbn;
-		this.id = id;
 		this.area = area;
 		this.tipo = tipo;
 //		this.perteneceA = perteneceA;
@@ -347,9 +344,6 @@ public class Obra implements guardado {
 		return isbn;
 	}
 
-	public int getId() {
-		return id;
-	}
 
 	/**
 	 * Metodo que devuelve el area tematica de la obra.
@@ -407,7 +401,6 @@ public class Obra implements guardado {
 		lista.add(getAutor3());
 		lista.add(getGenero());
 		lista.add(getIsbn());
-		lista.add(getId());
 		lista.add(getArea());
 		lista.add(getTipo());
 		return lista;
@@ -429,7 +422,7 @@ public class Obra implements guardado {
 				StringTokenizer x = new StringTokenizer(lector, "/");
 				lista.add(new Obra(Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), x.nextToken(),
 						x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(), x.nextToken(),
-						Integer.parseInt(x.nextToken()), Integer.parseInt(x.nextToken()), Area.valueOf(x.nextToken()),
+						Integer.parseInt(x.nextToken()),Area.valueOf(x.nextToken()),
 						tipoObra.valueOf(x.nextToken())));
 			}
 		} catch (Exception e) {

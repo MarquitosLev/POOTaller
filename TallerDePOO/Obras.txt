@@ -1,4 +1,2 @@
-1/14/Aristoteles/-/-/-/-/Poetico/5523/64/otro/Libro/
-2/1/Manfredi/-/-/-/-/Historico/234/8/otro/Libro/
-1/0/Harry Potter/y la Piedra Filosofal/JKR/-/-/Fantasy/934/72727/otro/Libro/
-1/1/Harry Potter/y la Camara Secreta/JKR/-/-/Fantasy/934/72727/otro/Libro/
+2/2/La Nona/Nona/-/-/-/Tragicomedia/5632/otro/Libro/
+1/1/Diario de Ana Frank/Judios en Guerra/Ana Frank/-/-/Diario/12451/otro/Diario/

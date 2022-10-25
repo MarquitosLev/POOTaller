@@ -731,15 +731,13 @@ public class ventanaPrincipal extends JFrame {
 
 				tipoObra tipoObra = (tipoObra) boxTipoObra.getSelectedItem();
 
-				Obra obra = new Obra(titulo, subtitulo, priAutor, segAutor, terAutor, genero, isbn, id, area, tipoObra);
+				Obra obra = new Obra(titulo, subtitulo, priAutor, segAutor, terAutor, genero, isbn,area, tipoObra);
 
 				// Si es la primera vez que se ingresa el titulo, se agrega obra y primer
 				// ejemplar
 				if (metodo.existeObra(titulo, subtitulo)) {
-					Random r = new Random();
-					int ran = r.nextInt(10000);
 					try {
-						Ejemplar ejemplar = new Ejemplar(ran, observaciones, true, formaAdqui, codUbi, obra);
+						Ejemplar ejemplar = new Ejemplar(id, observaciones, true, formaAdqui, codUbi, obra);
 						// Guarda el primer ejemplar de la obra
 						metodo.guardarEjemplar(ejemplar);
 
@@ -753,10 +751,8 @@ public class ventanaPrincipal extends JFrame {
 
 				} else {
 					Obra auxObra = obra;
-					Random r = new Random();
-					int ran = r.nextInt(10000);
 					try {
-						Ejemplar ejemplar = new Ejemplar(ran, observaciones, true, formaAdqui, codUbi, auxObra);
+						Ejemplar ejemplar = new Ejemplar(id, observaciones, true, formaAdqui, codUbi, auxObra);
 						metodo.guardar(ejemplar, "Ejemplares.txt");
 					} catch (BarcodeException e1) {
 						e1.printStackTrace();
