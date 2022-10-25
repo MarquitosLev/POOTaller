@@ -360,10 +360,8 @@ public abstract class Persona {
 	 * @return Devuelve un String con todos los datos almacenados.
 	 */
 	public String toString() {
-		return "* Nombre: " + nom + "\n* Apellido: " + apellido + "\n* tipo DNI: " + tipDoc + ", N� DNI: " + numDoc
-				+ "\n* Correo: " + correo + " - N� Celular: " + numCel + " - Fecha Nacimiento: " + fecNac + " - Sexo: "
-				+ sex + "\n* Lugar Nacimiento: " + lugarNac + "\n* Domicilio: " + domi + " - Codigo Postal: " + codPos
-				+ " - Departamento: " + dep + "-  Localidad: " + localidad;
+		return nom + " - " + apellido +" - " + tipDoc +" - " + numDoc +" - " + correo +" - " +
+	numCel +" - " + fecNac +" - " + sex +" - " + lugarNac +" - " + domi +" - " + codPos +" - " + dep +" - " + localidad;
 	}
 
 }
