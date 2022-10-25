@@ -173,26 +173,16 @@ public class MetodosTxt {
 	 * @return Retorna 'Verdadero' en caso de encontrar alguna coicidencia y 'Falso'
 	 *         en caso contrario.
 	 */
-	public boolean existeObra(String titu) {
-		datoObra = new ArrayList<String>();
-		try {
-			BufferedReader br = new BufferedReader(new FileReader("Obras.txt"));
-			String obra;
-			while ((obra = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
-				StringTokenizer x = new StringTokenizer(obra, "/");
-				x.nextToken();
-				x.nextToken();
-				datoObra.add(x.nextToken());// agrega al arraylist de String
-			}
-		} catch (Exception e) {
-		}
+	public boolean existeObra(String titu, String sub) {
+		
+		ArrayList<Obra> datoObra = Obra.leerTexto();
 
 		if (datoObra.size() == 0) {
 			return false;
 		}
 
 		for (int i = 0; i < datoObra.size(); i++) {
-			if ((datoObra.get(i).equals(titu))) {
+			if ((datoObra.get(i).getTitulo().equals(titu) && datoObra.get(i).getSubtitulo().equals(sub) )) {
 				return true;// retorna true si el titulo se encuentra en el txt
 			}
 		}

@@ -50,6 +50,7 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import java.awt.Component;
 
 public class ventanaPrincipal extends JFrame {
 
@@ -89,6 +90,12 @@ public class ventanaPrincipal extends JFrame {
 	private JTextField textDiasExtencion;
 	private JTable tableSegEditorial;
 	private JTextField textEditorialBusca;
+	private JTextField diaInicio;
+	private JTextField mesInicio;
+	private JTextField anioInicio;
+	private JTextField diaFinal;
+	private JTextField mesFinal;
+	private JTextField anioFinal;
 
 	public ventanaPrincipal(String userWelcome) {
 		MetodosTxt listFunc = new MetodosTxt();
@@ -724,7 +731,7 @@ public class ventanaPrincipal extends JFrame {
 
 				// Si es la primera vez que se ingresa el titulo, se agrega obra y primer
 				// ejemplar
-				if (metodo.existeObra(titulo)) {
+				if (metodo.existeObra(titulo, subtitulo)) {
 					Random r = new Random();
 					int ran = r.nextInt(10000);
 					try {
@@ -870,14 +877,14 @@ public class ventanaPrincipal extends JFrame {
 		JButton btnEjemplaresDisponibles = new JButton("Ejemplares Disponibles");
 		btnEjemplaresDisponibles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//textDispo.setText("");
+				textDispo.setText("");
 				ArrayList<Ejemplar> ejemplares = Ejemplar.leerTexto();
 				for (int i = 0; i < ejemplares.size(); i++) {
 
 					if (ejemplares.get(i).getDisponible()) {
 						textDispo.append(
 								ejemplares.get(i).getIdEjemplar() + " - " + ejemplares.get(i).getObra().getTitulo()
-										+ " - " + ejemplares.get(i).getObservaciones() + "\n");
+										+ " - "+ ejemplares.get(i).getObservaciones() + "\n");
 						textDispo.append("--------------------------------------------------------------------------\n");
 					}
 
@@ -1194,6 +1201,83 @@ public class ventanaPrincipal extends JFrame {
 				.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		lblNewLabel_13_1_2.setBounds(0, 0, 735, 396);
 		RankingMultados.add(lblNewLabel_13_1_2);
+		
+		JPanel MultadosPorPeriodo = new JPanel();
+		tabbedEstadisticas.addTab("Multados", null, MultadosPorPeriodo, null);
+		MultadosPorPeriodo.setLayout(null);
+		
+		JButton btnMultadosFechas = new JButton("Buscar");
+		btnMultadosFechas.setBounds(150, 235, 94, 26);
+		MultadosPorPeriodo.add(btnMultadosFechas);
+		
+		diaInicio = new JTextField();
+		diaInicio.setBounds(174, 104, 37, 20);
+		MultadosPorPeriodo.add(diaInicio);
+		diaInicio.setColumns(10);
+		
+		mesInicio = new JTextField();
+		mesInicio.setColumns(10);
+		mesInicio.setBounds(223, 104, 37, 20);
+		MultadosPorPeriodo.add(mesInicio);
+		
+		anioInicio = new JTextField();
+		anioInicio.setColumns(10);
+		anioInicio.setBounds(275, 104, 60, 20);
+		MultadosPorPeriodo.add(anioInicio);
+		
+		diaFinal = new JTextField();
+		diaFinal.setColumns(10);
+		diaFinal.setBounds(174, 167, 37, 20);
+		MultadosPorPeriodo.add(diaFinal);
+		
+		mesFinal = new JTextField();
+		mesFinal.setColumns(10);
+		mesFinal.setBounds(223, 167, 37, 20);
+		MultadosPorPeriodo.add(mesFinal);
+		
+		anioFinal = new JTextField();
+		anioFinal.setColumns(10);
+		anioFinal.setBounds(275, 167, 60, 20);
+		MultadosPorPeriodo.add(anioFinal);
+		
+		JLabel lblNewLabel_15 = new JLabel("Fecha Inicial:");
+		lblNewLabel_15.setForeground(new Color(255, 255, 255));
+		lblNewLabel_15.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_15.setBounds(24, 106, 132, 16);
+		MultadosPorPeriodo.add(lblNewLabel_15);
+		
+		JLabel lblNewLabel_15_1 = new JLabel("Fecha Final:");
+		lblNewLabel_15_1.setForeground(new Color(255, 255, 255));
+		lblNewLabel_15_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_15_1.setBounds(24, 169, 132, 16);
+		MultadosPorPeriodo.add(lblNewLabel_15_1);
+		
+		JLabel lblNewLabel_16_1 = new JLabel("DIA");
+		lblNewLabel_16_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_16_1.setForeground(new Color(255, 255, 255));
+		lblNewLabel_16_1.setBounds(174, 76, 37, 16);
+		MultadosPorPeriodo.add(lblNewLabel_16_1);
+		
+		JLabel lblNewLabel_16_2 = new JLabel("A\u00D1O");
+		lblNewLabel_16_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_16_2.setForeground(new Color(255, 255, 255));
+		lblNewLabel_16_2.setBounds(275, 76, 60, 16);
+		MultadosPorPeriodo.add(lblNewLabel_16_2);
+		
+		JLabel lblNewLabel_16_1_1 = new JLabel("MES");
+		lblNewLabel_16_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_16_1_1.setForeground(Color.WHITE);
+		lblNewLabel_16_1_1.setBounds(223, 76, 37, 16);
+		MultadosPorPeriodo.add(lblNewLabel_16_1_1);
+		
+		JTextArea textArea_1 = new JTextArea();
+		textArea_1.setBounds(358, 30, 337, 301);
+		MultadosPorPeriodo.add(textArea_1);
+		
+		JLabel lblNewLabel_13_1_2_1 = new JLabel("");
+		lblNewLabel_13_1_2_1.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
+		lblNewLabel_13_1_2_1.setBounds(0, 0, 735, 396);
+		MultadosPorPeriodo.add(lblNewLabel_13_1_2_1);
 
 		JLabel lblNewLabel_11 = new JLabel("");
 		lblNewLabel_11.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
