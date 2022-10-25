@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.StringTokenizer;
 
 import javax.swing.JComboBox;
@@ -571,5 +572,10 @@ public class MetodosTxt {
 		}
 		return multasEnFecha;
 	}
+	
+	public ArrayList<Lector> ordenarLectoresPorMulta(){
+		ArrayList<Lector> lectores = Lector.leerTexto();
+		Collections.sort(lectores, new OrdenarLectores());
+		return lectores;
+	}
   }
-
