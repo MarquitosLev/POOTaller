@@ -207,7 +207,8 @@ public class Obra implements guardado {
 	}
 
 	/**
-	 * Metodo que devuelve la cantidad de ejemplares de la obra que se encuentran disponibles.
+	 * Metodo que devuelve la cantidad de ejemplares de la obra que se encuentran
+	 * disponibles.
 	 * 
 	 * @return Retorna un entero con la cantidad de ejemplares disponibles.
 	 */
@@ -218,7 +219,8 @@ public class Obra implements guardado {
 	/**
 	 * Metodo que settea el atributo "cantEjemDisponible" de la clase.
 	 * 
-	 * @param cantEjemDisponible Se pasa la cantidad de ejemplares disponibles a agregar.
+	 * @param cantEjemDisponible Se pasa la cantidad de ejemplares disponibles a
+	 *                           agregar.
 	 */
 	public void setCantEjemDisponible(int cantEjemDisponible) {
 		this.cantEjemDisponible = cantEjemDisponible;
@@ -263,7 +265,8 @@ public class Obra implements guardado {
 	/**
 	 * Metodo que devuelve el nombre del primer autor de la obra.
 	 * 
-	 * @return Retorna un texto con el nombre almacenado del primer autor de la obra.
+	 * @return Retorna un texto con el nombre almacenado del primer autor de la
+	 *         obra.
 	 */
 	public String getAutor1() {
 		return autor1;
@@ -290,7 +293,8 @@ public class Obra implements guardado {
 	/**
 	 * Metodo que settea el atributo "autor2" de la clase.
 	 * 
-	 * @param autor2 Se pasa el nombre del segundo autor, y se lo agrega al atributo.
+	 * @param autor2 Se pasa el nombre del segundo autor, y se lo agrega al
+	 *               atributo.
 	 */
 	public void setAutor2(String autor2) {
 		this.autor2 = autor2;
@@ -299,7 +303,8 @@ public class Obra implements guardado {
 	/**
 	 * Metodo que devuelve el nombre del tercer autor de la obra.
 	 * 
-	 * @return Retorna un texto con el nombre almacenado del tercer autor de la obra.
+	 * @return Retorna un texto con el nombre almacenado del tercer autor de la
+	 *         obra.
 	 */
 	public String getAutor3() {
 		return autor3;
@@ -333,7 +338,8 @@ public class Obra implements guardado {
 	}
 
 	/**
-	 * Metodo que devuelve el ISBN (Numero Internacional Normalizado para Libros) de la obra.
+	 * Metodo que devuelve el ISBN (Numero Internacional Normalizado para Libros) de
+	 * la obra.
 	 * 
 	 * @return Retorna un entero con el ISBN almacenado en el atributo.
 	 */
@@ -341,7 +347,6 @@ public class Obra implements guardado {
 		return isbn;
 	}
 
-	
 	public int getId() {
 		return id;
 	}
@@ -367,7 +372,8 @@ public class Obra implements guardado {
 	/**
 	 * Metodo que devuelve el tipo de la obra.
 	 * 
-	 * @return Retorna el tipo de obra guardado en el atributo, que es de tipo "tipoObra".
+	 * @return Retorna el tipo de obra guardado en el atributo, que es de tipo
+	 *         "tipoObra".
 	 */
 	public tipoObra getTipo() {
 		return tipo;
@@ -383,7 +389,7 @@ public class Obra implements guardado {
 	}
 
 	/**
-	 * Metodo que se encarga de crear un array list del tipo objeto e ir agregando
+	 * Metodo que se encarga de crear un ArrayList del tipo objeto e ir agregando
 	 * los atributos de la clase dentro.
 	 * 
 	 * @return Retorna un ArrayList con todos los atributos de la clase.
@@ -409,7 +415,8 @@ public class Obra implements guardado {
 	 * Metodo que lee el archivo "Obras.txt" y retorna un ArrayList de todos los
 	 * objetos que se encuentren ahi.
 	 * 
-	 * @return Retorna un ArrayList con todos los objetos existentes en el txt.
+	 * @return Retorna un ArrayList ordenado por area tematica de la obra con todos
+	 *         los objetos existentes en el txt.
 	 */
 	public static ArrayList<Obra> leerTexto() {
 		ArrayList<Obra> lista = new ArrayList<Obra>();
@@ -429,39 +436,39 @@ public class Obra implements guardado {
 		for (int i = 0; i < lista.size(); i++) {
 			if (lista.get(i).getArea() == Area.valueOf("Matematica")) {
 				listaOrdenada.add(lista.get(i));
-			}	
+			}
 		}
-		
+
 		for (int j = 0; j < lista.size(); j++) {
 			if (lista.get(j).getArea() == Area.valueOf("Programacion")) {
 				listaOrdenada.add(lista.get(j));
-			}		
+			}
 		}
-		
+
 		for (int u = 0; u < lista.size(); u++) {
 			if (lista.get(u).getArea() == Area.valueOf("Contabilidad")) {
 				listaOrdenada.add(lista.get(u));
 			}
-				
+
 		}
 		for (int r = 0; r < lista.size(); r++) {
 			if (lista.get(r).getArea() == Area.valueOf("AdEmpresa")) {
 				listaOrdenada.add(lista.get(r));
-			}	
+			}
 		}
-		
+
 		for (int z = 0; z < lista.size(); z++) {
 			if (lista.get(z).getArea() == Area.valueOf("SisOperativo")) {
 				listaOrdenada.add(lista.get(z));
-			}	
+			}
 		}
-		
+
 		for (int v = 0; v < lista.size(); v++) {
 			if (lista.get(v).getArea() == Area.valueOf("otro")) {
 				listaOrdenada.add(lista.get(v));
-			}	
+			}
 		}
-		
+
 		return listaOrdenada;
 	}
 }

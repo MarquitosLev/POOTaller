@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 public class Coleccion extends Obra {
 	private String nomColeccion;
+	private int isbnColeccion;
 	private ArrayList<Obra> obras;
 
 	/**
@@ -41,6 +42,33 @@ public class Coleccion extends Obra {
 	 */
 	public void setNomColeccion(String nomColeccion) {
 		this.nomColeccion = nomColeccion;
+	}
+
+	/**
+	 * Metodo que devuelve el ISBN (Numero Internacional Normalizado para Libros) de la coleccion.
+	 * 
+	 * @return Retorna un entero con el ISBN de la coleccion.
+	 */
+	public int getIsbnColeccion() {
+		return isbnColeccion;
+	}
+
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
+	public ArrayList<Obra> getObras() {
+		return obras;
+	}
+
+	/**
+	 * 
+	 * 
+	 * @param obras
+	 */
+	public void setObras(ArrayList<Obra> obras) {
+		this.obras = obras;
 	}
 
 }
