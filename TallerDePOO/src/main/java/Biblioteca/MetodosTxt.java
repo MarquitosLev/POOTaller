@@ -642,7 +642,7 @@ public class MetodosTxt {
 		ArrayList<Reserva> reservas = Reserva.leerTexto();
 		for (int i = 0; i < reservas.size(); i++) {
 			Long comp = ChronoUnit.DAYS.between(fecha, reservas.get(i).getFechaReserva());
-			if (comp <= 0) {
+			if (comp >= 0) {
 				reservasPorFecha.add(reservas.get(i));
 			}
 		}
