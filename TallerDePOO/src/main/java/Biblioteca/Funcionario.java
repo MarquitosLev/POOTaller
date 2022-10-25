@@ -34,6 +34,10 @@ public class Funcionario implements guardado {
 		this.usuario = usuario;
 		this.contrasenia = contrasenia;
 	}
+	
+	public Funcionario(String usuario) {
+		this.usuario = usuario;
+	}
 
 	public ArrayList<Ejemplar> getEjemplares() {
 		return ejemplares;

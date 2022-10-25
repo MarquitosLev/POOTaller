@@ -10,10 +10,13 @@ import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.StringTokenizer;
 import java.awt.event.ActionEvent;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
@@ -33,6 +36,7 @@ import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.output.OutputException;
 import javax.swing.JCheckBox;
 import Biblioteca.FormaAdquirida;
+import Biblioteca.Funcionario;
 import Biblioteca.Lector;
 import Biblioteca.Obra;
 import Biblioteca.Prestamo;
@@ -80,7 +84,6 @@ public class ventanaPrincipal extends JFrame {
 	private JTextField textLugarNac;
 	private JTextField textCodUbi;
 	private JTable tableMorosos;
-	private JTable tablaObrasSolicitadas;
 	private JTextField textCarreras;
 	private JTextField textIDEjemplarExtencion;
 	private JTextField textDiasExtencion;
@@ -505,11 +508,6 @@ public class ventanaPrincipal extends JFrame {
 		JPanel listaObrasSolicitadas = new JPanel();
 		tabbedEstadisticas.addTab("Obras Solicitadas", null, listaObrasSolicitadas, null);
 		listaObrasSolicitadas.setLayout(null);
-
-		tablaObrasSolicitadas = new JTable((TableModel) null);
-		tablaObrasSolicitadas.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		tablaObrasSolicitadas.setBounds(43, 30, 649, 302);
-		listaObrasSolicitadas.add(tablaObrasSolicitadas);
 		try {
 			final DefaultTableModel modelo2 = new DefaultTableModel();
 
@@ -790,8 +788,10 @@ public class ventanaPrincipal extends JFrame {
 						JOptionPane.showMessageDialog(null, "Prestamo realizado", "Exito",
 								JOptionPane.INFORMATION_MESSAGE);
 					} else {
-						JOptionPane.showMessageDialog(null, "Ejemplar " + id + " ya esta prestado.", "Error",
-								JOptionPane.ERROR_MESSAGE);
+						//Reserva de un ejemplar
+						metodo.reservar(id, dni, textFuncPrestador.getText());
+						JOptionPane.showMessageDialog(null, "Ejemplar reservado", "Reservado",
+								JOptionPane.INFORMATION_MESSAGE);
 					}
 
 				} else {
@@ -910,23 +910,95 @@ public class ventanaPrincipal extends JFrame {
 		lblNewLabel_12.setBounds(0, 0, 735, 396);
 		ListaMorosos.add(lblNewLabel_12);
 
+		final JTextArea textSoliObra = new JTextArea();
+		textSoliObra.setBounds(273, 12, 435, 352);
+		listaObrasSolicitadas.add(textSoliObra);
+
 		JButton btnAlumDoc = new JButton("Alumno / Docente");
 		btnAlumDoc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				/*
 				 * ACTUALIZA OBRAS MAS SOLICITADAS POR ALUMNO Y DOCENTE
 				 */
-				int maxVecesPedidas = 0;
 				ArrayList<Lector> lectores = Lector.leerTexto();
 				ArrayList<Ejemplar> ejemplares = Ejemplar.leerTexto();
+				try {
+					FileReader fr = new FileReader("PrestamosTerminados.txt");
+					BufferedReader br = new BufferedReader(fr);
+					String l;
+					int dni = 0;
+					int idEj = 0;
+					while ((l = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+						
+						StringTokenizer x = new StringTokenizer(l, "/"); // Se crea un String hasta que aparezca el "-"
+						x.nextToken();
+						x.nextToken();
+						x.nextToken();
+						x.nextToken();
+						x.nextToken();
+						x.nextToken();
+						dni = Integer.parseInt(x.nextToken());
+						idEj = Integer.parseInt(x.nextToken());
+						
+						/*
+						 * Busca tipo de lector
+						 */
+						try {
+							FileReader f = new FileReader("Lectores.txt");
+							BufferedReader b = new BufferedReader(f);
+							String li;
+							String tipo = "";
+							while ((li = b.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
+								StringTokenizer x1 = new StringTokenizer(li, "/");
+								x1.nextToken();
+								x1.nextToken();
+								x1.nextToken();
+								x1.nextToken();
+								x1.nextToken();
+								x1.nextToken();
+								x1.nextToken();
+								x1.nextToken();
+								x1.nextToken();
+								x1.nextToken();
+								x1.nextToken();
+								x1.nextToken();
+								x1.nextToken();
+								x1.nextToken();
+								x1.nextToken();
+								x1.nextToken();
+								tipo = x1.nextToken();
+
+								for (int i = 0; i < lectores.size(); i++) {
+			
+									if (tipo.equals("Docente") || tipo.equals("Alumno") &&
+											(lectores.get(i).getNumDoc() == dni)) {
+										for (int j = 0; j < ejemplares.size(); j++) {
+										
+											if (ejemplares.get(j).getIdEjemplar() == idEj) {
+											
+												textSoliObra.append(ejemplares.get(j).getObra().getTitulo() + " - "
+														+ tipo + " - " + ejemplares.get(j).getIdEjemplar() + "\n");
+												textSoliObra.append("-----------------\n");
+											}
+										}
+									}
+								}
+
+							}
+						} catch (Exception c) {
+						}
+
+					}
+				} catch (Exception c) {
+				}
 
 			}
 		});
-		btnAlumDoc.setBounds(157, 343, 155, 23);
+		btnAlumDoc.setBounds(63, 120, 155, 23);
 		listaObrasSolicitadas.add(btnAlumDoc);
 
 		JButton btnPublicoGeneral = new JButton("Publico General");
-		btnPublicoGeneral.setBounds(400, 343, 155, 23);
+		btnPublicoGeneral.setBounds(63, 209, 155, 23);
 		listaObrasSolicitadas.add(btnPublicoGeneral);
 
 		JLabel lblNewLabel_13 = new JLabel("");
@@ -1061,22 +1133,25 @@ public class ventanaPrincipal extends JFrame {
 		lblNewLabel_13_1_1
 				.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		lblNewLabel_13_1_1.setBounds(0, 0, 735, 396);
-		EjemplaresArea.add(lblNewLabel_13_1_1);		
+		EjemplaresArea.add(lblNewLabel_13_1_1);
 
 		JPanel RankingMultados = new JPanel();
 		tabbedEstadisticas.addTab("RankingMultados", null, RankingMultados, null);
 		RankingMultados.setLayout(null);
-		
+
 		final JTextArea textRank = new JTextArea();
 		textRank.setEditable(false);
 		textRank.setBounds(55, 12, 625, 289);
 		RankingMultados.add(textRank);
-		
-		
+
 		JScrollPane scrollRank = new JScrollPane(textRank);
 		scrollRank.setBounds(33, 25, 668, 276);
 		RankingMultados.add(scrollRank);
 
+		/*
+		 * Ranking de multados
+		 * 
+		 */
 		JButton btnRankingMultados = new JButton("Buscar");
 		btnRankingMultados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

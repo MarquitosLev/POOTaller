@@ -204,8 +204,8 @@ public class MetodosTxt {
 	 * le suma 1 a la cantidad de ejemplares y cantidad de ejemplares disponibles a
 	 * la obra
 	 * 
-	 * @param ejemplar Se le pasa como parámetro el ejemplar que quiere ser añadido
-	 *                 al ArrayList y posteriormente al .txt
+	 * @param ejemplar Se le pasa como parámetro el ejemplar que quiere ser
+	 *                 añadido al ArrayList y posteriormente al .txt
 	 */
 	public void guardarEjemplar(Ejemplar ejemplar) {
 		ArrayList<Obra> datosObra = Obra.leerTexto();
@@ -361,22 +361,23 @@ public class MetodosTxt {
 						Prestamo prestamoDevuelto = new Prestamo(aux.getFechaHoraPrestada(),
 								aux.getFuncionarioPrestador(), aux.getFechaHoraADevolver(), fechaDevuelta, funcionario,
 								aux.getaDomicilio(), aux.getLector(), aux.getEjemplar());
-						
-						System.out.println("Si");
+
 						// Metodo para agregar una multa al lector
 						Long comparacion = ChronoUnit.DAYS.between(aux.getFechaHoraADevolver(), fechaDevuelta);
-						System.out.println(comparacion);
-						if(comparacion > 0) {
+						if (comparacion > 0) {
 							ArrayList<Lector> lectores = Lector.leerTexto();
-							for (int b = 0; b < lectores.size();b++) {
-								 if (lectores.get(b).getNumDoc() == aux.getLector().getNumDoc()) {
+							for (int b = 0; b < lectores.size(); b++) {
+								if (lectores.get(b).getNumDoc() == aux.getLector().getNumDoc()) {
 									lectores.get(b).setEstaMultado(true);
-									lectores.get(b).setCanMulta(lectores.get(b).getCanMulta()+1);
-									lectores.get(b).setDiasMultado(lectores.get(b).getDiasMultado()+(comparacion*3));
-									Multa multa = new Multa((comparacion*3), new Prestamo(ejemplar));
+									lectores.get(b).setCanMulta(lectores.get(b).getCanMulta() + 1);
+									lectores.get(b)
+											.setDiasMultado(lectores.get(b).getDiasMultado() + (comparacion * 3));
+									Multa multa = new Multa((comparacion * 3), new Prestamo(ejemplar));
 									guardar(multa, "Multas.txt");
 									try {
-										BufferedWriter bw2 = new BufferedWriter(new FileWriter("Lectores.txt"));// Vacia el txt
+										BufferedWriter bw2 = new BufferedWriter(new FileWriter("Lectores.txt"));// Vacia
+																												// el
+																												// txt
 										bw2.write("");
 										bw2.close();
 										for (int l = 0; l < lectores.size(); l++) {
@@ -387,10 +388,10 @@ public class MetodosTxt {
 									break;
 								}
 							}
-							
+
 						}
 						datosPrestamo.remove(i); // Despues de crear el prestamoDevuelto borra el prestamo del array
-							
+
 						try {
 							File txt = new File("PrestamosTerminados.txt");
 							if (!txt.exists()) { // Crea el archivo txt en caso de que no exista
@@ -494,15 +495,15 @@ public class MetodosTxt {
 
 		return false;
 	}
-	
+
 	public void extenderDias(int dias, int ejemplar) {
 		ArrayList<Prestamo> prestamos = Prestamo.leerTexto(1);
 		Boolean aux = true;
 		try {
-			for (int i = 0; i<prestamos.size(); i++) {
+			for (int i = 0; i < prestamos.size(); i++) {
 				if (prestamos.get(i).getEjemplar().getIdEjemplar() == ejemplar) {
 					prestamos.get(i).setFechaHoraADevolver(prestamos.get(i).getFechaHoraADevolver().plusDays(dias));
-					
+
 					BufferedWriter bw = new BufferedWriter(new FileWriter("Prestamos.txt"));// Vacia el txt
 					bw.write("");
 					bw.close();
@@ -510,19 +511,20 @@ public class MetodosTxt {
 						guardar(prestamos.get(q), "Prestamos.txt");
 					}
 					aux = false;
-				break;
+					break;
 				}
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 		}
 		if (aux == true) {
 			JOptionPane.showMessageDialog(null, "Ejemplar " + ejemplar + " no se encuentra en Prestamos.", "Error",
 					JOptionPane.ERROR_MESSAGE);
 		} else {
-			JOptionPane.showMessageDialog(null, "Se han extendido " + dias + " dias al pr�stamo", "Exito", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Se han extendido " + dias + " dias al pr�stamo", "Exito",
+					JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
-	
+
 	public void imprimirEjemplaresArea(JTextArea textArea, JComboBox boxArea2) {
 		ArrayList<Ejemplar> ejemplares = Ejemplar.leerTexto();
 		ArrayList<Obra> obras = Obra.leerTexto();
@@ -549,8 +551,8 @@ public class MetodosTxt {
 							/*
 							 * agrega al texto los datos (Titulo - IDEjemplar - Cantidad Disponible)
 							 */
-							textArea.append(obras.get(j).getTitulo() + " - " + ejemplares.get(i).getIdEjemplar()
-									+ " - " + obras.get(j).getCantEjemDisponible() + "\n");
+							textArea.append(obras.get(j).getTitulo() + " - " + ejemplares.get(i).getIdEjemplar() + " - "
+									+ obras.get(j).getCantEjemDisponible() + "\n");
 							textArea.append("----------------------------------------\n");
 						}
 					}
@@ -558,9 +560,10 @@ public class MetodosTxt {
 			}
 		}
 	}
-	
-	//Metodo que devuelve un ArrayList de los lectores con mas multas en cierta fecha dada
-	public ArrayList<Multa> lectoresPorFecha(LocalDateTime fechaMin, LocalDateTime fechaMax){
+
+	// Metodo que devuelve un ArrayList de los lectores con mas multas en cierta
+	// fecha dada
+	public ArrayList<Multa> lectoresPorFecha(LocalDateTime fechaMin, LocalDateTime fechaMax) {
 		ArrayList<Multa> multas = Multa.leerTexto();
 		ArrayList<Multa> multasEnFecha = new ArrayList<Multa>();
 		for (int i = 0; i < multas.size(); i++) {
@@ -572,10 +575,30 @@ public class MetodosTxt {
 		}
 		return multasEnFecha;
 	}
-	
-	public ArrayList<Lector> ordenarLectoresPorMulta(){
+
+	public ArrayList<Lector> ordenarLectoresPorMulta() {
 		ArrayList<Lector> lectores = Lector.leerTexto();
 		Collections.sort(lectores, new OrdenarLectores());
 		return lectores;
 	}
-  }
+
+	public void reservar(int id, int dni, String func) {
+
+		ArrayList<Prestamo> prestamos = Prestamo.leerTexto(1);
+		ArrayList<Lector> lectores = Lector.leerTexto();
+
+		for (int b = 0; b < prestamos.size(); b++) {
+			if (prestamos.get(b).getEjemplar().getIdEjemplar() == id) {
+				for (int i = 0; i < lectores.size(); i++) {
+					if(lectores.get(i).getNumDoc() == dni) {
+						Reserva reserva = new Reserva(new Lector(dni), new Ejemplar(id),
+								prestamos.get(b).getFechaHoraADevolver(), new Funcionario(func));
+						guardar(reserva, "Reservas.txt");
+					}
+					
+				}
+			}
+		}
+
+	}
+}
