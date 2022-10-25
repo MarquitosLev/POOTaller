@@ -522,7 +522,7 @@ public class ventanaPrincipal extends JFrame {
 		}
 
 		JLabel fondo = new JLabel("");
-		fondo.setBounds(6, 6, 777, 578);
+		fondo.setBounds(0, 0, 777, 578);
 		fondo.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
 		contentPane.add(fondo);
 		setLocationRelativeTo(null);
@@ -788,7 +788,7 @@ public class ventanaPrincipal extends JFrame {
 						JOptionPane.showMessageDialog(null, "Prestamo realizado", "Exito",
 								JOptionPane.INFORMATION_MESSAGE);
 					} else {
-						//Reserva de un ejemplar
+						// Reserva de un ejemplar
 						metodo.reservar(id, dni, textFuncPrestador.getText());
 						JOptionPane.showMessageDialog(null, "Ejemplar reservado", "Reservado",
 								JOptionPane.INFORMATION_MESSAGE);
@@ -854,16 +854,38 @@ public class ventanaPrincipal extends JFrame {
 		lblNewLabel_7_2.setBounds(24, 200, 185, 18);
 		panelPrestamo.add(lblNewLabel_7_2);
 
-		JTable tablaPrestamos = new JTable();
-		tablaPrestamos.setModel(new DefaultTableModel(new Object[][] {}, new String[] {}));
-		tablaPrestamos.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		tablaPrestamos.setForeground(Color.WHITE);
-		tablaPrestamos.setBackground(new Color(128, 128, 128));
-		tablaPrestamos.setBounds(427, 23, 323, 349);
-		panelPrestamo.add(tablaPrestamos);
+		final JTextArea textDispo = new JTextArea();
+		textDispo.setEditable(false);
+		textDispo.setFont(new Font("Franklin Gothic Book", Font.PLAIN, 16));
+		textDispo.setBounds(402, 25, 328, 335);
+		panelPrestamo.add(textDispo);
 
-		JButton btnEjemplaresDisponibles = new JButton("Ejemplares");
-		btnEjemplaresDisponibles.setBounds(450, 383, 102, 16);
+		JScrollPane scroll = new JScrollPane(textDispo);
+		scroll.setBounds(414, 23, 316, 337);
+		panelPrestamo.add(scroll);
+
+		/*
+		 * Actualiza los ejemplares disponibles
+		 */
+		JButton btnEjemplaresDisponibles = new JButton("Ejemplares Disponibles");
+		btnEjemplaresDisponibles.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//textDispo.setText("");
+				ArrayList<Ejemplar> ejemplares = Ejemplar.leerTexto();
+				for (int i = 0; i < ejemplares.size(); i++) {
+
+					if (ejemplares.get(i).getDisponible()) {
+						textDispo.append(
+								ejemplares.get(i).getIdEjemplar() + " - " + ejemplares.get(i).getObra().getTitulo()
+										+ " - " + ejemplares.get(i).getObservaciones() + "\n");
+						textDispo.append("--------------------------------------------------------------------------\n");
+					}
+
+				}
+
+			}
+		});
+		btnEjemplaresDisponibles.setBounds(474, 381, 179, 18);
 		panelPrestamo.add(btnEjemplaresDisponibles);
 
 		JButton btnExtender = new JButton("Extender");
@@ -929,7 +951,7 @@ public class ventanaPrincipal extends JFrame {
 					int dni = 0;
 					int idEj = 0;
 					while ((l = br.readLine()) != null) { // Lee el archivo hasta el siguiente salto de linea
-						
+
 						StringTokenizer x = new StringTokenizer(l, "/"); // Se crea un String hasta que aparezca el "-"
 						x.nextToken();
 						x.nextToken();
@@ -939,7 +961,7 @@ public class ventanaPrincipal extends JFrame {
 						x.nextToken();
 						dni = Integer.parseInt(x.nextToken());
 						idEj = Integer.parseInt(x.nextToken());
-						
+
 						/*
 						 * Busca tipo de lector
 						 */
@@ -969,13 +991,13 @@ public class ventanaPrincipal extends JFrame {
 								tipo = x1.nextToken();
 
 								for (int i = 0; i < lectores.size(); i++) {
-			
-									if (tipo.equals("Docente") || tipo.equals("Alumno") &&
-											(lectores.get(i).getNumDoc() == dni)) {
+
+									if (tipo.equals("Docente")
+											|| tipo.equals("Alumno") && (lectores.get(i).getNumDoc() == dni)) {
 										for (int j = 0; j < ejemplares.size(); j++) {
-										
+
 											if (ejemplares.get(j).getIdEjemplar() == idEj) {
-											
+
 												textSoliObra.append(ejemplares.get(j).getObra().getTitulo() + " - "
 														+ tipo + " - " + ejemplares.get(j).getIdEjemplar() + "\n");
 												textSoliObra.append("-----------------\n");
@@ -1092,7 +1114,7 @@ public class ventanaPrincipal extends JFrame {
 		btnBuscarEjemplaresArea.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				/*
-				 * Ejemplares disponibles para préstamo para un área de referencia determinada.
+				 * Ejemplares disponibles para prestamo para un area de referencia determinada.
 				 */
 				textArea.setText("");
 				int select = boxArea2.getSelectedIndex();

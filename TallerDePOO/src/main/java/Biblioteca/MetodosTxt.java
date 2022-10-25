@@ -520,7 +520,7 @@ public class MetodosTxt {
 			JOptionPane.showMessageDialog(null, "Ejemplar " + ejemplar + " no se encuentra en Prestamos.", "Error",
 					JOptionPane.ERROR_MESSAGE);
 		} else {
-			JOptionPane.showMessageDialog(null, "Se han extendido " + dias + " dias al préstamo", "Exito",
+			JOptionPane.showMessageDialog(null, "Se han extendido " + dias + " dias al prestamo", "Exito",
 					JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
