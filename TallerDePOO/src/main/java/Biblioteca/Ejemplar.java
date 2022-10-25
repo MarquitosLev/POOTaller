@@ -87,9 +87,9 @@ public class Ejemplar implements guardado {
 	}
 
 	/**
+	 * Constructor default para la clase Ejemplares.
 	 * 
-	 * 
-	 * @param idEjemplar
+	 * @param idEjemplar Se pasa por el parametro, el identificador unico del ejemplar.
 	 * @param observaciones
 	 * @param disponible
 	 * @param cantPedidas
@@ -135,16 +135,32 @@ public class Ejemplar implements guardado {
 		this.obra = new Obra();
 	}
 
+	/**
+	 * Getter que devuelve el valor de 'idEjemplar'
+	 * 
+	 * @return Retorna el identificador unico del ejemplar.
+	 */
+	
 	public int getIdEjemplar() {
 		return idEjemplar;
 	}
 
+	/**
+	 * Setter que guarda un valor en el atributo 'idEjemplar'
+	 * 
+	 * @param idEjemplar Se pasa por el parametor, el identificador unico del ejemplar. 
+	 */
+	
 	public void setIdEjemplar(int idEjemplar) {
 		this.idEjemplar = idEjemplar;
 	}
 
-	/*
-	 * CODIGO DE BARRA
+	/**
+	 * Metodo que se encarga de generar un codigo de barras en base al código de ubicacion de un ejemplar, 
+	 * un numero aleatorio y su identificador unico.
+	 * 
+	 * @throws BarcodeException Excepcion requerida por parte del modulo Barcode para poder generar el codigo de barras.
+	 * @throws OutputException Excepcion necesaria para poder generar el PNG del codigo de barras y mostrarlo.
 	 */
 	private void setCodBarr() throws BarcodeException, OutputException {
 		Random r = new Random();
@@ -155,86 +171,210 @@ public class Ejemplar implements guardado {
 		BarcodeImageHandler.savePNG(CodBarr, file);
 	}
 
+	/**
+	 * Metodo que se encarga de mostrar las observaciones.
+	 * 
+	 * @return Retorna las observaciones que el funcionario haya ingresaso
+	 */
 	public String getObservaciones() {
 		return observaciones;
 	}
 
+	/**
+	 * Metodo que sirve para setear el valor del atributo observaciones.
+	 * 
+	 * @param observaciones Las observaciones que el funcionario ingresa para ser guardadas.
+	 */
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
 
+	/**
+	 * Metodo que retorna la disponibilidad del ejemplar.
+	 * 
+	 * @return Retorna 'true' en el caso de que se encuentre diponible y 'false' en caso contrario
+	 */
 	public boolean getDisponible() {
 		return disponible;
 	}
+	
+	/**
+	 * Metodo setter para guardar la disponibilidad.
+	 * 
+	 * @param disponible Parametro que sirve para asignarle la disponibilidad del ejemplar.
+	 */
 
 	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
 	}
 
+	/**
+	 * Getter que retorna el atributo 'cantPedidas'
+	 * 
+	 * @return Retorna la cantidad de veces que se ha pedido el ejemplar.
+	 */
+	
 	public int getCantPedidas() {
 		return cantPedidas;
 	}
 
+	/**
+	 * Setter que guarda un valor en el atributo 'canPedidas'
+	 * 
+	 * @param cantPedidas Se pasa por medio de este, la cantidad de veces que le ejemplar fue pedido.
+	 */
+	
 	public void setCantPedidas(int cantPedidas) {
 		this.cantPedidas = cantPedidas;
 	}
+	
+	/**
+	 * Getter que retorna el valor del atributo 'getFechaAdquisicion'
+	 * 
+	 * @return Retorna la fecha en la que se adquirio el ejemplar.
+	 */
 
 	public LocalDateTime getFechaAdquisicion() {
 		return fechaAdquisicion;
 	}
+	
+	/**
+	 * Setter que se encarga de guardar un valor en 'fechaAdquisición'
+	 * 
+	 * @param fechaAdquisicion se pasa por parámetro la fecha en la que se adquirio el ejemplar.
+	 */
 
 	public void setFechaAdquisicion(LocalDateTime fechaAdquisicion) {
 		this.fechaAdquisicion = fechaAdquisicion;
 	}
 
+	/**
+	 * Getter que retorna el valor que tome la enumeracion 'formaAdquirida'
+	 * 
+	 * @return Retorna la forma en la que se adquirio el ejemplar.
+	 */
+	
 	public FormaAdquirida getFormaAdquirida() {
 		return formaAdquirida;
 	}
+	
+	/**
+	 * Setter que guardar el valor en el atributo 'formaAdquirida'
+	 * 
+	 * @param formaAdquirida Se pasa la por este parametro, la forma en la que se adquirio el ejemplar.
+	 */
 
 	public void setFormaAdquirida(FormaAdquirida formaAdquirida) {
 		this.formaAdquirida = formaAdquirida;
 	}
+	
+	/**
+	 * Getter que retorna el valor de 'fechaDeBaja' 
+	 * 
+	 * @return Retorna la fecha en la que se dio de baja el ejemplar. 
+	 */
 
 	public LocalDateTime getFechaDeBaja() {
 		return fechaDeBaja;
 	}
 
+	/**
+	 * Setter que se encarga de guardar un valor en 'fechaDeBaja'
+	 * 
+	 * @param fechaDeBaja Parametro por el que se pasa la fecha de baja de un ejemplar.
+	 */
+	
 	public void setFechaDeBaja(LocalDateTime fechaDeBaja) {
 		this.fechaDeBaja = fechaDeBaja;
 	}
+	
+	/**
+	 * Getter que retorna el valor de 'motivoDeBaja'
+	 * 
+	 * @return Retorna el motivo por el cual el ejemplar se dio de baja.
+	 */
 
 	public String getMotivoDeBaja() {
 		return motivoDeBaja;
 	}
 
+	/**
+	 * Setter que guarda el valor en el atributo 'motivoDeBaja'
+	 * 
+	 * @param motivoDeBaja Se pasa un string en el que se establece el modtivo de la baja del ejemplar
+	 */
+	
 	public void setMotivoDeBaja(String motivoDeBaja) {
 		this.motivoDeBaja = motivoDeBaja;
 	}
+	
+	/**
+	 * Getter que devuelve el valor del atributo 'codUbicacion'
+	 * 
+	 * @return Retorna el codigo de ubicacion del ejemplar.
+	 */
 
 	public String getCodUbicacion() {
 		return codUbicacion;
 	}
+	
+	/**
+	 * Setter que guarda un valor en 'codUbicacion'
+	 * 
+	 * @param codUbicacion A traves del parametro, se pasa el codigo de ubicacion para ser guardado en el atributo correspondiente.
+	 */
 
 	public void setCodUbicacion(String codUbicacion) {
 		this.codUbicacion = codUbicacion;
 	}
+	
+	/**
+	 * Getter que retorna los datos de 'obra'
+	 * 
+	 * @return Retorna los datos de la obra a la que pertenece el ejemplar.
+	 */
 
 	public Obra getObra() {
 		return this.obra;
 	}
 
+	/**
+	 * Setter que guarda un valor dentro de 'obra'
+	 *  
+	 * @param obra Se pasa un objeto del tipo 'Obra' para ser guardado en el atributo 'obra'
+	 */
+	
 	public void setObra(Obra obra) {
 		this.obra = obra;
 	}
 
+	/**
+	 * Getter que retorna el valor que se encuentra en el atribot 'lector'
+	 * 
+	 * @return Retorna todos los datos del objeto Lector que se encuentra en 'lector'
+	 */
+	
 	public Lector getLector() {
 		return lector;
 	}
 
+	
+	/**
+	 * Setter que guarda un valor en 'lector'
+	 * 
+	 * @param lector Se debe pasar un objeto del tipo Lector para que sea guardado en 'lector'
+	 */
+	
 	public void setLector(Lector lector) {
 		this.lector = lector;
 	}
 
+	/**
+	 * Metodo que crea un ArrayList para almacenar los datos de la clase. 
+	 * 
+	 * @return Retorna un ArrayList con los datos del ejemplar. 
+	 */
+	
 	public ArrayList<Object> obtenerLista() {
 		ArrayList<Object> lista = new ArrayList<Object>();
 		lista.add(getIdEjemplar());
@@ -248,6 +388,13 @@ public class Ejemplar implements guardado {
 		return lista;
 	}
 
+	/**
+	 * Metodo que lee el archivo 'Ejemplares.txt' y agrega todos los datos del ejemplar a un ArrayList
+	 * 
+	 * @return Retorna la lista con los datos del Ejemplar, extraidos de 'Ejemplares.txt'
+	 * @throws Es necesario el uso de "try - catch" para el funcionamiento del 'BufferedReader'
+	 */
+	
 	public static ArrayList<Ejemplar> leerTexto() {
 		ArrayList<Ejemplar> lista = new ArrayList<Ejemplar>();
 		try {
