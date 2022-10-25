@@ -2,6 +2,8 @@
 
 #### Repositorio dedicado al taller de la materia 'Programación Orientada a Objetos'
 
+## Nimbook !C:\Users\Leiva\Desktop\Facultad\Prog. Orientada a Objetos\Taller 2022\Imagenes Taller
+
 ### Integrantes del grupo.
   
   * *Marcos Joel Leiva*
@@ -15,7 +17,7 @@
  
 ### Instrucciones de instalación.
  
-  Pendiente xd
+  Para la intalacion, se requiere decargar el .ZIP en GitHub o, incluso, realizando un git clone por medio del comando del repositorio.
  
 ### Funcionalidades del programa.
  
@@ -29,3 +31,13 @@
  * Extensiones de plazos
  * Apartado de estadísticas
 
+ #### Dependencias utilizadas:
+ 
+ * **Barbecue 1.5.beta1** - Generador de Códigos de Barra.
+ 
+ [Para descargar dependencia]: https://sourceforge.net/projects/barbecue/files/barbecue/1.5-beta1/
+ 
+ 
+ 
+ 
+ 
