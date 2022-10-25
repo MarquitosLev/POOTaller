@@ -1,3 +1,1 @@
-gosti/gosti/
-mjlc/mjlc/
-seba/seba/
+admin/admin/

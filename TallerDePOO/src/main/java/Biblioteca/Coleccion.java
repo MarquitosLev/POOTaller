@@ -10,9 +10,9 @@ import java.util.ArrayList;
  * @author Sebastian Etchepare
  * @author Santiago Fernandez Gomez
  */
-public class Coleccion extends Obra {
+public class Coleccion extends Obra implements guardado {
 	private String nomColeccion;
-	private int isbnColeccion;
+	private String isbnColeccion;
 	private ArrayList<Obra> obras;
 
 	/**
@@ -22,7 +22,7 @@ public class Coleccion extends Obra {
 	 * @param nomColeccion  Se pasa un texto con el nombre de la coleccion.
 	 * @param isbnColeccion Se pasa un entero con el isbn de la coleccion.
 	 */
-	public Coleccion(String nomColeccion, int isbnColeccion) {
+	public Coleccion(String nomColeccion, String isbnColeccion) {
 		super();
 		this.nomColeccion = nomColeccion;
 		this.isbnColeccion = isbnColeccion;
@@ -53,7 +53,7 @@ public class Coleccion extends Obra {
 	 * 
 	 * @return Retorna un entero con el ISBN de la coleccion.
 	 */
-	public int getIsbnColeccion() {
+	public String getIsbnColeccion() {
 		return isbnColeccion;
 	}
 
@@ -75,4 +75,10 @@ public class Coleccion extends Obra {
 		this.obras = obras;
 	}
 
+	public ArrayList<Object> obtenerLista() {
+		ArrayList<Object> lista = new ArrayList<Object>();
+		lista.add(getNomColeccion());
+		lista.add(getIsbnColeccion());
+		return lista;
+	}
 }

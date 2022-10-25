@@ -11,9 +11,14 @@ import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.StringTokenizer;
@@ -28,6 +33,7 @@ import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
 import Biblioteca.Alumno;
 import Biblioteca.Area;
+import Biblioteca.Coleccion;
 import Biblioteca.Docente;
 import Biblioteca.Edicion;
 import Biblioteca.Ejemplar;
@@ -52,6 +58,7 @@ import javax.swing.border.MatteBorder;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import java.awt.Component;
+import javax.swing.JSeparator;
 
 public class ventanaPrincipal extends JFrame {
 
@@ -100,6 +107,10 @@ public class ventanaPrincipal extends JFrame {
 	private JTextField diaReser;
 	private JTextField mesReser;
 	private JTextField anioReser;
+	private JTextField motivo;
+	private JTextField idBaja;
+	private JTextField nomColec;
+	private JTextField isbnColec;
 
 	public ventanaPrincipal(String userWelcome) {
 		MetodosTxt listFunc = new MetodosTxt();
@@ -211,122 +222,122 @@ public class ventanaPrincipal extends JFrame {
 
 		final JComboBox boxArea = new JComboBox();
 		boxArea.setModel(new DefaultComboBoxModel(Area.values()));
-		boxArea.setBounds(93, 195, 124, 26);
+		boxArea.setBounds(12, 163, 124, 26);
 		panelEjemplar.add(boxArea);
 
 		final JComboBox boxTipoObra = new JComboBox();
 		boxTipoObra.setModel(new DefaultComboBoxModel(tipoObra.values()));
-		boxTipoObra.setBounds(229, 195, 124, 26);
+		boxTipoObra.setBounds(148, 163, 124, 26);
 		panelEjemplar.add(boxTipoObra);
 
 		textPriAutor = new JTextField();
-		textPriAutor.setBounds(93, 126, 124, 28);
+		textPriAutor.setBounds(12, 94, 124, 28);
 		panelEjemplar.add(textPriAutor);
 		textPriAutor.setColumns(10);
 
 		textTerAutor = new JTextField();
 		textTerAutor.setColumns(10);
-		textTerAutor.setBounds(366, 126, 124, 28);
+		textTerAutor.setBounds(285, 94, 124, 28);
 		panelEjemplar.add(textTerAutor);
 
 		textISBN = new JTextField();
 		textISBN.setColumns(10);
-		textISBN.setBounds(366, 67, 124, 28);
+		textISBN.setBounds(285, 35, 124, 28);
 		panelEjemplar.add(textISBN);
 
 		textTitulo = new JTextField();
 		textTitulo.setColumns(10);
-		textTitulo.setBounds(93, 67, 124, 28);
+		textTitulo.setBounds(12, 35, 124, 28);
 		panelEjemplar.add(textTitulo);
 
 		textSubtitulo = new JTextField();
 		textSubtitulo.setColumns(10);
-		textSubtitulo.setBounds(229, 67, 124, 28);
+		textSubtitulo.setBounds(148, 35, 124, 28);
 		panelEjemplar.add(textSubtitulo);
 
 		textSegAutor = new JTextField();
 		textSegAutor.setColumns(10);
-		textSegAutor.setBounds(229, 126, 124, 28);
+		textSegAutor.setBounds(148, 94, 124, 28);
 		panelEjemplar.add(textSegAutor);
 
 		textGenero = new JTextField();
 		textGenero.setColumns(10);
-		textGenero.setBounds(502, 126, 122, 28);
+		textGenero.setBounds(421, 94, 122, 28);
 		panelEjemplar.add(textGenero);
 
 		textID = new JTextField();
 		textID.setColumns(10);
-		textID.setBounds(502, 67, 122, 28);
+		textID.setBounds(421, 35, 122, 28);
 		panelEjemplar.add(textID);
 
 		JLabel lblNewLabel_1 = new JLabel("Area");
 		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setBounds(93, 167, 126, 16);
+		lblNewLabel_1.setBounds(12, 135, 126, 16);
 		panelEjemplar.add(lblNewLabel_1);
 
 		JLabel lblNewLabel_1_1 = new JLabel("Tipo de Obra");
 		lblNewLabel_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_1.setBounds(229, 166, 124, 16);
+		lblNewLabel_1_1.setBounds(148, 134, 124, 16);
 		panelEjemplar.add(lblNewLabel_1_1);
 
 		JLabel lblNewLabel_1_1_1 = new JLabel("Titulo");
 		lblNewLabel_1_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_1_1.setBounds(93, 44, 126, 16);
+		lblNewLabel_1_1_1.setBounds(12, 12, 126, 16);
 		panelEjemplar.add(lblNewLabel_1_1_1);
 
 		JLabel lblNewLabel_1_1_2 = new JLabel("Subtitulo");
 		lblNewLabel_1_1_2.setForeground(Color.WHITE);
-		lblNewLabel_1_1_2.setBounds(229, 44, 124, 16);
+		lblNewLabel_1_1_2.setBounds(148, 12, 124, 16);
 		panelEjemplar.add(lblNewLabel_1_1_2);
 
 		JLabel lblNewLabel_1_1_3 = new JLabel("Primer Autor");
 		lblNewLabel_1_1_3.setForeground(Color.WHITE);
-		lblNewLabel_1_1_3.setBounds(93, 107, 126, 16);
+		lblNewLabel_1_1_3.setBounds(12, 75, 126, 16);
 		panelEjemplar.add(lblNewLabel_1_1_3);
 
 		JLabel lblNewLabel_1_1_4 = new JLabel("Segundo Autor");
 		lblNewLabel_1_1_4.setForeground(Color.WHITE);
-		lblNewLabel_1_1_4.setBounds(229, 108, 124, 16);
+		lblNewLabel_1_1_4.setBounds(148, 76, 124, 16);
 		panelEjemplar.add(lblNewLabel_1_1_4);
 
 		JLabel lblNewLabel_1_1_5 = new JLabel("Tercer Autor");
 		lblNewLabel_1_1_5.setForeground(Color.WHITE);
-		lblNewLabel_1_1_5.setBounds(366, 107, 126, 16);
+		lblNewLabel_1_1_5.setBounds(285, 75, 126, 16);
 		panelEjemplar.add(lblNewLabel_1_1_5);
 
 		JLabel lblNewLabel_1_1_6 = new JLabel("Genero");
 		lblNewLabel_1_1_6.setForeground(Color.WHITE);
-		lblNewLabel_1_1_6.setBounds(502, 107, 124, 16);
+		lblNewLabel_1_1_6.setBounds(421, 75, 124, 16);
 		panelEjemplar.add(lblNewLabel_1_1_6);
 
 		JLabel lblNewLabel_1_1_7 = new JLabel("ISBN");
 		lblNewLabel_1_1_7.setForeground(Color.WHITE);
-		lblNewLabel_1_1_7.setBounds(366, 44, 126, 16);
+		lblNewLabel_1_1_7.setBounds(285, 12, 126, 16);
 		panelEjemplar.add(lblNewLabel_1_1_7);
 
 		JLabel lblNewLabel_1_1_8 = new JLabel("ID");
 		lblNewLabel_1_1_8.setForeground(Color.WHITE);
-		lblNewLabel_1_1_8.setBounds(502, 44, 124, 16);
+		lblNewLabel_1_1_8.setBounds(421, 12, 124, 16);
 		panelEjemplar.add(lblNewLabel_1_1_8);
 
 		final JComboBox boxAdquisicion = new JComboBox();
 		boxAdquisicion.setModel(new DefaultComboBoxModel(FormaAdquirida.values()));
-		boxAdquisicion.setBounds(366, 193, 124, 26);
+		boxAdquisicion.setBounds(285, 161, 124, 26);
 		panelEjemplar.add(boxAdquisicion);
 
 		JLabel lblNewLabel_1_1_8_1 = new JLabel("Forma de Adquisici\u00F3n");
 		lblNewLabel_1_1_8_1.setForeground(Color.WHITE);
-		lblNewLabel_1_1_8_1.setBounds(366, 166, 124, 16);
+		lblNewLabel_1_1_8_1.setBounds(285, 134, 124, 16);
 		panelEjemplar.add(lblNewLabel_1_1_8_1);
 
 		textObservacion = new JTextField();
-		textObservacion.setBounds(93, 258, 531, 45);
+		textObservacion.setBounds(12, 226, 531, 45);
 		panelEjemplar.add(textObservacion);
 		textObservacion.setColumns(10);
 
 		JLabel lblNewLabel_6 = new JLabel("* Observaciones");
 		lblNewLabel_6.setForeground(Color.WHITE);
-		lblNewLabel_6.setBounds(93, 232, 124, 16);
+		lblNewLabel_6.setBounds(12, 200, 124, 16);
 		panelEjemplar.add(lblNewLabel_6);
 
 		JPanel panelLectores = new JPanel();
@@ -539,13 +550,13 @@ public class ventanaPrincipal extends JFrame {
 		setLocationRelativeTo(null);
 
 		textCodUbi = new JTextField();
-		textCodUbi.setBounds(502, 194, 122, 28);
+		textCodUbi.setBounds(421, 162, 122, 28);
 		panelEjemplar.add(textCodUbi);
 		textCodUbi.setColumns(10);
 
 		JLabel lblNewLabel_10 = new JLabel("Codigo de Ubicacion");
 		lblNewLabel_10.setForeground(Color.WHITE);
-		lblNewLabel_10.setBounds(502, 167, 122, 16);
+		lblNewLabel_10.setBounds(421, 135, 122, 16);
 		panelEjemplar.add(lblNewLabel_10);
 
 		JLabel lblNewLabel_9 = new JLabel("A domicilio");
@@ -596,7 +607,7 @@ public class ventanaPrincipal extends JFrame {
 						// Verifica si es a domicilio, si se paso de la fecha y si el dni del lector
 						// de prestamo es igual al dni de lista lector
 
-						if (prestamos.get(i).getaDomicilio() && !metodo.fechaPasada(prestamos.get(i))
+						if (prestamos.get(i).getaDomicilio() && metodo.fechaPasada(prestamos.get(i))
 								&& prestamos.get(i).getLector().getNumDoc() == lectores.get(j).getNumDoc()) {
 							Object[] vec = new Object[6];
 							vec[0] = lectores.get(j).getNom();
@@ -741,7 +752,7 @@ public class ventanaPrincipal extends JFrame {
 						Ejemplar ejemplar = new Ejemplar(id, observaciones, true, formaAdqui, codUbi, obra);
 						// Guarda el primer ejemplar de la obra
 						metodo.guardarEjemplar(ejemplar);
-
+						JOptionPane.showMessageDialog(null, "Registrado", "Exito", JOptionPane.INFORMATION_MESSAGE);
 					} catch (BarcodeException e1) {
 						e1.printStackTrace();
 					} catch (OutputException e1) {
@@ -755,6 +766,7 @@ public class ventanaPrincipal extends JFrame {
 					try {
 						Ejemplar ejemplar = new Ejemplar(id, observaciones, true, formaAdqui, codUbi, auxObra);
 						metodo.guardar(ejemplar, "Ejemplares.txt");
+						JOptionPane.showMessageDialog(null, "Registrado", "Exito", JOptionPane.INFORMATION_MESSAGE);
 					} catch (BarcodeException e1) {
 						e1.printStackTrace();
 					} catch (OutputException e1) {
@@ -762,10 +774,20 @@ public class ventanaPrincipal extends JFrame {
 					}
 					metodo.guardar(obra, "Obras.txt");
 				}
+				textTitulo.setText("");
+				textSubtitulo.setText("");
+				textISBN.setText("");
+				textID.setText("");
+				textPriAutor.setText("");
+				textSegAutor.setText("");
+				textTerAutor.setText("");
+				textGenero.setText("");
+				textCodUbi.setText("");
+				textDomicilio.setText("");
 
 			}
 		});
-		btnRegistrar.setBounds(229, 325, 90, 28);
+		btnRegistrar.setBounds(148, 293, 90, 28);
 		panelEjemplar.add(btnRegistrar);
 
 		// REALIZADO DEL PRESTAMO
@@ -774,9 +796,6 @@ public class ventanaPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				// Realizado de prestamo
-
-				// FALTA EL COMPROBAR SI HAY EJEMPLARES DISPONIBLES DE LA OBRA (METODO)
-				// USAR EL METODO DE hayDisponibles(id);
 
 				int id = Integer.parseInt(textIDEjemplar.getText()); // Convierte a entero el id del ejemplar pasado
 				int dni = Integer.parseInt(textDniLector.getText()); // Convierte a entero el DNI del lector pasado
@@ -929,8 +948,131 @@ public class ventanaPrincipal extends JFrame {
 
 			}
 		});
-		btnNuevaEditorial.setBounds(366, 325, 124, 28);
+		btnNuevaEditorial.setBounds(285, 293, 124, 28);
 		panelEjemplar.add(btnNuevaEditorial);
+
+		motivo = new JTextField();
+		motivo.setHorizontalAlignment(SwingConstants.LEFT);
+		motivo.setBounds(30, 387, 260, 26);
+		panelEjemplar.add(motivo);
+		motivo.setColumns(10);
+
+		idBaja = new JTextField();
+		idBaja.setColumns(10);
+		idBaja.setBounds(302, 387, 107, 26);
+		panelEjemplar.add(idBaja);
+
+		JLabel lblNewLabel_19 = new JLabel("Motivo de Baja:");
+		lblNewLabel_19.setForeground(Color.WHITE);
+		lblNewLabel_19.setBounds(30, 359, 108, 16);
+		panelEjemplar.add(lblNewLabel_19);
+
+		JLabel lblNewLabel_19_1 = new JLabel("ID Ejemplar:");
+		lblNewLabel_19_1.setForeground(Color.WHITE);
+		lblNewLabel_19_1.setBounds(302, 359, 108, 16);
+		panelEjemplar.add(lblNewLabel_19_1);
+
+		JButton deBaja = new JButton("Dar de Baja");
+		deBaja.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Da de baja un ejemplar
+				String motivos = "";
+				int idDeBaja = 0;
+				Ejemplar ejemplar = null;
+				try {
+					motivos = motivo.getText();
+					idDeBaja = Integer.parseInt(idBaja.getText());
+					ejemplar = metodo.bajaEjemplar(idDeBaja);
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Campo incompleto", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				if (!metodo.existeEjemplar(idDeBaja)) {
+					try {
+						File txt = new File("EjemplaresDeBaja.txt");
+						if (!txt.exists()) { // Crea el archivo txt en caso de que no exista
+							txt.createNewFile();
+						}
+						FileWriter fw = new FileWriter("EjemplaresDeBaja.txt", true);
+						BufferedWriter br = new BufferedWriter(fw); // Escribe los datos asignados
+						PrintWriter escribir = new PrintWriter(br);
+						try {
+							ArrayList<Object> x = ejemplar.obtenerLista();
+							for (int i = 0; i < x.size(); i++) {
+								escribir.write(x.get(i) + "/");
+							}
+							escribir.write(motivos + "/");
+						} catch (Exception c) {
+						}
+						escribir.write("\n");
+						escribir.close();
+					} catch (Exception ce) {
+					}
+
+				} else {
+					JOptionPane.showMessageDialog(null, "No existe el ejemplar", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				motivo.setText("");
+				idBaja.setText("");
+			}
+		});
+		deBaja.setBounds(421, 387, 122, 26);
+		panelEjemplar.add(deBaja);
+
+		nomColec = new JTextField();
+		nomColec.setColumns(10);
+		nomColec.setBounds(600, 163, 123, 26);
+		panelEjemplar.add(nomColec);
+
+		isbnColec = new JTextField();
+		isbnColec.setColumns(10);
+		isbnColec.setBounds(600, 235, 123, 26);
+		panelEjemplar.add(isbnColec);
+		/*
+		 * Registra la coleccion
+		 */
+		JButton btnRegistrar_1 = new JButton("Registrar");
+		btnRegistrar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				String nom = nomColec.getText();
+				String isbn = isbnColec.getText();
+
+				Coleccion colec = new Coleccion(nom, isbn);
+
+				metodo.guardar(colec, "Colecciones.txt");
+
+				nomColec.setText("");
+				isbnColec.setText("");
+			}
+		});
+		btnRegistrar_1.setBounds(616, 293, 90, 28);
+		panelEjemplar.add(btnRegistrar_1);
+
+		JLabel lblNewLabel_20 = new JLabel("Agregar Coleccion");
+		lblNewLabel_20.setForeground(Color.LIGHT_GRAY);
+		lblNewLabel_20.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblNewLabel_20.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_20.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_20.setBounds(593, 98, 130, 28);
+		panelEjemplar.add(lblNewLabel_20);
+
+		JLabel lblNewLabel_1_2 = new JLabel("Nombre");
+		lblNewLabel_1_2.setForeground(Color.WHITE);
+		lblNewLabel_1_2.setBounds(600, 135, 126, 16);
+		panelEjemplar.add(lblNewLabel_1_2);
+
+		JLabel lblNewLabel_1_3 = new JLabel("ISBN");
+		lblNewLabel_1_3.setForeground(Color.WHITE);
+		lblNewLabel_1_3.setBounds(600, 214, 126, 16);
+		panelEjemplar.add(lblNewLabel_1_3);
+
+		JLabel lblNewLabel_20_1 = new JLabel("Dar de Baja");
+		lblNewLabel_20_1.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_20_1.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel_20_1.setForeground(Color.LIGHT_GRAY);
+		lblNewLabel_20_1.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblNewLabel_20_1.setBounds(30, 333, 130, 28);
+		panelEjemplar.add(lblNewLabel_20_1);
 
 		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/imagenes/fondoInicioSesion.jpg")));
@@ -1214,7 +1356,7 @@ public class ventanaPrincipal extends JFrame {
 		btnMultadosFechas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textFined.setText("");
-				
+
 				try {
 					int diaI = Integer.parseInt(diaInicio.getText());
 					int mesI = Integer.parseInt(mesInicio.getText());
@@ -1327,11 +1469,18 @@ public class ventanaPrincipal extends JFrame {
 				int diaR = Integer.parseInt(diaReser.getText());
 				int mesR = Integer.parseInt(mesReser.getText());
 				int anioR = Integer.parseInt(anioReser.getText());
+				LocalDateTime fecha = LocalDateTime.now();
+				ArrayList<Reserva> reservas = null;
+				ArrayList<Obra> obras = null;
+				ArrayList<Ejemplar> ejemplar = null;
+				try {
+					fecha = LocalDateTime.of(anioR, mesR, diaR, 0, 0).truncatedTo(ChronoUnit.DAYS);
+					reservas = metodo.obrasReservadasPorFecha(fecha);
+					obras = Obra.leerTexto();
+					ejemplar = Ejemplar.leerTexto();
+				} catch (Exception ex) {
 
-				LocalDateTime fecha = LocalDateTime.of(anioR, mesR, diaR, 0, 0);
-				ArrayList<Reserva> reservas = metodo.obrasReservadasPorFecha(fecha);
-				ArrayList<Obra> obras = Obra.leerTexto();
-				ArrayList<Ejemplar> ejemplar = Ejemplar.leerTexto();
+				}
 				for (int z = 0; z < reservas.size(); z++) {
 					for (int l = 0; l < ejemplar.size(); l++) {
 						if (ejemplar.get(l).getIdEjemplar() == reservas.get(z).getEjemplarReservado().getIdEjemplar()) {

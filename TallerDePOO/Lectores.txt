@@ -1,6 +1,3 @@
-Juli/Alvarez/saddsa/44123123/@@sda/2442/2002-05-05/Masculino/saddsa/dsads/434/sdads/dsadsa/3/true/45/Lector//
-Tobby/Jackson/multi/999/correo@live.com/123412/2022-03-05/Masculino/concor/concord 123/3200/concor/concor/0/false/0/Docente/Diseño Grafico, Turismo/
-DocenteJuan/adsdsa/dsadsa/40123123/dfgfdfdgf/241241/1980-07-07/Masculino/fdsfdsfds/ggfgf/42124/fddfd/dsadsa/0/false/0/Docente/Administracion - sistemas/
-AlumnaRamona/fadfdf/sdffdsdfs/40111222/dfgfdgf/41241/2002-08-08/Femenino/fdsfdsfd/gfggfgf/412421/gfgffg/sdadsasda/0/false/0/Alumno//
-Carlos/Garcia/tarjeta/121121/arroba@.com/234521/1996-10-11/No Binario/aca/auuuu/3200/Concor/Concor/0/false/0/Alumno//
-Hector/Gonzalez/Libreta/20010902/hectorgonzalez@gmail.com/6135271/1974-08-04/Masculino/Chajari/Monterrey 2041/3500/Federacion/Chajari/0/false/0/Docente/Ingenieria en alimentos/
+Marty/McFly/tarjeta/21101991/mcFlywapo@live.com/5901219/1990-10-21/Masculino/Minnesota/futuro 123/887711/Minnesota/Minnesota/0/false/0/Lector//
+Tomas/Boggia/tarjeta/43911119/boggiacampeon@gmail.com/4985677/2002-02-01/Masculino/Concordia/Irigoyen 555/3200/Concordia/Concordia/0/false/0/Alumno//
+Hermione/Granger/Libretita/9344919/grangerlista99@live.com/1111222/1989-09-19/Femenino/Washington/-/109922/Lujan/Washington/0/false/0/Docente/Magia Cultural, Quidditch /

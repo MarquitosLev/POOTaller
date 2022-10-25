@@ -712,7 +712,7 @@ public class MetodosTxt {
 		return reservasPorFecha;
 	}
 	
-	public Ejemplar bajaEjemplar(int ejemplar, String motivo) {
+	public Ejemplar bajaEjemplar(int ejemplar) {
 		ArrayList<Ejemplar> ejemplares = Ejemplar.leerTexto();
 		Ejemplar Aux = null;
 		for (int i = 0; i < ejemplares.size(); i++) {
