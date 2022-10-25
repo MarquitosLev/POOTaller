@@ -43,7 +43,9 @@ public class MetodosTxt {
 	 * @param nuevo Corresponde al objeto que va a ser agregado al ArrayList. Como
 	 *              se indica, debe ser o implementar la interfaz 'guardado'
 	 * 
-	 * @param ruta  Se pasa la ruta donde los datos serán guardado.
+	 * @param ruta  Se pasa la ruta donde los datos serian guardado.
+	 * 
+	 * @throws en caso de que esl guardad al txt falle.
 	 */
 
 	public void guardar(guardado nuevo, String ruta) {
@@ -70,7 +72,7 @@ public class MetodosTxt {
 	}
 
 	/**
-	 * Función que controla si un usuario ya se encuentra registrado dentro de la
+	 * Funciion que controla si un usuario ya se encuentra registrado dentro de la
 	 * aplicacion.
 	 * 
 	 * @param user Se le pasa el parámetro 'user', atributo perteneciente a
@@ -79,6 +81,8 @@ public class MetodosTxt {
 	 * 
 	 * @return Retorna 'Verdadero' o 'Falso' para indicar si el funcionario se
 	 *         encuentra o no guardado en el ArrayList.
+	 * 
+	 * @throws en caso que al leer el txt, falle.
 	 */
 	public boolean comprobarFuncionario(String user) {
 		datosFunc = new ArrayList<Funcionario>();
@@ -132,6 +136,8 @@ public class MetodosTxt {
 	 * 
 	 * @return En el caso de que el DNI se encuentre, retorna verdadero, por ende,
 	 *         el lector existe. En caso contrario, retorna falso
+	 * 
+	 * @throws en caso de que esl guardad al txt falle.
 	 */
 	public boolean existeLector(int dni) {
 		datosLector = new ArrayList<Integer>();
@@ -196,6 +202,8 @@ public class MetodosTxt {
 	 * 
 	 * @param ejemplar Se le pasa como parámetro el ejemplar que quiere ser
 	 *                 añadido al ArrayList y posteriormente al .txt
+	 * 
+	 * @throws en caso de que esl guardad al txt falle.
 	 */
 	public void guardarEjemplar(Ejemplar ejemplar) {
 		ArrayList<Obra> datosObra = Obra.leerTexto();
@@ -221,6 +229,13 @@ public class MetodosTxt {
 		guardar(ejemplar, "Ejemplares.txt");
 	}
 
+	/**
+	 * Comprueba si existe el ejemplar segun id ejemplar.
+	 * 
+	 * @param id
+	 * @return retorna true si el ejemplar existe en el .txt, caso contrario, false.
+	 * 
+	 */
 	public boolean existeEjemplar(int id) {
 		listaEjemplar = Ejemplar.leerTexto();
 
@@ -230,58 +245,58 @@ public class MetodosTxt {
 
 		for (int i = 0; i < listaEjemplar.size(); i++) {
 			if (listaEjemplar.get(i).getIdEjemplar() == id) {
-				return true;// retorna true si el id se encuentra en el txt
+				return true;
 			}
 		}
 		return false;
 
 	}
 
-	// Metodo llamado cuando se solicita el ejemplar
-	public void ejemplarPedido(Ejemplar ejemplar) { // Pide un Ejemplar solo con el atributo ID
+	/**
+	 * Metodo llamado cuando se solicita el ejemplar * Cambia disponibilidad de
+	 * ejemplar * Aumenta en 1 las veces solicitadas * Decrementa los ejemplares
+	 * disponibles en obra
+	 * 
+	 * 
+	 * @param ejemplar que contiene el id
+	 */
+	public void ejemplarPedido(Ejemplar ejemplar) {
 
 		ArrayList<Ejemplar> datosEjemplar = new ArrayList<Ejemplar>();
 		try {
 			BufferedReader br3 = new BufferedReader(new FileReader("Ejemplares.txt"));
 			String ejemplarNoDisponible;
-			while ((ejemplarNoDisponible = br3.readLine()) != null) { // Lee el archivo hasta el siguiente salto de
-																		// linea
+			while ((ejemplarNoDisponible = br3.readLine()) != null) {
 				StringTokenizer x = new StringTokenizer(ejemplarNoDisponible, "/");
 				datosEjemplar.add(new Ejemplar(Integer.parseInt(x.nextToken()), x.nextToken(),
 						Boolean.parseBoolean(x.nextToken()), FormaAdquirida.valueOf(x.nextToken()),
 						LocalDateTime.parse(x.nextToken()), x.nextToken(), new Obra(x.nextToken()),
-						Integer.parseInt(x.nextToken())));// agrega al arraylist de String
+						Integer.parseInt(x.nextToken())));
 			}
 		} catch (Exception e) {
 		}
-		Ejemplar ejem = new Ejemplar(); // Auxiliar para guardar el ejemplar que se actualizo
-		for (int j = 0; j < datosEjemplar.size(); j++) { // Recorre el ArrayList de Ejemplares buscando el ejemplar
-															// prestado para
-			if ((datosEjemplar.get(j).getIdEjemplar() == (ejemplar.getIdEjemplar()))) { // colocandole la disponibilidad
-																						// en false
-				datosEjemplar.get(j).setDisponible(false); // Setea en falso la disponibilidad
-				datosEjemplar.get(j).setCantPedidas(datosEjemplar.get(j).getCantPedidas() + 1); // Incrementa en 1 la
-																								// cantidad de veces
-																								// pedidas del ejemplar
+		Ejemplar ejem = new Ejemplar();
+		for (int j = 0; j < datosEjemplar.size(); j++) {
+			if ((datosEjemplar.get(j).getIdEjemplar() == (ejemplar.getIdEjemplar()))) {
+				datosEjemplar.get(j).setDisponible(false);
+				datosEjemplar.get(j).setCantPedidas(datosEjemplar.get(j).getCantPedidas() + 1);
 				ejem = datosEjemplar.get(j);
 				break;
-
 			}
 		}
 		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter("Ejemplares.txt"));// Vacia el txt
+			BufferedWriter bw = new BufferedWriter(new FileWriter("Ejemplares.txt"));
 			bw.write("");
 			bw.close();
 			for (int i = 0; i < datosEjemplar.size(); i++) {
-				guardar(datosEjemplar.get(i), "Ejemplares.txt"); // Guarda todos los ejemplares ya actualizados
+				guardar(datosEjemplar.get(i), "Ejemplares.txt");
 			}
 		} catch (Exception e) {
 		}
 
 		ArrayList<Obra> datosObra = Obra.leerTexto();
 
-		for (int i = 0; i < datosObra.size(); i++) { // Recorre el nuevo ArrayList quitando 1 ejemplar disponible a la
-														// obra
+		for (int i = 0; i < datosObra.size(); i++) {
 			if ((datosObra.get(i).getTitulo().equals(ejem.getObra().getTitulo()))) {
 				datosObra.get(i).setCantEjemDisponible(datosObra.get(i).getCantEjemDisponible() - 1);
 				break;
@@ -289,7 +304,7 @@ public class MetodosTxt {
 		}
 
 		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter("Obras.txt"));// Vacia el txt
+			BufferedWriter bw = new BufferedWriter(new FileWriter("Obras.txt"));
 			bw.write("");
 			bw.close();
 			for (int i = 0; i < datosObra.size(); i++) {
@@ -300,11 +315,16 @@ public class MetodosTxt {
 
 	}
 
+	/**
+	 * Al devolverlo cambia: * aumenta cantidad disponibles a obra
+	 * 
+	 * @param ejemplar Compara el titulo de las obras
+	 */
 	public void AumentoEjemplarDisponible(String ejemplar) {
 
 		ArrayList<Obra> datosObra = Obra.leerTexto();
 		for (int j = 0; j < datosObra.size(); j++) { // Recorre el nuevo ArrayList agregando 1 ejemplar
-			// a la obra // ingresada
+			// a la obra ingresada
 			if ((datosObra.get(j).getTitulo().equals(ejemplar))) {
 				datosObra.get(j).setCantEjemDisponible(datosObra.get(j).getCantEjemDisponible() + 1);
 				break;
@@ -312,7 +332,7 @@ public class MetodosTxt {
 		}
 
 		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter("Obras.txt"));// Vacia el txt
+			BufferedWriter bw = new BufferedWriter(new FileWriter("Obras.txt"));
 			bw.write("");
 			bw.close();
 			for (int q = 0; q < datosObra.size(); q++) {
@@ -322,16 +342,24 @@ public class MetodosTxt {
 		}
 	}
 
+	/**
+	 * Guarda en "PrestamosTerminados.txt" los datos de los prestamos finalizados
+	 * Tambien comprueba si se le acredita multa al lector. Cambia disponibilidad
+	 * del ejemplar a true
+	 * 
+	 * @param fechaDevuelta
+	 * @param funcionario
+	 * @param ejemplar
+	 * 
+	 * @throws en caso que al escribir falle
+	 */
 	public void guardarPrestamoTerminado(LocalDateTime fechaDevuelta, String funcionario, int ejemplar) {
 
-		if (comprobarFuncionario(funcionario)) { // Comprueba que el funcionario exista
+		if (comprobarFuncionario(funcionario)) {
 
-			if (existeEjemplar(ejemplar)) { // Comprueba que el ejemplar exista
+			if (existeEjemplar(ejemplar)) {
 
 				ArrayList<Prestamo> datosPrestamo = Prestamo.leerTexto(1);
-
-				// Recorre el ArrayList de Prestamos buscando el que
-				// coincide con el ejemplar ingresado
 				for (int i = 0; i < datosPrestamo.size(); i++) {
 					Ejemplar EjemplarAux = new Ejemplar(ejemplar);
 					if (datosPrestamo.get(i).getEjemplar().getIdEjemplar() == EjemplarAux.getIdEjemplar()) {
@@ -340,7 +368,6 @@ public class MetodosTxt {
 								aux.getFuncionarioPrestador(), aux.getFechaHoraADevolver(), fechaDevuelta, funcionario,
 								aux.getaDomicilio(), aux.getLector(), aux.getEjemplar());
 
-						// Metodo para agregar una multa al lector
 						Long comparacion = ChronoUnit.DAYS.between(aux.getFechaHoraADevolver(), fechaDevuelta);
 						if (comparacion > 0) {
 							ArrayList<Lector> lectores = Lector.leerTexto();
@@ -353,9 +380,7 @@ public class MetodosTxt {
 									Multa multa = new Multa((comparacion * 3), new Prestamo(ejemplar));
 									guardar(multa, "Multas.txt");
 									try {
-										BufferedWriter bw2 = new BufferedWriter(new FileWriter("Lectores.txt"));// Vacia
-																												// el
-																												// txt
+										BufferedWriter bw2 = new BufferedWriter(new FileWriter("Lectores.txt"));
 										bw2.write("");
 										bw2.close();
 										for (int l = 0; l < lectores.size(); l++) {
@@ -368,17 +393,17 @@ public class MetodosTxt {
 							}
 
 						}
-						datosPrestamo.remove(i); // Despues de crear el prestamoDevuelto borra el prestamo del array
+						datosPrestamo.remove(i);
 
 						try {
 							File txt = new File("PrestamosTerminados.txt");
-							if (!txt.exists()) { // Crea el archivo txt en caso de que no exista
+							if (!txt.exists()) {
 								txt.createNewFile();
 							}
 							FileWriter fw = new FileWriter("PrestamosTerminados.txt", true);
-							BufferedWriter br = new BufferedWriter(fw); // Escribe los datos asignados
+							BufferedWriter br = new BufferedWriter(fw);
 							PrintWriter escribir = new PrintWriter(br);
-							try { // Escribe todos los atributos del prestamo teminado en el txt
+							try {
 								escribir.write(prestamoDevuelto.getFechaHoraPrestada() + "/");
 								escribir.write(prestamoDevuelto.getFuncionarioPrestador() + "/");
 								escribir.write(prestamoDevuelto.getFechaHoraADevolver() + "/");
@@ -395,17 +420,14 @@ public class MetodosTxt {
 
 						}
 
-						// Obtengo los ejemplares del Ejemplares.txt
 						ArrayList<Ejemplar> datosEjemplar = Ejemplar.leerTexto();
 
-						// busco el ejemplar con el id ingresado
 						String nuevo = "";
 						for (int t = 0; t < datosEjemplar.size(); t++) {
 							if ((datosEjemplar.get(t).getIdEjemplar() == ejemplar)) {
 
 								nuevo = datosEjemplar.get(t).getObra().getTitulo();
 
-								// AL DEVOLVEL SETEA DISPONIBILIDAD A TRUE
 								datosEjemplar.get(t).setDisponible(true);
 
 								break;
@@ -413,7 +435,7 @@ public class MetodosTxt {
 						}
 
 						try {
-							BufferedWriter bw = new BufferedWriter(new FileWriter("Ejemplares.txt"));// Vacia el txt
+							BufferedWriter bw = new BufferedWriter(new FileWriter("Ejemplares.txt"));
 							bw.write("");
 							bw.close();
 							for (int y = 0; y < datosEjemplar.size(); y++) {
@@ -423,7 +445,7 @@ public class MetodosTxt {
 						}
 
 						try {
-							BufferedWriter bw2 = new BufferedWriter(new FileWriter("Prestamos.txt"));// Vacia el txt
+							BufferedWriter bw2 = new BufferedWriter(new FileWriter("Prestamos.txt"));
 							bw2.write("");
 							bw2.close();
 							for (int l = 0; l < datosPrestamo.size(); l++) {
@@ -443,8 +465,15 @@ public class MetodosTxt {
 		}
 	}
 
+	/**
+	 * Compara si la fecha a devolver fue antes o despues de la realizacion.
+	 * 
+	 * @param pres
+	 * @return true: si se paso de la fecha a devolver fa�se: si no se paso de la
+	 *         fecha
+	 */
 	public boolean fechaPasada(Prestamo pres) {
-		Long x = ChronoUnit.DAYS.between(pres.getFechaHoraADevolver(), LocalDateTime.now()); // 20-10 < 21-10
+		Long x = ChronoUnit.DAYS.between(pres.getFechaHoraADevolver(), LocalDateTime.now());
 		if (x < 0) {
 			return false;
 		} else {
@@ -452,15 +481,19 @@ public class MetodosTxt {
 		}
 	}
 
+	/**
+	 * Verifica si hay ejemplares existentes para prestar
+	 * 
+	 * @param id
+	 * @return true si el recorrida de obra es igual al de los ejemplares y si la
+	 *         cantidad disponible es mayor a 0
+	 */
 	public boolean hayDisponibles(int id) {
 		ArrayList<Ejemplar> ejemplares = Ejemplar.leerTexto();
 		ArrayList<Obra> obras = Obra.leerTexto();
 
 		for (int i = 0; i < obras.size(); i++) {
 			for (int t = 0; t < ejemplares.size(); t++) {
-				// Si el id del ejemplar y el titulo de obra y ejemplar son iguales, es
-				// verdadero
-
 				if (ejemplares.get(t).getIdEjemplar() == id
 						&& ejemplares.get(t).getObra().getTitulo().equals(obras.get(i).getTitulo())) {
 					if (obras.get(i).getCantEjemDisponible() > 0) {
@@ -474,6 +507,13 @@ public class MetodosTxt {
 		return false;
 	}
 
+	/**
+	 * Extiende el plazo del prestamo, en caso de que lo solicite un lector
+	 * 
+	 * @param dias     dias a extender
+	 * @param ejemplar ejemplar para identificar el prestamo
+	 * @throws En caso de que no exista el prestamo
+	 */
 	public void extenderDias(int dias, int ejemplar) {
 		ArrayList<Prestamo> prestamos = Prestamo.leerTexto(1);
 		Boolean aux = true;
@@ -503,32 +543,21 @@ public class MetodosTxt {
 		}
 	}
 
+	/**
+	 * Imprime en un campo de texto los ejemplares segun el area seleccionada
+	 * 
+	 * 
+	 * @param textArea  Relleno del campo de texto con los datos
+	 * @param boxArea2	Enumeracion de las areas
+	 */
 	public void imprimirEjemplaresArea(JTextArea textArea, JComboBox boxArea2) {
 		ArrayList<Ejemplar> ejemplares = Ejemplar.leerTexto();
 		ArrayList<Obra> obras = Obra.leerTexto();
-		/**
-		 * Recorre ejemplares
-		 */
 		for (int i = 0; i < ejemplares.size(); i++) {
-			/**
-			 * recorre obras
-			 */
 			for (int j = 0; j < obras.size(); j++) {
-				/*
-				 * Verifica si estan en la misma obra
-				 */
 				if (ejemplares.get(i).getObra().getTitulo().equals(obras.get(j).getTitulo())) {
-					/*
-					 * Verifica si es el area indicada
-					 */
 					if (obras.get(j).getArea().equals(boxArea2.getSelectedItem())) {
-						/*
-						 * verifica disponibilidad del ejemplar
-						 */
 						if (ejemplares.get(i).getDisponible()) {
-							/*
-							 * agrega al texto los datos (Titulo - IDEjemplar - Cantidad Disponible)
-							 */
 							textArea.append(obras.get(j).getTitulo() + " - " + ejemplares.get(i).getIdEjemplar() + " - "
 									+ obras.get(j).getCantEjemDisponible() + "\n");
 							textArea.append("----------------------------------------\n");
@@ -539,13 +568,18 @@ public class MetodosTxt {
 		}
 	}
 
-	// Metodo que devuelve un ArrayList de los lectores con mas multas en cierta
-	// fecha dada
+	/**
+	 * Metodo que devuelve un ArrayList de los lectores con mas multas en cierta fecha dada
+	 * 
+	 * @param fechaMin fecha inicio de intervalo
+	 * @param fechaMax fecha final de intervalo
+	 * @return ArrayList con las multas entre las fechas
+	 */
 	public ArrayList<Multa> lectoresPorFecha(LocalDateTime fechaMin, LocalDateTime fechaMax) {
 		ArrayList<Multa> multas = Multa.leerTexto();
 		ArrayList<Multa> multasEnFecha = new ArrayList<Multa>();
 		try {
-			
+
 			for (int i = 0; i < multas.size(); i++) {
 				Long menor = ChronoUnit.DAYS.between(fechaMin.truncatedTo(ChronoUnit.DAYS),
 						multas.get(i).getFechaHoraMultado().truncatedTo(ChronoUnit.DAYS));
@@ -554,19 +588,30 @@ public class MetodosTxt {
 				if ((menor >= 0 && mayor <= 0)) {
 					multasEnFecha.add(multas.get(i));
 				}
-			}	
+			}
 		} catch (Exception c) {
 			JOptionPane.showMessageDialog(null, "No Ingreso fechas", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		return multasEnFecha;
 	}
 
+	/**
+	 * Ordena lectores segun cantidad de multas
+	 * @return ArrayList con los lectores ordenados segun multas aplicadas
+	 */
 	public ArrayList<Lector> ordenarLectoresPorMulta() {
 		ArrayList<Lector> lectores = Lector.leerTexto();
 		Collections.sort(lectores, new OrdenarLectores());
 		return lectores;
 	}
 
+	/**
+	 * Metodo que realiza la reserva de un ejemplar
+	 * 
+	 * @param id  Id del Ejemplar
+	 * @param dni	Dni del lector que lo reserva
+	 * @param func Funcionario que lo reservo
+	 */
 	public void reservar(int id, int dni, String func) {
 
 		ArrayList<Prestamo> prestamos = Prestamo.leerTexto(1);
@@ -587,18 +632,30 @@ public class MetodosTxt {
 
 	}
 
+	/**
+	 * ArrayList con obras solicitadas por Alumno y Docente
+	 * @return ArrayList con obras solicitadas por Alumno y Docente
+	 */
 	public ArrayList<Obra> obrasPorAlumDoc() {
 		ArrayList<Obra> obras = Obra.leerTexto();
 		Collections.sort(obras, new ordenarObraAlumDoc());
 		return obras;
 	}
 
+	/**
+	 * ArrayList con obras solicitadas por publico en general
+	 * @return ArrayList con obras solicitadas por publico en general
+	 */
 	public ArrayList<Obra> obrasGeneral() {
 		ArrayList<Obra> obras = Obra.leerTexto();
 		Collections.sort(obras, new ordenarObraGeneral());
 		return obras;
 	}
 
+	/**
+	 * Guarda el tipo de lector en Obras.txt
+	 * @param prestamo Busca el prestamo para modificarlo
+	 */
 	public void guardarTipoEnObra(Prestamo prestamo) {
 		ArrayList<Obra> obras = Obra.leerTexto();
 		ArrayList<Ejemplar> ejemplares = Ejemplar.leerTexto();
@@ -637,6 +694,12 @@ public class MetodosTxt {
 		}
 	}
 
+	/**
+	 * Obras que se encuentran reservadas a partir de una fecha determinada.
+	 * 
+	 * @param fecha parametro para comparar las fechas de las reservas.
+	 * @return ArrayList con las reservas segun fechas
+	 */
 	public ArrayList<Reserva> obrasReservadasPorFecha(LocalDateTime fecha) {
 		ArrayList<Reserva> reservasPorFecha = new ArrayList<Reserva>();
 		ArrayList<Reserva> reservas = Reserva.leerTexto();
