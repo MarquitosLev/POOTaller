@@ -9,7 +9,14 @@ import java.util.StringTokenizer;
 import java.util.Random;
 import net.sourceforge.barbecue.*;
 import net.sourceforge.barbecue.output.OutputException;
-
+/**
+ * Clase que representa un Ejemplar de la Biblioteca.
+ * 
+ * @author Leandro Gonzalez Fister
+ * @author Marcos Leiva
+ * @author Sebastian Etchepare
+ * @author Santiago Fernandez Gomez
+ */
 public class Ejemplar implements guardado {
 	private int idEjemplar;
 	private String observaciones;
