@@ -23,7 +23,7 @@ public class Coleccion extends Obra implements guardado {
 	 * @param isbnColeccion Se pasa un entero con el isbn de la coleccion.
 	 */
 	public Coleccion(String nomColeccion, String isbnColeccion) {
-		super();
+		super("");
 		this.nomColeccion = nomColeccion;
 		this.isbnColeccion = isbnColeccion;
 	}
