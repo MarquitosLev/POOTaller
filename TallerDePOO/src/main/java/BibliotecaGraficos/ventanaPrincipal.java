@@ -979,6 +979,9 @@ public class ventanaPrincipal extends JFrame {
 				String motivos = "";
 				int idDeBaja = 0;
 				Ejemplar ejemplar = null;
+				/*
+				 * Prueba si no hay error
+				 */
 				try {
 					motivos = motivo.getText();
 					idDeBaja = Integer.parseInt(idBaja.getText());
@@ -986,6 +989,9 @@ public class ventanaPrincipal extends JFrame {
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "Campo incompleto", "Error", JOptionPane.ERROR_MESSAGE);
 				}
+				/*
+				 * En caso de que exista el ejemplar, se da de baja
+				 */
 				if (!metodo.existeEjemplar(idDeBaja)) {
 					try {
 						File txt = new File("EjemplaresDeBaja.txt");
@@ -1007,7 +1013,20 @@ public class ventanaPrincipal extends JFrame {
 						escribir.close();
 					} catch (Exception ce) {
 					}
+					
+					/*
+					 * Decrementa las cantidades disponibles y totales
+					 */
+					ArrayList<Obra> datosObra = Obra.leerTexto();
 
+					for (int i = 0; i < datosObra.size(); i++) {
+						if ((datosObra.get(i).getTitulo().equals(ejemplar.getObra().getTitulo()))) {
+							datosObra.get(i).setCantEjem(datosObra.get(i).getCantEjem() - 1);
+							datosObra.get(i).setCantEjemDisponible(datosObra.get(i).getCantEjemDisponible() - 1);
+							break;
+						}
+					}
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "No existe el ejemplar", "Error", JOptionPane.ERROR_MESSAGE);
 				}
