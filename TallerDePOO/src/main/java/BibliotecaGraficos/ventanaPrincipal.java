@@ -1104,6 +1104,7 @@ public class ventanaPrincipal extends JFrame {
 		ListaMorosos.add(lblNewLabel_12);
 
 		final JTextArea textSoliObra = new JTextArea();
+		textSoliObra.setEditable(false);
 		textSoliObra.setFont(new Font("Franklin Gothic Book", Font.PLAIN, 15));
 		textSoliObra.setBounds(273, 12, 435, 352);
 		listaObrasSolicitadas.add(textSoliObra);
@@ -1235,6 +1236,7 @@ public class ventanaPrincipal extends JFrame {
 		EjemplaresArea.add(boxArea2);
 
 		final JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
 		textArea.setFont(new Font("Dubai Medium", Font.PLAIN, 15));
 		textArea.setBounds(290, 42, 379, 283);
 		EjemplaresArea.add(textArea);
