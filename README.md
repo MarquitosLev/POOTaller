@@ -18,6 +18,8 @@
 ### Instrucciones de instalación.
  
   Para la intalacion, se requiere decargar el .ZIP en GitHub o, incluso, realizando un git clone por medio del comando del repositorio.
+  
+  * Iniciar el programa desde la clase Main.java, ubucado con el Path /TallerDePOO/src/main/java/Main/Main.java
  
    #### Dependencias utilizadas:
  
