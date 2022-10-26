@@ -33,7 +33,7 @@
 
  #### Dependencias utilizadas:
  
- * **Barbecue 1.5.beta1** - Generador de Códigos de Barra. [Link]([url](https://sourceforge.net/projects/barbecue/files/barbecue/1.5-beta1/))
+ * **Barbecue 1.5.beta1** - Generador de Códigos de Barra. [Link de Descarga](https://sourceforge.net/projects/barbecue/files/barbecue/1.5-beta1/)
  
  
  
