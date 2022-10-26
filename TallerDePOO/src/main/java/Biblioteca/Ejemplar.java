@@ -57,6 +57,12 @@ public class Ejemplar implements guardado {
 
 	}
 
+	/**
+	 * Constructor de la clase Ejemplar (para obtener un ArrayList del tipo prestamo)
+	 * 
+	 * @param idEjemplar Se pasa por parametro el identificador unico del ejemplar.
+	 */
+	
 	public Ejemplar(int idEjemplar) {
 		this.idEjemplar = idEjemplar;
 	}
@@ -64,14 +70,14 @@ public class Ejemplar implements guardado {
 	/**
 	 * Constructor usado para la devolucion de un ejemplar.
 	 * 
-	 * @param idEjemplar
-	 * @param observaciones
-	 * @param disponible
-	 * @param formaAdquirida
-	 * @param fechaAdquisicion
-	 * @param codUbicacion
-	 * @param obra
-	 * @param cantPedidas
+	 * @param idEjemplar Se pasa un entero con el id del ejemplar.
+	 * @param observaciones Se pasa un texto con las observaciones generales del ejemplar.
+	 * @param disponible Se pasa un valor booleano para ver si el ejemplar se encuentra o no disponible.
+	 * @param formaAdquirida Se pasa la forma en la que se adquirio el ejemplar.
+	 * @param fechaAdquisicion Se pasa la fecha en la que se adquirio el ejemplar. 
+	 * @param codUbicacion Se pasa un String con el codigo de ubicacion del ejemplar.
+	 * @param obra Se pasa un objeto de tipo "Obra" con todos los atributos de la clase Obra.
+	 * @param cantPedidas Se debe pasar un entero con la cantidad de veces que se ha pedido el ejemplar.
 	 */
 	public Ejemplar(int idEjemplar, String observaciones, boolean disponible, FormaAdquirida formaAdquirida,
 			LocalDateTime fechaAdquisicion, String codUbicacion, Obra obra, int cantPedidas) {
@@ -90,18 +96,18 @@ public class Ejemplar implements guardado {
 	 * Constructor default para la clase Ejemplares.
 	 * 
 	 * @param idEjemplar Se pasa por el parametro, el identificador unico del ejemplar.
-	 * @param observaciones
-	 * @param disponible
-	 * @param cantPedidas
-	 * @param fechaAdquisicion
-	 * @param formaAdquirida
-	 * @param fechaDeBaja
-	 * @param motivoDeBaja
-	 * @param codUbicacion
-	 * @param obra
-	 * @param lector
-	 * @throws BarcodeException
-	 * @throws OutputException
+	 * @param observaciones Se pasa un texto con las observaciones generales del ejemplar.
+	 * @param disponible Se pasa un valor booleano para ver si el ejemplar se encuentra o no disponible.
+	 * @param cantPedidas Se debe pasar un entero con la cantidad de veces que se ha pedido el ejemplar.
+	 * @param fechaAdquisicion Se pasa la fecha en la que se adquirio el ejemplar. 
+	 * @param formaAdquirida Se pasa la forma en la que se adquirio el ejemplar.
+	 * @param fechaDeBaja Se pasa por el parametro la fecha enlaque se da de baja en ejemplar. 
+	 * @param motivoDeBaja Se pasa por el parametro el motivo por el cual se dio de baja. 
+	 * @param codUbicacion Se pasa un String con el codigo de ubicacion del ejemplar.
+	 * @param obra Se pasa un objeto de tipo "Obra" con todos los atributos de la clase Obra.
+	 * @param lector Se debe pasar como parametro un objeto del tipo Lector
+	 * @throws BarcodeException Excepcion necesaria para la correcta generacion del codigo de barrras.
+	 * @throws OutputException Excepcion necesaria para que pueda generarse el PNG y pueda mostrarse el codigo de barras.
 	 */
 	public Ejemplar(int idEjemplar, String observaciones, boolean disponible, int cantPedidas,
 			LocalDateTime fechaAdquisicion, FormaAdquirida formaAdquirida, LocalDateTime fechaDeBaja,
@@ -119,20 +125,6 @@ public class Ejemplar implements guardado {
 		this.obra = obra;
 		this.lector = lector;
 
-	}
-
-	public Ejemplar() {
-		this.idEjemplar = 0;
-		this.observaciones = "";
-		this.disponible = true;
-		this.cantPedidas = 0;
-		this.fechaAdquisicion = LocalDateTime.of(1900, 1, 1, 1, 1);
-		// this.formaAdquirida = formaAdquirida.Otro; A esta todavía no la se hacer xd.
-		// Creo que hay que modificar algo en la enum.
-		this.fechaDeBaja = LocalDateTime.of(1900, 1, 1, 1, 1);
-		this.motivoDeBaja = " ";
-		this.codUbicacion = " ";
-		this.obra = new Obra();
 	}
 
 	/**
@@ -357,7 +349,6 @@ public class Ejemplar implements guardado {
 	public Lector getLector() {
 		return lector;
 	}
-
 	
 	/**
 	 * Setter que guarda un valor en 'lector'
@@ -393,6 +384,7 @@ public class Ejemplar implements guardado {
 	 * 
 	 * @return Retorna la lista con los datos del Ejemplar, extraidos de 'Ejemplares.txt'
 	 * @throws Es necesario el uso de "try - catch" para el funcionamiento del 'BufferedReader'
+	 * 
 	 */
 	
 	public static ArrayList<Ejemplar> leerTexto() {

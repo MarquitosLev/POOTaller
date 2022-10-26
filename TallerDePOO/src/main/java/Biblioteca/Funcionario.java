@@ -154,6 +154,7 @@ public class Funcionario implements guardado {
 	 * los objetos.
 	 * 
 	 * @return Retorna un ArrayList con todos los objetos existentes en el txt.
+	 * @throws Excepcion necesaria para el correcto funcionamiento del 'BufferedReader'
 	 */
 	public static ArrayList<Funcionario> leerTexto() {
 		ArrayList<Funcionario> lista = new ArrayList<Funcionario>();

@@ -275,7 +275,7 @@ public class MetodosTxt {
 			}
 		} catch (Exception e) {
 		}
-		Ejemplar ejem = new Ejemplar();
+		Ejemplar ejem = null;
 		for (int j = 0; j < datosEjemplar.size(); j++) {
 			if ((datosEjemplar.get(j).getIdEjemplar() == (ejemplar.getIdEjemplar()))) {
 				datosEjemplar.get(j).setDisponible(false);

@@ -2,7 +2,7 @@ package Biblioteca;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.time.LocalDate;
+//import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -25,10 +25,8 @@ public class Obra implements guardado {
 	private String autor3;
 	private String genero;
 	private String isbn;
-	private int id;
 	private Area area; // Enumeracion
 	private tipoObra tipo; // Enumeracion
-	private ArrayList<Coleccion> colecciones;
 	// private Coleccion perteneceA; //Unidireccionalidad con multiplicidad. Quitar
 	// comentario en constructores
 	private ArrayList<Ejemplar> ejemplares;
@@ -36,41 +34,21 @@ public class Obra implements guardado {
 	private Reserva funcionario; // Creación de la asociación entre funcionario, obra y reserva
 	private int pedidaPorAlumDoc;
 	private int pedidaGeneral;
-	
-	public Obra() {
-		super();
-		this.cantEjem = 0;
-		this.cantEjemDisponible = 0;
-		this.titulo = "";
-		this.subtitulo = "";
-		this.autor1 = "";
-		this.autor2 = "";
-		this.autor3 = "";
-		this.genero = "";
-		this.isbn = "";
-//		this.area =  "";
-//		this.tipo =  "";
-//		this.perteneceA = Coleccion();
-		this.ejemplares = new ArrayList<Ejemplar>();
-		this.ediciones = new ArrayList<Edicion>();
-		this.pedidaPorAlumDoc = 0;
-		this.pedidaGeneral = 0;
-	}
 
 	/**
-	 * Constructor de la clase Obra.
+	 * Constructor de la clase Obra (principal).
 	 * 
-	 * @param titulo
-	 * @param subtitulo
-	 * @param autor1
-	 * @param autor2
-	 * @param autor3
-	 * @param genero
-	 * @param isbn
-	 * @param id
-	 * @param area
-	 * @param tipo
+	 * @param titulo Se le pasa el titulo a agregar.
+	 * @param subtitulo Se le pasa un string con el subtitulo. 
+	 * @param autor1 Se le pasa un string con el nombre del primer autor de la obra
+	 * @param autor2 Se le pasa un string con el nombre del segundo autor de la obra
+	 * @param autor3 Se le pasa un string con el nombre del tercer autor de la obra
+	 * @param genero Se le pasa un string con el genero de la obra.
+	 * @param isbn Se pasa un string que contiene el codigo ISBN del ejemplar.
+	 * @param area Se pasa una enumeracion con el area de la obra. 
+	 * @param tipo se pasa una enumeracion con el tipo de de obra. 
 	 */
+	
 	public Obra(String titulo, String subtitulo, String autor1, String autor2, String autor3, String genero, String isbn,
 			Area area, tipoObra tipo) {
 		super();
@@ -87,24 +65,22 @@ public class Obra implements guardado {
 		this.tipo = tipo;
 		this.pedidaPorAlumDoc = 0;
 		this.pedidaGeneral = 0;
-//		this.perteneceA = perteneceA;
 	}
 
 	/**
-	 * Constructor de la clase Obra.
+	 * Constructor de la clase Obra (Usado por el metodo 'leerTexto')
 	 * 
-	 * @param cantEjem
-	 * @param cantEjemDisponible
-	 * @param titulo
-	 * @param subtitulo
-	 * @param autor1
-	 * @param autor2
-	 * @param autor3
-	 * @param genero
-	 * @param isbn
-	 * @param id
-	 * @param area
-	 * @param tipo
+	 * @param cantEjem Se pasa un entero con la cantidad de ejemplares que la biblioteca posee
+	 * @param cantEjemDisponible Se pasa un entero con la cantidad de ejemplares diponibles
+	 * @param titulo Se le pasa el titulo a agregar.
+	 * @param subtitulo Se le pasa un string con el subtitulo. 
+	 * @param autor1 Se le pasa un string con el nombre del primer autor de la obra
+	 * @param autor2 Se le pasa un string con el nombre del segundo autor de la obra
+	 * @param autor3 Se le pasa un string con el nombre del tercer autor de la obra
+	 * @param genero Se le pasa un string con el genero de la obra.
+	 * @param isbn Se pasa un string que contiene el codigo ISBN del ejemplar.
+	 * @param area Se pasa una enumeracion con el area de la obra. 
+	 * @param tipo Se pasa una enumeracion con el tipo de de obra.
 	 */
 
 	public Obra(int cantEjem, int cantEjemDisponible, String titulo, String subtitulo, String autor1, String autor2,
@@ -123,7 +99,6 @@ public class Obra implements guardado {
 		this.tipo = tipo;
 		this.pedidaPorAlumDoc = pedidaPorAlumDoc;
 		this.pedidaGeneral = pedidaGeneral;
-//		this.perteneceA = perteneceA;
 	}
 
 	/**
@@ -390,23 +365,45 @@ public class Obra implements guardado {
 		this.tipo = tipo;
 	}
 	
+	/**
+	 * Getter que retorna el valor del atributo 'pedidaPorAlumnos'
+	 * 
+	 * @return Retorna la cantidad de veces que la obra fue solicitada por un alumno/a
+	 */
+	
 	public int getPedidaPorAlumDoc() {
 		return pedidaPorAlumDoc;
 	}
+	
+	/**
+	 * Setter que guarda un valor en el atributo 'pedidaPorAlumDoc'
+	 * 
+	 * @param pedidaPorAlumDoc Se debe pasar por parametro, la cantidad de veces que la obra fue pedida por alumnos/as
+	 */
 
 	public void setPedidaPorAlumDoc(int pedidaPorAlumDoc) {
 		this.pedidaPorAlumDoc = pedidaPorAlumDoc;
 	}
 
+	/**
+	 * Getter que retorna el valor de la variable 'pedidaGeneral'
+	 * 
+	 * @return Retorna el numero de veces que un ejemplar fue solicitado por el publico general
+	 */
+	
 	public int getPedidaGeneral() {
 		return pedidaGeneral;
 	}
+	
+	/**
+	 * Setter que guarda un valor en el atributo 'pedidaGeneral'
+	 * 
+	 * @param pedidaGeneral Se debe pasar por parametro la cantidad de pedidos que tuvo la obra por parte del publico general.
+	 */
 
 	public void setPedidaGeneral(int pedidaGeneral) {
 		this.pedidaGeneral = pedidaGeneral;
 	}
-
-	
 
 	/**
 	 * Metodo que se encarga de crear un ArrayList del tipo objeto e ir agregando
@@ -438,6 +435,8 @@ public class Obra implements guardado {
 	 * 
 	 * @return Retorna un ArrayList ordenado por area tematica de la obra con todos
 	 *         los objetos existentes en el txt.
+	 *         
+	 * @throws el "Try - catch" utilizado es necesario para que el 'BufferedReader' funcione correctamente.
 	 */
 	public static ArrayList<Obra> leerTexto() {
 		ArrayList<Obra> lista = new ArrayList<Obra>();
