@@ -37,7 +37,7 @@ public class MetodosTxt {
 	ArrayList<Lector> listaLector;
 
 	/**
-	 * Guarda cualquier objeto que se pase por parámetro dentro de alguna de los 4
+	 * Guarda cualquier objeto que se pase por parÃ¡metro dentro de alguna de los 4
 	 * ArrayLists creados en la clase. Seria como una funcion de guardado general.
 	 * 
 	 * @param nuevo Corresponde al objeto que va a ser agregado al ArrayList. Como
@@ -75,7 +75,7 @@ public class MetodosTxt {
 	 * Funciion que controla si un usuario ya se encuentra registrado dentro de la
 	 * aplicacion.
 	 * 
-	 * @param user Se le pasa el parámetro 'user', atributo perteneciente a
+	 * @param user Se le pasa el parÃ¡metro 'user', atributo perteneciente a
 	 *             'Funcionario', para comprobar si el mismo ya existe dentro del
 	 *             ArrayList de funcionario.
 	 * 
@@ -107,13 +107,13 @@ public class MetodosTxt {
 	}
 
 	/**
-	 * Metodo encargado de controlar si la contraseña se encuentra o no dentro del
+	 * Metodo encargado de controlar si la contraseÃ±a se encuentra o no dentro del
 	 * ArrayList.
 	 * 
 	 * @param pass Se pasa el parametro para controlar si se encuentra como
-	 *             contraseña dentro del ArrayList de funcionarios.
+	 *             contraseÃ±a dentro del ArrayList de funcionarios.
 	 * 
-	 * @return Si la contraseña pasada por parametro coincide con alguna de las que
+	 * @return Si la contraseÃ±a pasada por parametro coincide con alguna de las que
 	 *         se encuentra dentro del ArrayList, entonces retorna 'Verdadero' sino,
 	 *         'Falso'
 	 */
@@ -200,8 +200,8 @@ public class MetodosTxt {
 	 * le suma 1 a la cantidad de ejemplares y cantidad de ejemplares disponibles a
 	 * la obra
 	 * 
-	 * @param ejemplar Se le pasa como parámetro el ejemplar que quiere ser
-	 *                 añadido al ArrayList y posteriormente al .txt
+	 * @param ejemplar Se le pasa como parÃ¡metro el ejemplar que quiere ser
+	 *                 aÃ±adido al ArrayList y posteriormente al .txt
 	 * 
 	 * @throws en caso de que esl guardad al txt falle.
 	 */
@@ -469,7 +469,7 @@ public class MetodosTxt {
 	 * Compara si la fecha a devolver fue antes o despues de la realizacion.
 	 * 
 	 * @param pres
-	 * @return true: si se paso de la fecha a devolver fa�se: si no se paso de la
+	 * @return true: si se paso de la fecha a devolver fañse: si no se paso de la
 	 *         fecha
 	 */
 	public boolean fechaPasada(Prestamo pres) {
@@ -711,6 +711,13 @@ public class MetodosTxt {
 		}
 		return reservasPorFecha;
 	}
+	
+	/**
+     	* Elimina de Ejemplares.txt el ID pasado por parametro
+    	* 
+     	* @param ejemplar id del ejemplar para dar de baja
+     	* @return Ejemplar borrado
+     	*/
 	
 	public Ejemplar bajaEjemplar(int ejemplar) {
 		ArrayList<Ejemplar> ejemplares = Ejemplar.leerTexto();
